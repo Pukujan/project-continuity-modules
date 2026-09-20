@@ -22,9 +22,13 @@ This repository is ready for a fresh session without prior chat history.
 
 Then implement only the bounded adoption task. Do not reconstruct project state from prior conversations.
 
+## Blocker
+
+Eval-lab PR #20 is mergeable and the continuity overlay validates locally, but configured CI remains red after one retry; both retry jobs exposed zero steps. Do not merge until CI succeeds.
+
 ## Exact next action
 
-Create the target adoption branch from Eval-lab `main`, add the compatibility overlay, validate it with PCM v1, and merge the target PR only if all available gates pass.
+Restore or observe successful Eval-lab CI for PR #20 at head `3e483cc6ba8d4a1eb1734aa49b89cc1d3bef6981`; only then merge PR #20 and finish PCM-0004.
 
 ## Authority
 
