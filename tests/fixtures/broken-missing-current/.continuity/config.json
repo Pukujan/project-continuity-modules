@@ -4,7 +4,7 @@
     "project": "PROJECT.md",
     "tasks": "tasks"
   },
-  "profile": "software",
+  "profile": "minimal",
   "protocol": "project-continuity",
   "protocol_version": "0.1.0-draft",
   "schema": "project-continuity.config.v1",
@@ -12,6 +12,6 @@
   "task_prefix": "PCM",
   "trackers": {
     "beads": false,
-    "github": true
+    "github": false
   }
 }
