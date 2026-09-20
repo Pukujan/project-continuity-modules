@@ -1,8 +1,8 @@
 # TASK-PCM-0003 — Adopt continuity v1 in custom-extensions
 
-<!-- continuity:task {"acceptance":["custom-extensions adopts protocol v1 without replacing its existing human-readable project/handoff contracts","specs/PDD.md carries valid continuity project metadata and remains the stable product contract","HANDOFF.md carries valid continuity current metadata and remains the mutable checkpoint","a target .continuity/config.json declares protocol/version/software profile/task prefix and canonical paths","target schemas/v1 exactly match the protocol repository v1 schema files","root tasks location is available for future bounded root tasks without duplicating the feature-branch PROV task","the target repository validates with the PCM v1 validator","no extension runtime code, release/current.json, registry status, permissions, or provenance-exporter feature branch is changed","target adoption PR is mergeable and all available CI/status gates are satisfied before merge","exact evidence, decisions, blockers, changed paths, and one next action are checkpointed before stop"],"depends_on":["PCM-0002"],"goal":"Adopt Project Continuity Protocol v1 in Pukujan/custom-extensions as a non-destructive overlay on its existing repository contracts.","id":"PCM-0003","next_action":"Review and merge task/PCM-0003-adopt-custom-extensions; after merge, activate PCM-0004.","owner":"ChatGPT/Sol current implementation session; GitHub assignee Pukujan","priority":"P0","protocol_version":"0.1.0-draft","schema":"project-continuity.task.v1","status":"active","why":"PCM-0001 and PCM-0002 proved the protocol in its own repository and a fresh minimal target; the next risk is adopting it into a mature repository without erasing existing continuity semantics."} -->
+<!-- continuity:task {"acceptance":["custom-extensions adopts protocol v1 without replacing its existing human-readable project/handoff contracts","specs/PDD.md carries valid continuity project metadata and remains the stable product contract","HANDOFF.md carries valid continuity current metadata and remains the mutable checkpoint","a target .continuity/config.json declares protocol/version/software profile/task prefix and canonical paths","target schemas/v1 exactly match the protocol repository v1 schema files","root tasks location is available for future bounded root tasks without duplicating the feature-branch PROV task","the target repository validates with the PCM v1 validator","no extension runtime code, release/current.json, registry status, permissions, or provenance-exporter feature branch is changed","target adoption PR is mergeable and all available CI/status gates are satisfied before merge","exact evidence, decisions, blockers, changed paths, and one next action are checkpointed before stop"],"depends_on":["PCM-0002"],"goal":"Adopt Project Continuity Protocol v1 in Pukujan/custom-extensions as a non-destructive overlay on its existing repository contracts.","id":"PCM-0003","next_action":"No further PCM-0003 work; continue under the active PCM-0004 task contract.","owner":"ChatGPT/Sol current implementation session; GitHub assignee Pukujan","priority":"P0","protocol_version":"0.1.0-draft","schema":"project-continuity.task.v1","status":"completed","why":"PCM-0001 and PCM-0002 proved the protocol in its own repository and a fresh minimal target; the next risk is adopting it into a mature repository without erasing existing continuity semantics."} -->
 
-- Status: active
+- Status: completed
 - Owner: ChatGPT/Sol current implementation session; GitHub assignee Pukujan
 - Priority: P0
 - Depends on: PCM-0002
@@ -97,6 +97,34 @@ Blocked/uncertain:
 
 Next:
 - Review and merge `task/PCM-0003-adopt-custom-extensions`; after merge, activate PCM-0004.
+
+### 2026-09-20 18:37:57 UTC — ChatGPT/Sol merge completion
+
+<!-- continuity:checkpoint {"agent":"ChatGPT/Sol merge completion","blocked":[],"changed":["tasks/TASK-PCM-0003-adopt-custom-extensions.md","tasks/TASK-PCM-0004-adopt-eval-lab.md","checkpoints/CURRENT.md","HANDOFF.md"],"completed":["Merged PCM-0003 protocol PR #6 after target custom-extensions adoption was already merged and verified.","Closed PCM-0003 canonically and activated PCM-0004."],"decisions":["Treat PCM-0003 as completed after protocol merge commit a046a526be31c039cfe5940e83b4b445afcebf76; proceed only under PCM-0004."],"evidence":["Protocol PR #6 -> mergeable=true; 0 statuses; 0 check runs; 0 workflow runs.","Protocol PR #6 merged -> a046a526be31c039cfe5940e83b4b445afcebf76.","GitHub Issue #5 -> closed/completed at 2026-09-20T18:37:57Z."],"next_action":"No further PCM-0003 work; continue under the active PCM-0004 task contract.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0003","timestamp":"2026-09-20T18:37:57Z"} -->
+
+Completed:
+- Merged PCM-0003 protocol PR #6 after target `custom-extensions` adoption was already merged and verified.
+- Closed PCM-0003 canonically and activated PCM-0004.
+
+Evidence:
+- protocol PR #6 -> `mergeable=true`; 0 statuses; 0 check runs; 0 workflow runs;
+- protocol PR #6 merged -> `a046a526be31c039cfe5940e83b4b445afcebf76`;
+- GitHub Issue #5 -> closed/completed at 2026-09-20T18:37:57Z.
+
+Decisions:
+- Treat PCM-0003 as completed after protocol merge; proceed only under PCM-0004.
+
+Changed:
+- `tasks/TASK-PCM-0003-adopt-custom-extensions.md`
+- `tasks/TASK-PCM-0004-adopt-eval-lab.md`
+- `checkpoints/CURRENT.md`
+- `HANDOFF.md`
+
+Blocked/uncertain:
+- none
+
+Next:
+- No further PCM-0003 work; continue under the active PCM-0004 task contract.
 
 ## Handoff
 
