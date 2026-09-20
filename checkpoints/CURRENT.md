@@ -30,8 +30,8 @@ Adopt the validated continuity protocol in existing repositories without erasing
 
 ## Blockers
 
-None known.
+- Eval-lab PR #20 is mergeable but CI run `35529923987` is red at head `3e483cc6ba8d4a1eb1734aa49b89cc1d3bef6981`. Attempt 1 and the single retry attempt 2 failed before any workflow steps were exposed, matching Eval-lab's documented runner-assignment infrastructure condition. Auto-merge is withheld until CI succeeds.
 
 ## Next atomic action
 
-Create an Eval-lab adoption branch from authoritative `main`, add the compatibility overlay, validate it with PCM v1, and merge only after all available target-repository gates pass.
+Restore or observe successful Eval-lab CI for PR #20 at head `3e483cc6ba8d4a1eb1734aa49b89cc1d3bef6981`; only then merge PR #20 and finish PCM-0004.
