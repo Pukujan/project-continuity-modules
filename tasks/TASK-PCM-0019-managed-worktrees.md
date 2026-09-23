@@ -290,6 +290,32 @@ Blocked/uncertain:
 Next:
 - Push this checkpoint and candidate PR, wait for protected CI/automatic merge, then run independent corrected-candidate and fresh-variant holdouts before closing #34 and reconciling #20.
 
+### 2026-09-23 20:09:04 UTC — Codex PCM-0019 audit-retention follow-up
+
+<!-- continuity:checkpoint {"agent":"Codex PCM-0019 audit-retention follow-up","blocked":["PR #47 hosted CI/merge and a properly scoped fresh candidate rerun plus the fresh retention variant remain; #34 and #20 must stay open until the holdouts pass."],"changed":["AGENTS.md, HANDOFF.md, README.md, SPEC.md, docs/HANDOFF_PROTOCOL.md, src/continuity/cli.py, tasks/TASK-PCM-0019-managed-worktrees.md, templates/v1/minimal/HANDOFF.md, templates/v1/software/AGENTS.md, tests/test_cli.py"],"completed":["The independent retention-variant session identified that a Git lock prevents removal but the policy did not require a durable expiry and release record; added a short-hold record containing reason, expected release date, path, and unlock/remove action.","Updated PCM operating rules, software and minimal profiles, generated instructions, README, protocol, task acceptance, and regression assertions; no custom pin database was added."],"decisions":["Temporary audit holds must be time-bounded and recorded in the task checkpoint; Git native lock protects them during the hold, and the ordinary verified cleanup remains mandatory after unlock."],"evidence":["Variant session 01a0cfda-315f-73d1-a806-e4213bbc8cc8 at merged commit 396bf6b: 22 test_cli tests passed, continuity validation VALID, git diff --check passed; first attempt omitted PYTHONPATH=src and failed imports, then the corrected command passed.","After incorporating the variant, full suite passed 46 tests each on Python 3.11.15 and 3.12.10; Ruff, MyPy, compileall, package build, continuity validation, and diff check passed.","The independent candidate session 01a0cfd8-2027-7382-b395-5c54c13309d7 read the task/docs but stopped without tests or changes, citing that hosted CI/merge were outside its no-publish scope. Record this as a failed candidate holdout, not a pass.","PR #45 merged at c04d5fa; safety follow-up PR #46 merged at 396bf6b after all hosted package, quality, and Python 3.11/3.12 checks passed."],"next_action":"Push this checkpoint and PR #47; after CI/merge, run a fresh local audit of issue #34 on the current merged commit, then a fresh variant that exercises a time-bounded audit hold, without providing a diagnosis or evaluator checklist.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0019","timestamp":"2026-09-23T20:09:04Z"} -->
+
+Completed:
+- The independent retention-variant session identified that a Git lock prevents removal but the policy did not require a durable expiry and release record; added a short-hold record containing reason, expected release date, path, and unlock/remove action.
+- Updated PCM operating rules, software and minimal profiles, generated instructions, README, protocol, task acceptance, and regression assertions; no custom pin database was added.
+
+Evidence:
+- Variant session 01a0cfda-315f-73d1-a806-e4213bbc8cc8 at merged commit 396bf6b: 22 test_cli tests passed, continuity validation VALID, git diff --check passed; first attempt omitted PYTHONPATH=src and failed imports, then the corrected command passed.
+- After incorporating the variant, full suite passed 46 tests each on Python 3.11.15 and 3.12.10; Ruff, MyPy, compileall, package build, continuity validation, and diff check passed.
+- The independent candidate session 01a0cfd8-2027-7382-b395-5c54c13309d7 read the task/docs but stopped without tests or changes, citing that hosted CI/merge were outside its no-publish scope. Record this as a failed candidate holdout, not a pass.
+- PR #45 merged at c04d5fa; safety follow-up PR #46 merged at 396bf6b after all hosted package, quality, and Python 3.11/3.12 checks passed.
+
+Decisions:
+- Temporary audit holds must be time-bounded and recorded in the task checkpoint; Git native lock protects them during the hold, and the ordinary verified cleanup remains mandatory after unlock.
+
+Changed:
+- AGENTS.md, HANDOFF.md, README.md, SPEC.md, docs/HANDOFF_PROTOCOL.md, src/continuity/cli.py, tasks/TASK-PCM-0019-managed-worktrees.md, templates/v1/minimal/HANDOFF.md, templates/v1/software/AGENTS.md, tests/test_cli.py
+
+Blocked/uncertain:
+- PR #47 hosted CI/merge and a properly scoped fresh candidate rerun plus the fresh retention variant remain; #34 and #20 must stay open until the holdouts pass.
+
+Next:
+- Push this checkpoint and PR #47; after CI/merge, run a fresh local audit of issue #34 on the current merged commit, then a fresh variant that exercises a time-bounded audit hold, without providing a diagnosis or evaluator checklist.
+
 ## Handoff
 
 Read `PROJECT.md` → `checkpoints/CURRENT.md` → this task → `AGENTS.md` →
