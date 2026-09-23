@@ -287,6 +287,29 @@ Next:
   existing schemas/tests, then implement the smallest compatible CLI changes
   and deterministic regressions.
 
+### 2026-09-23 23:42:58 UTC — Codex PCM handoff preparation
+
+<!-- continuity:checkpoint {"agent":"Codex PCM handoff preparation","blocked":["Fresh-session baseline and candidate trials, hosted CI, and issue #33 closeout remain pending."],"changed":["AGENTS.md; HANDOFF.md; README.md; checkpoints/CURRENT.md; docs/HANDOFF_PROTOCOL.md; src/continuity/cli.py; tasks/TASK-PCM-0018-document-discovery.md; templates/v1/minimal/HANDOFF.md; templates/v1/software/AGENTS.md; tests/test_cli.py"],"completed":["Strengthened fresh-session document discovery instructions; corrected the task log so the undocumented baseline claim is marked unverified and both holdouts remain pending; updated CURRENT and HANDOFF with exact continuation steps."],"decisions":["Do not treat the earlier undocumented baseline-score sentence as evidence; keep issue #33 open until fresh baseline and candidate results and merged closeout are recorded."],"evidence":["Full unittest suite passed 64 tests on Python 3.11.15 and 64 on Python 3.12.10; ruff check ., mypy src, compileall, and git diff --check passed; continuity validate returned VALID; generated document index check returned SYNCHRONIZED; local wheel/sdist smoke parity was previously recorded for Python 3.11 and 3.12. No verifiable baseline/candidate reports or hosted CI results exist yet."],"next_action":"Open an implementation PR for this pushed branch and let required CI auto-merge it; then run the same visible prompt in independent sessions at baseline 85f13464c466ff277ce319850ce8124c4bc95c52 and the merged candidate snapshot, record outcomes and cleanup, and keep #33 open until all acceptance is met.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0018","timestamp":"2026-09-23T23:42:58Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"c1b53991378e0be876b53f9b949559ca388a2aecc9f7dd0d5d83300d4638c6d2","request_id":"33e4c3c45503485082fe3a6023a0229c","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0018"} -->
+
+Completed:
+- Strengthened fresh-session document discovery instructions; corrected the task log so the undocumented baseline claim is marked unverified and both holdouts remain pending; updated CURRENT and HANDOFF with exact continuation steps.
+
+Evidence:
+- Full unittest suite passed 64 tests on Python 3.11.15 and 64 on Python 3.12.10; ruff check ., mypy src, compileall, and git diff --check passed; continuity validate returned VALID; generated document index check returned SYNCHRONIZED; local wheel/sdist smoke parity was previously recorded for Python 3.11 and 3.12. No verifiable baseline/candidate reports or hosted CI results exist yet.
+
+Decisions:
+- Do not treat the earlier undocumented baseline-score sentence as evidence; keep issue #33 open until fresh baseline and candidate results and merged closeout are recorded.
+
+Changed:
+- AGENTS.md; HANDOFF.md; README.md; checkpoints/CURRENT.md; docs/HANDOFF_PROTOCOL.md; src/continuity/cli.py; tasks/TASK-PCM-0018-document-discovery.md; templates/v1/minimal/HANDOFF.md; templates/v1/software/AGENTS.md; tests/test_cli.py
+
+Blocked/uncertain:
+- Fresh-session baseline and candidate trials, hosted CI, and issue #33 closeout remain pending.
+
+Next:
+- Open an implementation PR for this pushed branch and let required CI auto-merge it; then run the same visible prompt in independent sessions at baseline 85f13464c466ff277ce319850ce8124c4bc95c52 and the merged candidate snapshot, record outcomes and cleanup, and keep #33 open until all acceptance is met.
+
 ## Handoff
 
 Read `PROJECT.md`, `AGENTS.md`, `checkpoints/CURRENT.md`, this task, `SPEC.md`,
