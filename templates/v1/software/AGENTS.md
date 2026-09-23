@@ -11,3 +11,7 @@ Work only inside the active bounded task. Split or revise the task before materi
 ## Checkpoint
 
 Before stopping after meaningful work, append completed work, exact evidence, decisions, changed paths, blockers, and one next atomic action.
+
+Continuity bookkeeping supports execution but does not gate safe execution. If canonical continuity state is temporarily unavailable, continue safe authorized work in an already-authorized alternate checkout/host and run `continuity checkpoint <TASK-ID> --root <canonical-root> --recovery-root <alternate-root> ...` to write the JSON recovery receipt under `.continuity/recovery/`. Do not write an ad-hoc checkpoint under `checkpoints/`, replace the alternate task file, repair storage merely to write a checkpoint, treat a physical worktree as project identity, create competing continuity state, or request redundant permission. Reconcile later with `continuity recovery reconcile --root <canonical-root> --file <receipt>`.
+
+When a remote is available and pushing is authorized, commit and push meaningful checkpoint state. Otherwise record the exact dirty/local state and next action.

@@ -13,3 +13,7 @@ Start from repository state, not prior chat history.
 ## Authority
 
 Canonical repository files are authoritative. Tracker items and context packs are mirrors/derived views.
+
+## Degraded continuity
+
+Execution safety and existing authorization outrank continuity bookkeeping. If canonical continuity state is temporarily unavailable, do not stop safe work or repair storage merely to force a write. Use an already-authorized alternate checkout/host and run `continuity checkpoint <TASK-ID> --root <canonical-root> --recovery-root <alternate-root> ...` to write the JSON recovery receipt under `.continuity/recovery/`; do not create an ad-hoc Markdown checkpoint under `checkpoints/` or replace the alternate task file. Reconcile it later with `continuity recovery reconcile --root <canonical-root> --file <receipt>`. The repository/task lineage is authoritative; a physical worktree is not. Push meaningful commits when a remote and authorization are available; otherwise record exact dirty/local state.

@@ -85,6 +85,11 @@ Record observed evidence, decisions, changes, uncertainty, next action.
 ### Stop/handoff
 Ensure state is committed or dirty state is explicitly recorded, tests/evidence are captured, blockers are named, and next action is singular/unambiguous.
 
+### Degraded continuity
+Execution safety and existing authorization outrank continuity bookkeeping. Failure to read or write canonical continuity state is a degraded condition, not an execution gate, when the underlying task remains safe and recoverable. Continue in an already-authorized alternate checkout or host, write a recovery receipt containing the same repository/task lineage and checkpoint evidence, and reconcile it into canonical state when writable.
+
+The authoritative identity is the repository/task lineage (project identity, task ID, branch/ref, and Git history), not a physical path or machine. Multiple worktrees may be execution views of one lineage; they must not become competing continuity projects. When a remote is available and pushing is authorized, a committed and pushed task branch is the preferred durable handoff. If pushing is unavailable or unauthorized, record exact dirty/local state rather than inventing a second identity.
+
 ## 6. CLI behavior
 
 `continuity init` materializes v1 schemas and profile files. It performs a full conflict preflight and never silently overwrites different existing content.
@@ -94,6 +99,8 @@ Ensure state is committed or dirty state is explicitly recorded, tests/evidence 
 `continuity task new` allocates the next four-digit task ID from the configured prefix and writes one bounded task file.
 
 `continuity checkpoint` adds a checkpoint entry without deleting or replacing prior checkpoint history.
+
+`continuity checkpoint --recovery-root <alternate>` preserves a minimal recovery receipt in an authorized alternate checkout when canonical checkpoint state is temporarily unavailable. `continuity recovery reconcile` appends that receipt to the canonical task once it is writable.
 
 `continuity pack` creates a derived Markdown view with repository/ref/commit/protocol/task/generation/source metadata.
 

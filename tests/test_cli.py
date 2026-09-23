@@ -6,13 +6,17 @@ import subprocess
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from continuity.cli import (
+    ContinuityError,
     checkpoint_task,
     extract_marker,
     init_repo,
+    load_json,
     pack_task,
     preflight_repo,
+    reconcile_recovery,
     task_new,
     validate_repo,
 )
@@ -118,6 +122,74 @@ class ContinuityTests(unittest.TestCase):
         self.assertIn("continuity:checkpoint", updated)
         self.assertIn("implemented fixture", updated)
         self.assertEqual(validate_repo(root), [])
+
+    def test_unavailable_canonical_state_is_reported_without_traceback(self) -> None:
+        root = self.copy_fixture("valid-minimal")
+        task = root / "tasks" / "TASK-PCM-0001-example.md"
+        original_read = Path.read_text
+
+        def blocked_read(path: Path, *args, **kwargs):
+            if path.resolve() == task.resolve():
+                raise PermissionError("canonical task temporarily unavailable")
+            return original_read(path, *args, **kwargs)
+
+        with patch.object(Path, "read_text", blocked_read):
+            errors = validate_repo(root)
+            self.assertTrue(any("canonical task unavailable" in error for error in errors), errors)
+            mode, preflight_errors = preflight_repo(root)
+            self.assertEqual(mode, "DEGRADED_TARGET")
+            self.assertEqual(preflight_errors, errors)
+            with self.assertRaisesRegex(ContinuityError, "canonical task unavailable"):
+                checkpoint_task(
+                    root,
+                    "PCM-0001",
+                    "test-agent",
+                    "2026-09-20T18:00:00Z",
+                    ["implemented fixture"],
+                    ["temporary write failure reproduced"],
+                    ["continue safe work"],
+                    ["tests/test_cli.py"],
+                    [],
+                    "run validation",
+                )
+
+    def test_checkpoint_writes_recovery_receipt_and_reconciles(self) -> None:
+        root = self.copy_fixture("valid-minimal")
+        recovery_root = self.copy_fixture("valid-minimal")
+        task = root / "tasks" / "TASK-PCM-0001-example.md"
+        original_write = Path.write_text
+
+        def block_canonical_write(path: Path, data: str, *args, **kwargs):
+            if path.resolve() == task.resolve():
+                raise PermissionError("canonical task temporarily unavailable")
+            return original_write(path, data, *args, **kwargs)
+
+        with patch.object(Path, "write_text", block_canonical_write):
+            receipt_path = checkpoint_task(
+                root,
+                "PCM-0001",
+                "test-agent",
+                "2026-09-20T18:05:00Z",
+                ["implemented fixture"],
+                ["recovery receipt written"],
+                ["continue safe work"],
+                ["tests/test_cli.py"],
+                ["canonical task temporarily unavailable"],
+                "reconcile the receipt when canonical state is writable",
+                recovery_root,
+            )
+
+        receipt = load_json(receipt_path)
+        self.assertEqual(receipt["schema"], "project-continuity.recovery.v1")
+        self.assertEqual(receipt["status"], "pending-reconciliation")
+        self.assertEqual(receipt["checkpoint"]["agent"], "test-agent")
+        self.assertEqual(receipt["checkpoint"]["task_id"], "PCM-0001")
+        self.assertEqual(validate_repo(recovery_root), [])
+
+        output = reconcile_recovery(root, receipt_path)
+        self.assertEqual(output, task)
+        self.assertEqual(validate_repo(root), [])
+        self.assertEqual(load_json(receipt_path)["status"], "reconciled")
 
     def test_pack_records_git_provenance_and_sources(self) -> None:
         root = self.copy_fixture("valid-minimal")

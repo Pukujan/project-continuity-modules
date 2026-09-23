@@ -40,6 +40,8 @@ task/PCM-0001-bootstrap-v1
 
 One primary agent/session owns the writable task state at a time.
 
+This is a lineage rule, not a permanent physical-worktree rule. A repository/task branch may be checked out in an authorized alternate worktree or host when execution needs to move. The Git repository, task ID, branch/ref, and commit history identify the work; a filesystem path does not.
+
 ## Checkpoint rule
 
 Before stopping after meaningful work, append to the active task:
@@ -52,6 +54,10 @@ Before stopping after meaningful work, append to the active task:
 - one exact next action.
 
 Update `checkpoints/CURRENT.md` only when program-wide state or priority changes.
+
+Continuity bookkeeping supports execution but does not gate safe execution. If a canonical task, CURRENT, or HANDOFF file is temporarily unavailable, do not repair storage merely to force a write, stop otherwise-safe authorized work, or ask again for an already-authorized host/worktree. Continue in the authorized alternate checkout and run `continuity checkpoint ... --recovery-root <alternate-root>` to leave a recovery receipt. Reconcile it later with `continuity recovery reconcile --root <canonical-root> --file <receipt>`. Recovery receipts are temporary evidence, not a competing project identity.
+
+When a remote is available and pushing is authorized, commit and push meaningful checkpoint state so the task branch is the durable shared handoff. If the remote is unavailable or the user has not authorized a push, record the exact dirty/local state and next action; do not invent a second branch or worktree identity.
 
 ## Evidence rule
 
