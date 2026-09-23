@@ -77,3 +77,35 @@ Blocked/uncertain:
 Next:
 
 - Run the full automated release gate, push, and allow protected CI to merge.
+
+### 2026-09-23 13:34:48 UTC — Codex PCM-0012 agent lifecycle policy
+
+<!-- continuity:checkpoint {"agent":"Codex PCM-0012 agent lifecycle policy","blocked":[],"changed":["AGENTS.md; HANDOFF.md; README.md; SPEC.md; checkpoints/CURRENT.md; docs/AGENT_LIFECYCLE.md; docs/HANDOFF_PROTOCOL.md; templates/v1/minimal/HANDOFF.md; templates/v1/software/AGENTS.md; tasks/TASK-PCM-0012-agent-lifecycle.md; tests/test_agent_lifecycle_policy.py"],"completed":["Added normative delegated-agent lifecycle policy requiring parent capture followed by explicit close.","Added guidance to AGENTS.md, SPEC.md, README.md, handoff protocol, and generated minimal/software profiles.","Added deterministic policy tests covering capture-then-close and terminal-state cleanup guidance.","Closed the completed blind-test subagent after capturing its result."],"decisions":["Agent threads are temporary execution infrastructure; the parent task/checkpoint and pushed Git branch remain canonical.","Do not modify Hades v2 or any unrelated target repository."],"evidence":["ruff check . -> All checks passed.","mypy src -> Success: no issues found in 3 source files.","python -m compileall -q src tests -> exit 0.","PYTHONPATH=src python -m unittest discover -s tests -q -> 16 tests passed.","PYTHONPATH=src python -m continuity validate --root . -> VALID.","python -m build -> project_continuity-0.2.0 sdist and wheel built successfully.","GitHub issue #24 -> durable policy request and acceptance criteria."],"next_action":"Verify protected CI and allow automatic merge of the pushed task branch.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0012","timestamp":"2026-09-23T13:34:48Z"} -->
+
+Completed:
+- Added normative delegated-agent lifecycle policy requiring parent capture followed by explicit close.
+- Added guidance to AGENTS.md, SPEC.md, README.md, handoff protocol, and generated minimal/software profiles.
+- Added deterministic policy tests covering capture-then-close and terminal-state cleanup guidance.
+- Closed the completed blind-test subagent after capturing its result.
+
+Evidence:
+- ruff check . -> All checks passed.
+- mypy src -> Success: no issues found in 3 source files.
+- python -m compileall -q src tests -> exit 0.
+- PYTHONPATH=src python -m unittest discover -s tests -q -> 16 tests passed.
+- PYTHONPATH=src python -m continuity validate --root . -> VALID.
+- python -m build -> project_continuity-0.2.0 sdist and wheel built successfully.
+- GitHub issue #24 -> durable policy request and acceptance criteria.
+
+Decisions:
+- Agent threads are temporary execution infrastructure; the parent task/checkpoint and pushed Git branch remain canonical.
+- Do not modify Hades v2 or any unrelated target repository.
+
+Changed:
+- AGENTS.md; HANDOFF.md; README.md; SPEC.md; checkpoints/CURRENT.md; docs/AGENT_LIFECYCLE.md; docs/HANDOFF_PROTOCOL.md; templates/v1/minimal/HANDOFF.md; templates/v1/software/AGENTS.md; tasks/TASK-PCM-0012-agent-lifecycle.md; tests/test_agent_lifecycle_policy.py
+
+Blocked/uncertain:
+- none
+
+Next:
+- Verify protected CI and allow automatic merge of the pushed task branch.
