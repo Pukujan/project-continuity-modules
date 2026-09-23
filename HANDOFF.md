@@ -4,7 +4,8 @@ This repository is ready for a fresh PCM development session without prior chat 
 
 ## Active work
 
-- None. PCM-0014 is complete and merged automatically in PR #26 at `b9e0f7c`.
+- PCM-0015 is active as a planning-only task. Read `tasks/TASK-PCM-0015-versioned-project-memory.md` and `docs/research/PCM-0015-epistemic-context.md`. The latter records the available discussion verbatim and labels facts, requirements, proposals, and open questions; its PROV-O graph is adjacent.
+- PCM-0014 is complete and merged automatically in PR #26 at `b9e0f7c`.
 - GitHub issue #24 is closed by PR #26.
 - PCM-0012 and PCM-0013 remain separately recorded workspace-policy histories.
 - Candidate CLI/package version remains: `0.2.0`
@@ -22,7 +23,7 @@ This repository is ready for a fresh PCM development session without prior chat 
 
 ## Exact next action
 
-Activate PCM-0005 when ready to resume the queued adapter work. Do not modify Eval Lab, hades-v2, harness-on-steroids, inference-recommendation-engine, or any unrelated target repository.
+Push the initial PCM-0015 context checkpoint, then have GPT-6 Astra produce one bounded plan artifact under `docs/plans/PCM-0015-implementation-plan.md`. Keep the work planning-only, preserve PCM-0005 as a separate queued task, and do not modify Eval Lab, hades-v2, harness-on-steroids, inference-recommendation-engine, or any unrelated target repository.
 
 ## Authority
 

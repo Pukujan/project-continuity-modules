@@ -1,12 +1,12 @@
 # Current Repository Checkpoint
 
-<!-- continuity:current {"active_task":null,"active_task_file":null,"protocol_version":"0.1.0-draft","schema":"project-continuity.current.v1"} -->
+<!-- continuity:current {"active_task":"PCM-0015","active_task_file":"tasks/TASK-PCM-0015-versioned-project-memory.md","protocol_version":"0.1.0-draft","schema":"project-continuity.current.v1"} -->
 
 ## Program state
 
 Phase: adoption — prove v1 in mature repositories.
 
-No active task. PCM-0014 — close completed delegated agents and bound concurrency — merged automatically in PR #26 at `b9e0f7c` after protected CI passed.
+PCM-0015 — plan versioned, verifiable project memory — is active as a planning-only task linked to issue #28. Its verbatim discussion and PROV-O source graph are being recorded before delegation. PCM-0014 — close completed delegated agents and bound concurrency — merged automatically in PR #26 at `b9e0f7c` after protected CI passed.
 PCM-0012 and PCM-0013 are merged workspace-policy deliveries and remain separately recorded in their own task histories.
 
 ## Main objective
@@ -29,7 +29,7 @@ Adopt the validated continuity protocol in existing repositories without erasing
 
 ## Active
 
-- None.
+- PCM-0015 — versioned project memory, idempotent docs/manifests, discovery, evidence-linked claims, runtime enforcement boundaries, bounded checkpointing, and fresh-session evaluation. Planning only; do not implement yet.
 
 ## Prior completed/adopted work
 
@@ -48,4 +48,4 @@ None known.
 
 ## Next atomic action
 
-Activate PCM-0005 when ready to resume the queued adapter work.
+Complete the PCM-0015 scoped implementation plan and test strategy; then decide the first separately bounded implementation slice. Keep queued PCM-0005 distinct.
