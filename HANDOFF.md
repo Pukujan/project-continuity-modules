@@ -4,6 +4,10 @@ This repository is ready for a fresh PCM development session without prior chat 
 
 ## Active work
 
+- PCM-0019 / issue #34 is active: implement temporary task-owned worktrees under `pcm/worktree/<TASK-ID>`, safe push/CI/merge/removal, and immutable package-cache reuse. Start with `tasks/TASK-PCM-0019-managed-worktrees.md`.
+- Preserve strict single-checkout as an explicit opt-out. Issue #20's feature landed in PR #21 but remains open; reconcile it only after #34's final policy and tests pass.
+- PCM-0022 / issue #39 remains a separate test-method task. Run its corrected-candidate fresh-session checks only after #34 has a candidate; do not fold its policy/harness work into #34.
+- #42 README image recovery is deferred; do not search for or generate images until the user provides the promised plan.
 - PCM-0023 / issue #32 completed in PR #43 at `867e5ae`; closeout PR #44 updates the canonical task status/current pointer and closes #32.
 - PCM-0022 / issue #39 remains open: its policy merged in PR #40, but its corrected-candidate fresh-session rerun depends on the separate issue #34. Read its task file only when resuming that follow-up.
 - PCM-0019 / issue #34 remains open and separate. The #39 corrected-candidate holdout depends on its future implementation; do not implement managed worktrees under PCM-0022.
