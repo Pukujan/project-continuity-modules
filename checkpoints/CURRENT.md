@@ -6,7 +6,7 @@
 
 Phase: adoption — prove v1 in mature repositories.
 
-On 2026-09-23, the user activated PCM-0019 / issue #34 to replace the blanket worktree ban with a managed temporary-worktree lifecycle. The candidate now keeps one permanent home checkout for sequential work, permits task-scoped temporary linked worktrees when parallelism/isolation is useful, shares Git objects and reusable package caches, and verifies GitHub checks/merge before cleanup. Static gates and 43 tests on Python 3.11 and 3.12 pass locally; the disposable logical-size measurement and source citations are in the task record. Protected hosted CI, merge, issue closeout, and the separate PCM-0022/#39 holdout remain pending. No unrelated target repository is in scope.
+On 2026-09-23, the user activated PCM-0019 / issue #34 to replace the blanket worktree ban with a managed temporary-worktree lifecycle. The candidate keeps one permanent home checkout for sequential work, permits task-scoped temporary linked worktrees when parallelism/isolation is useful, and verifies GitHub checks/merge before cleanup. A Windows NTFS experiment measured 5,243,374 file-storage bytes for the home checkout plus three linked worktrees versus 8,390,584 bytes for the home checkout plus three non-hardlinked clones; full suites pass 43 tests each on Python 3.11 and 3.12. Sources, method, and limitations are recorded in the task. Hosted PR CI, merge, issue closeout, and the separate PCM-0022/#39 holdout remain pending. No unrelated target repository is in scope.
 
 PCM-0015 — plan versioned, verifiable project memory — completed as a planning-only task in PR #29 at `b379ba3`; issue #28 is closed. The plan did not implement the proposed capabilities. Follow-up issues #30-35 now track separate work for report-to-issue closeout, package/install parity, memory/discovery proof, managed worktrees/dependency caches, Codex session rotation, and archiving finished helper conversations. PCM-0010's baseline failure, fix, and post-fix blind rerun were already recorded and merged; stale issue #17 status was corrected and it closed through PR #37 at `cf76827`. PCM-0009's protocol/tooling work is on `main`, but issue #15 remains open because its broader description includes a target-repository remediation not performed here. PCM-0014 — close completed delegated agents and bound concurrency — merged automatically in PR #26 at `b9e0f7c` after protected CI passed.
 PCM-0012 and PCM-0013 are merged workspace-policy deliveries and remain separately recorded in their own task histories.
@@ -62,4 +62,4 @@ None known.
 
 ## Next atomic action
 
-Publish the PCM-0019 candidate for hosted CI, then run the separately scoped corrected-candidate holdout and scenario variant under #39 before issue #34 closeout or selecting another report.
+Publish the PCM-0019 candidate for protected CI, then run the separate #39 corrected-candidate holdout and scenario variant before closing issue #34 or selecting another report.

@@ -46,15 +46,22 @@ Checked on 2026-09-23 against the current official documentation:
   of downloads/build artifacts; it does not establish that separate task
   environments with different locks/interpreters can safely share one mutable
   `.venv`.
+- Microsoft's [GetCompressedFileSizeW documentation](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-getcompressedfilesizew)
+  describes the API used by the Windows experiment to report the actual bytes
+  of file storage used (compressed size when applicable).
 - A disposable Windows/Python 3.12 experiment now measures a 1 MiB deterministic
   payload in three linked worktrees versus three `git clone --no-hardlinks`
-  copies. `tests.test_worktrees.WorktreeStorageExperimentTests` reported
-  3,145,728 bytes of checked-out files in either case; one common Git object
-  store for the three worktrees was 1,049,070 bytes, versus 3,147,210 bytes
-  across three independent clone object stores. The experiment confirms that
-  linked worktrees save repeated Git-object storage but still materialize each
-  checkout's files. It measures logical file lengths, not Windows physical
-  allocation, real-project size, package caches, or virtual environments.
+  copies on the user's C: NTFS volume. `tests.test_worktrees.WorktreeStorageExperimentTests`
+  reported 3,145,728 bytes of checked-out files in either case; one common Git
+  object store for the worktrees was 1,049,070 bytes, versus 3,147,210 bytes
+  across three independent clone object stores. The Win32 file-storage API
+  measured the home checkout plus three worktrees at 5,243,374 bytes, versus
+  the same home checkout plus three non-hardlinked clones at 8,390,584 bytes.
+  This confirms a 3,147,210-byte saving for this tiny fixture, while showing
+  that every additional worktree still materializes its own checkout files.
+  The experiment excludes directory/filesystem metadata, real-project size,
+  package caches, and virtual environments; it is not a universal savings
+  estimate.
 
 ## Scope
 
@@ -208,6 +215,50 @@ Blocked/uncertain:
 Next:
 - Commit and push the reviewed candidate, then run the separate #39 holdout
   and scenario variant against the pushed candidate.
+
+### 2026-09-23 — Windows storage measurement and final local gates
+
+Completed:
+- Extended the disposable experiment to compare actual per-file storage on
+  Windows using the documented Win32 file-storage API; recorded the filesystem,
+  baseline, method, source, and limitations.
+- Reran both supported Python test suites and all local quality/package gates
+  after the measurement change.
+
+Evidence:
+- C: is NTFS. With the same 1 MiB deterministic repo payload, the home checkout
+  plus three linked worktrees used 5,243,374 file-storage bytes; the same home
+  checkout plus three non-hardlinked clones used 8,390,584 bytes, a difference
+  of 3,147,210 bytes for this fixture. The test also reports logical file
+  lengths. `GetCompressedFileSizeW` method is documented by Microsoft above.
+- Python 3.12 and Python 3.11.15 full suites -> 43 passed each; both produced
+  the Windows measurement above.
+- Ruff, MyPy, compileall, `continuity validate --root .`, and `python -m build`
+  -> passed.
+- Product/test commit `9aa1c16` records the Windows measurement implementation;
+  the durable task note/checkpoint is the next separate push.
+
+Decisions:
+- Report the result as a small-fixture comparison, not an expected percentage
+  saving for real repositories. Each worktree still stores its own checkout
+  files; most savings here are the avoided extra Git-object copies.
+- Keep the managed-worktree recommendation: one home checkout for sequential
+  work, optional temporary linked trees for true parallelism/isolation, and
+  cleanup only after remote verification.
+
+Changed:
+- `tests/test_worktrees.py`
+- This task record and `checkpoints/CURRENT.md`
+
+Blocked/uncertain:
+- Issue #39's fresh-session candidate and variant runs, protected hosted CI,
+  automatic merge, issue reconciliation, and local branch cleanup remain.
+- Directory metadata, package stores, mutable environments, and a production
+  repository were not measured.
+
+Next:
+- Publish the checkpoint and candidate PR; then run #39's separate holdout and
+  scenario variant before closing issue #34.
 
 ## Handoff
 
