@@ -63,3 +63,29 @@ Do not implement the proposed feature set in this planning task. The result is o
 - Official Codex subagent guidance: <https://learn.chatgpt.com/docs/agent-configuration/subagents>.
 
 ## Checkpoint log
+
+### 2026-09-23 14:14:42 UTC — GPT-6 Luna parent session
+
+<!-- continuity:checkpoint {"agent":"GPT-6 Luna parent session","blocked":["Actual package and Node distribution strategy remains undecided; no implementation or update behavior has yet been tested."],"changed":["HANDOFF.md; checkpoints/CURRENT.md; docs/research/PCM-0015-epistemic-context.md; docs/research/PCM-0015-provenance.ttl; tasks/TASK-PCM-0015-versioned-project-memory.md"],"completed":["Captured the visible user and assistant discussion verbatim in a Git-backed research record.","Added a W3C PROV-O Turtle graph that labels user requirements, prior proposals, repository observations, external sources, and unresolved questions.","Opened GitHub issue #28 and activated PCM-0015 as a planning-only task."],"decisions":["Prior design proposals remain unadopted until reviewed and tested; Astra owns only a bounded plan artifact."],"evidence":["continuity validate --root . -> VALID.","uv run --with rdflib --no-project python -c ... -> valid Turtle; 89 triples.","GitHub issue #28 -> created."],"next_action":"Delegate the plan-only task to GPT-6 Astra and continue parent review in GPT-6 Luna.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0015","timestamp":"2026-09-23T14:14:42Z"} -->
+
+Completed:
+- Captured the visible user and assistant discussion verbatim in a Git-backed research record.
+- Added a W3C PROV-O Turtle graph that labels user requirements, prior proposals, repository observations, external sources, and unresolved questions.
+- Opened GitHub issue #28 and activated PCM-0015 as a planning-only task.
+
+Evidence:
+- continuity validate --root . -> VALID.
+- uv run --with rdflib --no-project python -c ... -> valid Turtle; 89 triples.
+- GitHub issue #28 -> created.
+
+Decisions:
+- Prior design proposals remain unadopted until reviewed and tested; Astra owns only a bounded plan artifact.
+
+Changed:
+- HANDOFF.md; checkpoints/CURRENT.md; docs/research/PCM-0015-epistemic-context.md; docs/research/PCM-0015-provenance.ttl; tasks/TASK-PCM-0015-versioned-project-memory.md
+
+Blocked/uncertain:
+- Actual package and Node distribution strategy remains undecided; no implementation or update behavior has yet been tested.
+
+Next:
+- Delegate the plan-only task to GPT-6 Astra and continue parent review in GPT-6 Luna.
