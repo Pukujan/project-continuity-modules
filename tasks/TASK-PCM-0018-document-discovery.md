@@ -351,6 +351,29 @@ Blocked/uncertain:
 Next:
 - Open an implementation PR for this pushed branch and let required CI auto-merge it; then run the same visible prompt in independent sessions at baseline 85f13464c466ff277ce319850ce8124c4bc95c52 and the merged candidate snapshot, record outcomes and cleanup, and keep #33 open until all acceptance is met.
 
+### 2026-09-23 23:50:23 UTC — Codex PCM-0018 post-merge handoff
+
+<!-- continuity:checkpoint {"agent":"Codex PCM-0018 post-merge handoff","blocked":["Fresh-session baseline and candidate reports, plus final canonical closeout, remain outstanding."],"changed":["HANDOFF.md; checkpoints/CURRENT.md; tasks/TASK-PCM-0018-document-discovery.md; GitHub issue #33 status comment"],"completed":["Recorded the automatic merge of implementation PR #51; updated the permanent handoff and current checkpoint to identify the two pending fresh-session trials and keep issue #33 open."],"decisions":["Do not close issue #33 until the two independent pinned-snapshot trials and a separate merged closeout are complete; the old unsupported baseline claim is not a pass."],"evidence":["PR #51 merged at 98747fce4d5c805670dc3b00bb572e5c02706237 after hosted quality, Python 3.11/3.12 tests, package build, package-parity 3.11/3.12, and auto-merge checks passed. Local main is clean at the merge commit. continuity validate returned VALID and docs render --check returned SYNCHRONIZED. No verifiable baseline or candidate session report is recorded."],"next_action":"Run the same visible prompt in two independent fresh sessions: baseline 85f13464c466ff277ce319850ce8124c4bc95c52 and candidate 98747fce4d5c805670dc3b00bb572e5c02706237. Record prompt, model/session, starting commit, objective results, elapsed time, and cleanup; then complete remaining acceptance and use a separate CI/auto-merged closeout PR before closing #33.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0018","timestamp":"2026-09-23T23:50:23Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"35c066428c55c57a6371399f5016b292f0bb61f457c86752fa0e6cd2bae5c16e","request_id":"ab0b938607c54cb8aaec839bbb86d7be","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0018"} -->
+
+Completed:
+- Recorded the automatic merge of implementation PR #51; updated the permanent handoff and current checkpoint to identify the two pending fresh-session trials and keep issue #33 open.
+
+Evidence:
+- PR #51 merged at 98747fce4d5c805670dc3b00bb572e5c02706237 after hosted quality, Python 3.11/3.12 tests, package build, package-parity 3.11/3.12, and auto-merge checks passed. Local main is clean at the merge commit. continuity validate returned VALID and docs render --check returned SYNCHRONIZED. No verifiable baseline or candidate session report is recorded.
+
+Decisions:
+- Do not close issue #33 until the two independent pinned-snapshot trials and a separate merged closeout are complete; the old unsupported baseline claim is not a pass.
+
+Changed:
+- HANDOFF.md; checkpoints/CURRENT.md; tasks/TASK-PCM-0018-document-discovery.md; GitHub issue #33 status comment
+
+Blocked/uncertain:
+- Fresh-session baseline and candidate reports, plus final canonical closeout, remain outstanding.
+
+Next:
+- Run the same visible prompt in two independent fresh sessions: baseline 85f13464c466ff277ce319850ce8124c4bc95c52 and candidate 98747fce4d5c805670dc3b00bb572e5c02706237. Record prompt, model/session, starting commit, objective results, elapsed time, and cleanup; then complete remaining acceptance and use a separate CI/auto-merged closeout PR before closing #33.
+
 ## Handoff
 
 Read `PROJECT.md`, `AGENTS.md`, `checkpoints/CURRENT.md`, this task, `SPEC.md`,
