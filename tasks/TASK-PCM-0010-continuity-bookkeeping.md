@@ -139,6 +139,37 @@ Blocked/uncertain:
 Next:
 - Open a PR or perform human review of commit b4702df and its final verification checkpoint.
 
+### 2026-09-23 04:41:44 UTC — Codex PCM-0010 CI/CD delivery
+
+<!-- continuity:checkpoint {"agent":"Codex PCM-0010 CI/CD delivery","blocked":[],"changed":[".github/workflows/ci.yml","pyproject.toml","src/continuity/cli.py","tests/test_cli.py","PCM guidance and task state"],"completed":["Replaced optional checkpoint pushes with mandatory checkpoint commit-and-push delivery.","Added GitHub CI quality, test, compilation, package, and automatic pull-request merge jobs.","Added deterministic regression coverage for checkpoint publication to a Git remote."],"decisions":["A normal checkpoint is not durable until the task branch is pushed; remote failure is degraded continuity, not a second canonical worktree."],"evidence":["Ruff -> all checks passed.","MyPy src -> no issues found.","PYTHONPATH=src python -m unittest discover -s tests -q -> 14 tests passed.","PYTHONPATH=src python -m continuity validate --root . -> VALID."],"next_action":"Open the pushed pull request and verify required CI jobs plus automatic merge behavior.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0010","timestamp":"2026-09-23T04:41:44Z"} -->
+
+Completed:
+- Replaced optional checkpoint pushes with mandatory checkpoint commit-and-push delivery.
+- Added GitHub CI quality, test, compilation, package, and automatic pull-request merge jobs.
+- Added deterministic regression coverage for checkpoint publication to a Git remote.
+
+Evidence:
+- Ruff -> all checks passed.
+- MyPy src -> no issues found.
+- PYTHONPATH=src python -m unittest discover -s tests -q -> 14 tests passed.
+- PYTHONPATH=src python -m continuity validate --root . -> VALID.
+
+Decisions:
+- A normal checkpoint is not durable until the task branch is pushed; remote failure is degraded continuity, not a second canonical worktree.
+
+Changed:
+- .github/workflows/ci.yml
+- pyproject.toml
+- src/continuity/cli.py
+- tests/test_cli.py
+- PCM guidance and task state
+
+Blocked/uncertain:
+- none
+
+Next:
+- Open the pushed pull request and verify required CI jobs plus automatic merge behavior.
+
 ## Handoff
 
 Read `PROJECT.md` → `checkpoints/CURRENT.md` → this task → `AGENTS.md` → `SPEC.md` → `docs/HANDOFF_PROTOCOL.md` → `docs/BLIND_TEST_PCM-0010.md`. Keep PCM-0009 separate and do not modify unrelated target repositories.
