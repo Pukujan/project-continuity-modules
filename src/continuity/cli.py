@@ -381,10 +381,19 @@ def validate_repo(root: Path) -> list[str]:
         return [str(exc)]
 
     try:
-        errors.extend(f"{config_path}: {e}" for e in validate_schema(config, load_schema(root, "config")))
+        config_errors = [
+            f"{config_path}: {e}"
+            for e in validate_schema(config, load_schema(root, "config"))
+        ]
+        errors.extend(config_errors)
     except ContinuityError as exc:
         errors.append(str(exc))
-        return sorted(errors)
+        return sorted(set(errors))
+
+    # Invalid config is a terminal structural error. Do not index required
+    # keys after schema validation has already established that they are absent.
+    if config_errors:
+        return sorted(set(errors))
 
     canonical = config.get("canonical", {})
     project_path = root / canonical.get("project", "PROJECT.md")
