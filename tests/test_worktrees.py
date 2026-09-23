@@ -1,10 +1,13 @@
 from __future__ import annotations
 
+import ctypes
 import json
+import os
 import random
 import subprocess
 import tempfile
 import unittest
+from ctypes import wintypes
 from pathlib import Path
 from unittest.mock import patch
 
@@ -345,6 +348,28 @@ class WorktreeStorageExperimentTests(unittest.TestCase):
             def object_size(path: Path) -> int:
                 return sum(file.stat().st_size for file in (path / ".git" / "objects").rglob("*") if file.is_file())
 
+            def allocated_size(file: Path) -> int:
+                if os.name != "nt":
+                    raise unittest.SkipTest("Windows file-allocation measurement is Windows-only")
+                kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+                get_compressed_file_size = kernel32.GetCompressedFileSizeW
+                get_compressed_file_size.argtypes = (wintypes.LPCWSTR, ctypes.POINTER(wintypes.DWORD))
+                get_compressed_file_size.restype = wintypes.DWORD
+                high = wintypes.DWORD()
+                ctypes.set_last_error(0)
+                low = get_compressed_file_size(str(file), ctypes.byref(high))
+                error = ctypes.get_last_error()
+                if low == 0xFFFFFFFF and error:
+                    raise ctypes.WinError(error)
+                return (high.value << 32) | low
+
+            def allocated_files(path: Path, exclude_git: bool = False) -> int:
+                return sum(
+                    allocated_size(file)
+                    for file in path.rglob("*")
+                    if file.is_file() and (not exclude_git or ".git" not in file.relative_to(path).parts)
+                )
+
             linked_common_dirs = set()
             for path in [source, *worktrees]:
                 common_dir = Path(git(path, "rev-parse", "--git-common-dir"))
@@ -357,14 +382,34 @@ class WorktreeStorageExperimentTests(unittest.TestCase):
             self.assertGreater(shared_git_object_bytes, 0)
             self.assertEqual(worktree_checkout_bytes, clone_checkout_bytes)
             self.assertGreater(cloned_git_object_bytes, shared_git_object_bytes)
-            print(
+            summary = (
                 "LOGICAL_STORAGE_EXPERIMENT bytes: "
                 f"three_worktree_checkouts={worktree_checkout_bytes}; "
                 f"one_shared_git_object_store={shared_git_object_bytes}; "
                 f"three_clone_checkouts={clone_checkout_bytes}; "
                 f"three_cloned_git_object_stores={cloned_git_object_bytes}; "
-                "filesystem allocation and package environments not measured"
             )
+            if os.name == "nt":
+                home_checkout_and_objects = allocated_files(source, exclude_git=True) + allocated_files(
+                    source / ".git" / "objects"
+                )
+                worktree_allocated = home_checkout_and_objects + sum(
+                    allocated_files(path, exclude_git=True) for path in worktrees
+                )
+                clones_allocated = home_checkout_and_objects + sum(
+                    allocated_files(path / ".git" / "objects") + allocated_files(path, exclude_git=True)
+                    for path in clones
+                )
+                self.assertGreater(clones_allocated, worktree_allocated)
+                summary += (
+                    "\nWINDOWS_FILE_STORAGE_EXPERIMENT bytes: "
+                    f"home_plus_three_linked_worktrees={worktree_allocated}; "
+                    f"home_plus_three_no_hardlink_clones={clones_allocated}; "
+                    "Win32 GetCompressedFileSizeW; excludes filesystem metadata and package environments"
+                )
+            else:
+                summary += " physical Windows allocation and package environments not measured"
+            print(summary)
 
 
 if __name__ == "__main__":
