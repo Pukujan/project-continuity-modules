@@ -2,7 +2,7 @@
 
 <!-- continuity:task {"acceptance":["helper repository and target repository roles are explicit at cold start","continuity preflight classifies helper, valid target, missing adoption, and invalid pseudo-integration without crashing","mature repository adoption has a documented non-destructive overlay path","CLI/package and protocol versions are explicitly separated","automated regression tests and repository validation pass in CI","a fresh-session blind acceptance test passes before release/tag"],"depends_on":[],"goal":"Prevent Project Continuity Modules from being mistaken for the target project when agents use it as a helper for long-running work.","id":"PCM-0009","next_action":"Get PR #16 CI green, then run docs/BLIND_TEST.md in a fresh uncontaminated agent session; do not tag 0.2.0 before it passes.","owner":"ChatGPT/Sol current PCM hardening session; GitHub issue #15","priority":"P0","protocol_version":"0.1.0-draft","schema":"project-continuity.task.v1","status":"active","why":"A real long-running task conflated the helper repository with the target repository and produced continuity-looking but invalid target state, showing that PCM's bootstrap/adoption boundary was not strong enough."} -->
 
-- Status: active
+- Status: completed
 - Owner: ChatGPT/Sol current PCM hardening session; GitHub issue #15
 - Priority: P0
 - Depends on: none
@@ -40,7 +40,7 @@ Do not modify unrelated helper modules or any target project's runtime/product r
 - [x] mature repository adoption has a documented non-destructive overlay path.
 - [x] CLI/package and protocol versions are explicitly separated.
 - [x] automated tests and repository validation pass in CI.
-- [ ] a fresh-session blind acceptance test passes before release/tag.
+- [x] a fresh-session blind acceptance test passes before release/tag.
 
 ## Checkpoint log
 
@@ -97,6 +97,37 @@ Blocked/uncertain:
 
 Next:
 - Run `docs/BLIND_TEST.md` in a fresh uncontaminated agent session and record the result before merge/tag.
+
+### 2026-09-23 05:10 UTC — Codex automated fresh-session blind acceptance
+
+<!-- continuity:checkpoint {"agent":"Codex automated fresh-session blind acceptance","blocked":[],"changed":["tasks/TASK-PCM-0009-helper-target-boundary.md","checkpoints/CURRENT.md","HANDOFF.md"],"completed":["Ran the PCM-0009 blind acceptance scenario with a fresh independent test agent that received only ordinary helper/target instructions.","Recorded that continuity state was created in the disposable target repository rather than the PCM helper repository.","Confirmed the target product/runtime files remained untouched and the helper repository remained unchanged."],"decisions":["Accept the helper/target boundary as passing because the fresh agent identified the target as the owner, used PCM only as tooling, ran target preflight and validation, and did not create competing helper-owned project state.","Keep PCM-0009 separately scoped from PCM-0010 while allowing the stacked Git delivery to proceed through the protected main branch."],"evidence":["Fresh agent session 01a0cc9e-d9d9-7a80-b950-5ac8f081756d -> target continuity owner identified correctly.","Target preflight -> MODE: TARGET_VALID; target validation -> VALID.","Fresh agent reported helper self-validation -> VALID and 14 tests passed.","Fresh agent reported product src/ unchanged and helper repository unchanged.","Property/metamorphic checks -> PASS: relocation, unrelated-file addition, metadata reordering, malformed-config fail-closed behavior, and helper classification invariance."],"next_action":"Push this completed checkpoint to PR #16, verify protected-main CI, and allow automatic merge." ,"protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0009","timestamp":"2026-09-23T05:10:00Z"} -->
+
+Completed:
+- Ran the PCM-0009 blind acceptance scenario with a fresh independent test agent that received only ordinary helper/target instructions.
+- Recorded that continuity state was created in the disposable target repository rather than the PCM helper repository.
+- Confirmed the target product/runtime files remained untouched and the helper repository remained unchanged.
+
+Evidence:
+- Fresh agent session `01a0cc9e-d9d9-7a80-b950-5ac8f081756d` identified the target as the continuity owner.
+- Target preflight -> `MODE: TARGET_VALID`; target validation -> `VALID`.
+- Fresh agent reported helper self-validation -> `VALID` and 14 tests passed.
+- Fresh agent reported product `src/` unchanged and helper repository unchanged.
+- Property/metamorphic checks -> `PASS`: relocation, unrelated-file addition, metadata reordering, malformed-config fail-closed behavior, and helper classification invariance.
+
+Decisions:
+- Accept the helper/target boundary as passing because the fresh agent identified the target as the owner, used PCM only as tooling, ran target preflight and validation, and did not create competing helper-owned project state.
+- Keep PCM-0009 separately scoped from PCM-0010 while allowing the stacked Git delivery to proceed through the protected main branch.
+
+Changed:
+- `tasks/TASK-PCM-0009-helper-target-boundary.md`
+- `checkpoints/CURRENT.md`
+- `HANDOFF.md`
+
+Blocked/uncertain:
+- none
+
+Next:
+- Push this completed checkpoint to PR #16, verify protected-main CI, and allow automatic merge.
 
 ## Handoff
 

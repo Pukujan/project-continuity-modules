@@ -4,10 +4,10 @@ This repository is ready for a fresh PCM development session without prior chat 
 
 ## Active work
 
-- Task: `PCM-0010 — Continuity bookkeeping must not become an execution gate`
-- Issue: #17
-- Suggested branch: `task/PCM-0010-continuity-bookkeeping`
-- PCM-0009 predecessor candidate: PR #16; keep its helper/target identity scope separate
+- Tasks: `PCM-0009` and `PCM-0010` automated delivery gate
+- Issues: #15 and #17
+- PRs: #16 (main delivery) and #18 (stacked PCM-0010 delivery)
+- PCM-0009 and PCM-0010 remain separately scoped in task history
 - Candidate CLI/package version remains: `0.2.0`
 - Protocol version remains: `0.1.0-draft`
 - Release gate: deterministic suite + fresh-session blind acceptance in `docs/BLIND_TEST_PCM-0010.md`
@@ -24,7 +24,7 @@ This repository is ready for a fresh PCM development session without prior chat 
 
 ## Exact next action
 
-Push the task branch, open its PR, and verify required CI plus automatic merge. The deterministic suite, self-validation, and fresh-session blind rerun are complete; PCM-0009 remains a separate predecessor candidate. Do not modify Eval Lab, hades-v2, harness-on-steroids, inference-recommendation-engine, or any unrelated target repository.
+Verify the automatically merged candidate on `main`, then perform release metadata verification for package 0.2.0. Do not modify Eval Lab, hades-v2, harness-on-steroids, inference-recommendation-engine, or any unrelated target repository.
 
 ## Authority
 

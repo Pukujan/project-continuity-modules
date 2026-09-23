@@ -1,13 +1,13 @@
 # Current Repository Checkpoint
 
-<!-- continuity:current {"active_task":"PCM-0010","active_task_file":"tasks/TASK-PCM-0010-continuity-bookkeeping.md","protocol_version":"0.1.0-draft","schema":"project-continuity.current.v1"} -->
+<!-- continuity:current {"active_task":"PCM-0009","active_task_file":"tasks/TASK-PCM-0009-helper-target-boundary.md","protocol_version":"0.1.0-draft","schema":"project-continuity.current.v1"} -->
 
 ## Program state
 
 Phase: adoption — prove v1 in mature repositories.
 
-Current P0 task: PCM-0010 — continuity bookkeeping must not become an execution gate.
-PCM-0009 remains a separate open predecessor candidate in PR #16 and is not silently folded into PCM-0010.
+Current P0 task: PCM-0009 — helper/target identity hardening and cold-start blind acceptance.
+PCM-0010 remains separately recorded as the stacked degraded-continuity delivery in PR #18.
 
 ## Main objective
 
@@ -21,8 +21,8 @@ Adopt the validated continuity protocol in existing repositories without erasing
 
 ## Active
 
-- PCM-0009 — helper/target identity hardening and cold-start blind acceptance; GitHub issue #15, PR #16 (separate scope).
-- PCM-0010 — degraded continuity guidance, recovery receipt/reconciliation, deterministic regression tests, and fresh-session blind rerun; GitHub issue #17.
+- PCM-0009 — helper/target identity hardening and cold-start blind acceptance; GitHub issue #15, PR #16.
+- PCM-0010 — degraded continuity guidance, recovery receipt/reconciliation, deterministic regression tests, and fresh-session blind rerun; GitHub issue #17, stacked delivery PR #18.
 
 ## Prior completed/adopted work
 
@@ -41,4 +41,4 @@ None known.
 
 ## Next atomic action
 
-Push the PCM-0010 task branch, open its PR, and verify required CI plus automatic merge; PCM-0009 remains a separate predecessor candidate.
+Verify the automatically merged candidate on `main`, then perform release metadata verification for package 0.2.0.
