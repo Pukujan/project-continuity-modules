@@ -126,6 +126,31 @@ Blocked/uncertain:
 Next:
 - After this closeout PR passes required checks and merges, verify issue #31 is closed and start the separately scoped PCM-0018 / issue #33 task.
 
+### 2026-09-23 20:59:35 UTC — Codex PCM-0017 closeout
+
+<!-- continuity:checkpoint {"agent":"Codex PCM-0017 closeout","blocked":["Closeout PR checks and merge are pending; issue #31 is intentionally still open."],"changed":["tasks/TASK-PCM-0017-package-parity.md, checkpoints/CURRENT.md, HANDOFF.md"],"completed":["Updated task metadata and acceptance evidence to completed after PR #49 merged with all required checks.","Updated CURRENT and HANDOFF to show package parity is merged, the package and runtime both report 0.2.0, the protocol remains 0.1.0-draft, and issue #31 stays open only for this canonical closeout PR."],"decisions":["Keep issue #31 open until this canonical status record itself merges; no issue is closed solely because implementation code is on a local or unmerged branch."],"evidence":["PR #49 merged at 18f6b510c4de7005cb54ff7bfc016cd0ed67a0b8; hosted CI run 35918854304 passed all six required contexts and auto-merge.","Protected branch API confirms quality, test (3.11), test (3.12), package, package parity (3.11), and package parity (3.12) are required from GitHub Actions.","Continuity validation returned VALID after the closeout task/checkpoint/handoff updates."],"next_action":"Push this checkpoint, open the closeout PR with Closes #31, let all six required checks and auto-merge complete, verify the issue closure, then start PCM-0018 / issue #33.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0017","timestamp":"2026-09-23T20:59:35Z"} -->
+
+Completed:
+- Updated task metadata and acceptance evidence to completed after PR #49 merged with all required checks.
+- Updated CURRENT and HANDOFF to show package parity is merged, the package and runtime both report 0.2.0, the protocol remains 0.1.0-draft, and issue #31 stays open only for this canonical closeout PR.
+
+Evidence:
+- PR #49 merged at 18f6b510c4de7005cb54ff7bfc016cd0ed67a0b8; hosted CI run 35918854304 passed all six required contexts and auto-merge.
+- Protected branch API confirms quality, test (3.11), test (3.12), package, package parity (3.11), and package parity (3.12) are required from GitHub Actions.
+- Continuity validation returned VALID after the closeout task/checkpoint/handoff updates.
+
+Decisions:
+- Keep issue #31 open until this canonical status record itself merges; no issue is closed solely because implementation code is on a local or unmerged branch.
+
+Changed:
+- tasks/TASK-PCM-0017-package-parity.md, checkpoints/CURRENT.md, HANDOFF.md
+
+Blocked/uncertain:
+- Closeout PR checks and merge are pending; issue #31 is intentionally still open.
+
+Next:
+- Push this checkpoint, open the closeout PR with Closes #31, let all six required checks and auto-merge complete, verify the issue closure, then start PCM-0018 / issue #33.
+
 ## Handoff
 
 Read `PROJECT.md`, `checkpoints/CURRENT.md`, this task, `AGENTS.md`, `SPEC.md`, and `docs/VERSIONING.md`. Do not publish a package or change the protocol version.
