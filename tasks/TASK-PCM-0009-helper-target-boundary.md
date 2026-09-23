@@ -129,6 +129,33 @@ Blocked/uncertain:
 Next:
 - Push this completed checkpoint to PR #16, verify protected-main CI, and allow automatic merge.
 
+### 2026-09-23 05:02:18 UTC — Codex automated PCM-0009 release gate
+
+<!-- continuity:checkpoint {"agent":"Codex automated PCM-0009 release gate","blocked":[],"changed":["tasks/TASK-PCM-0009-helper-target-boundary.md","checkpoints/CURRENT.md","HANDOFF.md"],"completed":["Recorded the fresh-session blind acceptance pass and marked every PCM-0009 acceptance item complete.","Confirmed protected-main delivery is the next automated gate."],"decisions":["The PCM-0009 candidate is eligible for automatic merge after protected-main CI passes; no manual review is required."],"evidence":["Fresh independent agent 01a0cc9e-d9d9-7a80-b950-5ac8f081756d -> target-owned continuity, TARGET_VALID preflight, VALID target, unchanged product src, unchanged helper repository.","Ruff, MyPy, compileall, 14 unit tests, PCM validation -> all pass.","Property/metamorphic checks -> PASS."],"next_action":"Verify the protected-main pull-request run and allow automatic merge into main.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0009","timestamp":"2026-09-23T05:02:18Z"} -->
+
+Completed:
+- Recorded the fresh-session blind acceptance pass and marked every PCM-0009 acceptance item complete.
+- Confirmed protected-main delivery is the next automated gate.
+
+Evidence:
+- Fresh independent agent 01a0cc9e-d9d9-7a80-b950-5ac8f081756d -> target-owned continuity, TARGET_VALID preflight, VALID target, unchanged product src, unchanged helper repository.
+- Ruff, MyPy, compileall, 14 unit tests, PCM validation -> all pass.
+- Property/metamorphic checks -> PASS.
+
+Decisions:
+- The PCM-0009 candidate is eligible for automatic merge after protected-main CI passes; no manual review is required.
+
+Changed:
+- tasks/TASK-PCM-0009-helper-target-boundary.md
+- checkpoints/CURRENT.md
+- HANDOFF.md
+
+Blocked/uncertain:
+- none
+
+Next:
+- Verify the protected-main pull-request run and allow automatic merge into main.
+
 ## Handoff
 
 Read PROJECT → CURRENT → this task → AGENTS → docs/TARGET_ADOPTION.md → docs/BLIND_TEST.md. Preserve the helper/target boundary and do not use a target project to test by modifying its runtime/product code.
