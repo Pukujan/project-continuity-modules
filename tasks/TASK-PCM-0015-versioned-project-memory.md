@@ -1,9 +1,9 @@
 # TASK-PCM-0015 — Plan versioned, verifiable project memory
 
-<!-- continuity:task {"acceptance":["A durable implementation plan separates minimal core from optional adapters and defines explicit slice boundaries, non-goals, stop/split rules, and acceptance gates","The plan answers how PCM package and protocol versions relate, how Python and Node consumers would install/update, and what the current repository actually manages","The plan defines idempotency and a human-readable plus machine-readable state pattern with one authoritative source and generated/validated views","The plan defines document inventory/discovery, linked claims and evidence, freshness/supersession, and task ownership without assuming a graph database is required","The plan makes ordinary checkpoint cost proportional and specifies which operations happen on every checkpoint versus major handoff/release","The plan includes deterministic tests and a fresh-session blind end-to-end experiment proving an old document is found and not duplicated","The plan labels facts, user requirements, recommendations, inferences, and unresolved decisions; links evidence; and preserves Git as canonical","No implementation beyond this planning task is started"],"depends_on":[],"goal":"Produce a reviewable, evidence-based, sliced plan for testing and incrementally extending PCM with safe versioned adoption, idempotent documentation updates, durable document discovery, and fresh-session handoffs.","id":"PCM-0015","next_action":"GPT-6 Astra planning agent reads docs/research/PCM-0015-epistemic-context.md and the current PCM package/protocol/CLI state, then writes the bounded implementation plan in docs/plans/PCM-0015-implementation-plan.md.","owner":"GPT-6 Astra planning subagent (plan artifact); GPT-6 Luna parent session (scope and evidence review)","priority":"P1","protocol_version":"0.1.0-draft","schema":"project-continuity.task.v1","status":"active","why":"Fresh sessions reduce accumulated chat context but have repeatedly failed to discover earlier durable documents, causing duplicate work and incomplete context. PCM needs a small, verifiable, versioned memory and handoff workflow whose actual benefit and overhead are measured before it becomes policy."} -->
+<!-- continuity:task {"acceptance":["A durable implementation plan separates minimal core from optional adapters and defines explicit slice boundaries, non-goals, stop/split rules, and acceptance gates","The plan answers how PCM package and protocol versions relate, how Python and Node consumers would install/update, and what the current repository actually manages","The plan defines idempotency and a human-readable plus machine-readable state pattern with one authoritative source and generated/validated views","The plan defines document inventory/discovery, linked claims and evidence, freshness/supersession, and task ownership without assuming a graph database is required","The plan makes ordinary checkpoint cost proportional and specifies which operations happen on every checkpoint versus major handoff/release","The plan includes deterministic tests and a fresh-session blind end-to-end experiment proving an old document is found and not duplicated","The plan labels facts, user requirements, recommendations, inferences, and unresolved decisions; links evidence; and preserves Git as canonical","No implementation beyond this planning task is started"],"depends_on":[],"goal":"Produce a reviewable, evidence-based, sliced plan for testing and incrementally extending PCM with safe versioned adoption, idempotent documentation updates, durable document discovery, and fresh-session handoffs.","id":"PCM-0015","next_action":"GPT-6 Luna reviews the Astra plan, runs repository validation and full tests, then publishes the planning-only result through the normal CI/auto-merge path; implementation requires a separate bounded task.","owner":"GPT-6 Luna parent session (integration, evidence, and delivery)","priority":"P1","protocol_version":"0.1.0-draft","schema":"project-continuity.task.v1","status":"active","why":"Fresh sessions reduce accumulated chat context but have repeatedly failed to discover earlier durable documents, causing duplicate work and incomplete context. PCM needs a small, verifiable, versioned memory and handoff workflow whose actual benefit and overhead are measured before it becomes policy."} -->
 
 - Status: active; planning only
-- Owner: GPT-6 Astra planning subagent for the plan artifact; GPT-6 Luna parent for task scope and evidence
+- Owner: GPT-6 Luna parent session (integration, evidence, and delivery); GPT-6 Astra's bounded plan result is captured below
 - Priority: P1
 - Depends on: none
 - GitHub issue: [#28](https://github.com/Pukujan/project-continuity-modules/issues/28)
@@ -43,16 +43,16 @@ Do not implement the proposed feature set in this planning task. The result is o
 
 ## Acceptance criteria
 
-- [ ] Current package, protocol, templates, CLI, schemas, version policy, and CI are inspected with file/line evidence.
-- [ ] The plan states a recommended adoption/distribution strategy for Python users and a separately justified approach for Node or other runtimes; unsupported conclusions remain open questions.
-- [ ] The plan states concretely what PCM can enforce in-repository, what CI can enforce, and what requires a runtime/agent-host adapter.
-- [ ] Human-readable and machine-readable records have one declared source of truth and a reproducible generation or consistency check.
-- [ ] Idempotency is specified as repeat-run invariants for relevant commands and migrations.
-- [ ] A document lookup acceptance scenario starts from a fresh session with no old conversation, finds a document created by an earlier session and related neighbors, and prevents creating a duplicate.
-- [ ] Claim statuses and provenance distinguish user requirements, direct observations, external sources, model proposals, inferences, and stale/contradictory facts.
-- [ ] Each slice has scope, files/components, required tests, exit criteria, migration story, and a clear defer/stop condition.
-- [ ] Checkpoint flow remains concise for routine work and reserves expanded handoff/context-pack generation for meaningful checkpoints or task rotation.
-- [ ] No implementation is started as part of PCM-0015.
+- [x] Current package, protocol, templates, CLI, schemas, version policy, and CI are inspected with file/line evidence.
+- [x] The plan states a recommended adoption/distribution strategy for Python users and a separately justified approach for Node or other runtimes; unsupported conclusions remain open questions.
+- [x] The plan states concretely what PCM can enforce in-repository, what CI can enforce, and what requires a runtime/agent-host adapter.
+- [x] Human-readable and machine-readable records have one declared source of truth and a reproducible generation or consistency check.
+- [x] Idempotency is specified as repeat-run invariants for relevant commands and migrations.
+- [x] A document lookup acceptance scenario starts from a fresh session with no old conversation, finds a document created by an earlier session and related neighbors, and prevents creating a duplicate.
+- [x] Claim statuses and provenance distinguish user requirements, direct observations, external sources, model proposals, inferences, and stale/contradictory facts.
+- [x] Each slice has scope, files/components, required tests, exit criteria, migration story, and a clear defer/stop condition.
+- [x] Checkpoint flow remains concise for routine work and reserves expanded handoff/context-pack generation for meaningful checkpoints or task rotation.
+- [x] No implementation is started as part of PCM-0015.
 
 ## Evidence record
 
@@ -61,6 +61,10 @@ Do not implement the proposed feature set in this planning task. The result is o
 - Verbatim dialogue and source classifications: `docs/research/PCM-0015-epistemic-context.md`.
 - W3C PROV-O provenance graph: `docs/research/PCM-0015-provenance.ttl`.
 - Official Codex subagent guidance: <https://learn.chatgpt.com/docs/agent-configuration/subagents>.
+- Astra's completed, fresh-context plan review: one plan file only; identified package-version drift, generated-template worker-cleanup gaps, and non-idempotent checkpoint/recovery retries; its validation returned `VALID` and four focused tests passed. Full suite and behavioral acceptance were not run by Astra.
+- Parent scope review added a three-part minimum proof path and made later assertions, ownership automation, Node packaging, publication, and host hooks explicitly conditional/separate.
+- Parent verified `.github/workflows/ci.yml` triggers the full quality/test/package matrix for both `push` and `pull_request`; the plan records this duplicate-work cost and a narrow CI-trigger regression requirement, without changing workflow code in this planning task.
+- Parent checks: `PYTHONPATH=src python -B -m unittest discover -s tests -v` → 21 passed; Ruff → clean; MyPy → clean; compileall → clean; `continuity validate --root .` → `VALID`; rdflib parsed PROV-O Turtle → 135 triples; `git diff --check` → clean.
 
 ## Checkpoint log
 
