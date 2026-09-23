@@ -109,3 +109,34 @@ Blocked/uncertain:
 
 Next:
 - Verify protected CI and allow automatic merge of the pushed task branch.
+
+### 2026-09-23 13:39:17 UTC — Codex PCM-0014 merge reconciliation and verification
+
+<!-- continuity:checkpoint {"agent":"Codex PCM-0014 merge reconciliation and verification","blocked":[],"changed":["checkpoints/CURRENT.md; tasks/TASK-PCM-0014-agent-lifecycle.md"],"completed":["Preserved PCM-0012 and PCM-0013 workspace-policy history while renumbering the delegated-agent lifecycle task to PCM-0014.","Merged the latest protected main into the policy branch and retained the delegated-agent lifecycle guidance and deterministic tests.","Closed superseded PR #25 and opened corrected PR #26 from task/PCM-0014-agent-lifecycle."],"decisions":["Keep PCM-0012 and PCM-0013 as their existing workspace-policy task identities; this agent-lifecycle policy is PCM-0014.","Do not modify Hades v2 or any unrelated target repository."],"evidence":["ruff check . -> All checks passed.","mypy src -> Success: no issues found in 3 source files.","python -m compileall -q src tests -> exit 0.","PYTHONPATH=src python -m unittest discover -s tests -q -> 21 tests passed; expected CLI usage output from a rejection-path test.","PYTHONPATH=src python -m continuity validate --root . -> VALID.","python -m build -> project_continuity-0.2.0 sdist and wheel built successfully.","PR #26 is the corrected automated delivery for GitHub issue #24."],"next_action":"Verify protected CI and allow automatic merge of PR #26.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0014","timestamp":"2026-09-23T13:39:17Z"} -->
+
+Completed:
+- Preserved PCM-0012 and PCM-0013 workspace-policy history while renumbering the delegated-agent lifecycle task to PCM-0014.
+- Merged the latest protected main into the policy branch and retained the delegated-agent lifecycle guidance and deterministic tests.
+- Closed superseded PR #25 and opened corrected PR #26 from task/PCM-0014-agent-lifecycle.
+
+Evidence:
+- ruff check . -> All checks passed.
+- mypy src -> Success: no issues found in 3 source files.
+- python -m compileall -q src tests -> exit 0.
+- PYTHONPATH=src python -m unittest discover -s tests -q -> 21 tests passed; expected CLI usage output from a rejection-path test.
+- PYTHONPATH=src python -m continuity validate --root . -> VALID.
+- python -m build -> project_continuity-0.2.0 sdist and wheel built successfully.
+- PR #26 is the corrected automated delivery for GitHub issue #24.
+
+Decisions:
+- Keep PCM-0012 and PCM-0013 as their existing workspace-policy task identities; this agent-lifecycle policy is PCM-0014.
+- Do not modify Hades v2 or any unrelated target repository.
+
+Changed:
+- checkpoints/CURRENT.md; tasks/TASK-PCM-0014-agent-lifecycle.md
+
+Blocked/uncertain:
+- none
+
+Next:
+- Verify protected CI and allow automatic merge of PR #26.
