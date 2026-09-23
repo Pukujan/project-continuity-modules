@@ -104,3 +104,25 @@ Blocked/uncertain:
 
 Next:
 - Commit and push the policy slice, open a PR for required CI/auto-merge, then rerun the corrected-candidate holdout after #34 is delivered before closing #39.
+
+### 2026-09-23 17:16:33 UTC — Codex PCM-0022
+
+<!-- continuity:checkpoint {"agent":"Codex PCM-0022","blocked":[],"changed":["docs/TESTING_POLICY.md; AGENTS.md; templates/v1/software/AGENTS.md; templates/v1/minimal/HANDOFF.md; tests/test_agent_facing_testing_policy.py; tasks/TASK-PCM-0022-agent-facing-holdouts.md; checkpoints/CURRENT.md; HANDOFF.md"],"completed":["Added human-first, risk-based testing policy and deterministic policy tests."],"decisions":["Keep #39 open until corrected-candidate fresh-session rerun after #34."],"evidence":["24 unittest tests passed; Ruff, MyPy, compile, continuity validate, diff check, and package build passed."],"next_action":"Open PR for required CI/auto-merge; after #34, rerun the candidate holdout before closing #39.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0022","timestamp":"2026-09-23T17:16:33Z"} -->
+
+Completed:
+- Added human-first, risk-based testing policy and deterministic policy tests.
+
+Evidence:
+- 24 unittest tests passed; Ruff, MyPy, compile, continuity validate, diff check, and package build passed.
+
+Decisions:
+- Keep #39 open until corrected-candidate fresh-session rerun after #34.
+
+Changed:
+- docs/TESTING_POLICY.md; AGENTS.md; templates/v1/software/AGENTS.md; templates/v1/minimal/HANDOFF.md; tests/test_agent_facing_testing_policy.py; tasks/TASK-PCM-0022-agent-facing-holdouts.md; checkpoints/CURRENT.md; HANDOFF.md
+
+Blocked/uncertain:
+- none
+
+Next:
+- Open PR for required CI/auto-merge; after #34, rerun the candidate holdout before closing #39.
