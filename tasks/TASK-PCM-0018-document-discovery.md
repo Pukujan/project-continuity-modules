@@ -216,9 +216,10 @@ Evidence:
 - `continuity docs find` for PCM-0018 located the earlier plan, research, and
   relevant policies. The first validation of this entry identified two missing
   required headings; they are added below before final validation.
-- These handoff and instruction edits are currently uncommitted on
-  `task/PCM-0018-document-discovery`; hosted CI has not run because no PR has
-  been opened. Baseline/candidate blind-trial evidence remains absent.
+- These handoff and instruction edits are committed on
+  `task/PCM-0018-document-discovery` but remain unpushed; hosted CI has
+  not run because no PR has been opened. Baseline/candidate blind-trial
+  evidence remains absent.
 
 Decisions:
 - Do not count an undocumented prior-session claim as holdout evidence; run
@@ -232,7 +233,8 @@ Blocked/uncertain:
   by name only and were not inspected or removed in this handoff update.
 
 Next:
-- Commit and push the candidate, let required CI auto-merge it, then run the
+- Push the committed candidate and open its PR; let required CI auto-merge it,
+  then run the
   same visible prompt independently at baseline
   `85f13464c466ff277ce319850ce8124c4bc95c52` and the merged candidate snapshot.
   Record the actual report, model/session, starting revision, objective rubric
