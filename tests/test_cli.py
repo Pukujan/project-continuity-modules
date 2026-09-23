@@ -83,9 +83,12 @@ class ContinuityTests(unittest.TestCase):
             }),
             encoding="utf-8",
         )
+        validation_errors = validate_repo(root)
+        self.assertTrue(validation_errors)
+        self.assertTrue(any("missing required key" in error for error in validation_errors), validation_errors)
         mode, errors = preflight_repo(root)
         self.assertEqual(mode, "INVALID_TARGET")
-        self.assertTrue(errors)
+        self.assertEqual(errors, validation_errors)
 
     def test_task_new_allocates_stable_next_id(self) -> None:
         root = self.copy_fixture("valid-minimal")
