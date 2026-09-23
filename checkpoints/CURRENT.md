@@ -41,4 +41,4 @@ None known.
 
 ## Next atomic action
 
-Review the PCM-0010 diff, commit the branch, and leave it ready for PR review; PCM-0009 remains a separate predecessor candidate.
+Open a PR or perform human review of commit `b4702df`; PCM-0009 remains a separate predecessor candidate.

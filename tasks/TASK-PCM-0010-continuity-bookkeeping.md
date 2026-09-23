@@ -1,6 +1,6 @@
 # TASK-PCM-0010 — Continuity bookkeeping must not become an execution gate
 
-<!-- continuity:task {"acceptance":["blind disposable-repository reproduction is recorded without exposing the suspected root cause to the test agent","execution-versus-bookkeeping and repository-lineage/worktree semantics are normative in the protocol and generated guidance","canonical continuity read/write failures degrade to deterministic diagnostics rather than uncaught crashes","an authorized alternate checkout can receive a validated recovery receipt without creating a competing project identity","recovery receipts can be reconciled into the canonical task once writable","deterministic regression tests cover unavailable state, recovery receipt, reconciliation, and existing checkpoint behavior","a fresh-session blind rerun of the same scenario passes after the fix","PCM-0009 remains separately scoped and its helper-target boundary work is not silently rewritten","full test suite, self-validation, and continuity state are recorded before handoff"],"depends_on":["PCM-0009"],"goal":"Make continuity bookkeeping degrade gracefully when canonical state is temporarily unavailable, so safe authorized work can continue across one repository/task lineage and an alternate execution checkout.","id":"PCM-0010","next_action":"Review the PCM-0010 diff, commit the branch, and leave it ready for PR review.","owner":"Codex current PCM-0010 implementation session; GitHub issue #17","priority":"P0","protocol_version":"0.1.0-draft","schema":"project-continuity.task.v1","status":"active","why":"Issue #17 records repeated cases where checkpoint/write failures and physical-worktree assumptions blocked otherwise-safe execution. PCM must state that execution outranks bookkeeping and provide a minimal recoverable path when canonical continuity files are unavailable."} -->
+<!-- continuity:task {"acceptance":["blind disposable-repository reproduction is recorded without exposing the suspected root cause to the test agent","execution-versus-bookkeeping and repository-lineage/worktree semantics are normative in the protocol and generated guidance","canonical continuity read/write failures degrade to deterministic diagnostics rather than uncaught crashes","an authorized alternate checkout can receive a validated recovery receipt without creating a competing project identity","recovery receipts can be reconciled into the canonical task once writable","deterministic regression tests cover unavailable state, recovery receipt, reconciliation, and existing checkpoint behavior","a fresh-session blind rerun of the same scenario passes after the fix","PCM-0009 remains separately scoped and its helper-target boundary work is not silently rewritten","full test suite, self-validation, and continuity state are recorded before handoff"],"depends_on":["PCM-0009"],"goal":"Make continuity bookkeeping degrade gracefully when canonical state is temporarily unavailable, so safe authorized work can continue across one repository/task lineage and an alternate execution checkout.","id":"PCM-0010","next_action":"Open a PR or perform human review of commit b4702df and its final verification checkpoint.","owner":"Codex current PCM-0010 implementation session; GitHub issue #17","priority":"P0","protocol_version":"0.1.0-draft","schema":"project-continuity.task.v1","status":"active","why":"Issue #17 records repeated cases where checkpoint/write failures and physical-worktree assumptions blocked otherwise-safe execution. PCM must state that execution outranks bookkeeping and provide a minimal recoverable path when canonical continuity files are unavailable."} -->
 
 - Status: active
 - Owner: Codex current PCM-0010 implementation session; GitHub issue #17
@@ -109,6 +109,33 @@ Blocked/uncertain:
 
 Next:
 - Review the diff, run the full suite once more from a clean task state, commit the PCM-0010 branch, and leave it ready for PR review.
+
+### 2026-09-23 04:35:00 UTC — Codex PCM-0010 final verification
+
+<!-- continuity:checkpoint {"agent":"Codex PCM-0010 final verification","blocked":[],"changed":["tasks/TASK-PCM-0010-continuity-bookkeeping.md; checkpoints/CURRENT.md; HANDOFF.md"],"completed":["Committed the PCM-0010 implementation as b4702df (PCM-0010: degrade continuity bookkeeping safely).","Recorded the final full test, compilation, validation, and blind-rerun evidence in the task state."],"decisions":["Leave PCM-0009 PR #16 as a separate predecessor; PCM-0010 is ready for review on its own branch."],"evidence":["b4702df contains only PCM-0010 protocol/tooling/task-state changes; no unrelated target repository was modified.","PYTHONPATH=src python -m unittest discover -s tests -v -> 13 tests passed.","python -m compileall -q src tests -> exit 0.","PYTHONPATH=src python -m continuity validate --root . -> VALID.","Fresh blind post-fix session 01a0cc7a-9644-73a1-9396-551bf6d4f73b used alternate checkout and wrote/reconciled a validated recovery receipt."],"next_action":"Open a PR or perform human review of commit b4702df and its final verification checkpoint.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0010","timestamp":"2026-09-23T04:35:00Z"} -->
+
+Completed:
+- Committed the PCM-0010 implementation as b4702df (PCM-0010: degrade continuity bookkeeping safely).
+- Recorded the final full test, compilation, validation, and blind-rerun evidence in the task state.
+
+Evidence:
+- b4702df contains only PCM-0010 protocol/tooling/task-state changes; no unrelated target repository was modified.
+- PYTHONPATH=src python -m unittest discover -s tests -v -> 13 tests passed.
+- python -m compileall -q src tests -> exit 0.
+- PYTHONPATH=src python -m continuity validate --root . -> VALID.
+- Fresh blind post-fix session 01a0cc7a-9644-73a1-9396-551bf6d4f73b used alternate checkout and wrote/reconciled a validated recovery receipt.
+
+Decisions:
+- Leave PCM-0009 PR #16 as a separate predecessor; PCM-0010 is ready for review on its own branch.
+
+Changed:
+- tasks/TASK-PCM-0010-continuity-bookkeeping.md; checkpoints/CURRENT.md; HANDOFF.md
+
+Blocked/uncertain:
+- none
+
+Next:
+- Open a PR or perform human review of commit b4702df and its final verification checkpoint.
 
 ## Handoff
 

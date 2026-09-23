@@ -24,7 +24,7 @@ This repository is ready for a fresh PCM development session without prior chat 
 
 ## Exact next action
 
-Review the PCM-0010 diff, commit the branch, and leave it ready for PR review. The deterministic suite, self-validation, and fresh-session blind rerun are complete; PCM-0009 remains a separate predecessor candidate. Do not modify Eval Lab, hades-v2, harness-on-steroids, inference-recommendation-engine, or any unrelated target repository.
+Open a PR or perform human review of commit `b4702df`. The deterministic suite, self-validation, and fresh-session blind rerun are complete; PCM-0009 remains a separate predecessor candidate. Do not modify Eval Lab, hades-v2, harness-on-steroids, inference-recommendation-engine, or any unrelated target repository.
 
 ## Authority
 
