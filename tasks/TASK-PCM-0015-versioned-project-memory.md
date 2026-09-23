@@ -119,3 +119,28 @@ Blocked/uncertain:
 
 Next:
 - Review the Astra planning artifact when complete, then integrate it into the PCM-0015 checkpoint.
+
+### 2026-09-23 14:37:19 UTC — GPT-6 Luna parent session
+
+<!-- continuity:checkpoint {"agent":"GPT-6 Luna parent session","blocked":["Proposed features still require separate bounded implementation tasks and deterministic plus fresh-session acceptance."],"changed":["docs/plans/PCM-0015-implementation-plan.md; tasks/TASK-PCM-0015-versioned-project-memory.md; checkpoints/CURRENT.md; HANDOFF.md"],"completed":["Reviewed and narrowed Astra plan into a minimum proof path; recorded current CI duplication and enforcement limits."],"decisions":["Plan is proposal only. No memory/discovery feature, package publication, Node support, or host adapter is claimed to work or authorized for implementation."],"evidence":["PYTHONPATH=src python -B -m unittest discover -s tests -v -> 21 passed.","ruff check . -> passed; mypy src -> no issues; compileall -> passed.","continuity validate --root . -> VALID; PROV-O Turtle -> 135 triples.","git diff --check -> clean."],"next_action":"Create the planning-only PR; verify required CI and automatic merge; then close the plan issue without beginning implementation.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0015","timestamp":"2026-09-23T14:37:19Z"} -->
+
+Completed:
+- Reviewed and narrowed Astra plan into a minimum proof path; recorded current CI duplication and enforcement limits.
+
+Evidence:
+- PYTHONPATH=src python -B -m unittest discover -s tests -v -> 21 passed.
+- ruff check . -> passed; mypy src -> no issues; compileall -> passed.
+- continuity validate --root . -> VALID; PROV-O Turtle -> 135 triples.
+- git diff --check -> clean.
+
+Decisions:
+- Plan is proposal only. No memory/discovery feature, package publication, Node support, or host adapter is claimed to work or authorized for implementation.
+
+Changed:
+- docs/plans/PCM-0015-implementation-plan.md; tasks/TASK-PCM-0015-versioned-project-memory.md; checkpoints/CURRENT.md; HANDOFF.md
+
+Blocked/uncertain:
+- Proposed features still require separate bounded implementation tasks and deterministic plus fresh-session acceptance.
+
+Next:
+- Create the planning-only PR; verify required CI and automatic merge; then close the plan issue without beginning implementation.
