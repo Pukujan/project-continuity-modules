@@ -166,6 +166,28 @@ The main roles are:
 - `schemas/v1/` — machine-readable continuity contracts;
 - `.continuity/packs/` — generated context bundles that can be discarded and regenerated.
 
+## Using PCM as a helper for another repository
+
+When PCM is supplied to an agent as a helper, **the PCM checkout is not the target project**. Project state belongs in the repository the user is actually working on.
+
+Make the target root explicit and preflight it before relying on continuity state:
+
+```bash
+continuity preflight --root /path/to/target
+```
+
+A successful preflight prints `MODE: TARGET_VALID`. If it reports `HELPER_REPOSITORY`, `NOT_ADOPTED`, or `INVALID_TARGET`, stop treating that root as a continuity-enabled target and correct the integration first.
+
+Do not create a second continuity repository and do not store target PROJECT/CURRENT/TASK state in the PCM source repository.
+
+For an existing repository whose PROJECT, AGENTS, README, or HANDOFF files must be preserved, use the non-destructive overlay procedure in [`docs/TARGET_ADOPTION.md`](docs/TARGET_ADOPTION.md). A target is considered integrated only after:
+
+```bash
+continuity validate --root /path/to/target
+```
+
+returns `VALID`.
+
 ## Using PCM in a new project
 
 Python 3.11+ is currently the only runtime requirement.
@@ -239,7 +261,7 @@ It is a small protocol for making project state durable enough that work can cro
 
 ## Current status
 
-PCM is currently `0.1.0-draft`.
+The continuity protocol is currently `0.1.0-draft`; the CLI package is `0.2.0`.
 
 The implemented core includes:
 
@@ -247,6 +269,7 @@ The implemented core includes:
 - minimal and software initialization profiles;
 - non-destructive `init`;
 - deterministic `validate`;
+- explicit target/helper `preflight`;
 - task creation;
 - append-only checkpointing;
 - Git-provenance context-pack generation;

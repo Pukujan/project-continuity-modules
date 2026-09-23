@@ -493,6 +493,40 @@ def validate_repo(root: Path) -> list[str]:
     return sorted(set(errors))
 
 
+
+def preflight_repo(root: Path) -> tuple[str, list[str]]:
+    """Classify an explicit target root before an agent relies on PCM state."""
+    root = root.resolve()
+    if not root.exists():
+        return "MISSING_ROOT", [f"target root does not exist: {root}"]
+    if not root.is_dir():
+        return "INVALID_ROOT", [f"target root is not a directory: {root}"]
+
+    project_path = root / "PROJECT.md"
+    if project_path.exists():
+        try:
+            project_meta = extract_marker(project_path.read_text(encoding="utf-8"), "project")
+        except ContinuityError:
+            project_meta = None
+        if project_meta and project_meta.get("id") == "project-continuity-modules":
+            return "HELPER_REPOSITORY", [
+                "this root is the Project Continuity Modules helper repository; "
+                "another project's continuity state must live in that target repository"
+            ]
+
+    config_path = root / ".continuity" / "config.json"
+    if not config_path.exists():
+        return "NOT_ADOPTED", [
+            "missing .continuity/config.json; initialize a fresh target or follow "
+            "the mature-repository overlay procedure before relying on PCM state"
+        ]
+
+    errors = validate_repo(root)
+    if errors:
+        return "INVALID_TARGET", errors
+    return "TARGET_VALID", []
+
+
 def checkpoint_task(
     root: Path,
     task_id: str,
@@ -635,6 +669,9 @@ def build_parser() -> argparse.ArgumentParser:
     p_validate = sub.add_parser("validate")
     p_validate.add_argument("--root", default=".")
 
+    p_preflight = sub.add_parser("preflight")
+    p_preflight.add_argument("--root", required=True)
+
     p_task = sub.add_parser("task")
     task_sub = p_task.add_subparsers(dest="task_command", required=True)
     p_task_new = task_sub.add_parser("new")
@@ -687,6 +724,18 @@ def main(argv: list[str] | None = None) -> int:
                 return 1
             print("VALID")
             return 0
+
+        if args.command == "preflight":
+            root = Path(args.root).resolve()
+            mode, errors = preflight_repo(root)
+            print(f"ROOT: {root}")
+            print(f"MODE: {mode}")
+            if mode == "TARGET_VALID":
+                print("VALID")
+                return 0
+            for error in errors:
+                print(f"ERROR: {error}")
+            return 1 if mode == "INVALID_TARGET" else 2
 
         if args.command == "task" and args.task_command == "new":
             path = task_new(

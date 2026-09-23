@@ -12,6 +12,7 @@ from continuity.cli import (
     extract_marker,
     init_repo,
     pack_task,
+    preflight_repo,
     task_new,
     validate_repo,
 )
@@ -52,6 +53,39 @@ class ContinuityTests(unittest.TestCase):
             init_repo(root, "minimal", "Example", "PCM")
         self.assertFalse((root / ".continuity" / "config.json").exists())
         self.assertEqual((root / "PROJECT.md").read_text(encoding="utf-8"), "user content\n")
+
+    def test_preflight_accepts_explicit_valid_target(self) -> None:
+        root = Path(tempfile.mkdtemp(prefix="continuity-preflight-target-"))
+        self.addCleanup(shutil.rmtree, root, True)
+        init_repo(root, "minimal", "Inference Recommendation Engine", "IRE")
+        mode, errors = preflight_repo(root)
+        self.assertEqual(mode, "TARGET_VALID")
+        self.assertEqual(errors, [])
+
+    def test_preflight_rejects_pcm_helper_as_target(self) -> None:
+        root = Path(tempfile.mkdtemp(prefix="continuity-preflight-helper-"))
+        self.addCleanup(shutil.rmtree, root, True)
+        init_repo(root, "minimal", "Project Continuity Modules", "PCM")
+        mode, errors = preflight_repo(root)
+        self.assertEqual(mode, "HELPER_REPOSITORY")
+        self.assertTrue(any("helper repository" in error for error in errors), errors)
+
+    def test_preflight_rejects_continuity_looking_but_invalid_target(self) -> None:
+        root = Path(tempfile.mkdtemp(prefix="continuity-preflight-invalid-"))
+        self.addCleanup(shutil.rmtree, root, True)
+        (root / ".continuity").mkdir(parents=True)
+        (root / ".continuity" / "config.json").write_text(
+            json.dumps({
+                "protocolVersion": "0.1.0",
+                "projectName": "inference-recommendation-engine",
+                "taskPrefix": "IRE",
+                "activeTask": "IRE-0001",
+            }),
+            encoding="utf-8",
+        )
+        mode, errors = preflight_repo(root)
+        self.assertEqual(mode, "INVALID_TARGET")
+        self.assertTrue(errors)
 
     def test_task_new_allocates_stable_next_id(self) -> None:
         root = self.copy_fixture("valid-minimal")
