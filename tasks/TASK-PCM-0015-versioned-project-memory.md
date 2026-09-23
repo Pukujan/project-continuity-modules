@@ -89,3 +89,29 @@ Blocked/uncertain:
 
 Next:
 - Delegate the plan-only task to GPT-6 Astra and continue parent review in GPT-6 Luna.
+
+### 2026-09-23 14:19:30 UTC — GPT-6 Luna parent session
+
+<!-- continuity:checkpoint {"agent":"GPT-6 Luna parent session","blocked":["A public release and package update workflow do not yet exist; Python/Node distribution recommendation belongs in the plan."],"changed":["docs/research/PCM-0015-epistemic-context.md; docs/research/PCM-0015-provenance.ttl"],"completed":["Recorded release and package-manager evidence in the epistemic context and PROV-O graph."],"decisions":["Do not claim project-continuity 0.2.0 is externally released; this is only confirmed as the repository version/build output."],"evidence":["gh release list --repo Pukujan/project-continuity-modules --limit 10 -> no GitHub releases listed.","GET https://pypi.org/project/project-continuity/ -> 404 on 2026-09-23.",".github/workflows contains only ci.yml; CI builds the Python package but does not publish it.","PyPA, uv, and npm official docs reviewed; uv supports isolated and persistent CLI tools; npm engines is advisory unless engine-strict is set.","continuity validate --root . -> VALID; rdflib parsed PROV-O Turtle -> 135 triples."],"next_action":"Review the Astra planning artifact when complete, then integrate it into the PCM-0015 checkpoint.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0015","timestamp":"2026-09-23T14:19:30Z"} -->
+
+Completed:
+- Recorded release and package-manager evidence in the epistemic context and PROV-O graph.
+
+Evidence:
+- gh release list --repo Pukujan/project-continuity-modules --limit 10 -> no GitHub releases listed.
+- GET https://pypi.org/project/project-continuity/ -> 404 on 2026-09-23.
+- .github/workflows contains only ci.yml; CI builds the Python package but does not publish it.
+- PyPA, uv, and npm official docs reviewed; uv supports isolated and persistent CLI tools; npm engines is advisory unless engine-strict is set.
+- continuity validate --root . -> VALID; rdflib parsed PROV-O Turtle -> 135 triples.
+
+Decisions:
+- Do not claim project-continuity 0.2.0 is externally released; this is only confirmed as the repository version/build output.
+
+Changed:
+- docs/research/PCM-0015-epistemic-context.md; docs/research/PCM-0015-provenance.ttl
+
+Blocked/uncertain:
+- A public release and package update workflow do not yet exist; Python/Node distribution recommendation belongs in the plan.
+
+Next:
+- Review the Astra planning artifact when complete, then integrate it into the PCM-0015 checkpoint.
