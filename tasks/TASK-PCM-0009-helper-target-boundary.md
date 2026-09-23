@@ -39,7 +39,7 @@ Do not modify unrelated helper modules or any target project's runtime/product r
 - [x] malformed pseudo-integrations fail closed instead of crashing.
 - [x] mature repository adoption has a documented non-destructive overlay path.
 - [x] CLI/package and protocol versions are explicitly separated.
-- [ ] automated tests and repository validation pass in CI.
+- [x] automated tests and repository validation pass in CI.
 - [ ] a fresh-session blind acceptance test passes before release/tag.
 
 ## Checkpoint log
@@ -73,6 +73,30 @@ Blocked/uncertain:
 
 Next:
 - Get PR #16 CI green, then run `docs/BLIND_TEST.md` in a fresh uncontaminated agent session; do not tag 0.2.0 before it passes.
+
+### 2026-09-23 01:35:00 UTC — GitHub Actions verification
+
+<!-- continuity:checkpoint {"agent":"GitHub Actions verification","blocked":["Fresh-session blind acceptance is still pending and must be run outside this incident-aware session."],"changed":["none"],"completed":["Verified PCM-0009 candidate after fail-closed validator fix."],"decisions":["Keep PR #16 unmerged and do not tag 0.2.0 until the blind acceptance test passes."],"evidence":["PCM CI run 35806854531 completed successfully.","11 unit tests passed.","PYTHONPATH=src python -m continuity validate --root . -> VALID."],"next_action":"Run docs/BLIND_TEST.md in a fresh uncontaminated agent session and record the result before merge/tag.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0009","timestamp":"2026-09-23T01:35:00Z"} -->
+
+Completed:
+- Verified PCM-0009 candidate after the fail-closed validator fix.
+
+Evidence:
+- PCM CI run 35806854531 completed successfully.
+- 11 unit tests passed.
+- `PYTHONPATH=src python -m continuity validate --root .` -> `VALID`.
+
+Decisions:
+- Keep PR #16 unmerged and do not tag 0.2.0 until the blind acceptance test passes.
+
+Changed:
+- none.
+
+Blocked/uncertain:
+- Fresh-session blind acceptance is still pending and must be run outside this incident-aware session.
+
+Next:
+- Run `docs/BLIND_TEST.md` in a fresh uncontaminated agent session and record the result before merge/tag.
 
 ## Handoff
 
