@@ -86,14 +86,17 @@ After the task's commits/checkpoints are pushed, required CI passes, its PR is m
 Normal checkpoints still need to be pushed; worktrees do not create a second project identity. If checkpoint storage is unavailable, use only an already-authorized alternate environment and the recovery-receipt path above, not a newly created worktree as a workaround.
 
 When `.continuity/documents.json` exists, it owns the document catalog;
-`docs/CONTINUITY_INDEX.md` is a generated human view. Fetch `origin` before
-freshness-sensitive lookup, then use `continuity docs find "<terms>" --task
-<TASK-ID>` before writing or recreating a document. The command reads cached
-remote-tracking state and does not fetch. Treat `NEEDS_REVIEW` as targeted
-staleness and `REMOTE_UNKNOWN` as unverified, not current. After inspecting a
-source change, refresh its explicit review hash and regenerate the human view.
-Context packs include task-associated records and declared neighbors only;
-their Git commit/blob/hash provenance identifies exactly what was read.
+`docs/CONTINUITY_INDEX.md` is a generated human view. On every fresh session or
+task takeover/resumption, before deciding the next action, fetch `origin` and
+run `continuity docs find "<issue title and task-objective terms>" --task
+<TASK-ID>`. Read the matching records and their declared neighbors before
+concluding that prior work is missing or creating/recreating documentation.
+The command reads cached remote-tracking state and does not fetch. Treat
+`NEEDS_REVIEW` as targeted staleness and `REMOTE_UNKNOWN` as unverified, not
+current. After inspecting a source change, refresh its explicit review hash and
+regenerate the human view. Context packs include task-associated records and
+declared neighbors only; their Git commit/blob/hash provenance identifies
+exactly what was read.
 
 ## Delegated-agent cleanup
 

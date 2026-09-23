@@ -307,6 +307,11 @@ continuity docs find "checkpoint retries document discovery" --task APP-0004
 continuity pack APP-0004
 ```
 
+When a catalog exists, each fresh session or task takeover should do this
+lookup before choosing its next action—not only before writing a document.
+Read the matching records and their declared neighbors before concluding that
+prior work is missing or creating another copy.
+
 Search uses declared titles, summaries, keywords, paths, and neighboring-record
 links; it does not crawl or semantically understand every repository file.
 Freshness checks compare the reviewed file hash with the local checkout and

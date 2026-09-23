@@ -1,6 +1,6 @@
 # TASK-PCM-0018 — Idempotent checkpoints and fresh-session document discovery
 
-<!-- continuity:task {"acceptance":["Repeating a checkpoint with the same caller-supplied request ID and identical task/payload appends no duplicate and creates no additional commit when already delivered; reusing the ID with different content fails before mutation","Checkpoint publication safely retries after local append, local commit, remote push success, and a lost push response while preserving one event and the original event timestamp","A single machine-readable document inventory is the declared source of truth for a generated human-readable index; initialization/add/update and view rendering are deterministic and validate in CI","Deterministic document lookup finds a registered document from an earlier session and its explicitly related neighboring records; unrelated repository changes do not affect the result","Task-specific context packs include only the standard project/current/task records plus documents explicitly associated with that task, state the exact next action, and bind each source to the commit/content actually read","A changed indexed document is visibly marked needs_review for consumers that depend on it; a changed unrelated file does not mark it stale, and old evidence remains available","Ordinary contract, failure-injection, idempotence/metamorphic, source-view synchronization, and context-pack tests pass; full Ruff, MyPy, compile, Python 3.11/3.12 suites, package build/parity, continuity validation, and required GitHub CI pass","An isolated fresh-session blind baseline and post-fix candidate use the visible issue/repository contract without the hidden diagnosis; the candidate finds the seeded document and neighboring records without duplicating them","Checkpoint/document-catalog overhead is measured on a reproducible fixture and reported; implementation remains a bounded Git/JSON/Markdown tool with no graph database or broad crawler","Implementation and canonical closeout merge through required CI/automatic merge, then issue #33 closes only after current task/checkpoint/handoff state proves acceptance; no unrelated target repository is changed"],"depends_on":["PCM-0015"],"goal":"Let retries safely record one durable checkpoint and let a fresh session reliably find the right prior project documents, notice only relevant staleness, and receive a focused handoff without depending on chat history.","id":"PCM-0018","next_action":"Run a fresh-session post-fix candidate against the current committed task snapshot using the baseline prompt; record findings and timing, close the worker, remove the disposable checkout, and rerun continuity validation before pushing.","owner":"Codex PCM development session; GitHub issue #33","priority":"P1","protocol_version":"0.1.0-draft","schema":"project-continuity.task.v1","status":"active","why":"A retry can currently append duplicate checkpoint history, and a fresh session has no deterministic way to locate earlier decisions or related files. When later work changes a file, an old handoff may also look current even though its evidence is stale. These gaps waste time and can cause sessions to work from the wrong project state."} -->
+<!-- continuity:task {"acceptance":["Repeating a checkpoint with the same caller-supplied request ID and identical task/payload appends no duplicate and creates no additional commit when already delivered; reusing the ID with different content fails before mutation","Checkpoint publication safely retries after local append, local commit, remote push success, and a lost push response while preserving one event and the original event timestamp","A single machine-readable document inventory is the declared source of truth for a generated human-readable index; initialization/add/update and view rendering are deterministic and validate in CI","Deterministic document lookup finds a registered document from an earlier session and its explicitly related neighboring records; unrelated repository changes do not affect the result","Task-specific context packs include only the standard project/current/task records plus documents explicitly associated with that task, state the exact next action, and bind each source to the commit/content actually read","A changed indexed document is visibly marked needs_review for consumers that depend on it; a changed unrelated file does not mark it stale, and old evidence remains available","Ordinary contract, failure-injection, idempotence/metamorphic, source-view synchronization, and context-pack tests pass; full Ruff, MyPy, compile, Python 3.11/3.12 suites, package build/parity, continuity validation, and required GitHub CI pass","An isolated fresh-session blind baseline and post-fix candidate use the visible issue/repository contract without the hidden diagnosis; the candidate finds the seeded document and neighboring records without duplicating them","Checkpoint/document-catalog overhead is measured on a reproducible fixture and reported; implementation remains a bounded Git/JSON/Markdown tool with no graph database or broad crawler","Implementation and canonical closeout merge through required CI/automatic merge, then issue #33 closes only after current task/checkpoint/handoff state proves acceptance; no unrelated target repository is changed"],"depends_on":["PCM-0015"],"goal":"Let retries safely record one durable checkpoint and let a fresh session reliably find the right prior project documents, notice only relevant staleness, and receive a focused handoff without depending on chat history.","id":"PCM-0018","next_action":"Commit and push the tested candidate for required CI and automatic merge; then run and record separate fresh-session baseline and candidate trials on pinned repository snapshots before final closeout.","owner":"Codex PCM development session; GitHub issue #33","priority":"P1","protocol_version":"0.1.0-draft","schema":"project-continuity.task.v1","status":"active","why":"A retry can currently append duplicate checkpoint history, and a fresh session has no deterministic way to locate earlier decisions or related files. When later work changes a file, an old handoff may also look current even though its evidence is stale. These gaps waste time and can cause sessions to work from the wrong project state."} -->
 
 ## Human outcome
 
@@ -33,6 +33,13 @@ needed to continue.
   issue #31's closeout PR, so those pointers are corrected in this task start.
 
 ## Fresh-session blind trial
+
+**Status:** Neither a baseline report nor a candidate report is durably
+recorded here. An earlier checkpoint sentence claimed a scored baseline but
+provided no prompt/output, score, elapsed time, starting revision, or cleanup
+evidence; treat that claim as unverified, not as a completed trial. Run the
+baseline and candidate independently with the visible prompt below, pinned
+repository snapshots, and no prior-run results in either prompt.
 
 ### Visible prompt and scoring
 
@@ -160,7 +167,7 @@ Evidence:
 - `python tests/measure_pcm0018_overhead.py` on Windows 11 / Python 3.12.10 (100 checkpoint events; 12 indexed documents; 25 lookups) measured checkpoint append p50 17.028 ms / p95 23.272 ms, a 232-byte request-operation marker, and 923 average bytes of task growth per event. The 12-record JSON inventory was 5,718 bytes; its human index was 6,715 bytes. Lookup p50 was 73.482 ms / p95 81.559 ms.
 - The first lookup measurement was 699.200 ms p95; batching remote content reads reduced it to 81.559 ms p95 in the same fixture. These are local fixture measurements, not universal performance guarantees.
 - `continuity docs render --root . --check` passed. `continuity validate` rejected the disposable baseline checkout while it was detached rather than on the task branch; remove that checkout and rerun validation on the canonical checkout before delivery.
-- The scored baseline is recorded in “Fresh-session blind trial”; the candidate remains pending.
+- An earlier note claimed a scored baseline, but supplied no prompt/output, score, starting revision, timing, or cleanup record. No verifiable baseline report is present in this task file or the inspected issue comments; treat baseline and candidate as pending.
 
 Decisions:
 - Keep the inventory optional so repositories that do not need explicit
@@ -179,16 +186,57 @@ Changed:
   measurement script, task log, document catalog/index, CURRENT, and HANDOFF.
 
 Blocked/uncertain:
-- Hosted CI has not run because there is no PR yet. Final continuity validation
-  must be repeated after removing the disposable detached baseline checkout.
-- Fresh-session candidate remains pending.
+- Hosted CI has not run because there is no PR yet. Inspect the status and
+  ownership of the old detached disposable baseline checkout before any
+  cleanup; do not remove unknown content.
+- Both fresh-session baseline and candidate reports are pending.
 - Remote freshness is based on the fetched local cache of `origin/HEAD`; the
   command does not fetch and must label missing comparison evidence unknown.
 
 Next:
-- Commit the tested implementation, run the fresh-session candidate on that
-  exact commit, remove its disposable checkout, and rerun continuity
-  validation before pushing for GitHub CI.
+- Commit and push the tested implementation for required CI and automatic
+  merge. Then run separate baseline and candidate sessions on pinned snapshots,
+  record objective findings and cleanup, and keep #33 open until all acceptance
+  and merged closeout requirements are satisfied.
+
+### 2026-09-23 — handoff correction and local verification
+
+Completed:
+- Strengthened session-takeover instructions so each new session consults the
+  document catalog before choosing its next action, not only before writing
+  documentation.
+- Reconciled the task log with the actual evidence: the baseline score is not
+  present, so neither the baseline nor candidate trial is counted as complete.
+
+Evidence:
+- Full unittest suite: 64 tests passed on Python 3.11.15 and 64 on Python
+  3.12.10.
+- `ruff check .`, `mypy src`, `python -m compileall -q src tests`, and
+  `git diff --check` passed.
+- `continuity docs find` for PCM-0018 located the earlier plan, research, and
+  relevant policies. The first validation of this entry identified two missing
+  required headings; they are added below before final validation.
+- These handoff and instruction edits are currently uncommitted on
+  `task/PCM-0018-document-discovery`; hosted CI has not run because no PR has
+  been opened. Baseline/candidate blind-trial evidence remains absent.
+
+Decisions:
+- Do not count an undocumented prior-session claim as holdout evidence; run
+  baseline and candidate independently and record their observable evidence.
+- Keep GitHub issue #33 open until remaining acceptance is verified and the
+  canonical closeout has merged.
+
+Blocked/uncertain:
+- Required hosted CI, both fresh-session trials, and final issue closeout are
+  still pending. The inherited disposable PCM holdout folders were inventoried
+  by name only and were not inspected or removed in this handoff update.
+
+Next:
+- Commit and push the candidate, let required CI auto-merge it, then run the
+  same visible prompt independently at baseline
+  `85f13464c466ff277ce319850ce8124c4bc95c52` and the merged candidate snapshot.
+  Record the actual report, model/session, starting revision, objective rubric
+  results, elapsed time, and cleanup.
 
 ### 2026-09-23 — activation
 

@@ -128,6 +128,9 @@ class ContinuityTests(unittest.TestCase):
         self.assertIn("completed task's checkpoint", agents)
         self.assertIn("unlock/remove next action", agents)
         self.assertIn("required CI passes", agents)
+        self.assertIn("every fresh session or task takeover/resumption must consult it", agents)
+        self.assertIn("issue title and task-objective terms", agents)
+        self.assertIn("read the returned matches and declared neighbors", agents)
         self.assertIn("Reuse package-manager download/build caches", agents)
         self.assertNotIn("Do not create clones, task folders, or linked Git worktrees anywhere", agents)
         config = json.loads((root / ".continuity" / "config.json").read_text(encoding="utf-8"))
@@ -148,6 +151,9 @@ class ContinuityTests(unittest.TestCase):
         self.assertIn("expected release date", handoff)
         self.assertIn("git worktree lock", handoff)
         self.assertIn("git worktree unlock", handoff)
+        self.assertIn("Every fresh session or task takeover/resumption must consult the inventory", handoff)
+        self.assertIn("issue title and task-objective terms", handoff)
+        self.assertIn("read matching records and their declared neighbors", handoff)
 
     def test_init_cli_accepts_only_supported_workspace_modes(self) -> None:
         args = build_parser().parse_args(
