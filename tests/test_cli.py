@@ -362,6 +362,11 @@ class ContinuityTests(unittest.TestCase):
         self.assertEqual(output, task)
         self.assertEqual(validate_repo(root), [])
         self.assertEqual(load_json(receipt_path)["status"], "reconciled")
+        task_after_first_reconcile = task.read_bytes()
+        receipt_after_first_reconcile = receipt_path.read_bytes()
+        self.assertEqual(reconcile_recovery(root, receipt_path), task)
+        self.assertEqual(task.read_bytes(), task_after_first_reconcile)
+        self.assertEqual(receipt_path.read_bytes(), receipt_after_first_reconcile)
 
     def test_checkpoint_publish_commits_and_pushes_to_origin(self) -> None:
         root = self.copy_fixture("valid-minimal")
