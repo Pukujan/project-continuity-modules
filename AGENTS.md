@@ -40,6 +40,8 @@ task/PCM-0001-bootstrap-v1
 
 One primary agent/session owns the writable task state at a time.
 
+This is a lineage rule, not a permanent physical-worktree rule. A repository/task branch may be checked out in an authorized alternate worktree or host when execution needs to move. The Git repository, task ID, branch/ref, and commit history identify the work; a filesystem path does not.
+
 ## Checkpoint rule
 
 Before stopping after meaningful work, append to the active task:
@@ -52,6 +54,12 @@ Before stopping after meaningful work, append to the active task:
 - one exact next action.
 
 Update `checkpoints/CURRENT.md` only when program-wide state or priority changes.
+
+Continuity bookkeeping supports execution but does not gate safe execution. If a canonical task, CURRENT, or HANDOFF file is temporarily unavailable, do not repair storage merely to force a write, stop otherwise-safe authorized work, or ask again for an already-authorized host/worktree. Continue in the authorized alternate checkout and run `continuity checkpoint ... --recovery-root <alternate-root>` to leave a recovery receipt. Reconcile it later with `continuity recovery reconcile --root <canonical-root> --file <receipt>`. Recovery receipts are temporary evidence, not a competing project identity.
+
+Normal checkpoint delivery is mandatory: commit the product change first, then run `continuity checkpoint`. The command commits the canonical checkpoint and pushes the task branch to `origin`; a normal checkpoint is not complete while it exists only in a local worktree. CI runs on every pushed branch, and pull-request automation merges after the required checks pass. Do not create a second branch or worktree identity to avoid publishing.
+
+If the remote itself is unavailable, use the degraded recovery-receipt path. That is an emergency continuity condition, not a successful normal handoff: record the exact local state, continue only when the task remains safe, and publish/reconcile as soon as the shared Git path is available again.
 
 ## Evidence rule
 

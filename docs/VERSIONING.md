@@ -31,6 +31,8 @@ The CLI/package also follows semantic versioning:
 
 PCM-0009 therefore releases as CLI/package **0.2.0** because it adds the backward-compatible `preflight` command and adoption contract. The repository protocol remains **0.1.0-draft** because no required canonical object or schema meaning changes.
 
+PCM-0010 keeps the repository protocol at **0.1.0-draft**. Recovery receipts are optional, backward-compatible evidence outside the required canonical lifecycle; they do not replace or weaken existing PROJECT/CURRENT/TASK/CHECKPOINT schemas. The CLI/package remains on the 0.2.x compatibility line while it adds degraded-continuity handling and recovery reconciliation.
+
 ## Project declaration
 
 A participating repository declares the protocol version in `.continuity/config.json`. The PCM-0001 executable draft uses config schema `project-continuity.config.v1`, protocol version `0.1.0-draft`, and JSON Schema contracts under `schemas/v1/`.
