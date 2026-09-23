@@ -1,6 +1,6 @@
 # TASK-PCM-0019 — Managed temporary worktrees and dependency reuse
 
-<!-- continuity:task {"acceptance":["managed worktrees are opt-in through a validated workspace policy; strict single-checkout remains a supported opt-out and old configurations remain compatible","PCM-managed worktrees are created under the canonical project at pcm/worktree/<task-id> and bind one active task to one task branch","cleanup refuses trees outside the managed root, dirty or untracked work, unpublished commits, and work that is not proven merged into the canonical remote default branch","a reconciled, pushed, CI-approved and merged task tree can be removed without force; the local task branch is removed only after safe tree removal","generated agent instructions explain resuming one tree per task, parallelism boundaries, push/required-CI/automatic-merge, safe cleanup and preservation of unfinished trees","dependency guidance shares immutable pnpm/uv caches and installed runtimes where supported, but never shares mutable node_modules or .venv across incompatible lockfiles or interpreters","deterministic tests cover path/identity safety, creation reuse, rejection cases, and verified cleanup; repeatable disposable runs measure checkout disk use without leaving resources","the #34 corrected-candidate holdout and a fresh scenario variant pass under the separate #39 protocol","full Ruff, MyPy, compile, Python 3.11/3.12 tests, package build, continuity validation, required hosted CI, automatic merge, issue closeout, and local cleanup all succeed","PCM-0009 remains separately scoped and no unrelated target repository is modified"],"depends_on":["PCM-0011","PCM-0012","PCM-0013","PCM-0022"],"goal":"Allow useful parallel task isolation without scattering worktrees or repeatedly storing full dependency payloads, while ensuring every finished task is pushed, checked, merged and cleaned up safely.","id":"PCM-0019","next_action":"Inspect the current workspace-mode/config contracts and implement the managed-worktree create/list/remove lifecycle with refusal-first safety tests.","owner":"Codex PCM development session; GitHub issue #34","priority":"P1","protocol_version":"0.1.0-draft","schema":"project-continuity.task.v1","status":"active","why":"The blanket ban on worktrees blocks safe parallel isolation, while unmanaged worktrees and per-tree environments can accumulate on disk. The intended result is one resumable, task-owned tree inside the canonical project, shared immutable package caches, and automatic deletion only after verified GitHub delivery."} -->
+<!-- continuity:task {"acceptance":["managed-worktree support is enabled by a validated workspace policy; strict single-checkout remains an explicit opt-out and old configurations remain compatible","the main checkout remains the permanent home base and is used for sequential work; PCM-managed worktrees are created under the canonical project at pcm/worktree/<task-id> only when parallelism/isolation is useful, binding one active task to one task branch","cleanup refuses trees outside the managed root, dirty or untracked work, unpublished commits, and work that is not proven merged into the canonical remote default branch","a pushed, CI-approved and merged task tree can be removed without force; the local task branch is removed only after safe tree removal","cleanup fails closed for non-GitHub remotes until PCM implements a tested CI/merge verifier for those hosts","generated agent instructions explain when to use a worktree, resuming one tree across sessions, push/required-CI/automatic-merge, safe cleanup, and preservation of unfinished trees","dependency guidance reuses immutable pnpm/uv caches and installed runtimes where supported, but never shares mutable node_modules or .venv across incompatible lockfiles or interpreters","deterministic tests cover path/identity safety, creation reuse, rejection cases, and verified cleanup; repeatable disposable runs measure checkout disk use without leaving resources","the #34 corrected-candidate holdout and a fresh scenario variant pass under the separate #39 protocol","full Ruff, MyPy, compile, Python 3.11/3.12 tests, package build, continuity validation, required hosted CI, automatic merge, issue closeout, and local cleanup all succeed","PCM-0009 remains separately scoped and no unrelated target repository is modified"],"depends_on":["PCM-0011","PCM-0012","PCM-0013","PCM-0022"],"goal":"Allow useful parallel task isolation without scattering worktrees or repeatedly storing full dependency payloads, while ensuring every finished task is pushed, checked, merged and cleaned up safely.","id":"PCM-0019","next_action":"Publish the managed-worktree candidate for protected CI, then run the separate #39 corrected-candidate holdout and scenario variant.","owner":"Codex PCM development session; GitHub issue #34","priority":"P1","protocol_version":"0.1.0-draft","schema":"project-continuity.task.v1","status":"active","why":"A blanket worktree ban blocks safe parallel isolation, while unmanaged worktrees and per-tree environments can accumulate on disk. The intended result is one permanent main checkout, one temporary task-owned tree only when useful, shared immutable package caches, and refusal-first cleanup after verified GitHub delivery."} -->
 
 ## Human outcome
 
@@ -46,19 +46,27 @@ Checked on 2026-09-23 against the current official documentation:
   of downloads/build artifacts; it does not establish that separate task
   environments with different locks/interpreters can safely share one mutable
   `.venv`.
-- These primary docs establish capabilities and safety boundaries only. Actual
-  disk impact on this Windows checkout remains to be measured with the
-  disposable repeated-worktree experiment below.
+- A disposable Windows/Python 3.12 experiment now measures a 1 MiB deterministic
+  payload in three linked worktrees versus three `git clone --no-hardlinks`
+  copies. `tests.test_worktrees.WorktreeStorageExperimentTests` reported
+  3,145,728 bytes of checked-out files in either case; one common Git object
+  store for the three worktrees was 1,049,070 bytes, versus 3,147,210 bytes
+  across three independent clone object stores. The experiment confirms that
+  linked worktrees save repeated Git-object storage but still materialize each
+  checkout's files. It measures logical file lengths, not Windows physical
+  allocation, real-project size, package caches, or virtual environments.
 
 ## Scope
 
 Implement the repository policy, configuration, CLI behavior, tests, and
 verification evidence for a managed temporary-worktree lifecycle. Keep the
-default identity as the same canonical repository and remote; a path is an
-execution location, not a new project or task. Preserve strict single-checkout
-mode for serial environments. Reuse package-manager caches, but not mutable
-environment directories when dependency inputs differ. Keep `PCM-0009` separate
-and do not modify any target repository.
+default identity as the same canonical repository and remote; the main checkout
+is the permanent home base, and a path is only an execution location. Use the
+main checkout for sequential work and create a managed tree only when isolation
+or parallelism is useful. Preserve strict single-checkout mode as an opt-out.
+Reuse package-manager caches, but not mutable environment directories when
+dependency inputs differ. Keep `PCM-0009` separate and do not modify any target
+repository.
 
 Do not implement the other open reports (#30, #31, #33, #35, #39, #42), except
 the #39 acceptance runs that are explicitly dependent on this candidate. Do not
@@ -75,6 +83,8 @@ restore or generate README images; #42 remains separately owned and deferred.
   managed path, task/branch association, clean tracked and untracked state,
   publication, and merge into the protected remote default branch. It never
   uses force removal or deletes dirty, unmerged, pinned, or user-owned trees.
+- [ ] Cleanup fails closed for non-GitHub remotes until PCM implements a tested
+  CI/merge verifier for those hosts.
 - [ ] Successful cleanup removes the worktree and only then its safely merged
   local task branch. GitHub remains responsible for protected CI, auto-merge,
   and remote branch deletion; PCM must report inability to verify rather than
@@ -143,6 +153,61 @@ Blocked/uncertain:
 Next:
 - Inspect workspace configuration and implement create/list/remove behavior
   with refusal-first safety tests.
+
+### 2026-09-23 — managed-worktree policy and CLI candidate
+
+Completed:
+- Replaced the blanket worktree ban with a permanent home checkout plus
+  optional task-scoped linked worktrees for genuine isolation/parallelism.
+- Added validated workspace modes, a new-project default, backward compatibility,
+  task-path confinement, create/resume/remove commands, GitHub-only verified
+  cleanup, and refusal when delivery cannot be proven.
+- Updated PCM's generated and self-hosted instructions. Recorded official Git,
+  pnpm, and uv documentation as sources and measured a repeatable disposable
+  checkout comparison.
+
+Evidence:
+- Python 3.12: `python -m unittest discover -s tests -v` -> 43 passed.
+- Python 3.11.15: same test suite -> 43 passed; `continuity validate --root .`
+  -> VALID.
+- `ruff check src tests`, `mypy src`, compileall, Python 3.12 continuity
+  validation, and `python -m build` -> passed.
+- Storage experiment (three linked worktrees vs three independent
+  `--no-hardlinks` clones): 3,145,728 checkout bytes each; one shared worktree
+  Git-object store 1,049,070 bytes; clone object stores 3,147,210 bytes total.
+  Logical file sizes only; physical allocation and dependency environments were
+  not measured.
+- GitHub cleanup integration test proves removal succeeds when the exact task
+  head is merged, required checks pass, remote task status is completed, and the
+  local home checkout has not yet pulled the merge. Dirty, unmerged, and
+  unverifiable cases refuse cleanup.
+
+Decisions:
+- One checkout is not mandatory: it is the permanent home base and default for
+  sequential work; linked worktrees are temporary and created only when useful.
+- Do not share mutable dependency environments across incompatible lockfiles.
+  Reuse package caches; let safe cleanup remove the task's private environment.
+- Do not claim generic-host CI proof: until another host has a tested verifier,
+  PCM leaves its worktree untouched rather than guessing.
+
+Changed:
+- `src/continuity/cli.py`, `schemas/v1/config.schema.json`,
+  `.continuity/config.json`, `tests/test_cli.py`, and `tests/test_worktrees.py`
+- `AGENTS.md`, `HANDOFF.md`, `README.md`, `SPEC.md`,
+  `docs/HANDOFF_PROTOCOL.md`, and both applicable profile templates
+- This task record and `checkpoints/CURRENT.md`
+
+Blocked/uncertain:
+- Fresh-session candidate/variant checks under issue #39, hosted protected CI,
+  merge, closeout, and post-merge local branch/worktree cleanup remain pending.
+- The measurement is a small synthetic logical-byte comparison, not a Windows
+  disk-allocation or real-project dependency benchmark.
+- Pre-existing generated `dist/` and `src/project_continuity.egg-info/` remain
+  untracked and unstaged; build outputs are not included in the task.
+
+Next:
+- Commit and push the reviewed candidate, then run the separate #39 holdout
+  and scenario variant against the pushed candidate.
 
 ## Handoff
 
