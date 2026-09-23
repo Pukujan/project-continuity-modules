@@ -32,11 +32,15 @@ This repository is ready for a fresh PCM development session without prior chat 
 
 ## Exact next action
 
-After closeout PR #44 merges and issue #32 is closed, activate no work until the user selects the next bounded priority. Keep the #39 holdout dependent on #34.
+Finish PCM-0019/#34: align the generated and repository guidance with the managed-worktree lifecycle, complete deterministic safety and disk-footprint tests, run all local gates and continuity validation, then push for required CI and automatic merge. Keep the #39 fresh-session holdout separate and dependent on this candidate.
 
 ## Authority
 
 PCM owns only its protocol/tooling development state. When PCM is used as a helper for another repository, that target repository owns its PROJECT/CURRENT/TASK/checkpoint state. A target is not integrated until `continuity validate --root <target>` succeeds. The authoritative identity is the repository/task lineage and Git history; alternate worktrees/hosts are execution infrastructure. Normal checkpoints commit and push the task branch; CI and pull-request automation deliver the pushed state. Use and later reconcile a recovery receipt when canonical continuity state is temporarily unavailable.
+
+## Workspace policy
+
+Keep one permanent main checkout as the project home base and use it for sequential work. Create a linked worktree only when parallelism or isolation is useful, under `pcm/worktree/<TASK-ID>`, and reuse that task's worktree across sessions. Do not create one per agent or sibling clones. After required checks pass, the PR is merged, the task is complete, and the worktree is clean, run `continuity worktree remove <TASK-ID>`; it verifies GitHub delivery and refuses unsafe cleanup. Other Git hosts remain unsupported for cleanup until PCM has a tested CI/merge verifier for them. Shared package caches are encouraged, but mutable dependency environments stay separate when their lockfiles or runtimes differ. Strict `single-checkout` mode remains available.
 
 ## Continuity records
 
