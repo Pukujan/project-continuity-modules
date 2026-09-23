@@ -170,6 +170,29 @@ Blocked/uncertain:
 Next:
 - Open the pushed pull request and verify required CI jobs plus automatic merge behavior.
 
+### 2026-09-23 04:43:15 UTC — Codex PCM-0010 hosted CI verification
+
+<!-- continuity:checkpoint {"agent":"Codex PCM-0010 hosted CI verification","blocked":[],"changed":[".github/workflows/ci.yml"],"completed":["Fixed the automatic merge job to pass GitHub's repository context explicitly."],"decisions":["Automatic merge is performed by the CI workflow only after quality, both test versions, and package jobs succeed."],"evidence":["Hosted quality, test (3.11), test (3.12), and package jobs all passed on PR #18.","The first hosted auto-merge attempt failed only because gh had no repository context; the failure is now corrected."],"next_action":"Verify the new hosted run enables automatic merge and observe the final PR state.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0010","timestamp":"2026-09-23T04:43:15Z"} -->
+
+Completed:
+- Fixed the automatic merge job to pass GitHub's repository context explicitly.
+
+Evidence:
+- Hosted quality, test (3.11), test (3.12), and package jobs all passed on PR #18.
+- The first hosted auto-merge attempt failed only because gh had no repository context; the failure is now corrected.
+
+Decisions:
+- Automatic merge is performed by the CI workflow only after quality, both test versions, and package jobs succeed.
+
+Changed:
+- .github/workflows/ci.yml
+
+Blocked/uncertain:
+- none
+
+Next:
+- Verify the new hosted run enables automatic merge and observe the final PR state.
+
 ## Handoff
 
 Read `PROJECT.md` → `checkpoints/CURRENT.md` → this task → `AGENTS.md` → `SPEC.md` → `docs/HANDOFF_PROTOCOL.md` → `docs/BLIND_TEST_PCM-0010.md`. Keep PCM-0009 separate and do not modify unrelated target repositories.
