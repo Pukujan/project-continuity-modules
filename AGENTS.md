@@ -57,7 +57,9 @@ Update `checkpoints/CURRENT.md` only when program-wide state or priority changes
 
 Continuity bookkeeping supports execution but does not gate safe execution. If a canonical task, CURRENT, or HANDOFF file is temporarily unavailable, do not repair storage merely to force a write, stop otherwise-safe authorized work, or ask again for an already-authorized host/worktree. Continue in the authorized alternate checkout and run `continuity checkpoint ... --recovery-root <alternate-root>` to leave a recovery receipt. Reconcile it later with `continuity recovery reconcile --root <canonical-root> --file <receipt>`. Recovery receipts are temporary evidence, not a competing project identity.
 
-When a remote is available and pushing is authorized, commit and push meaningful checkpoint state so the task branch is the durable shared handoff. If the remote is unavailable or the user has not authorized a push, record the exact dirty/local state and next action; do not invent a second branch or worktree identity.
+Normal checkpoint delivery is mandatory: commit the product change first, then run `continuity checkpoint`. The command commits the canonical checkpoint and pushes the task branch to `origin`; a normal checkpoint is not complete while it exists only in a local worktree. CI runs on every pushed branch, and pull-request automation merges after the required checks pass. Do not create a second branch or worktree identity to avoid publishing.
+
+If the remote itself is unavailable, use the degraded recovery-receipt path. That is an emergency continuity condition, not a successful normal handoff: record the exact local state, continue only when the task remains safe, and publish/reconcile as soon as the shared Git path is available again.
 
 ## Evidence rule
 

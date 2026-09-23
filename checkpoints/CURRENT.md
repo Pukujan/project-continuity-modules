@@ -41,4 +41,4 @@ None known.
 
 ## Next atomic action
 
-Open a PR or perform human review of commit `b4702df`; PCM-0009 remains a separate predecessor candidate.
+Push the PCM-0010 task branch, open its PR, and verify required CI plus automatic merge; PCM-0009 remains a separate predecessor candidate.

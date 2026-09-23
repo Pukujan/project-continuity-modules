@@ -16,6 +16,7 @@ from continuity.cli import (
     load_json,
     pack_task,
     preflight_repo,
+    publish_checkpoint,
     reconcile_recovery,
     task_new,
     validate_repo,
@@ -191,6 +192,41 @@ class ContinuityTests(unittest.TestCase):
         self.assertEqual(validate_repo(root), [])
         self.assertEqual(load_json(receipt_path)["status"], "reconciled")
 
+    def test_checkpoint_publish_commits_and_pushes_to_origin(self) -> None:
+        root = self.copy_fixture("valid-minimal")
+        remote = Path(tempfile.mkdtemp(prefix="continuity-remote-"))
+        self.addCleanup(shutil.rmtree, remote, True)
+        subprocess.run(["git", "init", "-q", "--bare", remote], check=True)
+        subprocess.run(["git", "-C", root, "init", "-q", "-b", "task/PCM-0001-example"], check=True)
+        subprocess.run(["git", "-C", root, "config", "user.email", "fixture@example.invalid"], check=True)
+        subprocess.run(["git", "-C", root, "config", "user.name", "Fixture"], check=True)
+        subprocess.run(["git", "-C", root, "add", "."], check=True)
+        subprocess.run(["git", "-C", root, "commit", "-qm", "fixture"], check=True)
+        subprocess.run(["git", "-C", root, "remote", "add", "origin", str(remote)], check=True)
+        subprocess.run(["git", "-C", root, "push", "-q", "--set-upstream", "origin", "HEAD"], check=True)
+
+        task = root / "tasks" / "TASK-PCM-0001-example.md"
+        checkpoint_task(
+            root,
+            "PCM-0001",
+            "test-agent",
+            "2026-09-20T18:10:00Z",
+            ["prepared durable delivery"],
+            ["local validation passed"],
+            ["checkpoint delivery is a Git operation"],
+            ["tests/test_cli.py"],
+            [],
+            "open the automated review path",
+        )
+        commit = publish_checkpoint(root, task, "PCM-0001", "open the automated review path")
+
+        self.assertEqual(subprocess.check_output(["git", "-C", root, "rev-parse", "HEAD"], text=True).strip(), commit)
+        remote_commit = subprocess.check_output(
+            ["git", "--git-dir", remote, "rev-parse", "refs/heads/task/PCM-0001-example"], text=True
+        ).strip()
+        self.assertEqual(remote_commit, commit)
+        self.assertEqual(subprocess.check_output(["git", "-C", root, "status", "--porcelain"], text=True), "")
+
     def test_pack_records_git_provenance_and_sources(self) -> None:
         root = self.copy_fixture("valid-minimal")
         subprocess.run(["git", "init", "-q", root], check=True)
@@ -198,7 +234,9 @@ class ContinuityTests(unittest.TestCase):
         subprocess.run(["git", "-C", root, "config", "user.name", "Fixture"], check=True)
         subprocess.run(["git", "-C", root, "add", "."], check=True)
         subprocess.run(["git", "-C", root, "commit", "-qm", "fixture"], check=True)
-        subprocess.run(["git", "-C", root, "remote", "add", "origin", "https://example.invalid/fixture.git"], check=True)
+        subprocess.run(
+            ["git", "-C", root, "remote", "add", "origin", "https://example.invalid/fixture.git"], check=True
+        )
         output = pack_task(root, "PCM-0001", None)
         meta = extract_marker(output.read_text(encoding="utf-8"), "context-pack")
         self.assertEqual(meta["repository"], "https://example.invalid/fixture.git")
@@ -247,7 +285,10 @@ class ContinuityTests(unittest.TestCase):
         subprocess.run(["git", "-C", root, "config", "user.name", "PCM Dogfood"], check=True)
         subprocess.run(["git", "-C", root, "add", "."], check=True)
         subprocess.run(["git", "-C", root, "commit", "-qm", "dogfood source state"], check=True)
-        subprocess.run(["git", "-C", root, "remote", "add", "origin", "https://example.invalid/pcm-minimal-dogfood.git"], check=True)
+        subprocess.run(
+            ["git", "-C", root, "remote", "add", "origin", "https://example.invalid/pcm-minimal-dogfood.git"],
+            check=True,
+        )
 
         output = pack_task(root, "DOG-0001", None)
         meta = extract_marker(output.read_text(encoding="utf-8"), "context-pack")

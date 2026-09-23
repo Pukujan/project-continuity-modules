@@ -89,7 +89,7 @@ A typical cycle is:
 3. It performs only that bounded work.
 4. It runs whatever tests, experiments, or validation the task requires.
 5. Before stopping, it writes a checkpoint containing the important evidence, decisions, blockers, changed files, and one concrete next action.
-6. When a remote is available and the operation is authorized, it commits and pushes that state to the task branch.
+6. It commits and pushes that state to the task branch. A normal checkpoint is not complete while it exists only in a local worktree.
 7. The session can disappear completely.
 8. A new session resumes from the repository rather than reconstructing the old conversation.
 
@@ -108,7 +108,7 @@ The goal is not to preserve every sentence an agent ever produced. The goal is t
 
 Continuity state is important, but writing it is not an execution gate. If a canonical continuity file or checkout becomes temporarily unavailable while the underlying task remains safe, continue through an already-authorized alternate worktree or host and record a small recovery receipt with `--recovery-root`. Reconcile that receipt into the canonical task when it becomes writable.
 
-The durable identity is the repository/task lineage: project identity, task ID, branch/ref, and Git history. A local worktree is only an execution view. PCM therefore permits disposable or migrated worktrees, while keeping one authoritative task branch and avoiding competing continuity state. Push meaningful commits when a remote and authorization are available; when they are not, record the local dirty state explicitly and resume from it later.
+The durable identity is the repository/task lineage: project identity, task ID, branch/ref, remote, and Git history. A local worktree is only an execution view. PCM therefore permits disposable or migrated worktrees, while keeping one authoritative task branch and avoiding competing continuity state. Normal checkpoints must be committed and pushed; an unavailable remote is an emergency degraded-continuity condition that must be recorded and repaired, not a second local canonical state.
 
 ## Why Git is the transport
 
@@ -243,7 +243,7 @@ continuity checkpoint APP-0001 \
 
 The command exits successfully after writing a recovery receipt under `.continuity/recovery/`. Later, reconcile that receipt into the canonical task with `continuity recovery reconcile`.
 
-Then commit and push the resulting repository state when a remote and authorization are available.
+Commit the product change first, then run `continuity checkpoint`. The command commits the checkpoint and pushes the task branch. CI runs on the pushed branch and pull-request automation merges it after the required checks pass.
 
 A future session should be able to continue without needing the previous conversation.
 

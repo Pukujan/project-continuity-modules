@@ -24,8 +24,8 @@ This repository is ready for a fresh PCM development session without prior chat 
 
 ## Exact next action
 
-Open a PR or perform human review of commit `b4702df`. The deterministic suite, self-validation, and fresh-session blind rerun are complete; PCM-0009 remains a separate predecessor candidate. Do not modify Eval Lab, hades-v2, harness-on-steroids, inference-recommendation-engine, or any unrelated target repository.
+Push the task branch, open its PR, and verify required CI plus automatic merge. The deterministic suite, self-validation, and fresh-session blind rerun are complete; PCM-0009 remains a separate predecessor candidate. Do not modify Eval Lab, hades-v2, harness-on-steroids, inference-recommendation-engine, or any unrelated target repository.
 
 ## Authority
 
-PCM owns only its protocol/tooling development state. When PCM is used as a helper for another repository, that target repository owns its PROJECT/CURRENT/TASK/checkpoint state. A target is not integrated until `continuity validate --root <target>` succeeds. The authoritative identity is the repository/task lineage and Git history; alternate worktrees/hosts are execution infrastructure. Push meaningful commits when authorized; use and later reconcile a recovery receipt when canonical continuity state is temporarily unavailable.
+PCM owns only its protocol/tooling development state. When PCM is used as a helper for another repository, that target repository owns its PROJECT/CURRENT/TASK/checkpoint state. A target is not integrated until `continuity validate --root <target>` succeeds. The authoritative identity is the repository/task lineage and Git history; alternate worktrees/hosts are execution infrastructure. Normal checkpoints commit and push the task branch; CI and pull-request automation deliver the pushed state. Use and later reconcile a recovery receipt when canonical continuity state is temporarily unavailable.

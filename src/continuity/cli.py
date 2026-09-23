@@ -3,10 +3,10 @@ from __future__ import annotations
 import argparse
 import json
 import re
-import shutil
 import subprocess
 import sys
-from datetime import datetime, timezone
+from contextlib import suppress
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -246,7 +246,8 @@ def handoff_template() -> str:
         "5. the minimum relevant specification/design document\n\n"
         "## Authority\n\nCanonical repository files are authoritative. Tracker items and context packs are mirrors/derived views.\n\n"
         "## Degraded continuity\n\n"
-        "Execution safety and existing authorization outrank continuity bookkeeping. If a canonical continuity file is temporarily unavailable, do not stop safe work, repair storage just to force a checkpoint, or ask again for an already-authorized host/worktree. Use an authorized alternate checkout and run `continuity checkpoint <TASK-ID> --root <canonical-root> --recovery-root <alternate-root> ...` to write a JSON recovery receipt under `.continuity/recovery/`; do not create an ad-hoc Markdown checkpoint or replace the alternate task file. Reconcile it into the canonical task with `continuity recovery reconcile --root <canonical-root> --file <receipt>` when writable. The repository/task lineage is authoritative; a physical path is not.\n"
+        "Execution safety and existing authorization outrank continuity bookkeeping. If a canonical continuity file is temporarily unavailable, do not stop safe work, repair storage just to force a checkpoint, or ask again for an already-authorized host/worktree. Use an authorized alternate checkout and run `continuity checkpoint <TASK-ID> --root <canonical-root> --recovery-root <alternate-root> ...` to write a JSON recovery receipt under `.continuity/recovery/`; do not create an ad-hoc Markdown checkpoint or replace the alternate task file. Reconcile it into the canonical task with `continuity recovery reconcile --root <canonical-root> --file <receipt>` when writable. The repository/task lineage is authoritative; a physical path is not.\n\n"
+        "Normal checkpointing is a delivery operation, not a local note: commit the product change first, then run `continuity checkpoint`. The command commits the canonical checkpoint and pushes the task branch to `origin`; it fails rather than silently leaving a normal checkpoint local. CI runs on the pushed branch and the repository's pull-request automation merges it after required checks pass.\n"
     )
 
 
@@ -259,7 +260,8 @@ def agents_template() -> str:
         "Work only inside the active bounded task. Split or revise the task before materially expanding scope.\n\n"
         "## Checkpoint\n\n"
         "Before stopping after meaningful work, append completed work, exact evidence, decisions, changed paths, blockers, and one next atomic action.\n\n"
-        "If canonical continuity state is temporarily unavailable, treat that as degraded continuity rather than an execution blocker: keep safe authorized work moving, use an already-authorized alternate checkout/host, and run `continuity checkpoint <TASK-ID> --root <canonical-root> --recovery-root <alternate-root> --agent <name> --completed <work> --evidence <result> --next <next-action>` to write the JSON recovery receipt under `.continuity/recovery/`. Do not write an ad-hoc checkpoint under `checkpoints/`, replace the alternate task file, treat a physical worktree as project identity, repair storage merely to write a checkpoint, or request redundant permission. Reconcile later with `continuity recovery reconcile --root <canonical-root> --file <receipt>`.\n"
+        "If canonical continuity state is temporarily unavailable, treat that as degraded continuity rather than an execution blocker: keep safe authorized work moving, use an already-authorized alternate checkout/host, and run `continuity checkpoint <TASK-ID> --root <canonical-root> --recovery-root <alternate-root> --agent <name> --completed <work> --evidence <result> --next <next-action>` to write the JSON recovery receipt under `.continuity/recovery/`. Do not write an ad-hoc checkpoint under `checkpoints/`, replace the alternate task file, treat a physical worktree as project identity, repair storage merely to write a checkpoint, or request redundant permission. Reconcile later with `continuity recovery reconcile --root <canonical-root> --file <receipt>`.\n\n"
+        "For a normal checkpoint, commit the product change first and then run `continuity checkpoint`; it commits and pushes the checkpoint to the task branch. A normal checkpoint is not complete while it exists only in a local worktree. CI and pull-request automation take the pushed branch through validation and merge.\n"
     )
 
 
@@ -360,7 +362,8 @@ def task_new(root: Path, slug: str, goal: str, why: str, owner: str, priority: s
     config = load_config(root)
     task_id = next_task_id(root, config)
     slug = slugify(slug)
-    path = root / config["canonical"]["tasks"] / f"TASK-{task_id}-{slug}.md"
+    tasks_dir: str = config["canonical"]["tasks"]
+    path = root / tasks_dir / f"TASK-{task_id}-{slug}.md"
     meta = {
         "schema": "project-continuity.task.v1",
         "protocol_version": config["protocol_version"],
@@ -477,10 +480,8 @@ def validate_repo(root: Path) -> list[str]:
 
     current_meta = None
     if current_path.exists():
-        try:
+        with suppress(ContinuityError, OSError):
             current_meta = extract_marker(current_path.read_text(encoding="utf-8"), "current")
-        except (ContinuityError, OSError):
-            pass
 
     tasks_by_id: dict[str, tuple[Path, dict[str, Any]]] = {}
     for path in task_files(root, config):
@@ -503,7 +504,9 @@ def validate_repo(root: Path) -> list[str]:
             errors.append(str(exc))
             continue
         task_id = meta.get("id")
-        if isinstance(task_id, str) and not task_id.startswith(config["task_prefix"] + "-"):
+        if not isinstance(task_id, str):
+            continue
+        if not task_id.startswith(config["task_prefix"] + "-"):
             errors.append(f"{path}: task id prefix does not match configured task_prefix")
         if task_id in tasks_by_id:
             errors.append(f"duplicate task id: {task_id}")
@@ -515,7 +518,7 @@ def validate_repo(root: Path) -> list[str]:
             errors.append(f"{path}: next_action must be non-empty")
         errors.extend(validate_checkpoint_structure(root, path, text))
 
-    for task_id, (path, meta) in tasks_by_id.items():
+    for _task_id, (path, meta) in tasks_by_id.items():
         for dep in meta.get("depends_on", []):
             if dep.startswith("external:"):
                 continue
@@ -527,7 +530,7 @@ def validate_repo(root: Path) -> list[str]:
         active_file = current_meta.get("active_task_file")
         if (active_id is None) != (active_file is None):
             errors.append(f"{current_path}: active_task and active_task_file must both be null or both set")
-        if active_id is not None:
+        if active_id is not None and isinstance(active_id, str) and isinstance(active_file, str):
             target = root / active_file
             if not target.exists():
                 errors.append(f"{current_path}: active task file does not exist: {active_file}")
@@ -592,15 +595,19 @@ def preflight_repo(root: Path) -> tuple[str, list[str]]:
             project_meta = None
         if project_meta and project_meta.get("id") == "project-continuity-modules":
             return "HELPER_REPOSITORY", [
-                "this root is the Project Continuity Modules helper repository; "
-                "another project's continuity state must live in that target repository"
+                (
+                    "this root is the Project Continuity Modules helper repository; "
+                    "another project's continuity state must live in that target repository"
+                )
             ]
 
     config_path = root / ".continuity" / "config.json"
     if not config_path.exists():
         return "NOT_ADOPTED", [
-            "missing .continuity/config.json; initialize a fresh target or follow "
-            "the mature-repository overlay procedure before relying on PCM state"
+            (
+                "missing .continuity/config.json; initialize a fresh target or follow "
+                "the mature-repository overlay procedure before relying on PCM state"
+            )
         ]
 
     errors = validate_repo(root)
@@ -819,7 +826,9 @@ def reconcile_recovery(root: Path, receipt_path: Path) -> Path:
     if not isinstance(checkpoint, dict):
         raise ContinuityError(f"recovery receipt has no checkpoint: {receipt_path}")
     task_id = checkpoint.get("task_id")
-    required = ("task_id", "agent", "timestamp", "completed", "evidence", "decisions", "changed", "blocked", "next_action")
+    required = (
+        "task_id", "agent", "timestamp", "completed", "evidence", "decisions", "changed", "blocked", "next_action"
+    )
     if not all(key in checkpoint for key in required) or not isinstance(task_id, str):
         raise ContinuityError(f"recovery receipt checkpoint is incomplete: {receipt_path}")
     output = checkpoint_task(
@@ -835,7 +844,7 @@ def reconcile_recovery(root: Path, receipt_path: Path) -> Path:
         checkpoint["next_action"],
     )
     receipt["status"] = "reconciled"
-    receipt["reconciled_at"] = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    receipt["reconciled_at"] = datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     try:
         receipt_path.write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     except OSError as exc:
@@ -848,8 +857,7 @@ def git_value(root: Path, args: list[str], fallback: str | None = None) -> str:
         proc = subprocess.run(
             ["git", "-C", str(root), *args],
             check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
+            capture_output=True,
             text=True,
         )
         value = proc.stdout.strip()
@@ -860,6 +868,59 @@ def git_value(root: Path, args: list[str], fallback: str | None = None) -> str:
     if fallback is not None:
         return fallback
     raise ContinuityError(f"git provenance unavailable for: {' '.join(args)}")
+
+
+def git_run(root: Path, args: list[str]) -> subprocess.CompletedProcess[str]:
+    try:
+        return subprocess.run(
+            ["git", "-C", str(root), *args],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except FileNotFoundError as exc:
+        raise ContinuityError("git is required for checkpoint publishing") from exc
+    except subprocess.CalledProcessError as exc:
+        detail = (exc.stderr or exc.stdout or "git command failed").strip()
+        raise ContinuityError(f"git {' '.join(args)} failed: {detail}") from exc
+
+
+def publish_checkpoint(
+    root: Path, checkpoint_path: Path, task_id: str, next_action: str, recovery: bool = False
+) -> str:
+    """Commit and push one checkpoint so the shared branch is the durable handoff."""
+    root = root.resolve()
+    checkpoint_path = checkpoint_path.resolve()
+    try:
+        relative = checkpoint_path.relative_to(root).as_posix()
+    except ValueError as exc:
+        raise ContinuityError(f"checkpoint is outside the publishing repository: {checkpoint_path}") from exc
+
+    git_run(root, ["rev-parse", "--show-toplevel"])
+    branch = git_value(root, ["rev-parse", "--abbrev-ref", "HEAD"])
+    if branch == "HEAD":
+        raise ContinuityError("checkpoint publishing requires an attached task branch")
+    remote = git_value(root, ["remote", "get-url", "origin"], None)
+
+    status = git_run(root, ["status", "--porcelain", "--untracked-files=all"]).stdout.splitlines()
+    unexpected = [line for line in status if line[3:] != relative]
+    if unexpected and not recovery:
+        raise ContinuityError(
+            "checkpoint publishing requires product changes to be committed first; "
+            f"uncommitted paths: {', '.join(line[3:] for line in unexpected)}"
+        )
+
+    git_run(root, ["add", "--", relative])
+    staged = git_run(root, ["diff", "--cached", "--name-only"]).stdout.splitlines()
+    if relative not in staged:
+        raise ContinuityError(f"checkpoint produced no staged change: {checkpoint_path}")
+
+    kind = "recovery receipt" if recovery else "checkpoint"
+    message = f"PCM {kind} {task_id}: {next_action}"
+    git_run(root, ["commit", "-m", message])
+    commit = git_value(root, ["rev-parse", "HEAD"])
+    git_run(root, ["push", "--set-upstream", remote, f"HEAD:{branch}"])
+    return commit
 
 
 def pack_task(root: Path, task_id: str, output: Path | None) -> Path:
@@ -878,7 +939,7 @@ def pack_task(root: Path, task_id: str, output: Path | None) -> Path:
     repo = git_value(root, ["config", "--get", "remote.origin.url"], root.name)
     ref = git_value(root, ["rev-parse", "--abbrev-ref", "HEAD"])
     commit = git_value(root, ["rev-parse", "HEAD"])
-    generated = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    generated = datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     meta = {
         "schema": "project-continuity.context-pack.v1",
         "protocol_version": config["protocol_version"],
@@ -1011,7 +1072,7 @@ def main(argv: list[str] | None = None) -> int:
             return 0
 
         if args.command == "checkpoint":
-            timestamp = args.time or datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+            timestamp = args.time or datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
             recovery_root = Path(args.recovery_root).resolve() if args.recovery_root else None
             path = checkpoint_task(
                 Path(args.root).resolve(),
@@ -1027,9 +1088,13 @@ def main(argv: list[str] | None = None) -> int:
                 recovery_root,
             )
             if recovery_root is not None and path.is_relative_to(recovery_root / ".continuity" / "recovery"):
+                commit = publish_checkpoint(recovery_root, path, args.task_id, args.next_action, recovery=True)
                 print(f"DEGRADED_CONTINUITY: canonical checkpoint unavailable; recovery receipt written: {path}")
+                print(f"PUSHED: {commit}")
             else:
+                commit = publish_checkpoint(Path(args.root).resolve(), path, args.task_id, args.next_action)
                 print(path)
+                print(f"PUSHED: {commit}")
             return 0
 
         if args.command == "recovery" and args.recovery_command == "reconcile":
