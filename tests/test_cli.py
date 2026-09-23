@@ -10,6 +10,7 @@ from unittest.mock import patch
 
 from continuity.cli import (
     ContinuityError,
+    build_parser,
     checkpoint_task,
     extract_marker,
     init_repo,
@@ -48,6 +49,86 @@ class ContinuityTests(unittest.TestCase):
         results = init_repo(root, "minimal", "Example", "PCM")
         self.assertEqual((root / "notes.txt").read_text(encoding="utf-8"), "keep me\n")
         self.assertTrue(any(line.endswith("PROJECT.md") for line in results))
+        self.assertEqual(validate_repo(root), [])
+
+    def test_software_profile_includes_canonical_checkout_policy(self) -> None:
+        root = Path(tempfile.mkdtemp(prefix="continuity-software-init-"))
+        self.addCleanup(shutil.rmtree, root, True)
+        init_repo(root, "software", "Example", "SOFT")
+
+        agents = (root / "AGENTS.md").read_text(encoding="utf-8")
+        self.assertIn("one canonical checkout", agents)
+        self.assertIn("Do not create clones", agents)
+        self.assertIn("Do not create clones, task folders, or linked Git worktrees anywhere", agents)
+        self.assertNotIn("<canonical-root>/.worktrees/<task-slug>", agents)
+        config = json.loads((root / ".continuity" / "config.json").read_text(encoding="utf-8"))
+        schema = json.loads((root / "schemas" / "v1" / "config.schema.json").read_text(encoding="utf-8"))
+        self.assertNotIn("workspace_mode", config)
+        self.assertNotIn("workspace_mode", schema["properties"])
+        self.assertEqual(validate_repo(root), [])
+
+    def test_init_cli_rejects_removed_workspace_mode_option(self) -> None:
+        with self.assertRaises(SystemExit):
+            build_parser().parse_args(
+                ["init", "--profile", "software", "--workspace-mode", "linked-worktrees"]
+            )
+
+    def test_validation_accepts_only_canonical_worktree(self) -> None:
+        root = Path(tempfile.mkdtemp(prefix="continuity-canonical-worktree-"))
+        self.addCleanup(shutil.rmtree, root, True)
+        init_repo(root, "minimal", "Example", "SOFT")
+        (root / ".git").mkdir()
+        result = subprocess.CompletedProcess(
+            args=["git", "worktree", "list", "--porcelain"],
+            returncode=0,
+            stdout=f"worktree {root}\nHEAD 0123456789abcdef\n",
+            stderr="",
+        )
+
+        with patch("continuity.cli.subprocess.run", return_value=result):
+            errors = validate_repo(root)
+
+        self.assertEqual(errors, [])
+
+    def test_validation_rejects_registered_additional_worktree(self) -> None:
+        root = Path(tempfile.mkdtemp(prefix="continuity-single-checkout-"))
+        self.addCleanup(shutil.rmtree, root, True)
+        init_repo(root, "minimal", "Example", "SOFT")
+        (root / ".git").mkdir()
+        worktree_output = (
+            f"worktree {root}\nHEAD 0123456789abcdef\n\n"
+            f"worktree {root / '.worktrees' / 'task'}\nHEAD fedcba9876543210\n"
+        )
+        result = subprocess.CompletedProcess(
+            args=["git", "worktree", "list", "--porcelain"],
+            returncode=0,
+            stdout=worktree_output,
+            stderr="",
+        )
+
+        with patch("continuity.cli.subprocess.run", return_value=result):
+            errors = validate_repo(root)
+
+        self.assertTrue(
+            any("single-checkout mode requires exactly one registered Git worktree" in e for e in errors),
+            errors,
+        )
+
+    def test_legacy_workspace_mode_requires_manual_migration_without_rewriting(self) -> None:
+        root = self.copy_fixture("valid-minimal")
+        config_path = root / ".continuity" / "config.json"
+        config = json.loads(config_path.read_text(encoding="utf-8"))
+        config["workspace_mode"] = "linked-worktrees"
+        original = json.dumps(config, indent=3).encode("utf-8")
+        config_path.write_bytes(original)
+
+        errors = validate_repo(root)
+        self.assertTrue(any("unsupported legacy key 'workspace_mode'" in error for error in errors), errors)
+        self.assertTrue(any("remove this key" in error for error in errors), errors)
+        self.assertEqual(config_path.read_bytes(), original)
+
+        config.pop("workspace_mode")
+        config_path.write_text(json.dumps(config), encoding="utf-8")
         self.assertEqual(validate_repo(root), [])
 
     def test_init_refuses_conflicting_existing_content_before_writes(self) -> None:

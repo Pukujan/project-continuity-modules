@@ -252,13 +252,21 @@ def handoff_template() -> str:
 
 
 def agents_template() -> str:
+    workspace_rules = (
+        "## Canonical checkout\n\n"
+        "- Identify and reuse the one canonical checkout by host/path and normalized Git remote.\n"
+        "- Do not create clones, task folders, or linked Git worktrees anywhere.\n"
+        "- Run tasks sequentially on branches in the canonical checkout. Before switching tasks, commit and push the checkpoint, open or update its PR, pass required CI, merge, then fast-forward this same checkout.\n"
+        "- Reuse the repository's one root dependency environment; do not install per-task `.venv` or `node_modules` copies.\n\n"
+    )
     return (
         "# Agent Operating Contract\n\n"
         "## Start\n\n"
         "Read PROJECT → CURRENT → active TASK → minimum relevant spec before editing.\n\n"
         "## Scope\n\n"
         "Work only inside the active bounded task. Split or revise the task before materially expanding scope.\n\n"
-        "## Checkpoint\n\n"
+        + workspace_rules
+        + "## Checkpoint\n\n"
         "Before stopping after meaningful work, append completed work, exact evidence, decisions, changed paths, blockers, and one next atomic action.\n\n"
         "If canonical continuity state is temporarily unavailable, treat that as degraded continuity rather than an execution blocker: keep safe authorized work moving, use an already-authorized alternate checkout/host, and run `continuity checkpoint <TASK-ID> --root <canonical-root> --recovery-root <alternate-root> --agent <name> --completed <work> --evidence <result> --next <next-action>` to write the JSON recovery receipt under `.continuity/recovery/`. Do not write an ad-hoc checkpoint under `checkpoints/`, replace the alternate task file, treat a physical worktree as project identity, repair storage merely to write a checkpoint, or request redundant permission. Reconcile later with `continuity recovery reconcile --root <canonical-root> --file <receipt>`.\n\n"
         "For a normal checkpoint, commit the product change first and then run `continuity checkpoint`; it commits and pushes the checkpoint to the task branch. A normal checkpoint is not complete while it exists only in a local worktree. CI and pull-request automation take the pushed branch through validation and merge.\n"
@@ -273,13 +281,17 @@ def readme_template(name: str) -> str:
     )
 
 
-def init_repo(root: Path, profile: str, name: str, prefix: str) -> list[str]:
+def init_repo(
+    root: Path,
+    profile: str,
+    name: str,
+    prefix: str,
+) -> list[str]:
     if profile not in {"minimal", "software"}:
         raise ContinuityError(f"unsupported profile: {profile}")
     prefix = prefix.upper()
     if re.fullmatch(r"[A-Z][A-Z0-9]*", prefix) is None:
         raise ContinuityError("task prefix must match [A-Z][A-Z0-9]*")
-
     config = {
         "schema": CONFIG_SCHEMA,
         "protocol": "project-continuity",
@@ -426,6 +438,41 @@ def validate_checkpoint_structure(root: Path, task_path: Path, text: str) -> lis
     return errors
 
 
+def validate_single_checkout(root: Path) -> list[str]:
+    """Enforce one canonical Git checkout without changing Git state."""
+    root = root.resolve()
+    if not (root / ".git").exists():
+        return []
+
+    try:
+        result = subprocess.run(
+            ["git", "worktree", "list", "--porcelain"],
+            cwd=root,
+            capture_output=True,
+            check=True,
+            text=True,
+        )
+    except (OSError, subprocess.CalledProcessError) as exc:
+        return [f"could not inspect registered Git worktrees: {exc}"]
+
+    worktrees = [
+        line.removeprefix("worktree ")
+        for line in result.stdout.splitlines()
+        if line.startswith("worktree ")
+    ]
+
+    def normalize(path: str | Path) -> str:
+        return str(Path(path).resolve()).replace("\\", "/").casefold()
+
+    if len(worktrees) != 1 or normalize(worktrees[0]) != normalize(root):
+        found = ", ".join(worktrees) if worktrees else "none"
+        return [(
+            "single-checkout mode requires exactly one registered Git worktree "
+            f"at {root}; found: {found}"
+        )]
+    return []
+
+
 def validate_repo(root: Path) -> list[str]:
     errors: list[str] = []
     config_path = root / ".continuity" / "config.json"
@@ -433,6 +480,13 @@ def validate_repo(root: Path) -> list[str]:
         config = load_json(config_path)
     except ContinuityError as exc:
         return [str(exc)]
+
+    if "workspace_mode" in config:
+        return [(
+            f"{config_path}: unsupported legacy key 'workspace_mode'; "
+            "migration required: remove this key from .continuity/config.json, then run continuity validate again. "
+            "Validation does not modify configuration."
+        )]
 
     try:
         config_errors = [
@@ -448,6 +502,8 @@ def validate_repo(root: Path) -> list[str]:
     # keys after schema validation has already established that they are absent.
     if config_errors:
         return sorted(set(errors))
+
+    errors.extend(validate_single_checkout(root))
 
     canonical = config.get("canonical", {})
     project_path = root / canonical.get("project", "PROJECT.md")
@@ -1031,7 +1087,12 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == "init":
             root = Path(args.root).resolve()
             name = args.name or root.name
-            results = init_repo(root, args.profile, name, args.task_prefix)
+            results = init_repo(
+                root,
+                args.profile,
+                name,
+                args.task_prefix,
+            )
             for line in results:
                 print(line)
             return 0

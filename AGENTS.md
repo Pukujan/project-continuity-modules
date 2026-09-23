@@ -41,7 +41,15 @@ task/PCM-0001-bootstrap-v1
 
 One primary agent/session owns the writable task state at a time.
 
-This is a lineage rule, not a permanent physical-worktree rule. A repository/task branch may be checked out in an authorized alternate worktree or host when execution needs to move. The Git repository, task ID, branch/ref, and commit history identify the work; a filesystem path does not.
+## Canonical checkout
+
+- Before writing, identify the single canonical checkout by host/path and normalized Git remote; continue in that checkout.
+- Do not create another clone or sibling project folder to isolate a task. A different task or branch does not justify a duplicate checkout.
+- Run task branches sequentially in the one canonical folder and reuse its one root dependency environment.
+- Never create task clones, Git worktrees, task folders, or additional dependency environments.
+- If the canonical checkout is unavailable or ambiguous, resolve policy and ownership before creating any directory.
+
+The Git repository, task ID, branch/ref, and commit history identify the work; a filesystem path does not. Every task uses the canonical checkout.
 
 ## Checkpoint rule
 
@@ -56,9 +64,9 @@ Before stopping after meaningful work, append to the active task:
 
 Update `checkpoints/CURRENT.md` only when program-wide state or priority changes.
 
-Continuity bookkeeping supports execution but does not gate safe execution. If a canonical task, CURRENT, or HANDOFF file is temporarily unavailable, do not repair storage merely to force a write, stop otherwise-safe authorized work, or ask again for an already-authorized host/worktree. Continue in the authorized alternate checkout and run `continuity checkpoint ... --recovery-root <alternate-root>` to leave a recovery receipt. Reconcile it later with `continuity recovery reconcile --root <canonical-root> --file <receipt>`. Recovery receipts are temporary evidence, not a competing project identity.
+Continuity bookkeeping supports execution but does not gate safe execution. If a canonical task, CURRENT, or HANDOFF file is temporarily unavailable, do not repair storage merely to force a write or stop otherwise-safe authorized work. Use only an already-authorized alternate environment; never create a clone or worktree to bypass unavailable checkpoint state. Run `continuity checkpoint ... --recovery-root <alternate-root>` only when that alternate environment is authorized, then reconcile with `continuity recovery reconcile --root <canonical-root> --file <receipt>`. Recovery receipts are temporary evidence, not a competing project identity.
 
-Normal checkpoint delivery is mandatory: commit the product change first, then run `continuity checkpoint`. The command commits the canonical checkpoint and pushes the task branch to `origin`; a normal checkpoint is not complete while it exists only in a local worktree. CI runs on every pushed branch, and pull-request automation merges after the required checks pass. Do not create a second branch or worktree identity to avoid publishing.
+Normal checkpoint delivery is mandatory: commit the product change first, then run `continuity checkpoint`. The command commits the canonical checkpoint and pushes the task branch to `origin`; a normal checkpoint is not complete while it exists only on a local branch. CI runs on every pushed branch, and pull-request automation merges after the required checks pass. Do not create a second branch or worktree identity to avoid publishing.
 
 If the remote itself is unavailable, use the degraded recovery-receipt path. That is an emergency continuity condition, not a successful normal handoff: record the exact local state, continue only when the task remains safe, and publish/reconcile as soon as the shared Git path is available again.
 
