@@ -543,8 +543,21 @@ These observations were read from the PCM checkout at `388df1f057832d99b7c72d802
 - `SPEC.md` already distinguishes CLI/package version from protocol version and describes JSON Schema plus Markdown state.
 - The current CLI implements `init`, `validate`, `preflight`, `task new`, `checkpoint`, `pack`, and recovery commands (inspect `src/continuity/cli.py` before planning changes).
 - Current CI runs Ruff, MyPy, compileall, Python 3.11 and 3.12 tests, package build, continuity validation, and auto-merge after required jobs.
+- The checked-in workflow directory contains only `.github/workflows/ci.yml`; it builds the Python distribution but has no package publishing step. `gh release list` returned no GitHub releases.
+- Opening `https://pypi.org/project/project-continuity/` returned HTTP 404 on 2026-09-23. Therefore public PyPI publication is not established; treat `0.2.0` as repository package metadata/build version, not as a confirmed installable release.
+- CI installs the repository editable with `pip install -e ".[dev]"`; it does not lock or publish a separate PCM CLI installation for adopting projects.
+- No Node/npm package, Node version declaration, or Node CI matrix was found in the bounded targeted search.
 - Current PCM has no observed document registry, generated paired human/machine project-state view, package upgrade/audit command, or provenance-backed claim ledger. This is a bounded inspection, not a claim that no related concept exists anywhere in the repository; the planning agent must verify with targeted searches.
 - The working tree was clean before this task. The task branch is `task/PCM-0015-versioned-project-memory`.
+
+## Distribution research added during PCM-0015
+
+- PyPA documentation says `requires-python` declares the supported minimum interpreter version in package metadata. This repository currently uses `>=3.11`; compatibility still needs actual CI coverage for every claimed minor version.
+- `uv` provides `uvx` for isolated one-off CLI execution and `uv tool install` / `uv tool upgrade` for a persistent user-level tool environment. This can keep PCM separate from per-project Python environments, but it still requires a usable Python runtime and does not migrate each repository's protocol files by itself.
+- npm can publish executable packages using `package.json` `bin` and declare runtime compatibility with `engines`. npm documents `engines` as advisory for dependency installs unless `engine-strict` is enabled. A Node-native PCM wrapper/port would be a separate product surface and could duplicate protocol logic.
+- npm dependency update commands update installed dependencies within declared semver ranges; updating a project-level pin alone would not automatically run PCM's repository-content migration. A migration runner and repository CI gate remain separate requirements.
+
+Sources: <https://packaging.python.org/en/latest/guides/writing-pyproject-toml/>; <https://docs.astral.sh/uv/concepts/tools/>; <https://docs.npmjs.com/cli/v11/configuring-npm/package-json/>; <https://docs.npmjs.com/cli/v11/commands/npm-update/>.
 
 ## Epistemic labels for planning
 
@@ -553,6 +566,7 @@ These observations were read from the PCM checkout at `388df1f057832d99b7c72d802
 | `user_requirement` | Directly requested or repeatedly described by the user | Git is canonical; fresh sessions should resume from checkpoints; avoid lost documents; require bounded slices and tests |
 | `observed_repo_fact` | Directly inspected repository or tool state | Package 0.2.0; protocol 0.1.0-draft; current CI matrix; no active task at the start |
 | `external_source` | A claim supported by a linked research/specification source | PROV models provenance relations; JSON Schema validates structured data; context placement can affect model performance |
+| `observed_external_state` | A time-bounded check of an external service or publication surface | The current PyPI project URL returned 404; no GitHub releases were listed |
 | `prior_agent_proposal` | Suggested design from the previous assistant answer, not yet adopted or verified | manifest, index, claim statuses, commands, and proposed end-to-end tests |
 | `inference` | Reasoned conclusion that needs a test or explicit acceptance | Requiring registry lookup before documentation creation could reduce repeated docs |
 | `open_question` | Decision not yet made | whether PCM ships only as Python CLI, adds a Node entry point, or uses a language-neutral bootstrap; which files are generated; how much state every checkpoint updates |

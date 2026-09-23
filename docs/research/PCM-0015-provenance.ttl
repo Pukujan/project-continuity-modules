@@ -66,6 +66,46 @@ pcm:openAiSubagentsDocs a prov:Entity ;
     dct:title "OpenAI Subagents guidance" ;
     prov:value <https://learn.chatgpt.com/docs/agent-configuration/subagents> .
 
+pcm:pypaPackagingGuide a prov:Entity ;
+    pcm:epistemicStatus "external_source" ;
+    dct:title "Python Packaging User Guide: Writing pyproject.toml" ;
+    prov:value <https://packaging.python.org/en/latest/guides/writing-pyproject-toml/> .
+
+pcm:uvToolsGuide a prov:Entity ;
+    pcm:epistemicStatus "external_source" ;
+    dct:title "uv tool management" ;
+    prov:value <https://docs.astral.sh/uv/concepts/tools/> .
+
+pcm:npmPackageJsonDocs a prov:Entity ;
+    pcm:epistemicStatus "external_source" ;
+    dct:title "npm package.json documentation" ;
+    prov:value <https://docs.npmjs.com/cli/v11/configuring-npm/package-json/> .
+
+pcm:npmUpdateDocs a prov:Entity ;
+    pcm:epistemicStatus "external_source" ;
+    dct:title "npm update documentation" ;
+    prov:value <https://docs.npmjs.com/cli/v11/commands/npm-update/> .
+
+pcm:distributionSurfaceCheck a prov:Activity ;
+    dct:description "Inspect package metadata, CI/release configuration, public PyPI URL, and official Python/Node package-manager behavior on 2026-09-23." ;
+    prov:used pcm:repoSnapshot,
+        pcm:pypaPackagingGuide,
+        pcm:uvToolsGuide,
+        pcm:npmPackageJsonDocs,
+        pcm:npmUpdateDocs ;
+    prov:wasAssociatedWith pcm:luna .
+
+pcm:distributionObservations a prov:Entity ;
+    pcm:epistemicStatus "observed_repo_fact plus time-bounded observed_external_state" ;
+    dct:description "Repository declares project-continuity 0.2.0 for Python >=3.11 and builds it in CI; no publishing workflow or GitHub release was observed; the public PyPI project URL returned 404 at the check time; no Node package/runtime support was found in targeted inspection." ;
+    prov:wasGeneratedBy pcm:distributionSurfaceCheck ;
+    prov:wasDerivedFrom pcm:repoSnapshot,
+        pcm:pypaPackagingGuide,
+        pcm:uvToolsGuide,
+        pcm:npmPackageJsonDocs,
+        pcm:npmUpdateDocs ;
+    prov:hadPrimarySource <https://pypi.org/project/project-continuity/> .
+
 pcm:contextCapture a prov:Activity ;
     dct:description "Capture user requirements, prior proposals, repository observations, and research references as a PCM-0015 planning context." ;
     prov:used pcm:requestCrossSessionContinuity,
@@ -91,6 +131,19 @@ pcm:researchContext a prov:Entity ;
         pcm:priorAssistantDesign,
         pcm:repoSnapshot .
 
+pcm:contextEnrichment a prov:Activity ;
+    dct:description "Add time-bounded package publication observations and official Python/Node package-manager sources to the PCM-0015 context record." ;
+    prov:used pcm:researchContext,
+        pcm:distributionObservations ;
+    prov:wasAssociatedWith pcm:luna .
+
+pcm:enrichedResearchContext a prov:Entity ;
+    dct:title "PCM-0015 epistemic context, enriched with distribution research" ;
+    pcm:epistemicStatus "revision of source record; new time-bounded external observations are explicitly distinguished" ;
+    prov:wasGeneratedBy pcm:contextEnrichment ;
+    prov:wasDerivedFrom pcm:researchContext,
+        pcm:distributionObservations .
+
 pcm:planningTask a prov:Entity ;
     dct:identifier "PCM-0015" ;
     pcm:epistemicStatus "active bounded planning task; implementation is out of scope" ;
@@ -104,6 +157,7 @@ pcm:proposedMemoryArchitecture a prov:Entity ;
         pcm:requestIdempotencyAndMemory,
         pcm:priorAssistantDesign,
         pcm:repoSnapshot,
+        pcm:distributionObservations,
         pcm:provPrimer,
         pcm:provOntology,
         pcm:jsonSchemaSpec,
