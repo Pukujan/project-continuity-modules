@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import difflib
 import hashlib
 import json
 import os
@@ -1231,7 +1232,21 @@ def validate_document_catalog(root: Path, known_task_ids: set[str]) -> list[str]
     except OSError as exc:
         return errors + [f"generated document index unavailable: {view_path}: {exc}"]
     if actual != rendered:
-        errors.append(f"generated document index is out of date: run `continuity docs render --root {root}`")
+        detail = "\n".join(
+            list(
+                difflib.unified_diff(
+                    actual.splitlines(),
+                    rendered.splitlines(),
+                    fromfile="checked-in index",
+                    tofile="expected index",
+                    lineterm="",
+                )
+            )[:14]
+        )
+        errors.append(
+            f"generated document index is out of date: run `continuity docs render --root {root}`"
+            + (f"\n{detail}" if detail else "")
+        )
     return errors
 
 
@@ -2149,7 +2164,7 @@ def local_task_lock(root: Path, task_id: str) -> Iterator[None]:
     lock_file = (registry_dir / lock_name).open("a+b")
     try:
         if os.name == "nt":
-            import msvcrt
+            msvcrt: Any = __import__("msvcrt")
 
             try:
                 lock_file.seek(0, 2)
@@ -2171,10 +2186,10 @@ def local_task_lock(root: Path, task_id: str) -> Iterator[None]:
             yield
         finally:
             if os.name == "nt":
-                import msvcrt
+                msvcrt_unlock: Any = __import__("msvcrt")
 
                 lock_file.seek(0)
-                msvcrt.locking(lock_file.fileno(), msvcrt.LK_UNLCK, 1)
+                msvcrt_unlock.locking(lock_file.fileno(), msvcrt_unlock.LK_UNLCK, 1)
             else:
                 fcntl = __import__("fcntl")
 

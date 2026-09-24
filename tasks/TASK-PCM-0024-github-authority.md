@@ -1,6 +1,6 @@
 # TASK-PCM-0024 — Make GitHub authoritative and prove reliable continuation
 
-<!-- continuity:task {"acceptance":["Amend the normative specification and adopter guidance so GitHub issues are required and authoritative for PCM-governed task scope and lifecycle; keep merged repository history authoritative for accepted code","Deterministic tests verify the authority rule reaches generated guidance and conflict-safe adoption","A disposable GitHub adoption proves pushed checkpoints, required CI, automatic merge, issue closeout, and safe cleanup, including failure behavior","Fresh sessions without parent-chat history reliably find the authoritative issue, repository handoff, actual status, and next action; record observable baseline/candidate evidence and uncertainty","Add a reproducible larger-repository stress profile while keeping differential tests limited to a named trusted reference and tests proportional to the claim","Required local and hosted quality gates pass, changes merge automatically, and final task/checkpoint/handoff state is reconciled before issue #53 closes"],"depends_on":[],"goal":"Make GitHub the required authority for PCM project tracking and prove that a fresh session can continue the GitHub-owned task through tested, merged delivery and safe cleanup.","id":"PCM-0024","issue_url":"https://github.com/Pukujan/project-continuity-modules/issues/53","next_action":"Publish and review this implementation slice, then complete the two-user hosted adoption, fresh-session holdouts, large-repository stress profile, and remaining CI/closeout evidence.","owner":"Codex PCM session; GitHub issue #53","priority":"P1","protocol_version":"0.1.0-draft","schema":"project-continuity.task.v1","status":"active","why":"The current SPEC treats external trackers as optional mirrors, while the owner requires GitHub authority. A fresh agent must be able to recover task scope/status and complete the push, CI, merge, closeout, and cleanup path without chat history or contradictory local state."} -->
+<!-- continuity:task {"acceptance":["Amend the normative specification and adopter guidance so GitHub issues are required and authoritative for PCM-governed task scope and lifecycle; keep merged repository history authoritative for accepted code","Deterministic tests verify the authority rule reaches generated guidance and conflict-safe adoption","A disposable GitHub adoption proves pushed checkpoints, required CI, automatic merge, issue closeout, and safe cleanup, including failure behavior","Fresh sessions without parent-chat history reliably find the authoritative issue, repository handoff, actual status, and next action; record observable baseline/candidate evidence and uncertainty","Add a reproducible larger-repository stress profile while keeping differential tests limited to a named trusted reference and tests proportional to the claim","Required local and hosted quality gates pass, changes merge automatically, and final task/checkpoint/handoff state is reconciled before issue #53 closes"],"depends_on":[],"goal":"Make GitHub the required authority for PCM project tracking and prove that a fresh session can continue the GitHub-owned task through tested, merged delivery and safe cleanup.","id":"PCM-0024","issue_url":"https://github.com/Pukujan/project-continuity-modules/issues/53","next_action":"Resolve the hosted Linux MyPy and generated-index failures on PR #56, then complete the two-user adoption, fresh-session holdouts, stress profile, and closeout evidence.","owner":"Codex PCM session; GitHub issue #53","priority":"P1","protocol_version":"0.1.0-draft","schema":"project-continuity.task.v1","status":"active","why":"The current SPEC treats external trackers as optional mirrors, while the owner requires GitHub authority. A fresh agent must be able to recover task scope/status and complete the push, CI, merge, closeout, and cleanup path without chat history or contradictory local state."} -->
 
 - Status: active per owner direction; PCM-0018 / #33 cleanup remains separately blocked
 - Owner: Codex PCM session; GitHub issue #53
@@ -33,6 +33,41 @@ A new session should be able to identify the authorized work from GitHub, resume
 - Fresh-session holdout method: [#39](https://github.com/Pukujan/project-continuity-modules/issues/39)
 
 ## Checkpoint log
+
+### 2026-09-24 — cross-platform CI failure follow-up
+
+Completed:
+- Inspected the first hosted PR runs and found Linux MyPy rejected the
+  Windows-only `msvcrt.locking` attributes. Changed the platform-specific import
+  to a dynamically typed import; local MyPy now passes.
+- CI also found the generated document index differs on Linux. Added a bounded
+  unified diff to validator errors so the next hosted run identifies the exact
+  divergent lines; root cause is not yet established.
+
+Evidence:
+- PR #56 first hosted runs: workflow runs 35954192442, 35954212054, and
+  35954226873. The Linux MyPy error was `msvcrt` missing `locking`, `LK_NBLCK`,
+  and `LK_UNLCK`; the Linux validator reported an out-of-date generated index.
+- Issue #53 failure status is recorded at
+  https://github.com/Pukujan/project-continuity-modules/issues/53#issuecomment-5807488436.
+- After the lock import fix, local MyPy and Ruff passed, repository validation
+  passed, and the 17 worktree tests passed. The new index diff diagnostic has
+  not yet run in hosted CI.
+
+Decisions:
+- Do not enable/assume auto-merge while required hosted checks fail. Resolve
+  the index mismatch from the captured diff; do not bypass the validator.
+
+Changed:
+- `src/continuity/cli.py`
+
+Blocked/uncertain:
+- Cross-platform document-index divergence remains unexplained pending the
+  next hosted error detail; PR #56 stays open.
+
+Next:
+- Run final local checks, commit and push this fix, then inspect the Linux
+  index diff and correct its cause before considering merge.
 
 ### 2026-09-24 — authority and local workspace enforcement slice
 
