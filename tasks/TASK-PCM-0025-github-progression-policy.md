@@ -46,6 +46,30 @@ Local Python 3.12 gates passed: 78 tests in 350.921s; five focused policy tests 
 
 No checkpoints yet.
 
+### 2026-09-24 16:02:31 UTC — Astra/Codex via owner-authorized Pukujan
+
+<!-- continuity:checkpoint {"agent":"Astra/Codex via owner-authorized Pukujan","blocked":["Required hosted checks, automatic merge and final issue/document reconciliation are pending; this checkpoint is not merged delivery."],"changed":["SPEC, PROJECT, README, AGENTS, HANDOFF, CURRENT, handoff/records/adoption/version guidance, GitHub/profile templates, cli generators, policy tests, PCM-0024/0025/0026 task projections, catalog and generated index."],"completed":["Implemented bounded GitHub authority, lineage/evidence corrections, finite synchronized publication and mandatory CI/auto-merge policy; propagated generated/adopter guidance and deterministic tests."],"decisions":["Second-account verification is not required per owner comment 5816655372; historical checkpoint text is preserved. Manual issue receipts remain mandatory while automation is separately queued."],"evidence":["Product commit b88ef1e; 78 unittest tests passed in 350.921s on Python 3.12; five focused policy tests passed; Ruff, MyPy, compileall, continuity/index validation, diff checks and wheel/sdist build/install parity passed.","Leaf https://github.com/Pukujan/project-continuity-modules/issues/66 under parent https://github.com/Pukujan/project-continuity-modules/issues/53; automation sibling https://github.com/Pukujan/project-continuity-modules/issues/67 depends on this policy; no unresolved prerequisite."],"next_action":"Open the policy PR for leaf issue 66; verify exact required CI and auto-merge, then reconcile receipts under parent issue 53.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0025","timestamp":"2026-09-24T16:02:31Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"eb8bff97413559a638954cbb081b877aeabf1c5bd1b8adc19abf65fee4019759","request_id":"pcm0025-policy-20260924","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0025"} -->
+
+Completed:
+- Implemented bounded GitHub authority, lineage/evidence corrections, finite synchronized publication and mandatory CI/auto-merge policy; propagated generated/adopter guidance and deterministic tests.
+
+Evidence:
+- Product commit b88ef1e; 78 unittest tests passed in 350.921s on Python 3.12; five focused policy tests passed; Ruff, MyPy, compileall, continuity/index validation, diff checks and wheel/sdist build/install parity passed.
+- Leaf https://github.com/Pukujan/project-continuity-modules/issues/66 under parent https://github.com/Pukujan/project-continuity-modules/issues/53; automation sibling https://github.com/Pukujan/project-continuity-modules/issues/67 depends on this policy; no unresolved prerequisite.
+
+Decisions:
+- Second-account verification is not required per owner comment 5816655372; historical checkpoint text is preserved. Manual issue receipts remain mandatory while automation is separately queued.
+
+Changed:
+- SPEC, PROJECT, README, AGENTS, HANDOFF, CURRENT, handoff/records/adoption/version guidance, GitHub/profile templates, cli generators, policy tests, PCM-0024/0025/0026 task projections, catalog and generated index.
+
+Blocked/uncertain:
+- Required hosted checks, automatic merge and final issue/document reconciliation are pending; this checkpoint is not merged delivery.
+
+Next:
+- Open the policy PR for leaf issue 66; verify exact required CI and auto-merge, then reconcile receipts under parent issue 53.
+
 ## Handoff
 
 Verify live #66 and #53, then follow the exact next action above. The parent remains OPEN. Follow SPEC section 8; no local ledger is authority.
