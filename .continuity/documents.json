@@ -122,8 +122,8 @@
         "continuity-records-policy",
         "testing-policy"
       ],
-      "reviewed_commit": "uncommitted",
-      "reviewed_sha256": "1fb7e338ca1e77c1423280d5883569effc39e8951d573a1626f5c029946b0d8c",
+      "reviewed_commit": "8edb3e31a6b198c59ae1300883414cee107ee2cb",
+      "reviewed_sha256": "718bbcafc9f83bdebe83fc97f8b104906d7ed971c658c8d86edaa5b29605804e",
       "summary": "Queued policy to make GitHub authoritative for PCM task tracking and prove fresh-session delivery and continuity.",
       "tasks": [
         "PCM-0018",
