@@ -182,6 +182,29 @@ Blocked/uncertain:
 Next:
 - Open a review PR for this implementation slice; complete the two-user hosted adoption, fresh-session holdouts, large-repository stress profile, and hosted CI/merge/closeout evidence before closing #53.
 
+### 2026-09-24 04:11:31 UTC — Codex
+
+<!-- continuity:checkpoint {"agent":"Codex","blocked":["Hosted generated-index mismatch root cause is pending next CI diff; do not bypass validator or merge."],"changed":["src/continuity/cli.py; tasks/TASK-PCM-0024-github-authority.md"],"completed":["Fixed Linux-only MyPy issue by dynamically importing Windows lock API; added unified diff details to generated-index validation failures; local quality and worktree checks pass."],"decisions":["no new decisions"],"evidence":["PR #56 hosted runs 35954192442, 35954212054, 35954226873 showed Linux msvcrt typing and generated-index mismatch. Local Ruff, MyPy, compileall, validation, and 17 worktree tests passed after changes."],"next_action":"Inspect PR #56 hosted Linux index diff and resolve the true source of platform divergence before enabling merge.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0024","timestamp":"2026-09-24T04:11:31Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"001c1597b554a93ddc7de47058e22d9147742cf8566ec96ce7f270ecc5a4af18","request_id":"168ea88485764289a17aad8eb4ec2990","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0024"} -->
+
+Completed:
+- Fixed Linux-only MyPy issue by dynamically importing Windows lock API; added unified diff details to generated-index validation failures; local quality and worktree checks pass.
+
+Evidence:
+- PR #56 hosted runs 35954192442, 35954212054, 35954226873 showed Linux msvcrt typing and generated-index mismatch. Local Ruff, MyPy, compileall, validation, and 17 worktree tests passed after changes.
+
+Decisions:
+- no new decisions
+
+Changed:
+- src/continuity/cli.py; tasks/TASK-PCM-0024-github-authority.md
+
+Blocked/uncertain:
+- Hosted generated-index mismatch root cause is pending next CI diff; do not bypass validator or merge.
+
+Next:
+- Inspect PR #56 hosted Linux index diff and resolve the true source of platform divergence before enabling merge.
+
 ## Handoff
 
 Read issue #53, PROJECT, CURRENT, this task, and only relevant policy/test records. Confirm current GitHub state; do not rely on prior chat. Issue #33 remains open for cleanup/closeout, but does not block this owner-directed task.
