@@ -417,6 +417,31 @@ Blocked/uncertain:
 Next:
 - Wait for an owner-designated independently authenticated collaborator on a separate device/drive and authorization for the baseline/candidate no-history holdouts; then complete the remaining multi-user and fresh-session acceptance proof.
 
+### 2026-09-24 05:27:44 UTC — Codex
+
+<!-- continuity:checkpoint {"agent":"Codex","blocked":["Need an owner-designated independently authenticated collaborator with access to a separate device or drive to perform the issue-53 holdouts and coordinated adoption."],"changed":["HANDOFF.md; checkpoints/CURRENT.md; docs/CONTINUITY_INDEX.md; tasks/TASK-PCM-0024-github-authority.md; issue #53; child issue #63"],"completed":["Created and linked child issue #63 for the independently authenticated collaborator adoption and issue-53 holdouts.","Reconciled issue #53 to acknowledge the recorded PCM-0018 baseline/candidate reports while keeping its issue-53-specific proof separate."],"decisions":["Keep #53 and #33 open; same-account tests do not satisfy the separate-user acceptance."],"evidence":["GitHub issue #63 is open and linked under #53. Issue #53 is OPEN. Issue #33 task/issue records contain independent baseline and candidate reports at 85f1346 and 98747fc, with timings and cleanup status.","GitHub collaborator listing returns only Pukujan with admin/push permissions; a distinct authorized collaborator is not currently available."],"next_action":"Ask the repository owner to designate and authorize a second GitHub collaborator for issue #63; then run independent sessions at baseline 5304bfa and candidate 18e262d plus the real two-user checkout, writer, CI, merge, and cleanup proof.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0024","timestamp":"2026-09-24T05:27:44Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"414ac12cd5f567865d1780a76d48df42f25d92cad5647e5ff434ac4de2a880af","request_id":"7a31a2b0f5e84ef18bc7def81e7bc2c1","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0024"} -->
+
+Completed:
+- Created and linked child issue #63 for the independently authenticated collaborator adoption and issue-53 holdouts.
+- Reconciled issue #53 to acknowledge the recorded PCM-0018 baseline/candidate reports while keeping its issue-53-specific proof separate.
+
+Evidence:
+- GitHub issue #63 is open and linked under #53. Issue #53 is OPEN. Issue #33 task/issue records contain independent baseline and candidate reports at 85f1346 and 98747fc, with timings and cleanup status.
+- GitHub collaborator listing returns only Pukujan with admin/push permissions; a distinct authorized collaborator is not currently available.
+
+Decisions:
+- Keep #53 and #33 open; same-account tests do not satisfy the separate-user acceptance.
+
+Changed:
+- HANDOFF.md; checkpoints/CURRENT.md; docs/CONTINUITY_INDEX.md; tasks/TASK-PCM-0024-github-authority.md; issue #53; child issue #63
+
+Blocked/uncertain:
+- Need an owner-designated independently authenticated collaborator with access to a separate device or drive to perform the issue-53 holdouts and coordinated adoption.
+
+Next:
+- Ask the repository owner to designate and authorize a second GitHub collaborator for issue #63; then run independent sessions at baseline 5304bfa and candidate 18e262d plus the real two-user checkout, writer, CI, merge, and cleanup proof.
+
 ## Handoff
 
 Read issue #53, PROJECT, CURRENT, this task, and only relevant policy/test records. Confirm current GitHub state; do not rely on prior chat. Issue #33 remains open for cleanup/closeout, but does not block this owner-directed task.
