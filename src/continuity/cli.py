@@ -2555,6 +2555,35 @@ def recover_receipt(
     return decide_receipt_retry(comments, marker, payload_sha256, lookup_complete=lookup_complete)
 
 
+def post_receipt_if_absent(
+    bodies: list[str],
+    marker: str,
+    payload_sha256: str,
+    *,
+    lookup_complete: bool,
+    post,
+) -> str:
+    """Post only when lookup proves the marker is absent. Never posts on uncertainty."""
+    decision = recover_receipt(
+        bodies,
+        marker,
+        payload_sha256,
+        lookup_complete=lookup_complete,
+    )
+    if decision == "post":
+        post()
+    return decision
+
+
+def github_issue_comment_path(repository: str, issue_number: str) -> str:
+    owner, separator, name = repository.partition("/")
+    if not separator or not owner or not name or "/" in name or ".." in repository:
+        raise ContinuityError(f"receipt repository must be owner/name: {repository}")
+    if not issue_number.isdecimal():
+        raise ContinuityError(f"receipt issue number must be numeric: {issue_number}")
+    return f"repos/{repository}/issues/{issue_number}/comments"
+
+
 def publish_checkpoint(
     root: Path,
     checkpoint_path: Path,
