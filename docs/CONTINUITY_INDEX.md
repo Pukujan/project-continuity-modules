@@ -80,10 +80,10 @@
 ## PCM-0024 GitHub authority (`pcm-0024-github-authority`)
 
 - File: [`tasks/TASK-PCM-0024-github-authority.md`](../tasks/TASK-PCM-0024-github-authority.md)
-- Local content status: **CURRENT**
+- Local content status: **NEEDS_REVIEW**
 - Last reviewed at commit: `a9555b5d21d981c937ae9bd3cfebca24916a05db`
 - Reviewed SHA-256: `4c02c9547985cbb38b9242423697439350d49a3f1ffabed909c33bddc64444a7`
-- Current SHA-256: `4c02c9547985cbb38b9242423697439350d49a3f1ffabed909c33bddc64444a7`
+- Current SHA-256: `4609aa334a55e74fb570da1d6b10a5e2ce9db771949c740226a056936250c908`
 - Summary: Queued policy to make GitHub authoritative for PCM task tracking and prove fresh-session delivery and continuity.
 - Search terms: `GitHub authority`, `automatic merge`, `fresh session`, `issue lifecycle`, `large repository`
 - Neighboring records: `continuity-records-policy`, `testing-policy`
