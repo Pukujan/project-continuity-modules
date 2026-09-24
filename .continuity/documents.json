@@ -63,7 +63,7 @@
       "related": [
         "pcm-0015-research"
       ],
-      "reviewed_commit": "uncommitted",
+      "reviewed_commit": "b88ef1eba097d0927c55e9ef14ba3c76bbb2f5b2",
       "reviewed_sha256": "c212e2e143c318f47ab578d51d087a1f866f4db713afbb0bdde75e6112f6fbc2",
       "summary": "Human-readable and machine-verifiable issue, task, checkpoint and handoff records.",
       "tasks": [
@@ -85,7 +85,7 @@
         "continuity-records-policy",
         "testing-policy"
       ],
-      "reviewed_commit": "uncommitted",
+      "reviewed_commit": "b88ef1eba097d0927c55e9ef14ba3c76bbb2f5b2",
       "reviewed_sha256": "b2e589024208e4fe88e84adee7baa7d84a885b11d526f01eae2517dc2b62b527",
       "summary": "Normative field authority, lineage correction, synchronized docs and finite push/CI/merge receipts.",
       "tasks": [
@@ -148,7 +148,7 @@
         "continuity-records-policy",
         "testing-policy"
       ],
-      "reviewed_commit": "uncommitted",
+      "reviewed_commit": "b88ef1eba097d0927c55e9ef14ba3c76bbb2f5b2",
       "reviewed_sha256": "403f918b19f35de27139d3fb820d78ae001a15feef6209bbfceaac7af559147c",
       "summary": "Parent GitHub-authority task; current correction removes the second-account requirement and links policy and receipt children.",
       "tasks": [

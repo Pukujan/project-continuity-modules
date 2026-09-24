@@ -1,6 +1,6 @@
 # Continuity Document Index
 
-<!-- continuity:documents-index {"catalog_sha256":"1f16c2413f6ce43e027893726e0de2f96c26173f572fff5893da2f0858debff4","schema":"project-continuity.documents-index.v1"} -->
+<!-- continuity:documents-index {"catalog_sha256":"aa8ab90912cf40eb5d8ae50f6891c8725652eae13074802d6bb0f523ecc0469d","schema":"project-continuity.documents-index.v1"} -->
 
 > Generated from `.continuity/documents.json`. Edit the JSON inventory, then run `continuity docs render`; do not edit this view directly.
 > Freshness below compares local file bytes; after `git fetch origin`, use `continuity docs find` for cached remote freshness.
@@ -45,7 +45,7 @@
 
 - File: [`docs/CONTINUITY_RECORDS_POLICY.md`](../docs/CONTINUITY_RECORDS_POLICY.md)
 - Local content status: **CURRENT**
-- Last reviewed at commit: `uncommitted`
+- Last reviewed at commit: `b88ef1eba097d0927c55e9ef14ba3c76bbb2f5b2`
 - Reviewed SHA-256: `c212e2e143c318f47ab578d51d087a1f866f4db713afbb0bdde75e6112f6fbc2`
 - Current SHA-256: `c212e2e143c318f47ab578d51d087a1f866f4db713afbb0bdde75e6112f6fbc2`
 - Summary: Human-readable and machine-verifiable issue, task, checkpoint and handoff records.
@@ -57,7 +57,7 @@
 
 - File: [`SPEC.md`](../SPEC.md)
 - Local content status: **CURRENT**
-- Last reviewed at commit: `uncommitted`
+- Last reviewed at commit: `b88ef1eba097d0927c55e9ef14ba3c76bbb2f5b2`
 - Reviewed SHA-256: `b2e589024208e4fe88e84adee7baa7d84a885b11d526f01eae2517dc2b62b527`
 - Current SHA-256: `b2e589024208e4fe88e84adee7baa7d84a885b11d526f01eae2517dc2b62b527`
 - Summary: Normative field authority, lineage correction, synchronized docs and finite push/CI/merge receipts.
@@ -93,7 +93,7 @@
 
 - File: [`tasks/TASK-PCM-0024-github-authority.md`](../tasks/TASK-PCM-0024-github-authority.md)
 - Local content status: **CURRENT**
-- Last reviewed at commit: `uncommitted`
+- Last reviewed at commit: `b88ef1eba097d0927c55e9ef14ba3c76bbb2f5b2`
 - Reviewed SHA-256: `403f918b19f35de27139d3fb820d78ae001a15feef6209bbfceaac7af559147c`
 - Current SHA-256: `403f918b19f35de27139d3fb820d78ae001a15feef6209bbfceaac7af559147c`
 - Summary: Parent GitHub-authority task; current correction removes the second-account requirement and links policy and receipt children.
