@@ -44,7 +44,15 @@ class ReceiptGhTests(unittest.TestCase):
         self.assertEqual(len(calls), 1)
         self.assertEqual(
             calls[0][0],
-            ["gh", "api", "--method", "POST", "repos/Pukujan/project-continuity-modules/issues/67/comments", "--input", "-"],
+            [
+                "gh",
+                "api",
+                "--method",
+                "POST",
+                "repos/Pukujan/project-continuity-modules/issues/67/comments",
+                "--input",
+                "-",
+            ],
         )
         self.assertIn(marker, calls[0][1])
 
