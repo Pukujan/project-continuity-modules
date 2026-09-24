@@ -1,6 +1,6 @@
 # Continuity Document Index
 
-<!-- continuity:documents-index {"catalog_sha256":"a1bc566b1f96a787d76d191141b4ee9bacafa42803a9a98215db5c6a28c91358","schema":"project-continuity.documents-index.v1"} -->
+<!-- continuity:documents-index {"catalog_sha256":"f709723f57509dd101e4f23de0915669ef5a1c8cf0770bb4436ebdce7e94be32","schema":"project-continuity.documents-index.v1"} -->
 
 > Generated from `.continuity/documents.json`. Edit the JSON inventory, then run `continuity docs render`; do not edit this view directly.
 > Freshness below compares local file bytes; after `git fetch origin`, use `continuity docs find` for cached remote freshness.
@@ -81,13 +81,25 @@
 
 - File: [`tasks/TASK-PCM-0024-github-authority.md`](../tasks/TASK-PCM-0024-github-authority.md)
 - Local content status: **CURRENT**
-- Last reviewed at commit: `f4daa60d563ac29bcf6f60d9807e0715a8c77361`
-- Reviewed SHA-256: `770b82321effcd91310b39b9e791baf6b05e82fb4fd41779b2169dd6d210da4d`
-- Current SHA-256: `770b82321effcd91310b39b9e791baf6b05e82fb4fd41779b2169dd6d210da4d`
+- Last reviewed at commit: `uncommitted`
+- Reviewed SHA-256: `fb3420c743535220c6d18897fe518d46409ef8dcbcc9f28764ba740f937b78b1`
+- Current SHA-256: `fb3420c743535220c6d18897fe518d46409ef8dcbcc9f28764ba740f937b78b1`
 - Summary: Queued policy to make GitHub authoritative for PCM task tracking and prove fresh-session delivery and continuity.
 - Search terms: `GitHub authority`, `automatic merge`, `fresh session`, `issue lifecycle`, `large repository`
 - Neighboring records: `continuity-records-policy`, `testing-policy`
 - Task associations: `PCM-0018`, `PCM-0024`
+
+## PCM-0024 large-repository stress profile (`pcm-0024-stress-profile`)
+
+- File: [`docs/benchmarks/PCM-0024-stress-profile.md`](../docs/benchmarks/PCM-0024-stress-profile.md)
+- Local content status: **CURRENT**
+- Last reviewed at commit: `uncommitted`
+- Reviewed SHA-256: `be206563b7b93bc0bee48300ee3707c234a6bdc93ae1cf95be6fa1d5af474ed8`
+- Current SHA-256: `be206563b7b93bc0bee48300ee3707c234a6bdc93ae1cf95be6fa1d5af474ed8`
+- Summary: Reproducible synthetic benchmark for lookup, checkpoint append, context-pack latency, storage, and Python-traced memory.
+- Search terms: `benchmark`, `context-pack`, `stress`
+- Neighboring records: none
+- Task associations: `PCM-0024`
 
 ## Testing policy (`testing-policy`)
 
