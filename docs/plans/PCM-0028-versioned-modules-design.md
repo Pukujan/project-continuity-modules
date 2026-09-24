@@ -1,6 +1,6 @@
 # PCM-0028 design: independently versioned modules and an upgrade path
 
-Status: **design proposal for owner review. Nothing described under "Design" exists in the repository today unless it is named as existing with a path.** Tracking issue: [#100 / PCM-0028](https://github.com/Pukujan/project-continuity-modules/issues/100). Depends on [#99 / PCM-0027](https://github.com/Pukujan/project-continuity-modules/issues/99). Evidence base: `main` at `c894f3c` (2026-09-24).
+Status: **accepted by Alex on 2026-09-24** (see [Decisions](#decisions-accepted-by-alex-2026-09-24)). **Accepted design, not implemented: nothing described under "Design" exists in the repository today unless it is named as existing with a path.** Implementation is tracked by phase issues #104-#108 (sub-issues of #100). Tracking issue: [#100 / PCM-0028](https://github.com/Pukujan/project-continuity-modules/issues/100). Depends on [#99 / PCM-0027](https://github.com/Pukujan/project-continuity-modules/issues/99). Evidence base: `main` at `c894f3c` (2026-09-24).
 
 **Implementation waits on #99.** #99's blind test of the `issue-log-format` guidance was running when this was written and has no results yet. This plan uses `issue-log-format` 1.0.0 as the first new module. If the test changes the format, the module text changes but the mechanism in this plan does not. If #99 is dropped, `github-progression` becomes the reference module instead (see [Phase 1](#phase-1-spike-on-a-disposable-fixture-not-merged)).
 
@@ -43,7 +43,7 @@ Classification: **module** = versioned independently and installed into adopter 
 | `issue-log-format` | module (**first new one**) | 1.0.0 | Not in the repo. Proposed by #99 (`docs/ISSUE_LOG_FORMAT.md`, `ISSUE_LOG_FORMAT_POLICY_MARKER`) | #99 already specifies the target shape: stamp plus start/end block. |
 | `workspace-guidance` | module | 1.0.0 | `workspace_policy_text` `cli.py:514-534` | Two variants chosen by `workspace.mode`. The variant is recorded in the stamp. |
 | `document-discovery` | module | 1.0.0 | "Finding earlier project documents" paragraph in HANDOFF (558) and AGENTS (589) | Guidance for the catalog feature. |
-| `agent-lifecycle` | module | 1.0.0 | `docs/AGENT_LIFECYCLE.md`; text only in static templates and PCM's own `AGENTS.md` | **Missing from `init` output today.** Whether to add it is a separate decision (open question 6). |
+| `agent-lifecycle` | module | 1.0.0 | `docs/AGENT_LIFECYCLE.md`; text only in static templates and PCM's own `AGENTS.md` | **Missing from `init` output today.** Whether to add it is a separate decision (decision 6). |
 | `agent-facing-testing` | module | 1.0.0 | `docs/TESTING_POLICY.md`; text only in static templates | Same drift as `agent-lifecycle`. |
 | Degraded-continuity and checkpoint paragraphs | core | follows CLI | HANDOFF (562-564), AGENTS (585-588) | They describe CLI commands, so they must match the installed CLI rather than drift from it independently. |
 
@@ -59,7 +59,7 @@ Classification: **module** = versioned independently and installed into adopter 
 | Feature | Class | Where | Notes |
 | --- | --- | --- | --- |
 | `trackers.github` | core feature, plus the guidance modules `github-progression` and `github-issue-lifecycle` | `validate_repo` (1467, 1537-1553), `issue verify` | Behaviour is code, so it can't be pinned apart from the CLI. The switch stays in config. |
-| `trackers.beads` | out of scope | config only | No behaviour to version. Open question 7 asks whether to deprecate it. |
+| `trackers.beads` | out of scope | config only | No behaviour to version. Decision 7: leave it. |
 | `workspace.mode` | core feature, plus the `workspace-guidance` module | `validate_workspace_layout` (1425), worktree commands | The config switch picks the guidance variant. |
 | Document catalog | core feature, plus the `document-discovery` module | `docs` commands (1032-1308); `schemas/v1/documents.schema.json` | The catalog file is a protocol object, not a module. |
 | Checkpoint receipts (`--receipt-repo` / `--receipt-issue`) | core | `cli.py:2481-2979` | CLI-only behaviour. The `pcm:receipt-v2` comment markers are receipt data, not module stamps. |
@@ -71,7 +71,7 @@ Classification: **module** = versioned independently and installed into adopter 
 | --- | --- | --- |
 | Package/CLI version (`__init__.py`) | core | Stays the single package identity (`docs/VERSIONING.md`). |
 | Protocol version and `continuity:project/current/task/checkpoint/context-pack` markers | core | Canonical objects. Protocol semver already covers them. |
-| `schemas/v1/*.json` copied into adopters | core (protocol) | Versioned by protocol and schema id. Refreshing stale local copies is open question 8. |
+| `schemas/v1/*.json` copied into adopters | core (protocol) | Versioned by protocol and schema id. Refreshing stale local copies is #109 (decision 8). |
 | `templates/v1/**` static copies | out of scope as modules | Reference/test copies. Phase 5 regenerates them from the registry so they can't drift. |
 
 This covers #100's minimum: 2 profiles, 6 optional features (4 required), 8 guidance pieces (3 required), and the templates. Each has a proposed id and starting version, or a reason it has none.
@@ -131,7 +131,7 @@ Stamps record what is installed. A project sometimes needs to record what it *wa
 - **`false`** means the module is deliberately off. It is not reported as missing.
 - **No map, or no entry for a module** means "implicit": the enabled set is the profile's default modules plus any stamps found. Stale and missing checks behave as #99 specifies. **All existing configs are in this state and stay valid unchanged.**
 - **Conflicts.** If an entry disagrees with the stamps in the files, `validate` reports an error (`contradictory`).
-- **Compatibility.** The new CLI injects `modules` into older local config schemas the same way it already injects `workspace` (`cli.py:394-399`). An **older** CLI will reject a config that contains the map (`additionalProperties: false`). So `init` and `upgrade` write the map only when asked (`--pin`), and the docs name the minimum CLI. Open question 1 offers a separate file as the alternative.
+- **Compatibility.** The new CLI injects `modules` into older local config schemas the same way it already injects `workspace` (`cli.py:394-399`). An **older** CLI will reject a config that contains the map (`additionalProperties: false`). So `init` and `upgrade` write the map only when asked (`--pin`), and the docs name the minimum CLI. Decision 1 keeps this: the map is written only with `--pin`.
 
 ### Registry: format and location
 
@@ -185,7 +185,7 @@ continuity upgrade [--root .] [--module ID ...] [--to ID@VERSION] [--add ID]
                    [--adopt-modified ID] [--pin]
 ```
 
-- **Dry run by default.** Without `--apply`, it prints a plan and unified diffs of only the owned blocks, then exits 0 when the plan is safe and 1 when anything was refused. #100 sketches `--dry-run` as an opt-in; this makes it the default to match `init`'s never-surprise behaviour (open question 2).
+- **Dry run by default.** Without `--apply`, it prints a plan and unified diffs of only the owned blocks, then exits 0 when the plan is safe and 1 when anything was refused. #100 sketches `--dry-run` as an opt-in; this makes it the default to match `init`'s never-surprise behaviour (decision 2).
 - **Per module.** `--module` limits the run to the named modules. `--to` picks an exact version.
 - **New modules are never added silently.** `--add issue-log-format` inserts its blocks at the manifest's `insert_after` anchor, or at end of file when the anchor is missing, and shows that in the diff.
 - **Refusals.** Each refusal gets one clear line and a next step, and nothing is written:
@@ -255,7 +255,7 @@ So its manifest is written first, from #99's merged text:
 | Unedited output from any earlier `init` | `upgrade` recognises the text through legacy fingerprints and offers `stamp` / `wrap-legacy` / `replace-block`. |
 | Guidance edited inside a block (for example PCM's own `AGENTS.md` and `HANDOFF.md`, which are hand-written) | Reported as `modified`. `upgrade` refuses the block until someone reviews it and uses `--adopt-modified`. |
 | No PCM markers at all (for example IRE today, per #99) | Nothing changes until that project's owner runs `upgrade --add` under its own issue. |
-| Older CLI reading a project upgraded by a newer CLI | Stamps are plain HTML comments, so an older `validate` ignores them. It only fails if `--pin` wrote a `modules` map (see open question 1). |
+| Older CLI reading a project upgraded by a newer CLI | Stamps are plain HTML comments, so an older `validate` ignores them. It only fails if `--pin` wrote a `modules` map (see decision 1). |
 
 The existing `workspace_mode` legacy-key refusal (`cli.py:1443-1451`) shows the pattern for real breaking changes. Nothing in this plan needs that.
 
@@ -265,10 +265,14 @@ Each phase becomes its own follow-up issue with its own acceptance, as #100 succ
 
 ### Phase 0: prerequisite, #99 lands
 
+Issue: #99.
+
 - **Gate:** #99's evaluation results are posted with every success criterion marked, and the `issue-log-format` module is merged (or #99 records that it was revised or dropped).
 - **Measure:** the link to #99's results comment, and the merged PR. Nothing else starts before this.
 
 ### Phase 1: spike on a disposable fixture (not merged)
+
+Issue: #104 (PCM-0030).
 
 This is #100 success criterion 3 and tests H1 and H2.
 
@@ -285,6 +289,8 @@ This is #100 success criterion 3 and tests H1 and H2.
 
 ### Phase 2: registry, stamps and read-only reporting
 
+Issue: #105 (PCM-0031).
+
 - **Build:** the in-package registry for the 3 spike modules, stamps added to generated output, and generated templates reading block text from the registry. `validate` gets the warning/info channel (reusing #99's) and per-module statuses. Also a read-only `continuity modules status` (list id, installed, bundled, status). Package MINOR.
 - **Success conditions:**
   - generated `init` output is byte-identical to the registry's canonical text (parity test);
@@ -294,6 +300,8 @@ This is #100 success criterion 3 and tests H1 and H2.
 
 ### Phase 3: `upgrade` dry run and refusals
 
+Issue: #106 (PCM-0032).
+
 - **Build:** planning, target resolution, diffs and every refusal case. No writes.
 - **Success conditions:**
   - 100% of refusal fixtures are refused, with the expected message;
@@ -302,6 +310,8 @@ This is #100 success criterion 3 and tests H1 and H2.
   - each version downgrade or MAJOR crossing is refused without its flag.
 
 ### Phase 4: `upgrade --apply`, migrations and pins
+
+Issue: #107 (PCM-0033).
 
 - **Build:** all-or-nothing writes, the migration report, `stamp`, `wrap-legacy` and `replace-block`, `--add`, `--adopt-modified`, `--pin` and the config `modules` map. `docs/VERSIONING.md` and the existing-adopter update docs switch from manual to the command in this phase, not earlier.
 - **Success conditions:**
@@ -313,7 +323,9 @@ This is #100 success criterion 3 and tests H1 and H2.
 
 ### Phase 5: remaining modules and ending the drift
 
-- **Build:** register `github-issue-lifecycle`, `workspace-guidance`, `document-discovery`, `github-templates` and the two profiles. Regenerate `templates/v1/**` from the registry, or replace them with a parity test. Decide separately whether `agent-lifecycle` and `agent-facing-testing` enter `init` output (open question 6).
+Issue: #108 (PCM-0034).
+
+- **Build:** register `github-issue-lifecycle`, `workspace-guidance`, `document-discovery`, `github-templates` and the two profiles. Regenerate `templates/v1/**` from the registry, or replace them with a parity test. Add `agent-lifecycle` and `agent-facing-testing` to `init` output as default modules (decision 6).
 - **Success conditions:**
   - every inventory row marked "module" has a manifest;
   - a test fails if any static template differs from generated output;
@@ -345,10 +357,10 @@ This follows `docs/TESTING_POLICY.md`: the lightest test that proves the claim.
 
 | #100 success condition | Where this design meets it | Status |
 | --- | --- | --- |
-| 1. Written design covering registry schema, config shape, upgrade semantics, refusal cases, versioning rules, and migration of the current single marker; owner accepts it on #100 | [Module manifest](#what-makes-something-a-module), [Registry](#registry-format-and-location), [Config map](#optional-modules-map-in-config-declaring-intent), [upgrade UX](#continuity-upgrade-user-experience) (refusals listed), [Versioning](#versioning-rules-semver-per-module), [Stamp](#the-stamp-generalizing-the-existing-marker) plus [Migration path](#migration-path-for-existing-projects) (`continuity-records` marker stays valid; `wrap-legacy`) | Written here. **Owner acceptance pending.** |
+| 1. Written design covering registry schema, config shape, upgrade semantics, refusal cases, versioning rules, and migration of the current single marker; owner accepts it on #100 | [Module manifest](#what-makes-something-a-module), [Registry](#registry-format-and-location), [Config map](#optional-modules-map-in-config-declaring-intent), [upgrade UX](#continuity-upgrade-user-experience) (refusals listed), [Versioning](#versioning-rules-semver-per-module), [Stamp](#the-stamp-generalizing-the-existing-marker) plus [Migration path](#migration-path-for-existing-projects) (`continuity-records` marker stays valid; `wrap-legacy`) | Done: accepted by Alex 2026-09-24 ([Decisions](#decisions-accepted-by-alex-2026-09-24)). |
 | 2. Inventory classifies every current piece (at least 2 profiles, 4 optional features, 3 policy/guidance blocks, templates) with proposed id and starting version | [Inventory](#inventory-of-candidate-pieces): 2 profiles, 6 features, 8 guidance pieces, templates, core items | Done in this doc |
-| 3. Spike on a disposable fixture, not merged: validator reports at least 3 modules; dry run changes only owned blocks on 3 layouts; refuses 100% of hand-edited and contradictory cases | [Phase 1](#phase-1-spike-on-a-disposable-fixture-not-merged) with those exact thresholds, plus H1's 300-line bound | **Not started.** Waits on #99 (Phase 0). |
-| 4. Implementation split into bounded follow-up issues, one per slice, each with its own acceptance; nothing merges under #100 | [Phases 2-5](#phased-rollout), each with measurable success conditions, one issue each | Proposed; issues to be filed after owner acceptance |
+| 3. Spike on a disposable fixture, not merged: validator reports at least 3 modules; dry run changes only owned blocks on 3 layouts; refuses 100% of hand-edited and contradictory cases | [Phase 1](#phase-1-spike-on-a-disposable-fixture-not-merged) with those exact thresholds, plus H1's 300-line bound | **Not started.** Tracked by #104, blocked on #99 (Phase 0). |
+| 4. Implementation split into bounded follow-up issues, one per slice, each with its own acceptance; nothing merges under #100 | [Phases 2-5](#phased-rollout), each with measurable success conditions, one issue each | Filed: #104-#108 (plus #109 for decision 8), sub-issues of #100 |
 | 5. Existing manual update path stays manual and documented until an upgrade command is implemented and tested | [Phase 4](#phase-4-upgrade---apply-migrations-and-pins) is the only phase that changes the docs; [issue-log-format section](#how-issue-log-format-100-fits-as-the-first-new-module) keeps #99's manual path | Built into the plan |
 | H1 (at most 300 lines, at least 3 pieces, no template rewrite or protocol major) | Phase 1 condition; the stamp reuse avoids any template rewrite; the config map is optional, so no protocol major | Tested in the spike |
 | H2 (marker-delimited blocks allow safe automated upgrades) | Owned-block-only writes, hash-based `modified` detection, metamorphic test | Tested in the spike and Phase 3 |
@@ -365,17 +377,31 @@ That is worth it only if adopters really drift and really upgrade. Nobody has me
 
 This plan also doesn't make features that live in code (GitHub authority, worktrees, receipts) independently versionable. They ship with the CLI, and pretending otherwise would add version numbers that mean nothing.
 
-## Open questions for Alex
+## Decisions (accepted by Alex 2026-09-24)
 
-1. **Where pins live.** The `modules` map in `.continuity/config.json` (as #100 proposes; older CLIs reject it because of `additionalProperties: false`) or a separate optional `.continuity/modules.json` (older CLIs ignore it, as they ignore `documents.json`)? Recommendation: config map, written only with `--pin`. Stamps stay the real pin either way.
-2. **Dry run by default?** Recommendation: yes, with `--apply` to write. #100 sketched `--dry-run` as opt-in.
-3. **Dirty-tree rule.** Refuse on any dirty file (#100's wording) or only when files the upgrade would touch are dirty? Recommendation: any dirty file, with no override, at first.
-4. **Protocol version.** `docs/VERSIONING.md` says new optional fields are a protocol MINOR, but past optional additions (`workspace`, recovery receipts, the document catalog) kept `0.1.0-draft`. Should the optional `modules` map bump the protocol to `0.2.0-draft`, or follow past practice? Recommendation: follow past practice and fix the VERSIONING wording.
-5. **`continuity-records` delimiters.** Add start/end delimiters in #99's planned 1.3.0 bump, or in a separate 1.2.1 patch? Recommendation: fold them into 1.3.0 so there is one migration.
-6. **Agent-lifecycle and testing guidance.** Should they enter `init` output? Today they appear only in the static templates, which tests check, while real adopters never receive them.
-7. **`trackers.beads`.** Deprecate the unused flag, or leave it?
-8. **Stale local schemas.** Should `upgrade` later refresh adopters' copied `schemas/v1/*.json`? Recommendation: a separate issue. It is protocol, not modules.
-9. **Priority.** #100 proposes P3, after #99. Confirm.
+Alex accepted this design and the recommended answer to each open question. Where the draft gave no recommendation (6 and 7), the answer below is the author's judgment, which Alex accepted with the rest.
+
+1. **Where pins live:** the optional `modules` map in `.continuity/config.json`. `init` and `upgrade` write it only with `--pin`. Stamps stay the real pin. New CLIs inject the key into older local schemas, like `workspace`. Implemented in phase 4 (#107).
+2. **Dry run by default:** yes. `continuity upgrade` writes only with `--apply` (#106, #107).
+3. **Dirty-tree rule:** refuse when **any** file is dirty, with no override at first (#106).
+4. **Protocol version:** no bump. The optional `modules` map follows past practice for optional additions (`workspace`, recovery receipts, the document catalog), so the protocol stays `0.1.0-draft`. `docs/VERSIONING.md` is corrected to describe that practice (#107).
+5. **`continuity-records` delimiters:** folded into #99's planned 1.3.0 bump, so adopters do one migration. If #99 lands without that bump, they ship as a 1.2.1 patch in phase 4 (#107).
+6. **Agent-lifecycle and testing guidance:** yes, they become default modules in `init` output. PCM's tests already assume adopters carry them, but real `init` output doesn't. Existing adopters opt in with `upgrade --add`. Done in phase 5 (#108). *(Author's judgment.)*
+7. **`trackers.beads`:** leave it unchanged. Removing a required config key would touch every adopter's config and schema for no behaviour gain. It stays out of scope, with no issue filed. *(Author's judgment.)*
+8. **Stale local schemas:** a separate issue, because it is protocol maintenance, not module versioning: #109 (PCM-0035).
+9. **Priority:** P3, after #99. Confirmed.
+
+### Follow-up issues
+
+| Phase | Issue | Blocked by |
+| --- | --- | --- |
+| 0 | #99 (PCM-0027): `issue-log-format` module and blind test | none |
+| 1 | #104 (PCM-0030): spike on a disposable fixture, not merged | #99 |
+| 2 | #105 (PCM-0031): registry, stamps and read-only status | #104 plus the owner's continue decision |
+| 3 | #106 (PCM-0032): `upgrade` dry run and refusals | #105 |
+| 4 | #107 (PCM-0033): `upgrade --apply`, migrations and pins | #106 |
+| 5 | #108 (PCM-0034): remaining modules and ending template drift | #107 |
+| Decision 8 | #109 (PCM-0035): refresh adopters' copied schemas | #107 |
 
 ## Non-goals
 
