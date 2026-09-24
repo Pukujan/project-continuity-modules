@@ -124,6 +124,29 @@ Next:
 - Amend SPEC, README, adoption templates, generated agent guidance, the
   machine-readable authority manifest, and deterministic policy/adoption tests.
 
+### 2026-09-24 04:05:59 UTC — Codex
+
+<!-- continuity:checkpoint {"agent":"Codex","blocked":[],"changed":["SPEC, README, AGENTS, HANDOFF, CURRENT, TARGET_ADOPTION, VERSIONING, task schema, CLI, templates, and tests"],"completed":["Implemented GitHub issue authority, read-only issue verification, private checkout registry, safe worktree reuse and local task locking; updated adopter guidance and tests."],"decisions":["no new decisions"],"evidence":["70 tests passed; Ruff, MyPy, compileall, package parity, continuity validation, and document-index synchronization passed; issue #53 verified OPEN."],"next_action":"Open a review PR for this implementation slice; complete the two-user hosted adoption, fresh-session holdouts, large-repository stress profile, and hosted CI/merge/closeout evidence before closing #53.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0024","timestamp":"2026-09-24T04:05:59Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"3193b27ec1fce98be03145c500f6619f2e9bb5c93d3af9b491bde9c7ed24c383","request_id":"f49dcd53bbc1486ba79fd440c838ec54","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0024"} -->
+
+Completed:
+- Implemented GitHub issue authority, read-only issue verification, private checkout registry, safe worktree reuse and local task locking; updated adopter guidance and tests.
+
+Evidence:
+- 70 tests passed; Ruff, MyPy, compileall, package parity, continuity validation, and document-index synchronization passed; issue #53 verified OPEN.
+
+Decisions:
+- no new decisions
+
+Changed:
+- SPEC, README, AGENTS, HANDOFF, CURRENT, TARGET_ADOPTION, VERSIONING, task schema, CLI, templates, and tests
+
+Blocked/uncertain:
+- none
+
+Next:
+- Open a review PR for this implementation slice; complete the two-user hosted adoption, fresh-session holdouts, large-repository stress profile, and hosted CI/merge/closeout evidence before closing #53.
+
 ## Handoff
 
 Read issue #53, PROJECT, CURRENT, this task, and only relevant policy/test records. Confirm current GitHub state; do not rely on prior chat. Issue #33 remains open for cleanup/closeout, but does not block this owner-directed task.
