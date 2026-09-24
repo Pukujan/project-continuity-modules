@@ -565,6 +565,31 @@ Blocked/uncertain:
 Next:
 - Resolve cleanup of only the two task-owned disposable clones using an ordinary safe operation, then open the separate canonical closeout PR and keep #33 open until required CI and automatic merge complete.
 
+### 2026-09-24 02:35:00 UTC — Codex PCM-0018 cleanup follow-up
+
+<!-- continuity:checkpoint {"agent":"Codex PCM-0018 cleanup follow-up","blocked":["Candidate trial clone remains; baseline directory retains hidden .git marker. Automatic review blocked cleanup; exact model/runtime identifiers unavailable."],"changed":["tasks/TASK-PCM-0018-document-discovery.md; checkpoints/CURRENT.md; HANDOFF.md"],"completed":["Updated task/current/handoff to record partial disposable-snapshot cleanup, automatic-review rejection, and the remaining #33 blocker."],"decisions":["Stop cleanup attempts after automatic-review rejection; keep issue #33 open and PCM-0024 queued pending owner cleanup or explicit acceptance reconciliation."],"evidence":["Read-only inspection found baseline trial directory retains only a hidden .git marker; candidate disposable checkout remains. Task source paths were omitted from shared continuity records.","Ordinary removal of hidden .git marker was denied by Windows; automatic review rejected follow-up cleanup with 'blocked by policy'. No force deletion or permissions changes were used.","continuity validate -> VALID; continuity docs render --check -> SYNCHRONIZED; git diff --check passed."],"next_action":"Have the task owner remove or explicitly reconcile the remaining disposable trial-copy residue, then prepare separate canonical closeout PR; keep #33 open until required CI and automatic merge complete.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0018","timestamp":"2026-09-24T02:35:00Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"1fa8a27929cc528efec54cff7e8b2c5f065d20d4e9070615facceca7724aaa54","request_id":"178b33542a254284ac68b3d0419518ea","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0018"} -->
+
+Completed:
+- Updated task/current/handoff to record partial disposable-snapshot cleanup, automatic-review rejection, and the remaining #33 blocker.
+
+Evidence:
+- Read-only inspection found baseline trial directory retains only a hidden .git marker; candidate disposable checkout remains. Task source paths were omitted from shared continuity records.
+- Ordinary removal of hidden .git marker was denied by Windows; automatic review rejected follow-up cleanup with 'blocked by policy'. No force deletion or permissions changes were used.
+- continuity validate -> VALID; continuity docs render --check -> SYNCHRONIZED; git diff --check passed.
+
+Decisions:
+- Stop cleanup attempts after automatic-review rejection; keep issue #33 open and PCM-0024 queued pending owner cleanup or explicit acceptance reconciliation.
+
+Changed:
+- tasks/TASK-PCM-0018-document-discovery.md; checkpoints/CURRENT.md; HANDOFF.md
+
+Blocked/uncertain:
+- Candidate trial clone remains; baseline directory retains hidden .git marker. Automatic review blocked cleanup; exact model/runtime identifiers unavailable.
+
+Next:
+- Have the task owner remove or explicitly reconcile the remaining disposable trial-copy residue, then prepare separate canonical closeout PR; keep #33 open until required CI and automatic merge complete.
+
 ## Handoff
 
 Read `PROJECT.md`, `AGENTS.md`, `checkpoints/CURRENT.md`, this task, `SPEC.md`,
