@@ -327,7 +327,7 @@ Next:
 
 ### 2026-09-24 04:57:00 UTC — Codex
 
-<!-- continuity:checkpoint {"agent":"Codex","blocked":["Independent no-history issue-53 holdouts and actual two-user/separate-drive adoption still need an independent session and second authenticated collaborator/device."],"changed":["tasks/TASK-PCM-0024-github-authority.md; issue #53 progress comment"],"completed":["Reopened issue #53 after two consecutive unintended lifecycle transitions tied to merged commit directives; updated the task's exact next action to use neutral completion wording and documented the event on the issue."],"decisions":["Use positive lifecycle wording in checkpoint next actions and verify the live issue state after every merge."],"evidence":["PR #59 merged at 1066cec402ca7fcd76eda16146984ee464726625 with all six required checks and no PR closingIssuesReferences. The close event cites that merge commit; its squash message copied the task checkpoint next_action text 'only close #53 after full acceptance'. Issue #53 is OPEN again after gh issue reopen. Issue comment https://github.com/Pukujan/project-continuity-modules/issues/53#issuecomment-5807908634 records the earlier wording event; this second trigger is now understood."],"next_action":"Ask the owner to designate an independently authenticated collaborator/device and authorize independent no-history holdouts; run the required collaboration and fresh-session proof, then mark the issue complete only after every acceptance criterion passes.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0024","timestamp":"2026-09-24T04:57:00Z"} -->
+<!-- continuity:checkpoint {"agent":"Codex","blocked":["Independent no-history issue-53 holdouts and actual two-user/separate-drive adoption still need an independent session and second authenticated collaborator/device."],"changed":["tasks/TASK-PCM-0024-github-authority.md; issue #53 progress comment"],"completed":["Reopened issue #53 after two consecutive unintended lifecycle transitions tied to merged commit directives; updated the task's exact next action to use neutral completion wording and documented the event on the issue."],"decisions":["Use positive lifecycle wording in checkpoint next actions and verify the live issue state after every merge."],"evidence":["PR #59 merged at 1066cec402ca7fcd76eda16146984ee464726625 with all six required checks and no PR closingIssuesReferences. The close event cites that merge commit; its squash message copied the task checkpoint next_action text 'only close #53 after full acceptance'. Issue #53 is OPEN again after gh issue reopen. Issue comment https://github.com/Pukujan/project-continuity-modules/issues/53#issuecomment-5807908634 records the earlier wording event; this second trigger is now understood."],"next_action":"Publish the issue-lifecycle wording safeguard in a PR and verify protected checks; then ask the owner to designate an independently authenticated collaborator/device and authorize independent no-history holdouts.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0024","timestamp":"2026-09-24T04:57:00Z"} -->
 <!-- continuity:checkpoint-operation {"payload_sha256":"9cea536d9ccf76f3c39356d1968a9f3f486a5bd6253a12f99264acbe726c922c","request_id":"417d831970eb4d858d618296e154a464","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0024"} -->
 
 Completed:
@@ -347,6 +347,29 @@ Blocked/uncertain:
 
 Next:
 - Ask the owner to designate an independently authenticated collaborator/device and authorize independent no-history holdouts; run the required collaboration and fresh-session proof, then mark the issue complete only after every acceptance criterion passes.
+
+### 2026-09-24 05:07:12 UTC — Codex
+
+<!-- continuity:checkpoint {"agent":"Codex","blocked":["Independent no-history issue-53 holdouts and the real two-user/separate-drive adoption need an independently authenticated collaborator/device."],"changed":["SPEC.md; README.md; docs/CONTINUITY_RECORDS_POLICY.md; generated AGENTS/HANDOFF guidance and templates; src/continuity/cli.py; tests/test_continuity_records_policy.py"],"completed":["Added a normative GitHub issue-transition rule to PCM's policy, generated adopter instructions, and PR template. It explains that negated issue-closing keywords still change issue state and that progress-only PRs should use references."],"decisions":["Progress PRs reference issues without lifecycle keywords; use a completion keyword only when the issue's acceptance is satisfied. Verify live issue state after merges."],"evidence":["python -m unittest discover -s tests -v: 73 passed. Ruff, MyPy, compileall, continuity validation, and Python 3.12 wheel/sdist parity passed. The new regression verifies minimal/software generated guidance and PR templates. GitHub's official linking documentation lists the keywords and says they work in PR descriptions and commit messages: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue. Repo incident is documented in issue #53 comments; #53 is currently OPEN."],"next_action":"Publish the issue-lifecycle wording safeguard PR with auto-merge gated by required checks; then ask the owner to designate an independently authenticated collaborator/device and authorize the remaining holdouts.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0024","timestamp":"2026-09-24T05:07:12Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"e62b991ab2982d13e73b40c842b8a20c3ac05374f7f2ba13f7547c02bf158d96","request_id":"bb3a561593da4713bc80900224371283","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0024"} -->
+
+Completed:
+- Added a normative GitHub issue-transition rule to PCM's policy, generated adopter instructions, and PR template. It explains that negated issue-closing keywords still change issue state and that progress-only PRs should use references.
+
+Evidence:
+- python -m unittest discover -s tests -v: 73 passed. Ruff, MyPy, compileall, continuity validation, and Python 3.12 wheel/sdist parity passed. The new regression verifies minimal/software generated guidance and PR templates. GitHub's official linking documentation lists the keywords and says they work in PR descriptions and commit messages: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue. Repo incident is documented in issue #53 comments; #53 is currently OPEN.
+
+Decisions:
+- Progress PRs reference issues without lifecycle keywords; use a completion keyword only when the issue's acceptance is satisfied. Verify live issue state after merges.
+
+Changed:
+- SPEC.md; README.md; docs/CONTINUITY_RECORDS_POLICY.md; generated AGENTS/HANDOFF guidance and templates; src/continuity/cli.py; tests/test_continuity_records_policy.py
+
+Blocked/uncertain:
+- Independent no-history issue-53 holdouts and the real two-user/separate-drive adoption need an independently authenticated collaborator/device.
+
+Next:
+- Publish the issue-lifecycle wording safeguard PR with auto-merge gated by required checks; then ask the owner to designate an independently authenticated collaborator/device and authorize the remaining holdouts.
 
 ## Handoff
 
