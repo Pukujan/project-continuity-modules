@@ -136,7 +136,12 @@ class ManagedWorktreeTests(unittest.TestCase):
     def test_create_reuses_registered_checkout_on_another_drive(self) -> None:
         from continuity.cli import register_local_workspace
 
-        other_volume = tempfile.TemporaryDirectory(dir=Path(__file__).resolve().anchor)
+        try:
+            other_volume = tempfile.TemporaryDirectory(dir=Path(__file__).resolve().anchor)
+        except PermissionError:
+            # Hosted Unix runners generally cannot create temporary roots at `/`.
+            # Keep a separate-root reuse test there; Windows exercises another volume.
+            other_volume = tempfile.TemporaryDirectory()
         self.addCleanup(other_volume.cleanup)
         other = Path(other_volume.name) / "other-drive-checkout"
         subprocess.run(
