@@ -11,7 +11,7 @@ import subprocess
 import sys
 import tarfile
 import uuid
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 from contextlib import contextmanager, suppress
 from dataclasses import dataclass
 from datetime import UTC, datetime
@@ -2561,7 +2561,7 @@ def post_receipt_if_absent(
     payload_sha256: str,
     *,
     lookup_complete: bool,
-    post,
+    post: Callable[[], object],
 ) -> str:
     """Post only when lookup proves the marker is absent. Never posts on uncertainty."""
     decision = recover_receipt(
