@@ -194,6 +194,25 @@
       "title": "PCM-0024 large-repository stress profile"
     },
     {
+      "id": "pcm-0028-versioned-modules-design",
+      "keywords": [
+        "issue-log-format",
+        "modules",
+        "registry",
+        "upgrade",
+        "versioning"
+      ],
+      "path": "docs/plans/PCM-0028-versioned-modules-design.md",
+      "related": [
+        "continuity-records-policy"
+      ],
+      "reviewed_commit": "uncommitted",
+      "reviewed_sha256": "a9584c9867d5f9fa82419b4ada72db882a81d1481ed446bd6370a6a9692f7887",
+      "summary": "Proposal for independently versioned PCM guidance modules: inventory, stamps, registry, pins, upgrade command and phased rollout. Not implemented.",
+      "tasks": [],
+      "title": "PCM-0028 versioned modules design"
+    },
+    {
       "id": "testing-policy",
       "keywords": [
         "blind",

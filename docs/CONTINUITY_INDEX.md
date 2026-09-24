@@ -1,6 +1,6 @@
 # Continuity Document Index
 
-<!-- continuity:documents-index {"catalog_sha256":"957f0191ed15bc73b93ebd5670c208ed5eb334bccafeb30ea9515ac5e33c6a85","schema":"project-continuity.documents-index.v1"} -->
+<!-- continuity:documents-index {"catalog_sha256":"da5e36fb80149136bf4d897c648f7a5a0fe6ed2ecd7850258b49c1515303de9e","schema":"project-continuity.documents-index.v1"} -->
 
 > Generated from `.continuity/documents.json`. Edit the JSON inventory, then run `continuity docs render`; do not edit this view directly.
 > Freshness below compares local file bytes; after `git fetch origin`, use `continuity docs find` for cached remote freshness.
@@ -124,6 +124,18 @@
 - Search terms: `benchmark`, `context-pack`, `stress`
 - Neighboring records: none
 - Task associations: `PCM-0024`
+
+## PCM-0028 versioned modules design (`pcm-0028-versioned-modules-design`)
+
+- File: [`docs/plans/PCM-0028-versioned-modules-design.md`](../docs/plans/PCM-0028-versioned-modules-design.md)
+- Local content status: **CURRENT**
+- Last reviewed at commit: `uncommitted`
+- Reviewed SHA-256: `a9584c9867d5f9fa82419b4ada72db882a81d1481ed446bd6370a6a9692f7887`
+- Current SHA-256: `a9584c9867d5f9fa82419b4ada72db882a81d1481ed446bd6370a6a9692f7887`
+- Summary: Proposal for independently versioned PCM guidance modules: inventory, stamps, registry, pins, upgrade command and phased rollout. Not implemented.
+- Search terms: `issue-log-format`, `modules`, `registry`, `upgrade`, `versioning`
+- Neighboring records: `continuity-records-policy`
+- Task associations: none
 
 ## Testing policy (`testing-policy`)
 
