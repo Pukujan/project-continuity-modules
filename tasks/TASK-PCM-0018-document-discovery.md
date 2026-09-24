@@ -500,6 +500,30 @@ Next:
   task/current/handoff state; keep #33 open until it merges through required
   CI and automatic merge.
 
+### 2026-09-24 02:29:50 UTC — Codex PCM-0018 trial closeout
+
+<!-- continuity:checkpoint {"agent":"Codex PCM-0018 trial closeout","blocked":["Two task-owned disposable clone folders remain after Windows denied ordinary recursive cleanup; exact model/runtime identifiers unavailable."],"changed":["tasks/TASK-PCM-0018-document-discovery.md; checkpoints/CURRENT.md; HANDOFF.md"],"completed":["Recorded independent pinned baseline/candidate reports and updated CURRENT/HANDOFF; issue #33 remains open."],"decisions":["Do not complete blind-trial acceptance or activate queued PCM-0024 while task-owned disposable clone cleanup is unresolved."],"evidence":["Baseline 85f13464c466ff277ce319850ce8124c4bc95c52 and candidate 98747fce4d5c805670dc3b00bb572e5c02706237 were verified clean; elapsed 151.893s and 152.034s; candidate surfaced PCM-0015 research/plan and related catalog records.","continuity validate -> VALID; continuity docs render --check -> SYNCHRONIZED; git diff --check passed."],"next_action":"Resolve cleanup of only the two task-owned disposable clones using an ordinary safe operation, then open the separate canonical closeout PR and keep #33 open until required CI and automatic merge complete.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0018","timestamp":"2026-09-24T02:29:50Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"7617b00962be72748ecada27fa78b7eaa742ebce32a9889ebd19e2196d9cfc78","request_id":"14379aa0a4a2499eb546fae8afdb7b7d","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0018"} -->
+
+Completed:
+- Recorded independent pinned baseline/candidate reports and updated CURRENT/HANDOFF; issue #33 remains open.
+
+Evidence:
+- Baseline 85f13464c466ff277ce319850ce8124c4bc95c52 and candidate 98747fce4d5c805670dc3b00bb572e5c02706237 were verified clean; elapsed 151.893s and 152.034s; candidate surfaced PCM-0015 research/plan and related catalog records.
+- continuity validate -> VALID; continuity docs render --check -> SYNCHRONIZED; git diff --check passed.
+
+Decisions:
+- Do not complete blind-trial acceptance or activate queued PCM-0024 while task-owned disposable clone cleanup is unresolved.
+
+Changed:
+- tasks/TASK-PCM-0018-document-discovery.md; checkpoints/CURRENT.md; HANDOFF.md
+
+Blocked/uncertain:
+- Two task-owned disposable clone folders remain after Windows denied ordinary recursive cleanup; exact model/runtime identifiers unavailable.
+
+Next:
+- Resolve cleanup of only the two task-owned disposable clones using an ordinary safe operation, then open the separate canonical closeout PR and keep #33 open until required CI and automatic merge complete.
+
 ## Handoff
 
 Read `PROJECT.md`, `AGENTS.md`, `checkpoints/CURRENT.md`, this task, `SPEC.md`,
