@@ -152,6 +152,26 @@
       "title": "PCM-0015 epistemic context research"
     },
     {
+      "id": "pcm-0026-research",
+      "keywords": [
+        "retry-safe receipt",
+        "lost response",
+        "GitHub comment"
+      ],
+      "path": "docs/research/PCM-0026-issue-67-retry-safe-receipts.md",
+      "related": [
+        "pcm-0015-research",
+        "github-progression-spec"
+      ],
+      "reviewed_commit": "23e38ef37d5b2525dbc41c2d9f10a668e5476b84",
+      "reviewed_sha256": "48ff5f2fb1ee00ca6b1211d2baf6e2fd00a6868c65fbf80a30c38a52fdb206cb",
+      "summary": "Sourced limits for retrying a GitHub receipt after a lost comment response. Evidence is not implementation proof.",
+      "tasks": [
+        "PCM-0026"
+      ],
+      "title": "PCM-0026 retry-safe receipt research"
+    },
+    {
       "id": "pcm-0024-github-authority",
       "keywords": [
         "GitHub authority",

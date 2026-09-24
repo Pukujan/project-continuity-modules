@@ -1,6 +1,6 @@
 # Continuity Document Index
 
-<!-- continuity:documents-index {"catalog_sha256":"893b69b54f93d5362ad070e7c8b08da2126bfee746b7f8f63b532cb8f31b7dc0","schema":"project-continuity.documents-index.v1"} -->
+<!-- continuity:documents-index {"catalog_sha256":"24969b95ef5eaf946a0eb784ef6b26aeb653db1e930571d907f1dfaef29e652e","schema":"project-continuity.documents-index.v1"} -->
 
 > Generated from `.continuity/documents.json`. Edit the JSON inventory, then run `continuity docs render`; do not edit this view directly.
 > Freshness below compares local file bytes; after `git fetch origin`, use `continuity docs find` for cached remote freshness.
@@ -124,6 +124,18 @@
 - Search terms: `benchmark`, `context-pack`, `stress`
 - Neighboring records: none
 - Task associations: `PCM-0024`
+
+## PCM-0026 retry-safe receipt research (`pcm-0026-research`)
+
+- File: [`docs/research/PCM-0026-issue-67-retry-safe-receipts.md`](../docs/research/PCM-0026-issue-67-retry-safe-receipts.md)
+- Local content status: **CURRENT**
+- Last reviewed at commit: `23e38ef37d5b2525dbc41c2d9f10a668e5476b84`
+- Reviewed SHA-256: `48ff5f2fb1ee00ca6b1211d2baf6e2fd00a6868c65fbf80a30c38a52fdb206cb`
+- Current SHA-256: `48ff5f2fb1ee00ca6b1211d2baf6e2fd00a6868c65fbf80a30c38a52fdb206cb`
+- Summary: Sourced limits for retrying a GitHub receipt after a lost comment response. Evidence is not implementation proof.
+- Search terms: `GitHub comment`, `lost response`, `retry-safe receipt`
+- Neighboring records: `github-progression-spec`, `pcm-0015-research`
+- Task associations: `PCM-0026`
 
 ## Testing policy (`testing-policy`)
 
