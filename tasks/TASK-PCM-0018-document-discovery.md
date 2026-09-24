@@ -1,6 +1,6 @@
 # TASK-PCM-0018 — Idempotent checkpoints and fresh-session document discovery
 
-<!-- continuity:task {"acceptance":["Repeating a checkpoint with the same caller-supplied request ID and identical task/payload appends no duplicate and creates no additional commit when already delivered; reusing the ID with different content fails before mutation","Checkpoint publication safely retries after local append, local commit, remote push success, and a lost push response while preserving one event and the original event timestamp","A single machine-readable document inventory is the declared source of truth for a generated human-readable index; initialization/add/update and view rendering are deterministic and validate in CI","Deterministic document lookup finds a registered document from an earlier session and its explicitly related neighboring records; unrelated repository changes do not affect the result","Task-specific context packs include only the standard project/current/task records plus documents explicitly associated with that task, state the exact next action, and bind each source to the commit/content actually read","A changed indexed document is visibly marked needs_review for consumers that depend on it; a changed unrelated file does not mark it stale, and old evidence remains available","Ordinary contract, failure-injection, idempotence/metamorphic, source-view synchronization, and context-pack tests pass; full Ruff, MyPy, compile, Python 3.11/3.12 suites, package build/parity, continuity validation, and required GitHub CI pass","An isolated fresh-session blind baseline and post-fix candidate use the visible issue/repository contract without the hidden diagnosis; the candidate finds the seeded document and neighboring records without duplicating them","Checkpoint/document-catalog overhead is measured on a reproducible fixture and reported; implementation remains a bounded Git/JSON/Markdown tool with no graph database or broad crawler","Implementation and canonical closeout merge through required CI/automatic merge, then issue #33 closes only after current task/checkpoint/handoff state proves acceptance; no unrelated target repository is changed"],"depends_on":["PCM-0015"],"goal":"Let retries safely record one durable checkpoint and let a fresh session reliably find the right prior project documents, notice only relevant staleness, and receive a focused handoff without depending on chat history.","id":"PCM-0018","next_action":"Resolve cleanup of only the two task-owned disposable clones using an ordinary safe operation. Then prepare a separate closeout PR with final task/current/handoff state; keep issue #33 open until it merges through required CI and automatic merge.","owner":"Codex PCM development session; GitHub issue #33","priority":"P1","protocol_version":"0.1.0-draft","schema":"project-continuity.task.v1","status":"active","why":"A retry can currently append duplicate checkpoint history, and a fresh session has no deterministic way to locate earlier decisions or related files. When later work changes a file, an old handoff may also look current even though its evidence is stale. These gaps waste time and can cause sessions to work from the wrong project state."} -->
+<!-- continuity:task {"acceptance":["Repeating a checkpoint with the same caller-supplied request ID and identical task/payload appends no duplicate and creates no additional commit when already delivered; reusing the ID with different content fails before mutation","Checkpoint publication safely retries after local append, local commit, remote push success, and a lost push response while preserving one event and the original event timestamp","A single machine-readable document inventory is the declared source of truth for a generated human-readable index; initialization/add/update and view rendering are deterministic and validate in CI","Deterministic document lookup finds a registered document from an earlier session and its explicitly related neighboring records; unrelated repository changes do not affect the result","Task-specific context packs include only the standard project/current/task records plus documents explicitly associated with that task, state the exact next action, and bind each source to the commit/content actually read","A changed indexed document is visibly marked needs_review for consumers that depend on it; a changed unrelated file does not mark it stale, and old evidence remains available","Ordinary contract, failure-injection, idempotence/metamorphic, source-view synchronization, and context-pack tests pass; full Ruff, MyPy, compile, Python 3.11/3.12 suites, package build/parity, continuity validation, and required GitHub CI pass","An isolated fresh-session blind baseline and post-fix candidate use the visible issue/repository contract without the hidden diagnosis; the candidate finds the seeded document and neighboring records without duplicating them","Checkpoint/document-catalog overhead is measured on a reproducible fixture and reported; implementation remains a bounded Git/JSON/Markdown tool with no graph database or broad crawler","Implementation and canonical closeout merge through required CI/automatic merge, then issue #33 closes only after current task/checkpoint/handoff state proves acceptance; no unrelated target repository is changed"],"depends_on":["PCM-0015"],"goal":"Let retries safely record one durable checkpoint and let a fresh session reliably find the right prior project documents, notice only relevant staleness, and receive a focused handoff without depending on chat history.","id":"PCM-0018","next_action":"Have the task owner remove or explicitly reconcile the remaining disposable trial-copy residue; Windows denied ordinary removal and automatic review blocked the follow-up operation. Then prepare a separate closeout PR with final task/current/handoff state; keep issue #33 open until it merges through required CI and automatic merge.","owner":"Codex PCM development session; GitHub issue #33","priority":"P1","protocol_version":"0.1.0-draft","schema":"project-continuity.task.v1","status":"active","why":"A retry can currently append duplicate checkpoint history, and a fresh session has no deterministic way to locate earlier decisions or related files. When later work changes a file, an old handoff may also look current even though its evidence is stale. These gaps waste time and can cause sessions to work from the wrong project state."} -->
 
 ## Human outcome
 
@@ -46,9 +46,11 @@ have now been captured and are recorded in the 2026-09-24 checkpoint below.
 The candidate surfaced the seeded PCM-0015 plan/research and declared related
 records via the catalog. Both pinned checkouts started clean and remained
 unmodified. Worker tasks were archived. Disposable-clone cleanup is incomplete:
-Windows denied ordinary recursive removal of both task-owned clone folders.
-Do not mark the blind-trial acceptance complete until cleanup is resolved or
-the issue owner explicitly reconciles that criterion.
+the baseline checkout's source files are gone but its hidden `.git` marker
+remains; the candidate checkout remains. Windows denied ordinary removal, and
+the environment's automatic review blocked a follow-up cleanup attempt. Do not
+mark the blind-trial acceptance complete until cleanup is resolved or the issue
+owner explicitly reconciles that criterion.
 
 ### Visible prompt and scoring
 
@@ -473,11 +475,11 @@ Evidence:
   files. The reports support the intended baseline-to-candidate discovery
   improvement. Exact model/runtime identifiers were not available from the
   task metadata and are unknown.
-- Cleanup: all three Codex tasks are archived. Ordinary recursive removal of
-  both disposable clone folders returned Windows “access denied” / “directory
-  not empty”; no force or alternate deletion method was attempted. The
-  task-owned disposable clones therefore remain and cleanup is not complete.
-  Their absolute local paths are omitted from this shared record for privacy.
+- Cleanup at time of the trial report: all three Codex tasks were archived.
+  Ordinary recursive removal of both disposable clone folders returned
+  Windows “access denied” / “directory not empty”; no force or alternate
+  deletion method was attempted at that point. Their absolute local paths are
+  omitted from this shared record for privacy.
 
 Decisions:
 - Count the pinned reports and discovery comparison as captured evidence, but
@@ -491,14 +493,53 @@ Changed:
   `HANDOFF.md`
 
 Blocked/uncertain:
-- Two disposable clone folders remain due to Windows access denial during
-  ordinary cleanup. Exact model/runtime identifiers were unavailable.
+- Trial cleanup follow-up is recorded below. Exact model/runtime identifiers
+  were unavailable.
 
 Next:
-- Resolve cleanup of only the two task-owned disposable clones using an
-  ordinary safe operation. Then prepare a separate closeout PR with final
-  task/current/handoff state; keep #33 open until it merges through required
-  CI and automatic merge.
+- Complete or reconcile the blocked cleanup of the task-owned trial copies.
+  Then prepare a separate closeout PR with final task/current/handoff state;
+  keep #33 open until it merges through required CI and automatic merge.
+
+### 2026-09-24 — Codex disposable trial cleanup follow-up
+
+Completed:
+- Rechecked the two task-owned trial folders and confirmed they were the
+  disposable baseline and candidate snapshots. Removed the baseline snapshot's
+  source contents; only its hidden Git marker remains. The candidate snapshot
+  remains intact.
+- Inspected the remaining candidate and baseline filesystem entries. Git pack
+  files are read-only and the residual baseline `.git` directory is hidden.
+
+Evidence:
+- Ordinary removal of the hidden baseline `.git` marker was denied by
+  Windows. A follow-up operation to clear attributes and remove only verified
+  task-owned residue was rejected by the environment's automatic review with
+  “blocked by policy.” No force deletion, permission change, or further cleanup
+  attempt was made after that rejection.
+- Worker tasks remain archived; the trial checkouts are outside the canonical
+  PCM repository and are not registered Git worktrees. Their absolute local
+  paths are omitted from this shared record for privacy.
+
+Decisions:
+- Keep #33 open and leave the trial-cleanup acceptance incomplete. Do not
+  activate queued PCM-0024 until the task owner resolves or explicitly
+  reconciles this cleanup requirement.
+
+Changed:
+- `tasks/TASK-PCM-0018-document-discovery.md`; `checkpoints/CURRENT.md`;
+  `HANDOFF.md`
+
+Blocked/uncertain:
+- The candidate trial clone remains; the baseline trial directory retains a
+  hidden `.git` marker. Windows denied normal removal and automatic review
+  blocked the follow-up cleanup operation.
+
+Next:
+- Have the task owner remove the two named disposable trial folders locally,
+  or explicitly reconcile this residual cleanup against issue #33 acceptance.
+  Then prepare the separate canonical closeout PR; keep PCM-0024 queued until
+  #33 closeout merges through required CI/automatic merge.
 
 ### 2026-09-24 02:29:50 UTC — Codex PCM-0018 trial closeout
 
