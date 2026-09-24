@@ -233,6 +233,29 @@ Blocked/uncertain:
 Next:
 - Inspect PR #56 hosted Linux index diff and resolve the true source of platform divergence before enabling merge.
 
+### 2026-09-24 04:41:43 UTC — Codex
+
+<!-- continuity:checkpoint {"agent":"Codex","blocked":["A second independently authenticated collaborator and independent no-history issue-53 holdouts remain outstanding."],"changed":["src/continuity/cli.py; tests/test_checkpoint_retries.py; tests/test_worktrees.py; tests/pcm0024_stress_profile.py; docs/benchmarks/PCM-0024-stress-profile.md; PROJECT.md; HANDOFF.md; checkpoints/CURRENT.md; tasks/TASK-PCM-0024-github-authority.md; docs/CONTINUITY_INDEX.md; .continuity/documents.json"],"completed":["Merged PR #56 enforcement was followed by large-repository optimization and a reproducible stress profile; added stale-writer and multi-task worktree regression coverage."],"decisions":["Keep #53 open; local separate-root tests do not claim the issue's required real two-user hosted adoption. Stress guardrails are provisional and one-machine only."],"evidence":["Full suite: 72 passed; Ruff, MyPy, compileall, continuity validation, git diff check, and Python 3.12 wheel/sdist package parity passed. Stress profile: 5000 docs, 2000 checkpoints, lookup p95 77.637 ms, append p95 461.396 ms, pack 6916.171 ms / 1905540 bytes, Python traced peak 31686050 bytes; see docs/benchmarks/PCM-0024-stress-profile.md. Issue #53 is OPEN. Branch protection requires six CI checks and enforce-admins is enabled. This session has only one authenticated GitHub identity."],"next_action":"Open a PR for the committed follow-up and enable auto-merge behind required checks without closing issue #53; then arrange independent issue-53 holdouts and the real two-user, separate-drive adoption.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0024","timestamp":"2026-09-24T04:41:43Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"2d058ee0950f809c0c5f778bd72fc1ad1c759389c098e891093934c513eb2178","request_id":"f16bcb7eeb95455ab5822528d0ab13f0","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0024"} -->
+
+Completed:
+- Merged PR #56 enforcement was followed by large-repository optimization and a reproducible stress profile; added stale-writer and multi-task worktree regression coverage.
+
+Evidence:
+- Full suite: 72 passed; Ruff, MyPy, compileall, continuity validation, git diff check, and Python 3.12 wheel/sdist package parity passed. Stress profile: 5000 docs, 2000 checkpoints, lookup p95 77.637 ms, append p95 461.396 ms, pack 6916.171 ms / 1905540 bytes, Python traced peak 31686050 bytes; see docs/benchmarks/PCM-0024-stress-profile.md. Issue #53 is OPEN. Branch protection requires six CI checks and enforce-admins is enabled. This session has only one authenticated GitHub identity.
+
+Decisions:
+- Keep #53 open; local separate-root tests do not claim the issue's required real two-user hosted adoption. Stress guardrails are provisional and one-machine only.
+
+Changed:
+- src/continuity/cli.py; tests/test_checkpoint_retries.py; tests/test_worktrees.py; tests/pcm0024_stress_profile.py; docs/benchmarks/PCM-0024-stress-profile.md; PROJECT.md; HANDOFF.md; checkpoints/CURRENT.md; tasks/TASK-PCM-0024-github-authority.md; docs/CONTINUITY_INDEX.md; .continuity/documents.json
+
+Blocked/uncertain:
+- A second independently authenticated collaborator and independent no-history issue-53 holdouts remain outstanding.
+
+Next:
+- Open a PR for the committed follow-up and enable auto-merge behind required checks without closing issue #53; then arrange independent issue-53 holdouts and the real two-user, separate-drive adoption.
+
 ## Handoff
 
 Read issue #53, PROJECT, CURRENT, this task, and only relevant policy/test records. Confirm current GitHub state; do not rely on prior chat. Issue #33 remains open for cleanup/closeout, but does not block this owner-directed task.
