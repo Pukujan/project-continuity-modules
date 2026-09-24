@@ -1,6 +1,6 @@
 # Continuity Document Index
 
-<!-- continuity:documents-index {"catalog_sha256":"d037fe9f6ebfa8473c86135b9abbee6335ac355894e64e1dc2c8c00a88806448","schema":"project-continuity.documents-index.v1"} -->
+<!-- continuity:documents-index {"catalog_sha256":"3c753d392fc4e0ace34e4abbe8957fdf85647c8c333067177bf1977fb3281768","schema":"project-continuity.documents-index.v1"} -->
 
 > Generated from `.continuity/documents.json`. Edit the JSON inventory, then run `continuity docs render`; do not edit this view directly.
 > Freshness below compares local file bytes; after `git fetch origin`, use `continuity docs find` for cached remote freshness.
@@ -45,9 +45,9 @@
 
 - File: [`docs/CONTINUITY_RECORDS_POLICY.md`](../docs/CONTINUITY_RECORDS_POLICY.md)
 - Local content status: **CURRENT**
-- Last reviewed at commit: `85f13464c466ff277ce319850ce8124c4bc95c52`
-- Reviewed SHA-256: `a8468c14f7a14870532c8981f447875410baa896e323bed2c2431ee2cccc39c9`
-- Current SHA-256: `a8468c14f7a14870532c8981f447875410baa896e323bed2c2431ee2cccc39c9`
+- Last reviewed at commit: `uncommitted`
+- Reviewed SHA-256: `22a14093565d3990e2078547ae7c9d485ec9c2a71b95c74777e3cbdb53cf6a02`
+- Current SHA-256: `22a14093565d3990e2078547ae7c9d485ec9c2a71b95c74777e3cbdb53cf6a02`
 - Summary: Human-readable and machine-verifiable issue, task, checkpoint and handoff records.
 - Search terms: `issue logs`, `provenance`, `records`
 - Neighboring records: `pcm-0015-research`
