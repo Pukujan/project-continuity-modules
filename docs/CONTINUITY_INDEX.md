@@ -1,6 +1,6 @@
 # Continuity Document Index
 
-<!-- continuity:documents-index {"catalog_sha256":"3c753d392fc4e0ace34e4abbe8957fdf85647c8c333067177bf1977fb3281768","schema":"project-continuity.documents-index.v1"} -->
+<!-- continuity:documents-index {"catalog_sha256":"7acf4c3642249793bb18828d938d88304946b39305ab25021e57a84d0c942801","schema":"project-continuity.documents-index.v1"} -->
 
 > Generated from `.continuity/documents.json`. Edit the JSON inventory, then run `continuity docs render`; do not edit this view directly.
 > Freshness below compares local file bytes; after `git fetch origin`, use `continuity docs find` for cached remote freshness.
@@ -81,9 +81,9 @@
 
 - File: [`tasks/TASK-PCM-0024-github-authority.md`](../tasks/TASK-PCM-0024-github-authority.md)
 - Local content status: **CURRENT**
-- Last reviewed at commit: `563c7b3172232aa69daff4b1971ef22ca91c85b4`
-- Reviewed SHA-256: `53b7d5dc22a28983fae082e400a741ee30dfc54a60ef05f6ac801d01d26ece21`
-- Current SHA-256: `53b7d5dc22a28983fae082e400a741ee30dfc54a60ef05f6ac801d01d26ece21`
+- Last reviewed at commit: `uncommitted`
+- Reviewed SHA-256: `4c02c9547985cbb38b9242423697439350d49a3f1ffabed909c33bddc64444a7`
+- Current SHA-256: `4c02c9547985cbb38b9242423697439350d49a3f1ffabed909c33bddc64444a7`
 - Summary: Queued policy to make GitHub authoritative for PCM task tracking and prove fresh-session delivery and continuity.
 - Search terms: `GitHub authority`, `automatic merge`, `fresh session`, `issue lifecycle`, `large repository`
 - Neighboring records: `continuity-records-policy`, `testing-policy`
