@@ -256,6 +256,29 @@ Blocked/uncertain:
 Next:
 - Open a PR for the committed follow-up and enable auto-merge behind required checks without closing issue #53; then arrange independent issue-53 holdouts and the real two-user, separate-drive adoption.
 
+### 2026-09-24 04:44:14 UTC — Codex
+
+<!-- continuity:checkpoint {"agent":"Codex","blocked":["Hosted rerun of PR #57 is pending; issue #53's real two-user adoption and independent no-history holdouts remain outstanding."],"changed":["tests/test_worktrees.py; .continuity/documents.json; docs/CONTINUITY_INDEX.md"],"completed":["Fixed PR #57's first hosted CI failure: the cross-drive checkout-reuse test now falls back to a writable temporary root on Unix while retaining cross-volume coverage on Windows."],"decisions":["Treat same-volume Unix fallback as root-reuse coverage only; do not describe it as cross-drive proof. Windows local run exercised different volumes."],"evidence":["First PR #57 workflow run 35956749486 failed only in tests.test_worktrees.ManagedWorktreeTests.test_create_reuses_registered_checkout_on_another_drive because the hosted Unix account cannot create a directory under '/'. The corrected targeted test passed on local Windows; Ruff and continuity validation passed."],"next_action":"Confirm the new required CI runs pass for PR #57; keep issue #53 open and auto-merge gated on the complete required check set.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0024","timestamp":"2026-09-24T04:44:14Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"bc5875f7c857525c2f869898d2d63dd2c32fcdf72ab2d72dde3be8e2885bb09c","request_id":"d81cdfea897f4076ba70eeee23b5afb6","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0024"} -->
+
+Completed:
+- Fixed PR #57's first hosted CI failure: the cross-drive checkout-reuse test now falls back to a writable temporary root on Unix while retaining cross-volume coverage on Windows.
+
+Evidence:
+- First PR #57 workflow run 35956749486 failed only in tests.test_worktrees.ManagedWorktreeTests.test_create_reuses_registered_checkout_on_another_drive because the hosted Unix account cannot create a directory under '/'. The corrected targeted test passed on local Windows; Ruff and continuity validation passed.
+
+Decisions:
+- Treat same-volume Unix fallback as root-reuse coverage only; do not describe it as cross-drive proof. Windows local run exercised different volumes.
+
+Changed:
+- tests/test_worktrees.py; .continuity/documents.json; docs/CONTINUITY_INDEX.md
+
+Blocked/uncertain:
+- Hosted rerun of PR #57 is pending; issue #53's real two-user adoption and independent no-history holdouts remain outstanding.
+
+Next:
+- Confirm the new required CI runs pass for PR #57; keep issue #53 open and auto-merge gated on the complete required check set.
+
 ## Handoff
 
 Read issue #53, PROJECT, CURRENT, this task, and only relevant policy/test records. Confirm current GitHub state; do not rely on prior chat. Issue #33 remains open for cleanup/closeout, but does not block this owner-directed task.
