@@ -308,7 +308,7 @@ Next:
 <!-- continuity:checkpoint-operation {"payload_sha256":"274ca16095ba14e9fa5ee36d24993217812cd5d5f93d82ba6bbada5c32117215","request_id":"23ed54e496ab4dfa94973e3af1cfa55b","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0024"} -->
 
 Completed:
-- PR #58 merged the post-merge task/current/handoff reconciliation. GitHub briefly auto-closed issue #53 because PR prose contained the phrase 'does not close #53'; the issue was reopened immediately and the merged PR description was corrected.
+- PR #58 merged the post-merge task/current/handoff reconciliation. GitHub briefly changed issue #53's state because PR prose contained a negated lifecycle directive; the issue was reopened immediately and the merged PR description was corrected.
 
 Evidence:
 - PR #58 merged at dffa814317358870ccba0be7716f511b9b0f5d5a after all six required checks passed. Issue #53 is currently OPEN (verified with gh issue view and continuity issue verify); the correction and reason are documented in issue comment https://github.com/Pukujan/project-continuity-modules/issues/53#issuecomment-5807908634.
@@ -323,7 +323,7 @@ Blocked/uncertain:
 - Independent no-history issue-53 holdouts and actual two-user/separate-drive adoption still need an independent session and second authenticated collaborator/device.
 
 Next:
-- Arrange an authorized collaborator on a separate device/drive and authorize independent no-history issue-53 holdouts; then run the remaining proof, reconcile all evidence, and only close #53 after full acceptance.
+- Arrange an authorized collaborator on a separate device/drive and authorize independent no-history issue-53 holdouts; then run the remaining proof, reconcile all evidence, and mark issue #53 complete only after full acceptance.
 
 ## Handoff
 
