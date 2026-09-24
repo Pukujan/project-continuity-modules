@@ -399,6 +399,29 @@ Blocked/uncertain:
 Next:
 - Run separate fresh-session baseline and candidate trials using the same visible prompt at commits 85f13464c466ff277ce319850ce8124c4bc95c52 and 98747fce4d5c8056703329e243d49065e4741806; record the real reports, objective checks, elapsed time, and cleanup before closing #33.
 
+### 2026-09-24 00:29:57 UTC — Codex
+
+<!-- continuity:checkpoint {"agent":"Codex","blocked":[],"changed":["tasks/TASK-PCM-0018-document-discovery.md"],"completed":["Corrected the fresh-session candidate commit reference in the next action without rewriting the earlier checkpoint."],"decisions":["The previous checkpoint had a mistyped SHA; use the verified PR #51 merge commit for the candidate trial."],"evidence":["PCM-0018 task and merged PR #51 identify the candidate as 98747fce4d5c805670dc3b00bb572e5c02706237."],"next_action":"Run separate fresh-session baseline and candidate trials using the same visible prompt at commits 85f13464c466ff277ce319850ce8124c4bc95c52 and 98747fce4d5c805670dc3b00bb572e5c02706237; record the real reports, objective checks, elapsed time, and cleanup before closing #33.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0018","timestamp":"2026-09-24T00:29:57Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"c76284c6d5d45971d357570f59bca32007b514f43a5e17b4e1905dd9c86d4e43","request_id":"d712d18929d049a69cb3afcf01f7e2b8","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0018"} -->
+
+Completed:
+- Corrected the fresh-session candidate commit reference in the next action without rewriting the earlier checkpoint.
+
+Evidence:
+- PCM-0018 task and merged PR #51 identify the candidate as 98747fce4d5c805670dc3b00bb572e5c02706237.
+
+Decisions:
+- The previous checkpoint had a mistyped SHA; use the verified PR #51 merge commit for the candidate trial.
+
+Changed:
+- tasks/TASK-PCM-0018-document-discovery.md
+
+Blocked/uncertain:
+- none
+
+Next:
+- Run separate fresh-session baseline and candidate trials using the same visible prompt at commits 85f13464c466ff277ce319850ce8124c4bc95c52 and 98747fce4d5c805670dc3b00bb572e5c02706237; record the real reports, objective checks, elapsed time, and cleanup before closing #33.
+
 ## Handoff
 
 Read `PROJECT.md`, `AGENTS.md`, `checkpoints/CURRENT.md`, this task, `SPEC.md`,
