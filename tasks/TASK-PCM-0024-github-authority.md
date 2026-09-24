@@ -442,6 +442,32 @@ Blocked/uncertain:
 Next:
 - Ask the repository owner to designate and authorize a second GitHub collaborator for issue #63; then run independent sessions at baseline 5304bfa and candidate 18e262d plus the real two-user checkout, writer, CI, merge, and cleanup proof.
 
+### 2026-09-24 06:30:03 UTC — Codex
+
+<!-- continuity:checkpoint {"agent":"Codex","blocked":[],"changed":["HANDOFF.md; checkpoints/CURRENT.md; docs/CONTINUITY_INDEX.md; tasks/TASK-PCM-0024-github-authority.md; issue #53; issue #63"],"completed":["Ran independent no-history PCM-0024 holdouts at baseline 5304bfa and candidate 18e262d using subagents with no parent-chat history; recorded their reports and limits in child issue #63.","Ran the focused checkout/checkpoint suites: 24 tests passed in 72.740 seconds, covering cross-volume registered checkout reuse, local resolver locking, stale-writer rejection, independent task branches, and cleanup evidence gates."],"decisions":["Use local no-history agents and deterministic tests for the claims they prove; retain the real cross-account hosted-adoption claim as an explicit unverified boundary. Do not require the owner to create a second account."],"evidence":["Baseline holdout recovered the GitHub authority rule, issue #53 OPEN and #33 separate/open state, and detected baseline SPEC/README/task/HANDOFF contradictions; it recommended reconciling #33 status and activating #53. No files or worktrees changed; elapsed time approximate 2 minutes.","Candidate holdout recovered the issue scope and authority boundaries, identified #53/#33 open work and child #63, and recommended verifying current PR state then proceeding with the outstanding issue-53 proof. No files or worktrees changed; elapsed time approximate 3 minutes.","Holdout runtime/model identifiers unavailable; one run per revision does not establish repeatability. Local tests do not prove a distinct GitHub account, cross-account permissions, or a real second users hosted PR/CI path."],"next_action":"Preserve the completed holdout and local-test evidence in the task record. Keep issue #53 open because actual cross-account GitHub permissions and hosted adoption remain unverified; proceed only if the owner supplies an existing independent account or changes that acceptance criterion.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0024","timestamp":"2026-09-24T06:30:03Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"b671d86f5d373a9546731885380edbc2cefb906d55e4898ab69d38025308febb","request_id":"b17d2c197d304ee9a53140a5aa36c6b0","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0024"} -->
+
+Completed:
+- Ran independent no-history PCM-0024 holdouts at baseline 5304bfa and candidate 18e262d using subagents with no parent-chat history; recorded their reports and limits in child issue #63.
+- Ran the focused checkout/checkpoint suites: 24 tests passed in 72.740 seconds, covering cross-volume registered checkout reuse, local resolver locking, stale-writer rejection, independent task branches, and cleanup evidence gates.
+
+Evidence:
+- Baseline holdout recovered the GitHub authority rule, issue #53 OPEN and #33 separate/open state, and detected baseline SPEC/README/task/HANDOFF contradictions; it recommended reconciling #33 status and activating #53. No files or worktrees changed; elapsed time approximate 2 minutes.
+- Candidate holdout recovered the issue scope and authority boundaries, identified #53/#33 open work and child #63, and recommended verifying current PR state then proceeding with the outstanding issue-53 proof. No files or worktrees changed; elapsed time approximate 3 minutes.
+- Holdout runtime/model identifiers unavailable; one run per revision does not establish repeatability. Local tests do not prove a distinct GitHub account, cross-account permissions, or a real second users hosted PR/CI path.
+
+Decisions:
+- Use local no-history agents and deterministic tests for the claims they prove; retain the real cross-account hosted-adoption claim as an explicit unverified boundary. Do not require the owner to create a second account.
+
+Changed:
+- HANDOFF.md; checkpoints/CURRENT.md; docs/CONTINUITY_INDEX.md; tasks/TASK-PCM-0024-github-authority.md; issue #53; issue #63
+
+Blocked/uncertain:
+- none
+
+Next:
+- Preserve the completed holdout and local-test evidence in the task record. Keep issue #53 open because actual cross-account GitHub permissions and hosted adoption remain unverified; proceed only if the owner supplies an existing independent account or changes that acceptance criterion.
+
 ## Handoff
 
 Read issue #53, PROJECT, CURRENT, this task, and only relevant policy/test records. Confirm current GitHub state; do not rely on prior chat. Issue #33 remains open for cleanup/closeout, but does not block this owner-directed task.
