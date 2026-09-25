@@ -90,6 +90,29 @@ Blocked/uncertain:
 Next:
 - Verify sanitizer NOTE + keyword-free message + SYNCHRONIZED index at pushed head, post dogfood evidence to #140/#123, then launch scout text arms.
 
+### 2026-09-25 21:01:48 UTC — owner/Astra
+
+<!-- continuity:checkpoint {"agent":"owner/Astra","blocked":["None."],"changed":["tasks/TASK-PCM-0050-epistemic-records.md, docs/CONTINUITY_INDEX.md (auto)"],"completed":["Second dogfood pass: fresh checkpoint whose next_action embeds a closing keyword, exercising the sanitizer on a real generated commit message (the idempotent retry of pcm-0047-dogfood-20260925 only re-pushed a pre-made commit and proved the index-refresh NOTE)."],"decisions":["Dogfood acceptance for PCM-0047 requires the sanitizer to fire on a generated commit; retry path does not regenerate the message."],"evidence":["Commit message of this checkpoint inspected for absence of effective closing keywords; NOTE printed by sanitizer; docs render --check SYNCHRONIZED at pushed head."],"next_action":"Post dogfood evidence to #140 and #123, then launch scout text arms.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0050","timestamp":"2026-09-25T21:01:48Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"4c22ac41310de8c72e34e5d08b5e40532b69a5057e62a3543289aba66a0de4a6","request_id":"pcm-0047-dogfood2-20260925","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0050"} -->
+
+Completed:
+- Second dogfood pass: fresh checkpoint whose next_action embeds a closing keyword, exercising the sanitizer on a real generated commit message (the idempotent retry of pcm-0047-dogfood-20260925 only re-pushed a pre-made commit and proved the index-refresh NOTE).
+
+Evidence:
+- Commit message of this checkpoint inspected for absence of effective closing keywords; NOTE printed by sanitizer; docs render --check SYNCHRONIZED at pushed head.
+
+Decisions:
+- Dogfood acceptance for PCM-0047 requires the sanitizer to fire on a generated commit; retry path does not regenerate the message.
+
+Changed:
+- tasks/TASK-PCM-0050-epistemic-records.md, docs/CONTINUITY_INDEX.md (auto)
+
+Blocked/uncertain:
+- None.
+
+Next:
+- Post dogfood evidence to #140 and #123, then launch scout text arms.
+
 ## Handoff
 
 Read PROJECT -> CURRENT -> this task -> #144 -> docs/research/PCM-0050-epistemic-bitemporal-records.md. Decision slice only.
