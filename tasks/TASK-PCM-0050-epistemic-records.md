@@ -44,6 +44,29 @@ Blocked/uncertain:
 Next:
 - Open PR for task/PCM-0050-epistemic-records, verify required CI and auto-merge, then post merge receipt on #144; owner answers the five open questions there.
 
+### 2026-09-25 20:05:05 UTC — owner/Astra
+
+<!-- continuity:checkpoint {"agent":"owner/Astra","blocked":["Owner decision on five open questions (#144) pending; workers T46Scorer2/T47Hygiene2 in flight on zero-delta-pushed branches."],"changed":["tasks/TASK-PCM-0050-epistemic-records.md (this entry only)"],"completed":["Branch state reconciled after reviewer caught a lost-then-reapplied addendum: task/PCM-0050-epistemic-records head 81c30e7 now contains the prior-art addendum (PCM-0015 S9 delta), corrected citations (Chapman/Blaustein/Elsaesser TaPP 2010 UNVERIFIED vs Friedman et al. TaPP 2020), catalog registration, committed arm plan, repointed CURRENT, and checkpoint entry 1."],"decisions":["Correction to entry 1 (append-only): entry 1 claimed the addendum shipped in product commit e1cb2ce; it actually landed in the amended checkpoint commit 81c30e7 because a branch reset discarded the first uncommitted copy. Entry 1's pushed SHA f3ae58d was superseded by the amend; this entry's push is the authoritative branch state. #144 receipt 5838757901 references f3ae58d and will be superseded by a correction comment keyed to the merge SHA."],"evidence":["grep: 'Addendum 2026-09-25' present; 'Chapman' present x2; entry pcm-0050-advisory-20260925 present in task file; tree clean at 81c30e7."],"next_action":"Open PR for task/PCM-0050-epistemic-records, verify required CI and auto-merge, post superseding receipt on #144 keyed to the merge SHA.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0050","timestamp":"2026-09-25T20:05:05Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"a0eb9c73e21fe4f369db19cfdce562365c4b5adc2a6c7db226e8bb5e1444910c","request_id":"pcm-0050-advisory3-20260925","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0050"} -->
+
+Completed:
+- Branch state reconciled after reviewer caught a lost-then-reapplied addendum: task/PCM-0050-epistemic-records head 81c30e7 now contains the prior-art addendum (PCM-0015 S9 delta), corrected citations (Chapman/Blaustein/Elsaesser TaPP 2010 UNVERIFIED vs Friedman et al. TaPP 2020), catalog registration, committed arm plan, repointed CURRENT, and checkpoint entry 1.
+
+Evidence:
+- grep: 'Addendum 2026-09-25' present; 'Chapman' present x2; entry pcm-0050-advisory-20260925 present in task file; tree clean at 81c30e7.
+
+Decisions:
+- Correction to entry 1 (append-only): entry 1 claimed the addendum shipped in product commit e1cb2ce; it actually landed in the amended checkpoint commit 81c30e7 because a branch reset discarded the first uncommitted copy. Entry 1's pushed SHA f3ae58d was superseded by the amend; this entry's push is the authoritative branch state. #144 receipt 5838757901 references f3ae58d and will be superseded by a correction comment keyed to the merge SHA.
+
+Changed:
+- tasks/TASK-PCM-0050-epistemic-records.md (this entry only)
+
+Blocked/uncertain:
+- Owner decision on five open questions (#144) pending; workers T46Scorer2/T47Hygiene2 in flight on zero-delta-pushed branches.
+
+Next:
+- Open PR for task/PCM-0050-epistemic-records, verify required CI and auto-merge, post superseding receipt on #144 keyed to the merge SHA.
+
 ## Handoff
 
 Read PROJECT -> CURRENT -> this task -> #144 -> docs/research/PCM-0050-epistemic-bitemporal-records.md. Decision slice only.
