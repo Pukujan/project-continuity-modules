@@ -130,6 +130,23 @@ class DiagramHoldoutScorerTests(unittest.TestCase):
             if name != "diagram_present":
                 self.assertTrue(passed, name)
 
+    def test_indented_fences_with_branch_labels_pass(self) -> None:
+        # Regression: the holdout's real candidate outputs indent every fence
+        # line and use `-->|label|` edges; the shape check must accept them.
+        record = (
+            _steps(5)
+            + "\n\n```mermaid\n"
+            + "    graph TD\n"
+            + "    A[Checkpoint push starts] --> B[Leaf receipt posted]\n"
+            + "    B --> C{Retry or resolve manually}\n"
+            + "    C -->|Retry| D[Automatic retry risks duplicate]\n"
+            + "    C -->|Manual| E[Marker time decides]\n"
+            + "```\n"
+        )
+        scored = score(record)
+        for name, passed in scored.items():
+            self.assertTrue(passed, name)
+
     def test_helper_functions_report_fence_facts(self) -> None:
         inside = "<details>\n<summary>flow</summary>\n\n```mermaid\ngraph TD\nA[start] --> B[done]\n```\n\n</details>\n"
         fences = extract_fences(inside)

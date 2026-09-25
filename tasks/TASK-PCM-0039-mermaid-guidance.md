@@ -37,9 +37,9 @@ A reader on a phone sees a readable diagram where a record describes a multi-ste
 
 Pre-registered on the issue body (copy of #126 "How we will know"; numeric thresholds as stated):
 
-- [ ] **S1 Adoption:** ≥80% of candidate-arm outputs (n=5, fresh subagent sessions, current guidance) pass all applicable deterministic checks: diagram present when the scenario names ≥4 steps; direction TD (or LR within cap); ≤8 nodes; text alternative present; wide diagram inside `<details>`; no viewscreen link. Every individual run ≥60%.
-- [ ] **S2 Improvement:** candidate arm passes ≥30 percentage points above the baseline arm (n=5, 1.0.0 guidance without diagram rules).
-- [ ] **S3 Determinism:** the scorer is a pure function with unit tests (positive control: the guidance's own example passes; 3 negative controls fail as intended).
+- [x] **S1 Adoption:** ≥80% of candidate-arm outputs (n=5, fresh subagent sessions, current guidance) pass all applicable deterministic checks: diagram present when the scenario names ≥4 steps; direction TD (or LR within cap); ≤8 nodes; text alternative present; wide diagram inside `<details>`; no viewscreen link. Every individual run ≥60%. **Observed: 5/5 (100%) candidate runs pass all seven checks; each run 100%.**
+- [x] **S2 Improvement:** candidate arm passes ≥30 percentage points above the baseline arm (n=5, 1.0.0 guidance without diagram rules). **Observed: candidate 100% − baseline 0% = +100 points; all five baseline runs failed exactly `diagram_present` (zero fences), confirming the rule — not general diligence — drives the difference.**
+- [x] **S3 Determinism:** the scorer is a pure function with unit tests (positive control: the guidance's own example passes; 3 negative controls fail as intended). **Observed: 14 deterministic tests OK; positive control passes; three negative controls fail exactly their intended check sets. The holdout itself exposed a scorer false-negative (indented fence lines rejected by `first_statement`/`_LINE_FORMS`): fixed at the root (strip in `first_statement` + line-form match) with a permanent regression test `test_indented_fences_with_branch_labels_pass`; all four candidate fences re-scored green after the fix — no participant output was edited to pass.**
 - [ ] **S4 Gates:** module doc, CLI constants, generated + static propagation, staleness warnings, and deterministic tests all pass local gates (unittest, Ruff, MyPy, compileall, `continuity validate`, index sync) and the six required hosted contexts with auto-merge on the exact candidate.
 
 ## Evidence and sources
@@ -47,6 +47,17 @@ Pre-registered on the issue body (copy of #126 "How we will know"; numeric thres
 - Source: issue body of [#126](https://github.com/Pukujan/project-continuity-modules/issues/126), observed 2026-09-25 (this branch's planning read of the live issue).
 - Rendering evidence (browser DOM + screenshots, verified 2026-09-25, disposable matrix `Pukujan/pcm-mermaid-matrix`): [issue #1 probes](https://github.com/Pukujan/pcm-mermaid-matrix/issues/1), [PR #2 surfaces](https://github.com/Pukujan/pcm-mermaid-matrix/pull/2), [blob view](https://github.com/Pukujan/pcm-mermaid-matrix/blob/main/MERMAID_MATRIX.md). Key measurements: 7-node `flowchart LR` = 2120px in an 878px container (scales to fit, illegible on 390px); same content as `graph TD` = 441px; renderer = viewscreen iframe, info probe reports v11.17.2; `<details>` renders lazily after expansion; broken syntax shows a visible "Syntax error in text" panel; standalone viewscreen URL is an empty shell.
 - This increment's local gates (run on the branch): `continuity validate --root .` and `continuity docs render --check --root .` results recorded in the PR verification section.
+
+### Hidden-holdout results (run 2026-09-25, recorded before PR)
+
+Design as pre-registered: 10 fresh subagent sessions (5 candidate / 5 baseline), identical instructions, arms differing only in the guidance block (candidate = branch `ISSUE_LOG_FORMAT_GUIDANCE` 1.1.0; baseline = same constant at `origin/main` 1.0.0 — extracted programmatically, lengths 2,261 vs 1,631 bytes, `Diagrams` present only in candidate). Participants saw only guidance + `tests/fixtures/pcm0039_diagram_holdout/scenario.md` (361 words; rubric-vocabulary leak test passes); the scorer (`tests/diagram_holdout_scorer.py`) judged every returned log.
+
+| Arm | Runs | pass-all | Failures |
+| --- | --- | --- | --- |
+| candidate | 5 | 5/5 (100%) | none |
+| baseline | 5 | 0/5 (0%) | `diagram_present` ×5 (zero fences; all other six checks passed on each) |
+
+Process notes (honest limits): (1) the first launch delivered unsubstituted `{{ARM_TEXT}}` placeholders; corrected full prompts were re-sent before any participant produced a final log — no arm ran on placeholder text. (2) A duplicate scorer agent briefly raced the assigned one; parent arbitration settled ownership and the conformant files were re-verified green on disk. (3) One baseline participant messaged an idle non-participant agent about format requirements; no reply was given (that agent stood down by design), and the baseline logs contain no rubric vocabulary — contamination assessed nil. (4) n=5 per arm, one synthetic scenario: demonstrates followability on cheap sessions, not universality; a real-incident rerun remains a stated follow-up. Raw logs and the scoring driver are session-local evidence; the deterministic scorer + fixtures + controls are committed so any maintainer can re-score.
 
 ## Reproduction details (only when needed)
 

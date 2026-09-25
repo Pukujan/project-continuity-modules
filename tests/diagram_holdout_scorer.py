@@ -81,7 +81,7 @@ def fence_lines(fence: str) -> list[str]:
 def first_statement(fence: str) -> str:
     """Return the first non-empty line of a fence body ('' when the fence is empty)."""
     lines = fence_lines(fence)
-    return lines[0] if lines else ""
+    return lines[0].strip() if lines else ""
 
 
 def is_wide(fence: str) -> bool:
@@ -143,14 +143,14 @@ def _line_shape_ok(line: str) -> bool:
             return False
     if line.count('"') % 2 != 0:
         return False
-    return any(form.match(line) for form in _LINE_FORMS)
+    return any(form.match(line.strip()) for form in _LINE_FORMS)
 
 
 def _syntax_shape_ok(fence: str) -> bool:
     lines = fence_lines(fence)
     if not lines:
         return False
-    if not _STATEMENT_RE.match(lines[0]):
+    if not _STATEMENT_RE.match(lines[0].strip()):
         return False
     return all(_line_shape_ok(line) for line in lines[1:])
 
