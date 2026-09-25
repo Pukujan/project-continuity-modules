@@ -159,6 +159,29 @@ Blocked/uncertain:
 Next:
 - Confirm sanitizer rewrite in this commit's message, then post split evidence to #140 and #123: index refresh proven across passes 1-4, sanitizer proven by this pass.
 
+### 2026-09-25 21:02:48 UTC — owner/Astra
+
+<!-- continuity:checkpoint {"agent":"owner/Astra","blocked":["None."],"changed":["tasks/TASK-PCM-0050-epistemic-records.md, docs/CONTINUITY_INDEX.md (auto)"],"completed":["Fifth pass: the keyword now sits in the next_action text itself (close #99999, non-existent ref), which is what composes the commit subject."],"decisions":["Passes 1-4 had the keyword only in non-message fields; this pass targets the message composition path."],"evidence":["Expect stdout NOTE: closing keyword sanitized; expect git log -1 subject to read Refs #99999."],"next_action":"Verify subject rewrite then post split dogfood evidence to #140 and #123.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0050","timestamp":"2026-09-25T21:02:48Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"65f86aad2aafdcdc4afbdc123772765dfa97fbf136d86875007f4cc05631dc4c","request_id":"pcm-0047-dogfood5-20260925","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0050"} -->
+
+Completed:
+- Fifth pass: the keyword now sits in the next_action text itself (close #99999, non-existent ref), which is what composes the commit subject.
+
+Evidence:
+- Expect stdout NOTE: closing keyword sanitized; expect git log -1 subject to read Refs #99999.
+
+Decisions:
+- Passes 1-4 had the keyword only in non-message fields; this pass targets the message composition path.
+
+Changed:
+- tasks/TASK-PCM-0050-epistemic-records.md, docs/CONTINUITY_INDEX.md (auto)
+
+Blocked/uncertain:
+- None.
+
+Next:
+- Verify subject rewrite then post split dogfood evidence to #140 and #123.
+
 ## Handoff
 
 Read PROJECT -> CURRENT -> this task -> #144 -> docs/research/PCM-0050-epistemic-bitemporal-records.md. Decision slice only.
