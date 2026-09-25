@@ -182,6 +182,29 @@ Blocked/uncertain:
 Next:
 - Verify subject rewrite then post split dogfood evidence to #140 and #123.
 
+### 2026-09-25 21:02:58 UTC — owner/Astra
+
+<!-- continuity:checkpoint {"agent":"owner/Astra","blocked":["None."],"changed":["tasks/TASK-PCM-0050-epistemic-records.md, docs/CONTINUITY_INDEX.md (auto)"],"completed":["Sixth pass: keyword placed in the --next text itself this time; subject composition reads only --next, so the sanitizer must fire on the generated commit message."],"decisions":["Passes 1-5 placed the keyword in non-message fields; only --next reaches the subject."],"evidence":["Expect stdout 'NOTE: closing keyword sanitized' and subject 'Refs #99999' instead of 'close #99999'."],"next_action":"close #99999 after posting split dogfood evidence to #140 and #123","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0050","timestamp":"2026-09-25T21:02:58Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"857d2d44e9af50148fd9dc24fbb21879f37c3e123d263a4812b138c92ce9b4c9","request_id":"pcm-0047-dogfood6-20260925","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0050"} -->
+
+Completed:
+- Sixth pass: keyword placed in the --next text itself this time; subject composition reads only --next, so the sanitizer must fire on the generated commit message.
+
+Evidence:
+- Expect stdout 'NOTE: closing keyword sanitized' and subject 'Refs #99999' instead of 'close #99999'.
+
+Decisions:
+- Passes 1-5 placed the keyword in non-message fields; only --next reaches the subject.
+
+Changed:
+- tasks/TASK-PCM-0050-epistemic-records.md, docs/CONTINUITY_INDEX.md (auto)
+
+Blocked/uncertain:
+- None.
+
+Next:
+- close #99999 after posting split dogfood evidence to #140 and #123
+
 ## Handoff
 
 Read PROJECT -> CURRENT -> this task -> #144 -> docs/research/PCM-0050-epistemic-bitemporal-records.md. Decision slice only.

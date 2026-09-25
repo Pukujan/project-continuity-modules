@@ -203,7 +203,7 @@
 - Local content status: **NEEDS_REVIEW**
 - Last reviewed at commit: `1d3671d62ad8872b9798415da5b46d9ab7cffbe7`
 - Reviewed SHA-256: `dbbd6d7b5fa5a65342093a421eed3fbed7b5d852eed588871c3e15c5dda07599`
-- Current SHA-256: `29183c574b3fa94c690be97b60fec4f5a95df4c9a7b4d8aa683459d523d2f6a4`
+- Current SHA-256: `bf7f865bcc95103c28b8575d4384c82946a66b9fff47c3729a422b993ea8e7c5`
 - Summary: Decision-slice projection for PCM-0050.
 - Search terms: `PCM-0050`, `decision`, `projection`
 - Neighboring records: none
