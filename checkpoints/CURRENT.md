@@ -1,6 +1,6 @@
 # Current Repository Checkpoint
 
-<!-- continuity:current {"active_task":null,"active_task_file":null,"protocol_version":"0.1.0-draft","schema":"project-continuity.current.v1"} -->
+<!-- continuity:current {"active_task": "PCM-0042", "active_task_file": "tasks/TASK-PCM-0042-staff-model-retirement.md", "protocol_version": "0.1.0-draft", "schema": "project-continuity.current.v1"} -->
 
 ## Current projection — no active task; PCM-0024/0025/0026/0027 delivered and closed
 
