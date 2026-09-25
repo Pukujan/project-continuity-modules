@@ -524,6 +524,29 @@ Blocked/uncertain:
 Next:
 - Merge this closeout PR, post #53 closeout receipt with inline trial facts, delete the disposable trial repository, close #53.
 
+### 2026-09-25 12:03:05 UTC — owner/Astra planning; subagent execution
+
+<!-- continuity:checkpoint {"agent":"owner/Astra planning; subagent execution","blocked":["None."],"changed":["tasks/TASK-PCM-0024-github-authority.md; tasks/TASK-PCM-0027-issue-log-format.md; docs/CONTINUITY_INDEX.md."],"completed":["Corrected trial evidence attribution (auto-merge proven on PR #4 only; #2/#3 owner-merged with green checks), recorded the TR-0005 negative-path observation (failing lint blocks armed auto-merge; nothing merged or cleaned), set trial repo disposition to archived, and synchronized PCM-0027's stale active prose to its merged reality."],"decisions":["Archive (not delete) the trial repo so #53 citations remain live; append-only corrections rather than editing posted comments except the #99 factual grep sentence, which is being corrected in place with a visible note."],"evidence":["Trial PR #6 run 36130693093 lint=fail mergeStateStatus=BLOCKED no mergeCommit; trial issue #5 comment 5831842714; local validate VALID + index SYNCHRONIZED pre-checkpoint; #53 closeout 5831418345 will receive a dated correction comment."],"next_action":"Re-render index, merge this PR, then post the dated #53 correction, patch #99 item 3, add the #110 no-release addendum, and file the checkpoint-index defect issue.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0024","timestamp":"2026-09-25T12:03:05Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"04963cee05624cfe02fbdc9a30b0653a16793e597705ad0fb881b578b206704f","request_id":"pcm0024-ledger-followups-20260925","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0024"} -->
+
+Completed:
+- Corrected trial evidence attribution (auto-merge proven on PR #4 only; #2/#3 owner-merged with green checks), recorded the TR-0005 negative-path observation (failing lint blocks armed auto-merge; nothing merged or cleaned), set trial repo disposition to archived, and synchronized PCM-0027's stale active prose to its merged reality.
+
+Evidence:
+- Trial PR #6 run 36130693093 lint=fail mergeStateStatus=BLOCKED no mergeCommit; trial issue #5 comment 5831842714; local validate VALID + index SYNCHRONIZED pre-checkpoint; #53 closeout 5831418345 will receive a dated correction comment.
+
+Decisions:
+- Archive (not delete) the trial repo so #53 citations remain live; append-only corrections rather than editing posted comments except the #99 factual grep sentence, which is being corrected in place with a visible note.
+
+Changed:
+- tasks/TASK-PCM-0024-github-authority.md; tasks/TASK-PCM-0027-issue-log-format.md; docs/CONTINUITY_INDEX.md.
+
+Blocked/uncertain:
+- None.
+
+Next:
+- Re-render index, merge this PR, then post the dated #53 correction, patch #99 item 3, add the #110 no-release addendum, and file the checkpoint-index defect issue.
+
 ## Handoff
 
 Read issue #53, PROJECT, CURRENT, this task, and only relevant policy/test records. Confirm current GitHub state; do not rely on prior chat. Issue #33 remains open for cleanup/closeout, but does not block this owner-directed task.
