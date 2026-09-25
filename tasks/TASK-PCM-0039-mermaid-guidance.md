@@ -1,0 +1,67 @@
+# TASK-PCM-0039 — Mermaid Guidance
+
+<!-- continuity:task {"acceptance":["S1 Adoption: >=80% of candidate-arm outputs (n=5, fresh subagent sessions, current 1.1.0 guidance) pass all applicable deterministic checks — diagram present when the scenario names >=4 steps, direction TD (or LR within the <=4-short-node cap), <=8 nodes, text alternative present, wide diagram inside <details>, no viewscreen link; every individual run >=60%","S2 Improvement: candidate arm passes >=30 percentage points above the baseline arm (n=5, 1.0.0 guidance without diagram rules)","S3 Determinism: the holdout scorer is a pure function with unit tests (positive control: the guidance's own example passes; 3 negative controls fail as intended)","S4 Gates: module doc, CLI constants, generated + static propagation, staleness warnings and deterministic tests pass local gates (unittest, Ruff, MyPy, compileall, continuity validate, index sync) and the six required hosted contexts with auto-merge on the exact candidate"],"depends_on":[],"goal":"Ship issue-log-format 1.1.0: tested diagram rules so every adopter's issue logs, updates and PRs carry readable mermaid diagrams with text alternatives","id":"PCM-0039","issue_url":"https://github.com/Pukujan/project-continuity-modules/issues/126","next_action":"run the hidden holdout (candidate vs baseline arms) against the branch text, then open the PR under required CI with auto-merge","owner":"owner/Astra planning; subagent execution","priority":"P2","protocol_version":"0.1.0-draft","schema":"project-continuity.task.v1","status":"active","why":"Multi-step flows are where text-only records fail hardest; mobile readers get illegible strips from wide diagrams; agents need rules proven against real GitHub rendering"} -->
+
+- Status: active
+- Owner: owner/Astra planning; subagent execution
+- Priority: P2
+- Depends on: none
+
+## Goal
+
+Ship issue-log-format 1.1.0: tested diagram rules so every adopter's issue logs, updates and PRs carry readable mermaid diagrams with text alternatives
+
+## Why
+
+Multi-step flows are where text-only records fail hardest; mobile readers get illegible strips from wide diagrams; agents need rules proven against real GitHub rendering
+
+## Allowed files
+
+- `docs/ISSUE_LOG_FORMAT.md` (module doc: marker, Diagrams section, changelog)
+- Static guidance copies: `AGENTS.md`, `HANDOFF.md`, `templates/v1/software/AGENTS.md`, `templates/v1/minimal/HANDOFF.md`, `templates/v1/software/README.md`, `.github/ISSUE_TEMPLATE/task.md`, `.github/pull_request_template.md`
+- `src/continuity/cli.py` (guidance constants only)
+- Version bookkeeping: `README.md`, `SPEC.md`, `docs/VERSIONING.md`, `.continuity/documents.json` + `docs/CONTINUITY_INDEX.md` (catalog refresh/render)
+- Holdout scorer + fixtures + tests: `tests/diagram_holdout_scorer.py`, `tests/test_diagram_holdout_scorer.py`, `tests/fixtures/pcm0039_diagram_holdout/`
+
+## Human outcome
+
+A reader on a phone sees a readable diagram where a record describes a multi-step flow, and the record still makes sense wherever rendering fails; a fresh agent given the guidance block produces such a diagram without knowing GitHub's renderer internals.
+
+## Scope and boundaries
+
+- In scope: diagram rules in the `issue-log-format` 1.1.0 module doc and generated guidance; propagation to static copies and templates; version bookkeeping; hidden-holdout scorer and fixtures.
+- Out of scope: no diagram renderer in the CLI; no GitHub API diagram validation; no diagram requirement for trivial issues; no new validator error severity (marker scan unchanged); no edits to target repositories; the package version stays 0.5.0 (guidance text only, protocol unchanged).
+- Dependencies/uncertainty: none blocking. n=5 per arm on one synthetic scenario demonstrates followability on cheap sessions, not universality; a real-incident rerun is a follow-up and one pass is not repeatability (*inferred* limit, stated in the issue).
+
+## Acceptance criteria
+
+Pre-registered on the issue body (copy of #126 "How we will know"; numeric thresholds as stated):
+
+- [ ] **S1 Adoption:** ≥80% of candidate-arm outputs (n=5, fresh subagent sessions, current guidance) pass all applicable deterministic checks: diagram present when the scenario names ≥4 steps; direction TD (or LR within cap); ≤8 nodes; text alternative present; wide diagram inside `<details>`; no viewscreen link. Every individual run ≥60%.
+- [ ] **S2 Improvement:** candidate arm passes ≥30 percentage points above the baseline arm (n=5, 1.0.0 guidance without diagram rules).
+- [ ] **S3 Determinism:** the scorer is a pure function with unit tests (positive control: the guidance's own example passes; 3 negative controls fail as intended).
+- [ ] **S4 Gates:** module doc, CLI constants, generated + static propagation, staleness warnings, and deterministic tests all pass local gates (unittest, Ruff, MyPy, compileall, `continuity validate`, index sync) and the six required hosted contexts with auto-merge on the exact candidate.
+
+## Evidence and sources
+
+- Source: issue body of [#126](https://github.com/Pukujan/project-continuity-modules/issues/126), observed 2026-09-25 (this branch's planning read of the live issue).
+- Rendering evidence (browser DOM + screenshots, verified 2026-09-25, disposable matrix `Pukujan/pcm-mermaid-matrix`): [issue #1 probes](https://github.com/Pukujan/pcm-mermaid-matrix/issues/1), [PR #2 surfaces](https://github.com/Pukujan/pcm-mermaid-matrix/pull/2), [blob view](https://github.com/Pukujan/pcm-mermaid-matrix/blob/main/MERMAID_MATRIX.md). Key measurements: 7-node `flowchart LR` = 2120px in an 878px container (scales to fit, illegible on 390px); same content as `graph TD` = 441px; renderer = viewscreen iframe, info probe reports v11.17.2; `<details>` renders lazily after expansion; broken syntax shows a visible "Syntax error in text" panel; standalone viewscreen URL is an empty shell.
+- This increment's local gates (run on the branch): `continuity validate --root .` and `continuity docs render --check --root .` results recorded in the PR verification section.
+
+## Reproduction details (only when needed)
+
+Hidden-holdout arms per S1/S2: participants receive only the guidance block + seeded evidence, never the rubric; the scorer and fixtures are committed with the PR. Local gate commands: `python3.12 -m unittest`, `ruff check .`, `mypy src`, `python3.12 -m compileall src`, `PYTHONPATH=src python3.12 -m continuity validate --root .`, `PYTHONPATH=src python3.12 -m continuity docs render --check --root .`.
+
+## Related records
+
+- Required leaf owning issue, parent ancestry and dependencies (or explicitly none): leaf #126 (PCM-0039); parent: none; dependencies: none. Extends the merged `issue-log-format` 1.0.0 module from #99 / PCM-0027 (CLOSED) via its recorded 1.1.0 correction path; #100 / PCM-0028 registers the version bump when the registry lands.
+- Primary writer / branch / source issue revision / as-of status: owner/Astra planning with subagent execution; branch `task/PCM-0039-mermaid-guidance`; source: #126 body as observed 2026-09-25; as-of: docs synchronized on-branch, not yet PR'd.
+- Related PR/CI evidence and push receipt (request ID / SHA): pending — recorded when the PR opens.
+
+## Checkpoint log
+
+No checkpoints yet.
+
+## Handoff
+
+Read PROJECT → CURRENT → this task → minimum relevant spec. Checkpoint before stopping.
