@@ -73,6 +73,29 @@ Hidden-holdout arms per S1/S2: participants receive only the guidance block + se
 
 No checkpoints yet.
 
+### 2026-09-25 18:36:00 UTC — owner/Astra planning; subagent execution
+
+<!-- continuity:checkpoint {"agent":"owner/Astra planning; subagent execution","blocked":["None."],"changed":["tasks/TASK-PCM-0039-mermaid-guidance.md; tests/diagram_holdout_scorer.py; tests/test_diagram_holdout_scorer.py."],"completed":["Ran the pre-registered hidden holdout: 5 candidate + 5 baseline fresh subagent arms on the seeded scenario, scored by the committed deterministic scorer. S1 100% (threshold >=80%), S2 +100pp (threshold >=30pp), S3 14 controls green incl. a real scorer false-negative found BY the holdout (indented fences) and fixed with a permanent regression test. Acceptance boxes S1-S3 checked with observed numbers."],"decisions":["Holdout process notes recorded honestly (placeholder-prompt relaunch before any final log; duplicate-scorer arbitration; nil contamination assessment; n=5 single-scenario limit)."],"evidence":["score summary: candidate pass-all 5/5, baseline 0/5 failing exactly diagram_present; scorer suite tests.test_diagram_holdout_scorer 14 OK; full discover 196 with only the six known macOS-environmental failures; ruff/mypy/compileall clean; validate VALID; index SYNCHRONIZED; arms extracted programmatically (baseline from origin/main constant, 1631B no-Diagrams vs candidate 2261B with-Diagrams)."],"next_action":"Re-render index, open PR Refs #126, verify six required contexts + auto-merge, publish leaf/parent receipts, close #126.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0039","timestamp":"2026-09-25T18:36:00Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"a5d257826beae5486a3fdb727f58ec4ac4b4aa69359ab1cf79014602b71ab5f9","request_id":"pcm0039-holdout-20260925","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0039"} -->
+
+Completed:
+- Ran the pre-registered hidden holdout: 5 candidate + 5 baseline fresh subagent arms on the seeded scenario, scored by the committed deterministic scorer. S1 100% (threshold >=80%), S2 +100pp (threshold >=30pp), S3 14 controls green incl. a real scorer false-negative found BY the holdout (indented fences) and fixed with a permanent regression test. Acceptance boxes S1-S3 checked with observed numbers.
+
+Evidence:
+- score summary: candidate pass-all 5/5, baseline 0/5 failing exactly diagram_present; scorer suite tests.test_diagram_holdout_scorer 14 OK; full discover 196 with only the six known macOS-environmental failures; ruff/mypy/compileall clean; validate VALID; index SYNCHRONIZED; arms extracted programmatically (baseline from origin/main constant, 1631B no-Diagrams vs candidate 2261B with-Diagrams).
+
+Decisions:
+- Holdout process notes recorded honestly (placeholder-prompt relaunch before any final log; duplicate-scorer arbitration; nil contamination assessment; n=5 single-scenario limit).
+
+Changed:
+- tasks/TASK-PCM-0039-mermaid-guidance.md; tests/diagram_holdout_scorer.py; tests/test_diagram_holdout_scorer.py.
+
+Blocked/uncertain:
+- None.
+
+Next:
+- Re-render index, open PR Refs #126, verify six required contexts + auto-merge, publish leaf/parent receipts, close #126.
+
 ## Handoff
 
 Read PROJECT → CURRENT → this task → minimum relevant spec. Checkpoint before stopping.
