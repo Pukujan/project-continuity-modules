@@ -119,7 +119,7 @@
 - Local content status: **NEEDS_REVIEW**
 - Last reviewed at commit: `b88ef1eba097d0927c55e9ef14ba3c76bbb2f5b2`
 - Reviewed SHA-256: `403f918b19f35de27139d3fb820d78ae001a15feef6209bbfceaac7af559147c`
-- Current SHA-256: `36f9ffd2a1e83316c078f3165c096c166292d04d6b5acc359f8ff4ceb4d90c31`
+- Current SHA-256: `96f5e8abc65215866ab04a80163dd8dfcc695059da73ff9e562783d5d131a4cd`
 - Summary: Parent GitHub-authority task; current correction removes the second-account requirement and links policy and receipt children.
 - Search terms: `GitHub authority`, `automatic merge`, `fresh session`, `issue lifecycle`, `large repository`
 - Neighboring records: `continuity-records-policy`, `testing-policy`
