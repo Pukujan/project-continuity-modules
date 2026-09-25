@@ -500,6 +500,29 @@ Blocked/uncertain:
 Next:
 - Verify required checks and auto-merge for the #66 policy PR, then record receipt/parent evidence; retain #53 OPEN.
 
+### 2026-09-25 10:58:24 UTC — owner/Astra planning; subagent execution
+
+<!-- continuity:checkpoint {"agent":"owner/Astra planning; subagent execution","blocked":["None."],"changed":["tasks/TASK-PCM-0024-github-authority.md; checkpoints/CURRENT.md; docs/CONTINUITY_INDEX.md."],"completed":["Marked PCM-0024 completed with all four acceptance boxes checked and honest boundary notes; CURRENT chain now reads delivered/closed through #53."],"decisions":["Trial repository facts recorded inline before its scheduled deletion; #110 keeps deferred automation; #100 keeps evaluation adjudication."],"evidence":["PRs #114/#115/#116 merged with six required contexts at 84fd300/e92ebdb/2b28da4; disposable trial evidence PR #116 section; validate VALID, index SYNCHRONIZED, 182-discovery with only six known macOS-environmental failures."],"next_action":"Merge this closeout PR, post #53 closeout receipt with inline trial facts, delete the disposable trial repository, close #53.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0024","timestamp":"2026-09-25T10:58:24Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"7b6fea7f7a53a52f0b7bcca46d5d694b164da8b49b9a1225a21d601c2d75d9da","request_id":"pcm0024-closeout-20260925","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0024"} -->
+
+Completed:
+- Marked PCM-0024 completed with all four acceptance boxes checked and honest boundary notes; CURRENT chain now reads delivered/closed through #53.
+
+Evidence:
+- PRs #114/#115/#116 merged with six required contexts at 84fd300/e92ebdb/2b28da4; disposable trial evidence PR #116 section; validate VALID, index SYNCHRONIZED, 182-discovery with only six known macOS-environmental failures.
+
+Decisions:
+- Trial repository facts recorded inline before its scheduled deletion; #110 keeps deferred automation; #100 keeps evaluation adjudication.
+
+Changed:
+- tasks/TASK-PCM-0024-github-authority.md; checkpoints/CURRENT.md; docs/CONTINUITY_INDEX.md.
+
+Blocked/uncertain:
+- None.
+
+Next:
+- Merge this closeout PR, post #53 closeout receipt with inline trial facts, delete the disposable trial repository, close #53.
+
 ## Handoff
 
 Read issue #53, PROJECT, CURRENT, this task, and only relevant policy/test records. Confirm current GitHub state; do not rely on prior chat. Issue #33 remains open for cleanup/closeout, but does not block this owner-directed task.
