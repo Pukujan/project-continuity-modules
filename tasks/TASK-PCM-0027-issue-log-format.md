@@ -84,6 +84,29 @@ Blocked/uncertain:
 Next:
 - Open PR to main (Refs #99), verify six required contexts + auto-merge on the exact candidate, publish leaf/parent receipts keyed to the merged SHA, then the closeout increment marks PCM-0027 completed and removes the worktree.
 
+### 2026-09-25 09:09:30 UTC — owner/Astra planning
+
+<!-- continuity:checkpoint {"agent":"owner/Astra planning","blocked":["None."],"changed":["tasks/TASK-PCM-0027-issue-log-format.md; checkpoints/CURRENT.md."],"completed":["Recorded task completion + parent close-out: [leaf receipt 5829746872](https://github.com/Pukujan/project-continuity-modules/issues/99#issuecomment-5829746872) posted on #99; [#53 parent progression comment posted](https://github.com/Pukujan/project-continuity-modules/issues/53#issuecomment-5828384182) remains the live aggregate link; issue #99 CLOSED."],"decisions":["Status flips to completed only after merge (active-task invariant); evaluation adjudication moved to #100 per owner close plan; worktree removal follows this merge."],"evidence":["PR #113 merged at 79337a600bf282e98188bbb9ed37ff35468db39f; six required contexts + auto-merge green on the exact candidate (run 36115136343); local suite state documented in the task file."],"next_action":"Merge the closeout PR, verify accepted history, then run continuity worktree remove PCM-0027.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0027","timestamp":"2026-09-25T09:09:30Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"2ea7b28fc554c05d7298fb23406c0105c5eae807032e06de20a5a611bd56947e","request_id":"pcm0027-closeout-20260925","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0027"} -->
+
+Completed:
+- Recorded task completion + parent close-out: [leaf receipt 5829746872](https://github.com/Pukujan/project-continuity-modules/issues/99#issuecomment-5829746872) posted on #99; [#53 parent progression comment posted](https://github.com/Pukujan/project-continuity-modules/issues/53#issuecomment-5828384182) remains the live aggregate link; issue #99 CLOSED.
+
+Evidence:
+- PR #113 merged at 79337a600bf282e98188bbb9ed37ff35468db39f; six required contexts + auto-merge green on the exact candidate (run 36115136343); local suite state documented in the task file.
+
+Decisions:
+- Status flips to completed only after merge (active-task invariant); evaluation adjudication moved to #100 per owner close plan; worktree removal follows this merge.
+
+Changed:
+- tasks/TASK-PCM-0027-issue-log-format.md; checkpoints/CURRENT.md.
+
+Blocked/uncertain:
+- None.
+
+Next:
+- Merge the closeout PR, verify accepted history, then run continuity worktree remove PCM-0027.
+
 ## Handoff
 
 Read PROJECT → CURRENT → this task → `docs/ISSUE_LOG_FORMAT.md`. The module, propagation, validator, and tests are on this branch; next action is publishing the PR with `Refs #99` and reconciling #99 per the owner close plan (evaluation results remain open there). Checkpoint before stopping.
