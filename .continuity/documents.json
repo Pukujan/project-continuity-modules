@@ -306,8 +306,8 @@
         "pcm-0015-plan",
         "pcm-0015-research"
       ],
-      "reviewed_commit": "1d3671d62ad8872b9798415da5b46d9ab7cffbe7",
-      "reviewed_sha256": "6f2d16f9e639f42b3de461b5b29e4e8e74e085a3348d2113fd5d2f86e639400d",
+      "reviewed_commit": "uncommitted",
+      "reviewed_sha256": "4f591713d8ebbfda17111fecef6e533b4207f6410310974787b58a95ba60b91b",
       "summary": "Bitemporal/PROV prior art, PCM-0015 S9 delta analysis, options O1-O4 for claim provenance, adopter ticket placement, and record aging.",
       "tasks": [
         "PCM-0050"

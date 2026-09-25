@@ -1,6 +1,6 @@
 # Continuity Document Index
 
-<!-- continuity:documents-index {"catalog_sha256":"2b9711dbc33559caaaf9ed78df32ab8a18edde71829fd39c12bc9069dbfac595","schema":"project-continuity.documents-index.v1"} -->
+<!-- continuity:documents-index {"catalog_sha256":"61a020cdbfea9d286f138f70d9f9b6e1629dcb21eac87f8bc04a4b663691357f","schema":"project-continuity.documents-index.v1"} -->
 
 > Generated from `.continuity/documents.json`. Edit the JSON inventory, then run `continuity docs render`; do not edit this view directly.
 > Freshness below compares local file bytes; after `git fetch origin`, use `continuity docs find` for cached remote freshness.
@@ -189,9 +189,9 @@
 
 - File: [`docs/research/PCM-0050-epistemic-bitemporal-records.md`](../docs/research/PCM-0050-epistemic-bitemporal-records.md)
 - Local content status: **CURRENT**
-- Last reviewed at commit: `1d3671d62ad8872b9798415da5b46d9ab7cffbe7`
-- Reviewed SHA-256: `6f2d16f9e639f42b3de461b5b29e4e8e74e085a3348d2113fd5d2f86e639400d`
-- Current SHA-256: `6f2d16f9e639f42b3de461b5b29e4e8e74e085a3348d2113fd5d2f86e639400d`
+- Last reviewed at commit: `uncommitted`
+- Reviewed SHA-256: `4f591713d8ebbfda17111fecef6e533b4207f6410310974787b58a95ba60b91b`
+- Current SHA-256: `4f591713d8ebbfda17111fecef6e533b4207f6410310974787b58a95ba60b91b`
 - Summary: Bitemporal/PROV prior art, PCM-0015 S9 delta analysis, options O1-O4 for claim provenance, adopter ticket placement, and record aging.
 - Search terms: `adopter-feedback`, `bitemporal`, `claim`, `epistemic`, `provenance`, `supersession`
 - Neighboring records: `continuity-records-policy`, `issue-log-format`, `pcm-0015-plan`, `pcm-0015-research`
@@ -200,10 +200,10 @@
 ## PCM-0050 task projection (`pcm-0050-task`)
 
 - File: [`tasks/TASK-PCM-0050-epistemic-records.md`](../tasks/TASK-PCM-0050-epistemic-records.md)
-- Local content status: **CURRENT**
+- Local content status: **NEEDS_REVIEW**
 - Last reviewed at commit: `1d3671d62ad8872b9798415da5b46d9ab7cffbe7`
 - Reviewed SHA-256: `dbbd6d7b5fa5a65342093a421eed3fbed7b5d852eed588871c3e15c5dda07599`
-- Current SHA-256: `dbbd6d7b5fa5a65342093a421eed3fbed7b5d852eed588871c3e15c5dda07599`
+- Current SHA-256: `6737ba5f01337010397583e1ab9ed72dee5896595de300c69ad280c5a6d697ce`
 - Summary: Decision-slice projection for PCM-0050.
 - Search terms: `PCM-0050`, `decision`, `projection`
 - Neighboring records: none
