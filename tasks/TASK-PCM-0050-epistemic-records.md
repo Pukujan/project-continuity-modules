@@ -136,6 +136,29 @@ Blocked/uncertain:
 Next:
 - Verify sanitizer output then post dogfood evidence to #140 and #123.
 
+### 2026-09-25 21:02:36 UTC — owner/Astra
+
+<!-- continuity:checkpoint {"agent":"owner/Astra","blocked":["None."],"changed":["tasks/TASK-PCM-0050-epistemic-records.md, docs/CONTINUITY_INDEX.md (auto)"],"completed":["Fourth dogfood pass: keyword placed in --next itself (close #99999, a deliberately non-existent ref so a sanitizer failure cannot close a real issue); the tool composes and creates the commit so the sanitizer path is the only message author."],"decisions":["Passes 1-3 proved the index-refresh NOTE only; sanitizer proof requires the keyword in the composed subject."],"evidence":["Sanitizer NOTE on stdout + git log -1 --format=%B showing Refs #99999 rewrite at pushed head e8c1b32's successor."],"next_action":"Confirm sanitizer rewrite in this commit's message, then post split evidence to #140 and #123: index refresh proven across passes 1-4, sanitizer proven by this pass.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0050","timestamp":"2026-09-25T21:02:36Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"410ac8eddbedc8ef06901daeca80b2fd17c8ec6e1e17c27312227e4b6a1bb91d","request_id":"pcm-0047-dogfood4-20260925","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0050"} -->
+
+Completed:
+- Fourth dogfood pass: keyword placed in --next itself (close #99999, a deliberately non-existent ref so a sanitizer failure cannot close a real issue); the tool composes and creates the commit so the sanitizer path is the only message author.
+
+Evidence:
+- Sanitizer NOTE on stdout + git log -1 --format=%B showing Refs #99999 rewrite at pushed head e8c1b32's successor.
+
+Decisions:
+- Passes 1-3 proved the index-refresh NOTE only; sanitizer proof requires the keyword in the composed subject.
+
+Changed:
+- tasks/TASK-PCM-0050-epistemic-records.md, docs/CONTINUITY_INDEX.md (auto)
+
+Blocked/uncertain:
+- None.
+
+Next:
+- Confirm sanitizer rewrite in this commit's message, then post split evidence to #140 and #123: index refresh proven across passes 1-4, sanitizer proven by this pass.
+
 ## Handoff
 
 Read PROJECT -> CURRENT -> this task -> #144 -> docs/research/PCM-0050-epistemic-bitemporal-records.md. Decision slice only.
