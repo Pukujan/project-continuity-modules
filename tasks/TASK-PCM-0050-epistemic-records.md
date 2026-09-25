@@ -67,6 +67,29 @@ Blocked/uncertain:
 Next:
 - Open PR for task/PCM-0050-epistemic-records, verify required CI and auto-merge, post superseding receipt on #144 keyed to the merge SHA.
 
+### 2026-09-25 20:59:38 UTC — owner/Astra
+
+<!-- continuity:checkpoint {"agent":"owner/Astra","blocked":["None."],"changed":["tasks/TASK-PCM-0050-epistemic-records.md, docs/CONTINUITY_INDEX.md (auto)"],"completed":["PCM-0047 dogfood on the real publish path: this checkpoint's --next deliberately contains close #144; the sanitizer must rewrite it to a Refs form with an operator NOTE, and because tasks/TASK-PCM-0050-epistemic-records.md is cataloged the generated index must refresh in the same commit."],"decisions":["Dogfood acceptance line for PCM-0047 (issue 140) executed here after #147 merge; earlier checkpoint pcm-0047-merge-20260925 did not exercise either fixed path (no keyword, non-cataloged file) \u2014 correction posted rather than silently replaced."],"evidence":["Post-run checks recorded on #140/#123: commit message keyword-free, NOTE printed, docs render --check SYNCHRONIZED at pushed head."],"next_action":"Verify sanitizer NOTE + keyword-free message + SYNCHRONIZED index at pushed head, post dogfood evidence to #140/#123, then launch scout text arms.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0050","timestamp":"2026-09-25T20:59:38Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"bfefedb7ee800179bfa947c3b657af0d3722f178b00d182712a969db9a9e74e2","request_id":"pcm-0047-dogfood-20260925","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0050"} -->
+
+Completed:
+- PCM-0047 dogfood on the real publish path: this checkpoint's --next deliberately contains close #144; the sanitizer must rewrite it to a Refs form with an operator NOTE, and because tasks/TASK-PCM-0050-epistemic-records.md is cataloged the generated index must refresh in the same commit.
+
+Evidence:
+- Post-run checks recorded on #140/#123: commit message keyword-free, NOTE printed, docs render --check SYNCHRONIZED at pushed head.
+
+Decisions:
+- Dogfood acceptance line for PCM-0047 (issue 140) executed here after #147 merge; earlier checkpoint pcm-0047-merge-20260925 did not exercise either fixed path (no keyword, non-cataloged file) — correction posted rather than silently replaced.
+
+Changed:
+- tasks/TASK-PCM-0050-epistemic-records.md, docs/CONTINUITY_INDEX.md (auto)
+
+Blocked/uncertain:
+- None.
+
+Next:
+- Verify sanitizer NOTE + keyword-free message + SYNCHRONIZED index at pushed head, post dogfood evidence to #140/#123, then launch scout text arms.
+
 ## Handoff
 
 Read PROJECT -> CURRENT -> this task -> #144 -> docs/research/PCM-0050-epistemic-bitemporal-records.md. Decision slice only.
