@@ -113,6 +113,29 @@ Blocked/uncertain:
 Next:
 - Post dogfood evidence to #140 and #123, then launch scout text arms.
 
+### 2026-09-25 21:02:12 UTC — owner/Astra
+
+<!-- continuity:checkpoint {"agent":"owner/Astra","blocked":["None."],"changed":["tasks/TASK-PCM-0050-epistemic-records.md, docs/CONTINUITY_INDEX.md (auto)"],"completed":["Third dogfood pass: next_action deliberately embeds the literal keyword sequence close #144 so the sanitizer must rewrite the generated commit message; prior passes proved the index NOTE but never fired the sanitizer."],"decisions":["Sanitizer proof requires a generated commit whose source --next contains an effective closing keyword."],"evidence":["Inspect this checkpoint's commit message: expect Refs #144 (no effective keyword) plus the sanitizer NOTE on stdout; docs render --check SYNCHRONIZED at pushed head."],"next_action":"Verify sanitizer output then post dogfood evidence to #140 and #123.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0050","timestamp":"2026-09-25T21:02:12Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"febf0ef8eb01f27f2df35fe23a51c35a89c46988b330dcb6563164f36b8e3fdc","request_id":"pcm-0047-dogfood3-20260925","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0050"} -->
+
+Completed:
+- Third dogfood pass: next_action deliberately embeds the literal keyword sequence close #144 so the sanitizer must rewrite the generated commit message; prior passes proved the index NOTE but never fired the sanitizer.
+
+Evidence:
+- Inspect this checkpoint's commit message: expect Refs #144 (no effective keyword) plus the sanitizer NOTE on stdout; docs render --check SYNCHRONIZED at pushed head.
+
+Decisions:
+- Sanitizer proof requires a generated commit whose source --next contains an effective closing keyword.
+
+Changed:
+- tasks/TASK-PCM-0050-epistemic-records.md, docs/CONTINUITY_INDEX.md (auto)
+
+Blocked/uncertain:
+- None.
+
+Next:
+- Verify sanitizer output then post dogfood evidence to #140 and #123.
+
 ## Handoff
 
 Read PROJECT -> CURRENT -> this task -> #144 -> docs/research/PCM-0050-epistemic-bitemporal-records.md. Decision slice only.
