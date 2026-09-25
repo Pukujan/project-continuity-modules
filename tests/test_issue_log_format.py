@@ -8,7 +8,6 @@ stale -> warning that prints the exact update step.
 from __future__ import annotations
 
 import json
-import shutil
 import tempfile
 import unittest
 from pathlib import Path
@@ -255,7 +254,12 @@ class IssueLogFormatInitTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(prefix="pcm0027-preserve-") as tmp:
             root = Path(tmp) / "target"
             root.mkdir()
-            marker = '<!-- continuity:project {"schema":"project-continuity.project.v1","protocol_version":"0.1.0-draft","id":"tgt","title":"Target","project":"PROJECT.md","tasks":"tasks","current":"checkpoints/CURRENT.md","profile":"software","trackers":{"github":false},"version":"0.1.0-draft"} -->'
+            marker = (
+                '<!-- continuity:project {"schema":"project-continuity.project.v1",'
+                '"protocol_version":"0.1.0-draft","id":"tgt","title":"Target",'
+                '"project":"PROJECT.md","tasks":"tasks","current":"checkpoints/CURRENT.md",'
+                '"profile":"software","trackers":{"github":false},"version":"0.1.0-draft"} -->'
+            )
             (root / "PROJECT.md").write_text(
                 f"# Target\n\n{marker}\n\nUser contract.\n", encoding="utf-8"
             )
@@ -311,9 +315,8 @@ class IssueLogFormatRolloutTests(unittest.TestCase):
             with self.subTest(path=relative_path):
                 text = (ROOT / relative_path).read_text(encoding="utf-8")
                 self.assertIn('"policy_version":"1.3.0"', text)
-        from continuity.cli import CONTINUITY_RECORDS_POLICY_MARKER
-
         self.assertIn('"policy_version":"1.3.0"', CONTINUITY_RECORDS_POLICY_MARKER)
+
 
     def test_package_version_bumped(self) -> None:
         from continuity import __version__
