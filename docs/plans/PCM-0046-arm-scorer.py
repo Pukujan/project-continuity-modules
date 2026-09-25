@@ -67,7 +67,8 @@ def main() -> int:
             "meets_4of5": vs.count("pass") >= 4,
         }
     print(json.dumps({"arms": {k: v["verdict"] for k, v in out.items()}, "tally": tally}, indent=1))
-    RES.joinpath("scored.json").write_text(json.dumps({"arms": {k: v for k, v in out.items()}, "tally": tally}, indent=1))
+    payload = json.dumps({"arms": out, "tally": tally}, indent=1)
+    RES.joinpath("scored.json").write_text(payload)
     return 0
 
 
