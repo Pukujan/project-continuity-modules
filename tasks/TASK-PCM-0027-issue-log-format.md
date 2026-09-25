@@ -105,7 +105,7 @@ Blocked/uncertain:
 - None.
 
 Next:
-- None: closeout merged at `84fd300`, worktree verified-removed, #99 CLOSED.
+- Merge the closeout PR, verify accepted history, then run continuity worktree remove PCM-0027.
 
 ### 2026-09-25 09:09:51 UTC — owner/Astra planning
 
@@ -128,7 +128,7 @@ Blocked/uncertain:
 - None.
 
 Next:
-- None: closeout merged at `84fd300`, worktree verified-removed, #99 CLOSED.
+- Merge the closeout PR, verify accepted history, then run continuity worktree remove PCM-0027.
 
 ## Handoff
 
