@@ -53,6 +53,29 @@ Starting revision, material inputs/configuration, runtime, exact command or prom
 
 No checkpoints yet.
 
+### 2026-09-25 19:02:20 UTC — owner
+
+<!-- continuity:checkpoint {"agent":"owner","blocked":["Foreign linked worktree /private/tmp/pcm-pinned makes local validate INVALID (outside pcm/worktree/<TASK-ID>); owner decision needed to pin-compliantly relocate or remove."],"changed":["docs/ARCHITECTURE.md; .continuity/documents.json; docs/CONTINUITY_INDEX.md; tasks/TASK-PCM-0043-architecture-doc.md; checkpoints/CURRENT.md."],"completed":["Wrote docs/ARCHITECTURE.md (ownership, checkpoints, resume, TASK, self-vs-adopter, doc system; four 1.1.0-compliant diagrams with text alternatives), registered catalog + index, filled task projection, CURRENT active."],"decisions":["no new decisions"],"evidence":["docs add REGISTERED; render RENDERED; validate on this device reports one foreign-worktree error only (/private/tmp/pcm-pinned, detached 8626efa, not created by this session, left untouched); fresh-clone CI unaffected."],"next_action":"PR Refs #134, verify six contexts + merge, receipts, close #134 and #128.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0043","timestamp":"2026-09-25T19:02:20Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"55935314c1a13ee57b26d7edaa67ffb97df2b0d6c262d38a0c621efdba176657","request_id":"pcm0043-archdoc-20260925","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0043"} -->
+
+Completed:
+- Wrote docs/ARCHITECTURE.md (ownership, checkpoints, resume, TASK, self-vs-adopter, doc system; four 1.1.0-compliant diagrams with text alternatives), registered catalog + index, filled task projection, CURRENT active.
+
+Evidence:
+- docs add REGISTERED; render RENDERED; validate on this device reports one foreign-worktree error only (/private/tmp/pcm-pinned, detached 8626efa, not created by this session, left untouched); fresh-clone CI unaffected.
+
+Decisions:
+- no new decisions
+
+Changed:
+- docs/ARCHITECTURE.md; .continuity/documents.json; docs/CONTINUITY_INDEX.md; tasks/TASK-PCM-0043-architecture-doc.md; checkpoints/CURRENT.md.
+
+Blocked/uncertain:
+- Foreign linked worktree /private/tmp/pcm-pinned makes local validate INVALID (outside pcm/worktree/<TASK-ID>); owner decision needed to pin-compliantly relocate or remove.
+
+Next:
+- PR Refs #134, verify six contexts + merge, receipts, close #134 and #128.
+
 ## Handoff
 
 Read PROJECT → CURRENT → this task → minimum relevant spec. Checkpoint before stopping.
