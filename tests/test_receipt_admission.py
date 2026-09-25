@@ -242,6 +242,55 @@ class ReceiptAdmissionTests(unittest.TestCase):
             with self.subTest(kind=kind.value):
                 self.assertTrue(kind.is_sufficient_alone)
 
+    def test_qualifies_for_matches_the_owner_gate_binding(self) -> None:
+        for gate, expected_kind in GATE_QUALIFYING_KINDS.items():
+            for kind in EvidenceKind:
+                with self.subTest(gate=gate.value, kind=kind.value):
+                    self.assertEqual(kind.qualifies_for(gate), kind is expected_kind)
+        for gate in Gate:
+            for kind in EvidenceKind:
+                if kind.qualifies_for(gate):
+                    with self.subTest(implication=kind.value):
+                        self.assertTrue(kind.is_sufficient_alone)
+
+    def test_a_reviewed_kind_bound_to_another_gate_denies_the_gate(self) -> None:
+        for gate in Gate:
+            for other_gate, other_kind in GATE_QUALIFYING_KINDS.items():
+                if other_gate is gate:
+                    continue
+                with self.subTest(gate=gate.value, kind=other_kind.value):
+                    provider = provider_replacing(
+                        PCM67_PROFILE, gate, (make_record(gate, other_kind, PCM67_PROFILE),)
+                    )
+                    verdict = evaluate_admission(PCM67_PROFILE, MATCHING_CONTEXT, provider)
+                    self.assertFalse(verdict.admitted)
+                    self.assertEqual(verdict.reasons, (f"KIND_GATE_MISMATCH:{gate.value}",))
+
+    def test_mixed_insufficient_and_wrong_gate_reviewed_evidence_emits_both_codes(self) -> None:
+        for gate in Gate:
+            wrong_gate = next(other for other in Gate if other is not gate)
+            with self.subTest(gate=gate.value):
+                provider = provider_replacing(
+                    PCM67_PROFILE,
+                    gate,
+                    (
+                        make_record(gate, EvidenceKind.VERSION_STRING, PCM67_PROFILE),
+                        make_record(gate, GATE_QUALIFYING_KINDS[wrong_gate], PCM67_PROFILE),
+                    ),
+                )
+                verdict = evaluate_admission(PCM67_PROFILE, MATCHING_CONTEXT, provider)
+                self.assertFalse(verdict.admitted)
+                self.assertEqual(
+                    verdict.reasons,
+                    (f"INSUFFICIENT_EVIDENCE:{gate.value}", f"KIND_GATE_MISMATCH:{gate.value}"),
+                )
+
+    def test_clean_own_gate_evidence_still_admits_after_kind_binding(self) -> None:
+        provider = TableProvider({PCM67_WIN32_DELETE_EXTRA_V1: full_clean_evidence(PCM67_PROFILE)})
+        verdict = evaluate_admission(PCM67_PROFILE, MATCHING_CONTEXT, provider)
+        self.assertTrue(verdict.admitted)
+        self.assertEqual(verdict.reasons, ())
+
     def test_binding_drift_denies(self) -> None:
         drifted_profile = make_profile(sqlite_version="3.48.0")
         with self.subTest(kind="profile_binding"):

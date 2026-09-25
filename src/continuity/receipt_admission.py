@@ -53,6 +53,15 @@ class EvidenceKind(StrEnum):
     REVIEWED_CUSTODY_RECORDS = "REVIEWED_CUSTODY_RECORDS"
     REVIEWED_ROUTE_COVERAGE = "REVIEWED_ROUTE_COVERAGE"
 
+    def qualifies_for(self, gate: Gate) -> bool:
+        """True only for the one gate the owner decision table binds this kind to.
+
+        A reviewed kind satisfies exactly its own gate; every kind that is not
+        sufficient alone qualifies for no gate. Qualification implies
+        ``is_sufficient_alone``.
+        """
+        return _QUALIFYING_GATE_BY_KIND.get(self) is gate
+
     @property
     def is_sufficient_alone(self) -> bool:
         """True only for reviewed evidence kinds that may satisfy a gate alone."""
@@ -67,6 +76,15 @@ _SUFFICIENT_ALONE_KINDS: frozenset[EvidenceKind] = frozenset(
         EvidenceKind.REVIEWED_ROUTE_COVERAGE,
     }
 )
+
+#: Owner decision table (issue #67): each reviewed kind is bound to exactly one
+#: gate, and only that gate; insufficient-alone kinds qualify for none.
+_QUALIFYING_GATE_BY_KIND: dict[EvidenceKind, Gate] = {
+    EvidenceKind.REVIEWED_RUNTIME_REPORT: Gate.D1,
+    EvidenceKind.REVIEWED_DURABILITY_MATRIX: Gate.D2,
+    EvidenceKind.REVIEWED_CUSTODY_RECORDS: Gate.P,
+    EvidenceKind.REVIEWED_ROUTE_COVERAGE: Gate.Q,
+}
 
 
 class EvidenceStatus(StrEnum):
@@ -188,9 +206,14 @@ def _evaluate_gate(
             denied.append("WRITER_REVISION_DRIFT")
     if denied:
         return denied
-    if all(not record.kind.is_sufficient_alone for record in records):
-        return [f"INSUFFICIENT_EVIDENCE:{gate.value}"]
-    return []
+    if any(record.kind.qualifies_for(gate) for record in records):
+        return []
+    kind_codes: list[str] = []
+    if any(not record.kind.is_sufficient_alone for record in records):
+        kind_codes.append(f"INSUFFICIENT_EVIDENCE:{gate.value}")
+    if any(record.kind.is_sufficient_alone for record in records):
+        kind_codes.append(f"KIND_GATE_MISMATCH:{gate.value}")
+    return sorted(kind_codes)
 
 
 def evaluate_admission(
