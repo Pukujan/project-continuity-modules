@@ -46,6 +46,29 @@ Blocked/uncertain:
 Next:
 - Open PR Refs #129, verify six contexts + merge, post receipts, close #129.
 
+### 2026-09-25 18:49:20 UTC — owner/Astra planning
+
+<!-- continuity:checkpoint {"agent":"owner/Astra planning","blocked":["None."],"changed":["tasks/TASK-PCM-0042-staff-model-retirement.md; checkpoints/CURRENT.md."],"completed":["Marked PCM-0042 completed; CURRENT active task cleared."],"decisions":["no new decisions"],"evidence":["PR #132 merged at aa02a4c; six contexts run 36175420479; receipt 5837807514; #123 second-instance evidence posted."],"next_action":"Merge the closeout PR under required checks; the retirement chain is then complete.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0042","timestamp":"2026-09-25T18:49:20Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"3d282652eb78f466097ce175251b3896c9aef365a42174bcc5d081765747c446","request_id":"pcm0042-closeout-20260925","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0042"} -->
+
+Completed:
+- Marked PCM-0042 completed; CURRENT active task cleared.
+
+Evidence:
+- PR #132 merged at aa02a4c; six contexts run 36175420479; receipt 5837807514; #123 second-instance evidence posted.
+
+Decisions:
+- no new decisions
+
+Changed:
+- tasks/TASK-PCM-0042-staff-model-retirement.md; checkpoints/CURRENT.md.
+
+Blocked/uncertain:
+- None.
+
+Next:
+- Merge the closeout PR under required checks; the retirement chain is then complete.
+
 ## Handoff
 
 Read PROJECT → CURRENT → this task → #129. Complete: receipt posted (5837807514); #129 closed (accidental keyword mechanism disclosed on the receipt and on #123 as a second instance).
