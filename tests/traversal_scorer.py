@@ -62,8 +62,8 @@ def _result(
 def _parse_unified(task_diff: str) -> tuple[list[str], list[str], bool, bool]:
     """Return (before_lines, after_lines, well_formed, whole_file)."""
     lines = task_diff.splitlines()
-    has_files = any(l.startswith("--- ") for l in lines) and any(l.startswith("+++ ") for l in lines)
-    hunks = [m for l in lines if (m := _HUNK_RE.match(l))]
+    has_files = any(ln.startswith("--- ") for ln in lines) and any(ln.startswith("+++ ") for ln in lines)
+    hunks = [m for ln in lines if (m := _HUNK_RE.match(ln))]
     well_formed = has_files and bool(hunks)
     before: list[str] = []
     after: list[str] = []
@@ -116,8 +116,8 @@ def _entry_blocks(lines: list[str]) -> dict[str, list[str]]:
 def score_t1(task_diff: str) -> dict[str, Any]:
     before, after, well_formed, whole_file = _parse_unified(task_diff)
     diff_lines = task_diff.splitlines()
-    has_deletions = any(l.startswith("-") and not l.startswith("---") for l in diff_lines)
-    prior_headers = [l for l in before if l.startswith("### ")]
+    has_deletions = any(ln.startswith("-") and not ln.startswith("---") for ln in diff_lines)
+    prior_headers = [ln for ln in before if ln.startswith("### ")]
     context_present = bool(prior_headers)
     checks = {
         "diff_present": well_formed,
@@ -138,10 +138,10 @@ def score_t1(task_diff: str) -> dict[str, Any]:
         )
     no_deletions = not has_deletions
     last_prior_idx = -1
-    for i, l in enumerate(diff_lines):
-        if l.startswith(" ") and l[1:] == prior_headers[-1]:
+    for i, ln in enumerate(diff_lines):
+        if ln.startswith(" ") and ln[1:] == prior_headers[-1]:
             last_prior_idx = i
-    additions = [i for i, l in enumerate(diff_lines) if l.startswith("+") and not l.startswith("+++")]
+    additions = [i for i, ln in enumerate(diff_lines) if ln.startswith("+") and not ln.startswith("+++")]
     in_append_zone = all(i > last_prior_idx for i in additions)
     first_plus_is_header = (not additions) or diff_lines[additions[0]].lstrip("+").startswith("### ")
     additions_ok = in_append_zone and first_plus_is_header
@@ -149,8 +149,8 @@ def score_t1(task_diff: str) -> dict[str, Any]:
     checks["additions_after_last_entry"] = additions_ok
     before_blocks = _entry_blocks(before)
     after_blocks = _entry_blocks(after)
-    before_headers = [l for l in before if l.startswith("### ")]
-    after_headers = [l for l in after if l.startswith("### ")]
+    before_headers = [ln for ln in before if ln.startswith("### ")]
+    after_headers = [ln for ln in after if ln.startswith("### ")]
     entries: dict[str, bool] = {}
     for h in prior_headers:
         idx = before_headers.index(h)

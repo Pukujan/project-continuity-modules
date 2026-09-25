@@ -354,8 +354,6 @@ class TestProperties(unittest.TestCase):
         for name, args, kwargs in self._all_fixture_inputs():
             with self.subTest(scorer=name):
                 frozen = copy.deepcopy((args, kwargs))
-                first = score(*[{"task_diff": args[0], "answer": "", "text": "", "snapshot": {"files": {}}}] * 0 or [])
-                del first
                 r1 = json.dumps({"t1": score_t1(*args) if name == "t1" else None})
                 if name == "t1":
                     r1 = score_t1(*args)
