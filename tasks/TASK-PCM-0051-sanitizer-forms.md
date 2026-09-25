@@ -9,7 +9,17 @@
 
 ## Checkpoint log
 
-No checkpoints yet.
+### 2026-09-25 — red->green on colon/cross-repo forms
+
+Completed: EFFECTIVE_CLOSING test pattern widened (colon `Closes: #N`, `CLOSES:#N`, cross-repo `Fixes org/repo#N`); CLOSING_DIRECTIVE_RE widened with a colon separator branch and optional org/repo prefix; replacement helper preserves the original separator (hyphen/space) or emits ": " for colon forms. Bare "close 12" deliberately NOT sanitized (not a GitHub closing form).
+
+Evidence: focused tests.test_checkpoint_hygiene 13/13 OK (red capture: 3 failures of 13 at the red commit); ruff clean; mypy clean; full discover: exactly the six known macOS-environmental failures.
+
+Decisions: group 2 requires #N or issues URL; colon rewrite yields "Refs: #N" (non-closing).
+
+Blocked/uncertain: none.
+
+Next: PR under required CI + auto-merge; receipts on #154/#123.
 
 ## Handoff
 
