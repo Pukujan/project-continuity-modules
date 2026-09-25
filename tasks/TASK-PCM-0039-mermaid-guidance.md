@@ -96,6 +96,29 @@ Blocked/uncertain:
 Next:
 - Re-render index, open PR Refs #126, verify six required contexts + auto-merge, publish leaf/parent receipts, close #126.
 
+### 2026-09-25 18:40:42 UTC — owner/Astra planning
+
+<!-- continuity:checkpoint {"agent":"owner/Astra planning","blocked":["None."],"changed":["tasks/TASK-PCM-0039-mermaid-guidance.md; checkpoints/CURRENT.md."],"completed":["Marked PCM-0039 completed with S4 observed facts and CURRENT synchronized."],"decisions":["no new decisions"],"evidence":["PR #130 merged at 1e89195; six contexts green run 36174453270; receipt 5837663115; #126 CLOSED."],"next_action":"Merge this closeout PR; then execute the released PCM-0042 staff-model retirement on its own branch.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0039","timestamp":"2026-09-25T18:40:42Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"cf541933c5162f471e3a92180fc90d0f13b27f6f31b54a939ea6f6a735f4756a","request_id":"pcm0039-closeout-20260925","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0039"} -->
+
+Completed:
+- Marked PCM-0039 completed with S4 observed facts and CURRENT synchronized.
+
+Evidence:
+- PR #130 merged at 1e89195; six contexts green run 36174453270; receipt 5837663115; #126 CLOSED.
+
+Decisions:
+- no new decisions
+
+Changed:
+- tasks/TASK-PCM-0039-mermaid-guidance.md; checkpoints/CURRENT.md.
+
+Blocked/uncertain:
+- None.
+
+Next:
+- Merge this closeout PR; then execute the released PCM-0042 staff-model retirement on its own branch.
+
 ## Handoff
 
 Read PROJECT → CURRENT → this task → minimum relevant spec. Checkpoint before stopping.
