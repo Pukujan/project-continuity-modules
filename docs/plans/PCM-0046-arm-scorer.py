@@ -49,7 +49,6 @@ def tree_snapshot(tree: pathlib.Path) -> dict:
 
 
 def main() -> int:
-    base = FX.joinpath("t1_task_before.md").read_text()
     issue_state = json.loads(FX.joinpath("t2_issue.json").read_text())
     projection = json.loads(FX.joinpath("t2_projection.json").read_text())
     out = {}
