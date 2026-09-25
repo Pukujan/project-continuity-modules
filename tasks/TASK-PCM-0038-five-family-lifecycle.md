@@ -38,6 +38,29 @@ Blocked/uncertain: none.
 
 Next: none — see meta `next_action`.
 
+### 2026-09-25 13:26:07 UTC — owner/Astra planning
+
+<!-- continuity:checkpoint {"agent":"owner/Astra planning","blocked":["None."],"changed":["checkpoints/CURRENT.md; tasks/TASK-PCM-0038-five-family-lifecycle.md."],"completed":["Recorded the five-family lifecycle supplement on #53 after this projection merges; corrected CURRENT's PR #116 merge-SHA citation to 2b28da45d10f55595c1e4118e03e5fad6b46add0."],"decisions":["Archive, not delete, the trial; honest attribution \u2014 auto-merge firing proof remains PR #4 only."],"evidence":["Trial run 36138014952 all five contexts pass on head 7730ce3; merge 862842c; trial issue #7 closeout 5832880727."],"next_action":"Merge this projection PR, then post the #53 five-family supplement comment referenced in this task.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0038","timestamp":"2026-09-25T13:26:07Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"2505a3060a6b61af10e7081d58494bafdc9c44592506cebe07054c37c084ee40","request_id":"pcm0038-evidence-20260925","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0038"} -->
+
+Completed:
+- Recorded the five-family lifecycle supplement on #53 after this projection merges; corrected CURRENT's PR #116 merge-SHA citation to 2b28da45d10f55595c1e4118e03e5fad6b46add0.
+
+Evidence:
+- Trial run 36138014952 all five contexts pass on head 7730ce3; merge 862842c; trial issue #7 closeout 5832880727.
+
+Decisions:
+- Archive, not delete, the trial; honest attribution — auto-merge firing proof remains PR #4 only.
+
+Changed:
+- checkpoints/CURRENT.md; tasks/TASK-PCM-0038-five-family-lifecycle.md.
+
+Blocked/uncertain:
+- None.
+
+Next:
+- Merge this projection PR, then post the #53 five-family supplement comment referenced in this task.
+
 ## Handoff
 
 Read PROJECT → CURRENT → this task → #53 closeout + supplements. PCM-0024's acceptance now matches its evidence exactly; continuations live only on [#110] (automation research, no slice released) and [#100] (evaluation adjudication).
