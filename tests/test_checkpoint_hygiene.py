@@ -34,6 +34,7 @@ class HygieneCase(unittest.TestCase):
         subprocess.run(["git", "-C", root, "commit", "-qm", "fixture"], check=True)
         subprocess.run(["git", "-C", root, "remote", "add", "origin", str(remote)], check=True)
         subprocess.run(["git", "-C", root, "push", "-q", "--set-upstream", "origin", "HEAD"], check=True)
+        subprocess.run(["git", "--git-dir", str(remote), "symbolic-ref", "HEAD", f"refs/heads/{branch}"], check=True)
         return root, remote
 
     def run_cli(self, args: list[str]) -> tuple[int, str]:
