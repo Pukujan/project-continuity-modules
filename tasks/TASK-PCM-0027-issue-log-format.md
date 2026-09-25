@@ -61,6 +61,29 @@ A fresh agent or person writing an issue log, progress update, or PR in a PCM ad
 
 No checkpoints yet.
 
+### 2026-09-25 08:50:11 UTC — owner/Astra planning; subagent execution
+
+<!-- continuity:checkpoint {"agent":"owner/Astra planning; subagent execution","blocked":["None."],"changed":["src/continuity/cli.py; src/continuity/__init__.py; docs/ISSUE_LOG_FORMAT.md; .continuity/documents.json; docs/CONTINUITY_INDEX.md; README.md; SPEC.md; docs/VERSIONING.md; docs/CONTINUITY_RECORDS_POLICY.md; AGENTS.md; HANDOFF.md; templates/v1/*; .github/ISSUE_TEMPLATE/task.md; .github/pull_request_template.md; tests/test_issue_log_format.py; tasks/TASK-PCM-0027-issue-log-format.md; checkpoints/CURRENT.md."],"completed":["Implemented and locally verified the issue-log-format 1.0.0 module: CLI constants + mechanically replaceable guidance block, generator propagation (handoff/agents/issue/PR/readme), static-copy + PCM dogfood propagation, severity validator (missing warn / contradictory error / stale warn with update step), module doc + catalog/index, records-policy 1.3.0 reference, package 0.5.0, task projection, CURRENT synchronization."],"decisions":["Owner direction 5828143593: PRs share the core-tier shape; missing stays warning for all adopters in 1.0.0; #99 closes at merge with evaluation adjudication moved to #100."],"evidence":["Focused suites: tests.test_issue_log_format 22 OK; records+progression+cli combined green; full discover 182 with exactly the six known macOS-environmental test_worktrees/test_cli failures (identical names at base); ruff 0.16.9 + mypy 1.18.1 clean; continuity validate VALID; docs render SYNCHRONIZED; cold-start adopter init smoke: all five generated files carry exactly one block, findings ([], []), stale-then-contradictory severity path observed live."],"next_action":"Open PR to main (Refs #99), verify six required contexts + auto-merge on the exact candidate, publish leaf/parent receipts keyed to the merged SHA, then the closeout increment marks PCM-0027 completed and removes the worktree.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0027","timestamp":"2026-09-25T08:50:11Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"c5dbb4f504864619bc599ce524ec8091360086a1adfb7fcb57de676297c9c918","request_id":"pcm0027-module-publish-20260925","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0027"} -->
+
+Completed:
+- Implemented and locally verified the issue-log-format 1.0.0 module: CLI constants + mechanically replaceable guidance block, generator propagation (handoff/agents/issue/PR/readme), static-copy + PCM dogfood propagation, severity validator (missing warn / contradictory error / stale warn with update step), module doc + catalog/index, records-policy 1.3.0 reference, package 0.5.0, task projection, CURRENT synchronization.
+
+Evidence:
+- Focused suites: tests.test_issue_log_format 22 OK; records+progression+cli combined green; full discover 182 with exactly the six known macOS-environmental test_worktrees/test_cli failures (identical names at base); ruff 0.16.9 + mypy 1.18.1 clean; continuity validate VALID; docs render SYNCHRONIZED; cold-start adopter init smoke: all five generated files carry exactly one block, findings ([], []), stale-then-contradictory severity path observed live.
+
+Decisions:
+- Owner direction 5828143593: PRs share the core-tier shape; missing stays warning for all adopters in 1.0.0; #99 closes at merge with evaluation adjudication moved to #100.
+
+Changed:
+- src/continuity/cli.py; src/continuity/__init__.py; docs/ISSUE_LOG_FORMAT.md; .continuity/documents.json; docs/CONTINUITY_INDEX.md; README.md; SPEC.md; docs/VERSIONING.md; docs/CONTINUITY_RECORDS_POLICY.md; AGENTS.md; HANDOFF.md; templates/v1/*; .github/ISSUE_TEMPLATE/task.md; .github/pull_request_template.md; tests/test_issue_log_format.py; tasks/TASK-PCM-0027-issue-log-format.md; checkpoints/CURRENT.md.
+
+Blocked/uncertain:
+- None.
+
+Next:
+- Open PR to main (Refs #99), verify six required contexts + auto-merge on the exact candidate, publish leaf/parent receipts keyed to the merged SHA, then the closeout increment marks PCM-0027 completed and removes the worktree.
+
 ## Handoff
 
 Read PROJECT → CURRENT → this task → `docs/ISSUE_LOG_FORMAT.md`. The module, propagation, validator, and tests are on this branch; next action is publishing the PR with `Refs #99` and reconciling #99 per the owner close plan (evaluation results remain open there). Checkpoint before stopping.
