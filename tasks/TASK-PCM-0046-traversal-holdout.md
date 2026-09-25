@@ -44,6 +44,29 @@ Blocked/uncertain:
 Next:
 - Open PR for task/PCM-0046-traversal-holdout, verify six required contexts + auto-merge, then run arms per docs/plans/PCM-0046-arm-plan.md.
 
+### 2026-09-25 20:50:47 UTC — owner/Astra
+
+<!-- continuity:checkpoint {"agent":"owner/Astra","blocked":["External provider rate window; no code or repository work is blocked."],"changed":["tasks/TASK-PCM-0046-traversal-holdout.md (this entry)"],"completed":["Scorer merged to main at 09638d8 (#148, six contexts green, merge receipt 5839360783). 20-arm bundles staged and verified intact (rubric/expected excluded); launcher + pure rescoring harness persisted via #151 with repo-root-relative paths (private absolute path removed pre-merge per reviewer)."],"decisions":["Arms remain the only open acceptance item; #139 stays open until tallies post to #139/#137. Baseline guidance variants defined in docs/plans (rewrite-sections + no-keyword sentence) for the delta arms."],"evidence":["Probe arm T3a1probe at 21:15Z returned provider 429 retry-after ~7.2h (window opens ~04:15Z 2026-09-26); all 20 launches at 20:40Z failed identically pre-execution, so no arm ran and bundles are unmodified (sha256 tree verified against tests/fixtures)."],"next_action":"After ~04:15Z: spawn 20 arms per docs/plans/PCM-0046-arm-launcher.sh, score with docs/plans/PCM-0046-arm-scorer.py, report, closeout PR, close #139, remove worktree.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0046","timestamp":"2026-09-25T20:50:47Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"d706a1ca211d5bc7af9b8dba517b3cd76331492d3221371df7f7e8f7d20a6800","request_id":"pcm-0046-armswait-20260925","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0046"} -->
+
+Completed:
+- Scorer merged to main at 09638d8 (#148, six contexts green, merge receipt 5839360783). 20-arm bundles staged and verified intact (rubric/expected excluded); launcher + pure rescoring harness persisted via #151 with repo-root-relative paths (private absolute path removed pre-merge per reviewer).
+
+Evidence:
+- Probe arm T3a1probe at 21:15Z returned provider 429 retry-after ~7.2h (window opens ~04:15Z 2026-09-26); all 20 launches at 20:40Z failed identically pre-execution, so no arm ran and bundles are unmodified (sha256 tree verified against tests/fixtures).
+
+Decisions:
+- Arms remain the only open acceptance item; #139 stays open until tallies post to #139/#137. Baseline guidance variants defined in docs/plans (rewrite-sections + no-keyword sentence) for the delta arms.
+
+Changed:
+- tasks/TASK-PCM-0046-traversal-holdout.md (this entry)
+
+Blocked/uncertain:
+- External provider rate window; no code or repository work is blocked.
+
+Next:
+- After ~04:15Z: spawn 20 arms per docs/plans/PCM-0046-arm-launcher.sh, score with docs/plans/PCM-0046-arm-scorer.py, report, closeout PR, close #139, remove worktree.
+
 ## Handoff
 
 Read PROJECT -> CURRENT -> this task -> #139 (method, pre-registered pass rules) -> docs/plans/PCM-0046-arm-plan.md. Scorer/fixtures/rubric are on this branch (14c65a8, d0f9de7); the 20 arms run only after merge with the rubric withheld from participants.
