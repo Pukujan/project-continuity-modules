@@ -8,7 +8,7 @@ Artifacts live under /tmp/pcm0046-arms/results/:
   T4-<n>.tree/       participant's final tree directory
   T4-<n>.answer.txt  participant's yes/no sentence (recorded; T4 grades the tree)
 
-Run: python3.12 /tmp/pcm0046-score.py   (imports the merged scorer from the repo)
+Run: python3.12 docs/plans/PCM-0046-arm-scorer.py [results-dir]   (default /tmp/pcm0046-arms/results)
 """
 import difflib
 import hashlib
@@ -16,12 +16,12 @@ import json
 import pathlib
 import sys
 
-REPO = pathlib.Path("/Users/teresaguajardo/Documents/Projects/project-continuity-modules")
+REPO = pathlib.Path(__file__).resolve().parents[2]  # repo root; script lives in docs/plans/
 sys.path.insert(0, str(REPO / "tests"))
 from traversal_scorer import score_t1, score_t2, score_t3, score_t4  # noqa: E402
 
 FX = REPO / "tests" / "fixtures" / "pcm0046_traversal"
-RES = pathlib.Path("/tmp/pcm0046-arms/results")
+RES = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else "/tmp/pcm0046-arms/results")
 
 
 def whole_file_diff(before: str, after: str) -> str:

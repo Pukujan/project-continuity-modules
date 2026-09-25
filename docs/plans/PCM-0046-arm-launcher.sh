@@ -2,7 +2,7 @@
 # PCM-0046 arm launcher — run after #148 merges. Each arm = fresh subagent via task tool.
 # This script only prints the prompts; arms are spawned through the agent task tool, not bash.
 set -euo pipefail
-A=/tmp/pcm0046-arms
+A=${1:-/tmp/pcm0046-arms}
 for n in 1 2 3 4 5; do
   echo "=== T1-$n ==="
   cat <<EOF
