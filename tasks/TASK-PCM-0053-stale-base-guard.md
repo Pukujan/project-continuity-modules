@@ -53,6 +53,29 @@ RED: 2 failures + 1 error before the guard (overlap not refused; TypeError on un
 
 No checkpoints yet.
 
+### 2026-09-25 23:25:32 UTC — owner/Astra
+
+<!-- continuity:checkpoint {"agent":"owner/Astra","blocked":["None for this slice; provider pool still 429 for PCM-0046 arms (sibling task)."],"changed":["src/continuity/cli.py, tests/test_checkpoint_stale_base.py (new), tasks/TASK-PCM-0053-stale-base-guard.md, .continuity/documents.json, docs/CONTINUITY_INDEX.md"],"completed":["Stale-base guard implemented red-first in publish_checkpoint: _stale_base_overlap fetches the origin default branch, forks at merge-base, and refuses (no commit, no push) when any path touched since the fork or staged by this checkpoint also changed upstream \u2014 error names the files and the --allow-stale-base opt-out; unresolvable origins degrade to proceeding; recovery receipts skip the guard. Dogfooded live: this checkpoint published through the freshly installed guard (overlap-free branch, clean pass \u2014 the positive control on the real publish path)."],"decisions":["Overlap-scoped refusal (not general staleness) to keep parallel non-conflicting task branches false-positive-free; guard is git-only, no gh calls, per #166 boundaries."],"evidence":["RED before guard: 2 failures + 1 error in tests.test_checkpoint_stale_base; GREEN: 5/5 OK; test_checkpoint_hygiene + test_checkpoint_retries OK; full discover 257 = six known macOS-environmental failures identical at baseline f4ffd6f; ruff on changed files: no new findings (two pre-existing ISC003 in cli.py unchanged); continuity docs render --check SYNCHRONIZED at product commit 0e05a13? see git log at entry write time."],"next_action":"Open PR for task/PCM-0053-stale-base-guard, verify six required contexts + auto-merge, post merge receipt on #166 and close-out evidence for acceptance criterion 3.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0053","timestamp":"2026-09-25T23:25:32Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"06c81f8c1a0497cd1668392aba86ec65dcc616a7da3c9d13b4b2610a55e8d712","request_id":"pcm-0053-guard-20260925","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0053"} -->
+
+Completed:
+- Stale-base guard implemented red-first in publish_checkpoint: _stale_base_overlap fetches the origin default branch, forks at merge-base, and refuses (no commit, no push) when any path touched since the fork or staged by this checkpoint also changed upstream — error names the files and the --allow-stale-base opt-out; unresolvable origins degrade to proceeding; recovery receipts skip the guard. Dogfooded live: this checkpoint published through the freshly installed guard (overlap-free branch, clean pass — the positive control on the real publish path).
+
+Evidence:
+- RED before guard: 2 failures + 1 error in tests.test_checkpoint_stale_base; GREEN: 5/5 OK; test_checkpoint_hygiene + test_checkpoint_retries OK; full discover 257 = six known macOS-environmental failures identical at baseline f4ffd6f; ruff on changed files: no new findings (two pre-existing ISC003 in cli.py unchanged); continuity docs render --check SYNCHRONIZED at product commit 0e05a13? see git log at entry write time.
+
+Decisions:
+- Overlap-scoped refusal (not general staleness) to keep parallel non-conflicting task branches false-positive-free; guard is git-only, no gh calls, per #166 boundaries.
+
+Changed:
+- src/continuity/cli.py, tests/test_checkpoint_stale_base.py (new), tasks/TASK-PCM-0053-stale-base-guard.md, .continuity/documents.json, docs/CONTINUITY_INDEX.md
+
+Blocked/uncertain:
+- None for this slice; provider pool still 429 for PCM-0046 arms (sibling task).
+
+Next:
+- Open PR for task/PCM-0053-stale-base-guard, verify six required contexts + auto-merge, post merge receipt on #166 and close-out evidence for acceptance criterion 3.
+
 ## Handoff
 
 Read PROJECT → CURRENT → this task → minimum relevant spec. Checkpoint before stopping.

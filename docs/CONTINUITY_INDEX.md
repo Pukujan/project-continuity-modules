@@ -236,10 +236,10 @@
 ## PCM-0053 stale-base guard: checkpoint refuses overlapping upstream edits (`pcm-0053-guard-plan`)
 
 - File: [`tasks/TASK-PCM-0053-stale-base-guard.md`](../tasks/TASK-PCM-0053-stale-base-guard.md)
-- Local content status: **CURRENT**
+- Local content status: **NEEDS_REVIEW**
 - Last reviewed at commit: `uncommitted`
 - Reviewed SHA-256: `00b2e8bc91952312d8d9d8e5f009f9ae54273f2a09e35b29f5dd57276209e3bb`
-- Current SHA-256: `00b2e8bc91952312d8d9d8e5f009f9ae54273f2a09e35b29f5dd57276209e3bb`
+- Current SHA-256: `401d13f89c9795265202101d2679a3c85a4ff8bffc7df3fd71900c1ec171dd50`
 - Summary: Design decision + red-first evidence for the publish-path guard against silently reverting accepted history from a stale local base; incident provenance on #166/#162.
 - Search terms: `authoritative-remote`, `checkpoint-guard`, `publish-path`, `stale-base`
 - Neighboring records: none
