@@ -227,7 +227,7 @@
 - Local content status: **NEEDS_REVIEW**
 - Last reviewed at commit: `uncommitted`
 - Reviewed SHA-256: `6171aed26136ab97a7d4ccaefa689ded092a606e6f3cdeaacadc83bb0608fe0a`
-- Current SHA-256: `04b60abe8b5b56fa16e5fe63456da8959b7f7c357f3b0f687f66a8bc245e8a8b`
+- Current SHA-256: `ffb3cc811afa28c4bbe8833eae33ad4f1f5ca28e0fd7b0b8c551a8978562f63f`
 - Summary: Incident: PR #161 checkpoint composed by uv-tool CLI 0.4.0 (pre-sanitizer) carried a raw closing keyword; squash merge auto-closed active issue #139; reopened with correction; version-drift gate decision open on #162.
 - Search terms: `closing-keyword`, `incident`, `sanitizer-bypass`, `stale-cli`, `version-drift`
 - Neighboring records: none
