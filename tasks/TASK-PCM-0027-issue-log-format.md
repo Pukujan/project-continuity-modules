@@ -107,6 +107,29 @@ Blocked/uncertain:
 Next:
 - Merge the closeout PR, verify accepted history, then run continuity worktree remove PCM-0027.
 
+### 2026-09-25 09:09:51 UTC — owner/Astra planning
+
+<!-- continuity:checkpoint {"agent":"owner/Astra planning","blocked":["None."],"changed":["tasks/TASK-PCM-0027-issue-log-format.md (appended checkpoint)."],"completed":["Corrected wording only: [#99](https://github.com/Pukujan/project-continuity-modules/issues/99) is a top-level deliverable (parent: none), so its leaf receipt needs no parent progression post; the prior entry's \"parent close-out\" label referred to [#53 comment 5828384182](https://github.com/Pukujan/project-continuity-modules/issues/53#issuecomment-5828384182), which is the PCM-0026 child close-out that points at #99 as the then-next slice. No facts change."],"decisions":["no new decisions"],"evidence":["Append-only correction preserved under the records policy; both comments verified live."],"next_action":"Merge the closeout PR, verify accepted history, then run continuity worktree remove PCM-0027.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0027","timestamp":"2026-09-25T09:09:51Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"1e8945840b7ae307f90d03ac045d22656353982720d0cad267b5ae4402ed3875","request_id":"pcm0027-closeout-correction-20260925","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0027"} -->
+
+Completed:
+- Corrected wording only: [#99](https://github.com/Pukujan/project-continuity-modules/issues/99) is a top-level deliverable (parent: none), so its leaf receipt needs no parent progression post; the prior entry's "parent close-out" label referred to [#53 comment 5828384182](https://github.com/Pukujan/project-continuity-modules/issues/53#issuecomment-5828384182), which is the PCM-0026 child close-out that points at #99 as the then-next slice. No facts change.
+
+Evidence:
+- Append-only correction preserved under the records policy; both comments verified live.
+
+Decisions:
+- no new decisions
+
+Changed:
+- tasks/TASK-PCM-0027-issue-log-format.md (appended checkpoint).
+
+Blocked/uncertain:
+- None.
+
+Next:
+- Merge the closeout PR, verify accepted history, then run continuity worktree remove PCM-0027.
+
 ## Handoff
 
 Read PROJECT → CURRENT → this task → `docs/ISSUE_LOG_FORMAT.md`. The module, propagation, validator, and tests are on this branch; next action is publishing the PR with `Refs #99` and reconciling #99 per the owner close plan (evaluation results remain open there). Checkpoint before stopping.
