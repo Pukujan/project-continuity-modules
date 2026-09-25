@@ -76,6 +76,29 @@ Blocked/uncertain:
 Next:
 - PR Refs #134, verify six contexts + merge, receipts, close #134 and #128.
 
+### 2026-09-25 19:32:07 UTC — owner
+
+<!-- continuity:checkpoint {"agent":"owner","blocked":["None."],"changed":["tasks/TASK-PCM-0043-architecture-doc.md; checkpoints/CURRENT.md."],"completed":["Marked PCM-0043 completed; CURRENT cleared and updated with the delivered architecture doc."],"decisions":["no new decisions"],"evidence":["PR #136 merged at 5c89db3; six contexts green; receipt 5838053801; #134/#128 CLOSED."],"next_action":"Merge this closeout PR; then execute the released PCM-0046 P1 traversal holdout.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0043","timestamp":"2026-09-25T19:32:07Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"da5c3e9f564f6ee33461d7402cffe5662dc721a0e0b382b29021e8fec05764e4","request_id":"pcm0043-closeout-20260925","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0043"} -->
+
+Completed:
+- Marked PCM-0043 completed; CURRENT cleared and updated with the delivered architecture doc.
+
+Evidence:
+- PR #136 merged at 5c89db3; six contexts green; receipt 5838053801; #134/#128 CLOSED.
+
+Decisions:
+- no new decisions
+
+Changed:
+- tasks/TASK-PCM-0043-architecture-doc.md; checkpoints/CURRENT.md.
+
+Blocked/uncertain:
+- None.
+
+Next:
+- Merge this closeout PR; then execute the released PCM-0046 P1 traversal holdout.
+
 ## Handoff
 
 Read PROJECT → CURRENT → this task → minimum relevant spec. Checkpoint before stopping.
