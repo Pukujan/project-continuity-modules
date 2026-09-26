@@ -102,6 +102,29 @@ Blocked/uncertain:
 Next:
 - Merge PR task/PCM-0054-projection-sync under six contexts, post merge receipt on #169, then owner answers the pending decision briefs (#162 5840695558, #169 acceptance 2, #144 O1-O4, #142, #143, #166 caveat).
 
+### 2026-09-26 03:56:43 UTC — owner/Astra
+
+<!-- continuity:checkpoint {"agent":"owner/Astra","blocked":["None; PCM-0046 arms window ~04:05Z (pool probe 03:5xZ: 429 retry ~12min at spawn, then ExecAudit also 429 at 03:59Z \u2014 arms themselves untested)."],"changed":["src/continuity/cli.py, tasks/TASK-PCM-0054-durability-receipt-audit.md (tests/test_receipt_audit.py committed at 411dbfc)"],"completed":["continuity receipt audit implemented per owner decision 5842002712: receipt_coverage + audit_receipt_gaps + checkpoint_request_ids_at + audit_task_receipts + parser/dispatch; 10 red-first cases green; real-repo smoke AUDIT_CLEAN on PCM-0053 branch vs #166; criteria 2-3 checked. Status stays active until the PR merges (completion discipline)."],"decisions":["Coverage join = sha (full/prefix) or v2 request id; degraded lookups NEVER emit verdicts; non-github remotes auditable only with explicit --repository matching the task's issue_url ledger."],"evidence":["discover 274 tests = six known macOS-environmental names; receipt suites OK; ruff@0.6.9 two pre-existing ISC003; smoke: audit on origin/task/PCM-0053-stale-base-guard -> AUDIT_CLEAN exit 0; degraded NOTE path and wrong-ledger error exercised in tests."],"next_action":"Open PR task/PCM-0054-receipt-audit, arm auto-merge after final push, merge receipt on #169, then close out PCM-0054.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0054","timestamp":"2026-09-26T03:56:43Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"d3819c3139d6456f72b98e69c4649b28ea946ff94b39e9898773d94ae7b8e037","request_id":"pcm-0054-audit-20260926","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0054"} -->
+
+Completed:
+- continuity receipt audit implemented per owner decision 5842002712: receipt_coverage + audit_receipt_gaps + checkpoint_request_ids_at + audit_task_receipts + parser/dispatch; 10 red-first cases green; real-repo smoke AUDIT_CLEAN on PCM-0053 branch vs #166; criteria 2-3 checked. Status stays active until the PR merges (completion discipline).
+
+Evidence:
+- discover 274 tests = six known macOS-environmental names; receipt suites OK; ruff@0.6.9 two pre-existing ISC003; smoke: audit on origin/task/PCM-0053-stale-base-guard -> AUDIT_CLEAN exit 0; degraded NOTE path and wrong-ledger error exercised in tests.
+
+Decisions:
+- Coverage join = sha (full/prefix) or v2 request id; degraded lookups NEVER emit verdicts; non-github remotes auditable only with explicit --repository matching the task's issue_url ledger.
+
+Changed:
+- src/continuity/cli.py, tasks/TASK-PCM-0054-durability-receipt-audit.md (tests/test_receipt_audit.py committed at 411dbfc)
+
+Blocked/uncertain:
+- None; PCM-0046 arms window ~04:05Z (pool probe 03:5xZ: 429 retry ~12min at spawn, then ExecAudit also 429 at 03:59Z — arms themselves untested).
+
+Next:
+- Open PR task/PCM-0054-receipt-audit, arm auto-merge after final push, merge receipt on #169, then close out PCM-0054.
+
 ## Handoff
 
 Read PROJECT → CURRENT → this task → minimum relevant spec. Checkpoint before stopping.
