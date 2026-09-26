@@ -302,6 +302,29 @@ Blocked/uncertain:
 Next:
 - Open PR #206, auto-merge armed after this final push; on merge, receipt on #189; then STOP - no further self-referential increments regardless of review pressure; remaining queue is owner-gated (#201 A/B, #189-191, #181/182/185, #144/142/143/#135, #171/#110/#33).
 
+### 2026-09-26 16:26:15 UTC — owner/Astra
+
+<!-- continuity:checkpoint {"agent":"owner/Astra","blocked":[],"changed":["tasks/TASK-PCM-0063-t2-staleness-guidance-decision.md, docs/plans/PCM-0046-arms-results/{REPORT.md,meta.json}, .continuity/documents.json, docs/CONTINUITY_INDEX.md"],"completed":["Counter-signal wording made precise wherever mutable: all five arms reported the issue-closed fact; none named it a contradiction or flagged staleness; all five still recommended the stale action. Applied to marker why, prose Why, and the Evidence line; #189's body (the authority field for this task) got the same correction append-only (5847822604); REPORT.md correction 13 records the change and confirms counts stay 5/5. Supersedes: correction 6-era wording 'all five stated the contradiction' overstated attribution - the arms juxtaposed two facts without labeling them; immutable entries keep their original text as history."],"decisions":["Wording precision over count-only fix: the T2-v2 rule design (this issue's subject) must describe the gap as live-fact-ignored, not contradiction-blind - the arms were not blind, they deferred."],"evidence":["assert-based script confirms zero old-form hits in the two live fields; docs refresh + render SYNCHRONIZED after; validate at the single known device-local error; suite 274 at six known names; keyed #189 comments verified via API listing."],"next_action":"Open PR #207, arm auto-merge after this final push, post the merge receipt on #189; then STOP permanently - queue is owner-gated.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0063","timestamp":"2026-09-26T16:26:15Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"ab18603b9de66a9185a793073d757f5b3c90695a2dd4169f46d8e813af1cb9b6","request_id":"pcm-0063-wording3-20260926","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0063"} -->
+
+Completed:
+- Counter-signal wording made precise wherever mutable: all five arms reported the issue-closed fact; none named it a contradiction or flagged staleness; all five still recommended the stale action. Applied to marker why, prose Why, and the Evidence line; #189's body (the authority field for this task) got the same correction append-only (5847822604); REPORT.md correction 13 records the change and confirms counts stay 5/5. Supersedes: correction 6-era wording 'all five stated the contradiction' overstated attribution - the arms juxtaposed two facts without labeling them; immutable entries keep their original text as history.
+
+Evidence:
+- assert-based script confirms zero old-form hits in the two live fields; docs refresh + render SYNCHRONIZED after; validate at the single known device-local error; suite 274 at six known names; keyed #189 comments verified via API listing.
+
+Decisions:
+- Wording precision over count-only fix: the T2-v2 rule design (this issue's subject) must describe the gap as live-fact-ignored, not contradiction-blind - the arms were not blind, they deferred.
+
+Changed:
+- tasks/TASK-PCM-0063-t2-staleness-guidance-decision.md, docs/plans/PCM-0046-arms-results/{REPORT.md,meta.json}, .continuity/documents.json, docs/CONTINUITY_INDEX.md
+
+Blocked/uncertain:
+- none
+
+Next:
+- Open PR #207, arm auto-merge after this final push, post the merge receipt on #189; then STOP permanently - queue is owner-gated.
+
 ## Handoff
 
 Read PROJECT → CURRENT → this task → minimum relevant spec. Checkpoint before stopping.

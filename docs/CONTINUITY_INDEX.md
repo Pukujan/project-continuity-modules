@@ -356,10 +356,10 @@
 ## PCM-0063 — T2 staleness read-rule decision (leaf #189) (`pcm-0063-decision`)
 
 - File: [`tasks/TASK-PCM-0063-t2-staleness-guidance-decision.md`](../tasks/TASK-PCM-0063-t2-staleness-guidance-decision.md)
-- Local content status: **CURRENT**
+- Local content status: **NEEDS_REVIEW**
 - Last reviewed at commit: `uncommitted`
 - Reviewed SHA-256: `9259295f9a37c5b40f64c687b1b930dc29590272165362d5040040a880510a57`
-- Current SHA-256: `9259295f9a37c5b40f64c687b1b930dc29590272165362d5040040a880510a57`
+- Current SHA-256: `2bbf413827034c8f6577c1c34f1118c8685f1717301e5af45c58e42fddc8dc72`
 - Summary: Decision task for the read-time staleness-reconciliation rule: PCM-0046 measured T2 at 0/5 (agents follow the stale projection over the closed live issue); owner picks A/B/C on #189 before any guidance slice.
 - Search terms: `63`, `decision`, `staleness`
 - Neighboring records: `pcm-0046-arm-plan`
