@@ -33,8 +33,8 @@ A fresh session running one deterministic command learns, from the repository an
 ## Acceptance criteria
 
 - [x] Filing slice merged under six required hosted contexts with merge receipt on #169: task projection + CURRENT entry record the enforcement matrix (code-enforced: branch/uncommitted/stale-base/sanitizer/push; convention+opt-in: receipt posting, merge-window discipline) with path:line evidence at `690b7f8`, and the three backfilled receipt ids (5841258606, 5841258803, 5841258608). DELIVERED: filing merged `0fb5aca` (#170, receipt 5841456903); docs slice merged `d5021a3` (#173, tool-posted push receipt 5841654302, merge receipt 5841856423); catalog registration correction + baseline-naming/version-identity fixes recorded append-only in 5841856422.
-- [ ] Owner decision recorded on #169 (one of: default-on receipts when `trackers.github=true` / additive `continuity receipt audit` command / explicit keep-as-convention) — mirrors the #162 acceptance-2 gate; no CLI change before it.
-- [ ] If implementation approved: red-first tests prove audit exits non-zero on a local bare-remote fixture with a pushed SHA lacking a keyed comment, zero when the marker exists, and degrades without network; full suite stays at baseline.
+- [x] Owner decision recorded on #169 (comment 5842002712): additive `continuity receipt audit` command; receipts stay opt-in (#67 freeze semantics unchanged); implementation branch cut only after the decision.
+- [x] Implementation (approved via 5842002712): red-first harness `411dbfc` failed before, then tests/test_receipt_audit.py 10/10 OK — gap -> exit 1 with MISSING lines; v2-marker, manual-comment short-sha-prefix, and request-id coverage -> clean; unproven lookup -> NOTE, never fabricating gaps; branch-not-on-origin -> NOTE; mismatched --repository vs github origin -> wrong-ledger error. Real-repo smoke: AUDIT_CLEAN exit 0 on surviving origin branch task/PCM-0053-stale-base-guard against #166 (push b87e019 covered by receipt 5841072961). Full discover 274 = six known macOS-environmental names, zero new; ruff@0.6.9 = two pre-existing ISC003.
 
 ## Evidence and sources
 
