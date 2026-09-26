@@ -75,6 +75,29 @@ Blocked/uncertain:
 Next:
 - Open PR for task/PCM-0055-receipt-json, verify six contexts + auto-merge, post merge receipt on #171.
 
+### 2026-09-26 01:19:53 UTC — owner/Astra
+
+<!-- continuity:checkpoint {"agent":"owner/Astra","blocked":["Version bump decision (0.5.1) is owner territory (#162/#169)."],"changed":["tasks/TASK-PCM-0055-receipt-json-encoding.md, checkpoints/CURRENT.md, docs/CONTINUITY_INDEX.md"],"completed":["Task closed out: all 3 acceptance criteria evidenced in accepted history (fix+tests at 8227885; dogfood RECEIPT: post 5841558506; merge receipt 5841585509); PR #172 body wrong-citation corrected in place; version-identity 0.5.0-two-behaviors gap recorded as owner input (Refs #169 5841856422)."],"decisions":["PCM-0055 status completed; #171 closes on owner confirmation, not by keyword."],"evidence":["gh pr view 172 -> MERGED 8227885; comments API -> 5841558506/5841585509; full discover 259 = same six broken names as detached-worktree baseline re-run at 690b7f8 (5 failures incl 4 worktree FAILs + 1 worktree ERROR + 2 test_cli FAILs) \u2014 zero regressions."],"next_action":"Post the PCM-0054 sync receipt on Refs #169, open PR task/PCM-0054-projection-sync, arm auto-merge after this final push.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0055","timestamp":"2026-09-26T01:19:53Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"2a05f5cdc054ac625267cee65dd120ca56f70fc505d3f956ff4dddf5faed5946","request_id":"pcm-0055-complete-20260926","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0055"} -->
+
+Completed:
+- Task closed out: all 3 acceptance criteria evidenced in accepted history (fix+tests at 8227885; dogfood RECEIPT: post 5841558506; merge receipt 5841585509); PR #172 body wrong-citation corrected in place; version-identity 0.5.0-two-behaviors gap recorded as owner input (Refs #169 5841856422).
+
+Evidence:
+- gh pr view 172 -> MERGED 8227885; comments API -> 5841558506/5841585509; full discover 259 = same six broken names as detached-worktree baseline re-run at 690b7f8 (5 failures incl 4 worktree FAILs + 1 worktree ERROR + 2 test_cli FAILs) — zero regressions.
+
+Decisions:
+- PCM-0055 status completed; #171 closes on owner confirmation, not by keyword.
+
+Changed:
+- tasks/TASK-PCM-0055-receipt-json-encoding.md, checkpoints/CURRENT.md, docs/CONTINUITY_INDEX.md
+
+Blocked/uncertain:
+- Version bump decision (0.5.1) is owner territory (#162/#169).
+
+Next:
+- Post the PCM-0054 sync receipt on Refs #169, open PR task/PCM-0054-projection-sync, arm auto-merge after this final push.
+
 ## Handoff
 
 Read PROJECT → CURRENT → this task → minimum relevant spec. Checkpoint before stopping.

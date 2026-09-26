@@ -263,7 +263,7 @@
 - Local content status: **NEEDS_REVIEW**
 - Last reviewed at commit: `uncommitted`
 - Reviewed SHA-256: `b9969f3754738546f287b988cb8f4f7a666dae74858dee344f52f2e723eb8646`
-- Current SHA-256: `b6ae97d3e889b25c02a4c5873bda2905ab17d612e4ea3c7468891bef2b11d342`
+- Current SHA-256: `a088794f586d9f8279db63bb69b3cc79e0a049baf6bb9302e53727ccaf101a0e`
 - Summary: gh api --input - needs JSON request parameters; red-first fix + shim test; checkpoint dogfoods the opt-in flags (Refs #171).
 - Search terms: none
 - Neighboring records: `pcm-0054-durability-receipt-audit`
