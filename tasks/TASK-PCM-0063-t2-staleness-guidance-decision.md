@@ -187,6 +187,29 @@ Blocked/uncertain:
 Next:
 - Push to update PR #199 (auto-merge stays armed); verify green on the new head; on merge, receipts on #189 and #201.
 
+### 2026-09-26 15:12:27 UTC — owner/Astra
+
+<!-- continuity:checkpoint {"agent":"owner/Astra","blocked":[],"changed":["tasks/TASK-PCM-0063-t2-staleness-guidance-decision.md, .continuity/documents.json, docs/CONTINUITY_INDEX.md"],"completed":["Projection factual sync: marker why and Evidence line carried the pre-correction 'three arms' counter-signal count; REPORT.md correction 6 (merged 4044c80) established 5/5 from the committed answer files. Task markers are schema-checked, not digest-chained, so this is a legitimate current-state correction of my own live projection rather than an edit to any published checkpoint record. Owed-note from post-merge review now closed instead of deferred, per the explicit-completion requirement; no REPORT or history change needed (correction 6 already supersedes at the source)."],"decisions":["Small dedicated increment rather than fourth correction-fold: the advisory's own alternative (note as owed) leaves a knowingly inconsistent record I own; user directive is complete work."],"evidence":["grep: 'three stated'/'3 arms' gone from non-immutable fields; the two surviving hits sit only inside the hash-immutable 13:42:26Z entry (disclosed, unremovable pending #201); docs refresh pcm-0063-decision + render SYNCHRONIZED; suite at six known names."],"next_action":"Open PR, arm auto-merge after this final push, post merge receipt on #189.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0063","timestamp":"2026-09-26T15:12:27Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"c6ee2f3f6463ad15748bc662e4d67aacfc9305494f0e01189236059e0d2ef775","request_id":"pcm-0063-countsync-20260926","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0063"} -->
+
+Completed:
+- Projection factual sync: marker why and Evidence line carried the pre-correction 'three arms' counter-signal count; REPORT.md correction 6 (merged 4044c80) established 5/5 from the committed answer files. Task markers are schema-checked, not digest-chained, so this is a legitimate current-state correction of my own live projection rather than an edit to any published checkpoint record. Owed-note from post-merge review now closed instead of deferred, per the explicit-completion requirement; no REPORT or history change needed (correction 6 already supersedes at the source).
+
+Evidence:
+- grep: 'three stated'/'3 arms' gone from non-immutable fields; the two surviving hits sit only inside the hash-immutable 13:42:26Z entry (disclosed, unremovable pending #201); docs refresh pcm-0063-decision + render SYNCHRONIZED; suite at six known names.
+
+Decisions:
+- Small dedicated increment rather than fourth correction-fold: the advisory's own alternative (note as owed) leaves a knowingly inconsistent record I own; user directive is complete work.
+
+Changed:
+- tasks/TASK-PCM-0063-t2-staleness-guidance-decision.md, .continuity/documents.json, docs/CONTINUITY_INDEX.md
+
+Blocked/uncertain:
+- none
+
+Next:
+- Open PR, arm auto-merge after this final push, post merge receipt on #189.
+
 ## Handoff
 
 Read PROJECT → CURRENT → this task → minimum relevant spec. Checkpoint before stopping.
