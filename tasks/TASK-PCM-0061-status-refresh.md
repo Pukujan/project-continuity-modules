@@ -53,6 +53,29 @@ Base `d46e0b7` (#183). Verified before editing: `src/continuity/__init__.py` == 
 
 No checkpoints yet.
 
+### 2026-09-26 03:46:00 UTC — owner/Astra
+
+<!-- continuity:checkpoint {"agent":"owner/Astra","blocked":["PCM-0046 arms window ~04:05Z (2/2 probes 429 at 01:3xZ)."],"changed":["README.md, SPEC.md, docs/ARCHITECTURE.md, docs/VERSIONING.md, tasks/TASK-PCM-0054/0055/0056 markers, tasks/TASK-PCM-0059..0062 (new), checkpoints/CURRENT.md, .continuity/documents.json, docs/CONTINUITY_INDEX.md"],"completed":["README evidence table re-pinned 0b3be9c->d46e0b7 (0.6.0; 1.2.0 readability; receipts proven in production with verified comment ids 5841558506/5842251679/5842595705; 264 tests; stale L462/L1632 citations -> L473/L1745-1781) with marketing half + hero images untouched per owner instruction; SPEC.md + ARCHITECTURE.md 1.1.0->1.2.0; dated VERSIONING 1.2.0 entry; PCM-0059/0060/0061/0062 projections minted with real acceptance arrays; placeholder acceptance markers fixed on PCM-0054/0055; #175/#177/#180 closed at receipts, #93/#111 closed as superseded, #171 delivery note awaiting owner confirmation."],"decisions":["README historical rows stay truthful snapshots; only current-state claims re-pinned. 4 stale items closed without data loss (PR heads remain reachable)."],"evidence":["discover 264 = six known macOS-environmental names (worktrees 3F+1E, test_cli 2F); ruff@0.6.9 two pre-existing ISC003; validate device-local pcm-pinned only; close/receipt ids verified via API in-session before posting; #183 checks: 13 pass lines."],"next_action":"PR task/PCM-0061-status-refresh: arm auto-merge after this final push, merge receipt on #184, then resume PCM-0054 audit implementation on task/PCM-0054-receipt-audit.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0061","timestamp":"2026-09-26T03:46:00Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"b56932408e66cbcf88c647ebdc9a930af18aefdc85474e7cf0b4d2426b269ba1","request_id":"pcm-0061-refresh-20260926","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0061"} -->
+
+Completed:
+- README evidence table re-pinned 0b3be9c->d46e0b7 (0.6.0; 1.2.0 readability; receipts proven in production with verified comment ids 5841558506/5842251679/5842595705; 264 tests; stale L462/L1632 citations -> L473/L1745-1781) with marketing half + hero images untouched per owner instruction; SPEC.md + ARCHITECTURE.md 1.1.0->1.2.0; dated VERSIONING 1.2.0 entry; PCM-0059/0060/0061/0062 projections minted with real acceptance arrays; placeholder acceptance markers fixed on PCM-0054/0055; #175/#177/#180 closed at receipts, #93/#111 closed as superseded, #171 delivery note awaiting owner confirmation.
+
+Evidence:
+- discover 264 = six known macOS-environmental names (worktrees 3F+1E, test_cli 2F); ruff@0.6.9 two pre-existing ISC003; validate device-local pcm-pinned only; close/receipt ids verified via API in-session before posting; #183 checks: 13 pass lines.
+
+Decisions:
+- README historical rows stay truthful snapshots; only current-state claims re-pinned. 4 stale items closed without data loss (PR heads remain reachable).
+
+Changed:
+- README.md, SPEC.md, docs/ARCHITECTURE.md, docs/VERSIONING.md, tasks/TASK-PCM-0054/0055/0056 markers, tasks/TASK-PCM-0059..0062 (new), checkpoints/CURRENT.md, .continuity/documents.json, docs/CONTINUITY_INDEX.md
+
+Blocked/uncertain:
+- PCM-0046 arms window ~04:05Z (2/2 probes 429 at 01:3xZ).
+
+Next:
+- PR task/PCM-0061-status-refresh: arm auto-merge after this final push, merge receipt on #184, then resume PCM-0054 audit implementation on task/PCM-0054-receipt-audit.
+
 ## Handoff
 
 Read PROJECT → CURRENT → this task → minimum relevant spec. Checkpoint before stopping.

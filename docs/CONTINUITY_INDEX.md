@@ -332,10 +332,10 @@
 ## PCM-0061 status refresh and lifecycle hygiene (`pcm-0061-status-refresh`)
 
 - File: [`tasks/TASK-PCM-0061-status-refresh.md`](../tasks/TASK-PCM-0061-status-refresh.md)
-- Local content status: **CURRENT**
+- Local content status: **NEEDS_REVIEW**
 - Last reviewed at commit: `uncommitted`
 - Reviewed SHA-256: `7ee1d641b07afeae34b34be783b32feb17923191ee50d5c8dce6d3352940619c`
-- Current SHA-256: `7ee1d641b07afeae34b34be783b32feb17923191ee50d5c8dce6d3352940619c`
+- Current SHA-256: `5dc8e5a553d8e428182cbfe00dd19748d9b80f1a9ba3d3019bedf520ae82aefe`
 - Summary: README evidence table re-pinned to d46e0b7, normative 1.2.0 refs, close-outs for #175/#177/#180 + superseded PRs #93/#111 (Refs #184).
 - Search terms: `lifecycle`, `readme`, `status`
 - Neighboring records: `pcm-0058-readability`
