@@ -79,6 +79,29 @@ Blocked/uncertain:
 Next:
 - Open PR for task/PCM-0054-guidance-prose, verify six contexts + auto-merge, post merge receipt on #169.
 
+### 2026-09-26 01:21:06 UTC — owner/Astra
+
+<!-- continuity:checkpoint {"agent":"owner/Astra","blocked":["Acceptance 2 on #169 (owner decision); PCM-0046 arms provider-429 (~04:05Z)."],"changed":["tasks/TASK-PCM-0054-durability-receipt-audit.md, tasks/TASK-PCM-0055-receipt-json-encoding.md, checkpoints/CURRENT.md, docs/CONTINUITY_INDEX.md"],"completed":["Projection sync: acceptance 1 checked with delivered evidence (filing 0fb5aca + docs slice d5021a3; receipts 5841456903/5841654302/5841856423); false request-id citation replaced with corrected lineage; allowed-files amendment 2 (guidance-text fix needs no #169 decision); audit-correction pointer 5841856422 (PR #170 catalog claim, PR #172 citation, baseline names 5F+1E, 0.5.0 version identity); DB-posture question + answer recorded on #144 (5841877756). PCM-0055 closed out on this branch (cac15b4)."],"decisions":["Acceptance 2 stays owner-gated; DuckDB/OTEL analytics-substrate question to be filed as its own decision issue rather than folded here."],"evidence":["detached-worktree baseline discover at 690b7f8: same six broken names as current 259-test discover (worktrees 4F+1E, test_cli 2F) \u2014 zero regressions; gh comments API verified all cited ids; validate = device-local pcm-pinned error only."],"next_action":"Merge PR task/PCM-0054-projection-sync under six contexts, post merge receipt on #169, then owner answers the pending decision briefs (#162 5840695558, #169 acceptance 2, #144 O1-O4, #142, #143, #166 caveat).","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0054","timestamp":"2026-09-26T01:21:06Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"7fb29414aada88d1261c00d19520e72766f7be8de74dc96d0d3ad03b8dc69757","request_id":"pcm-0054-sync-20260926","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0054"} -->
+
+Completed:
+- Projection sync: acceptance 1 checked with delivered evidence (filing 0fb5aca + docs slice d5021a3; receipts 5841456903/5841654302/5841856423); false request-id citation replaced with corrected lineage; allowed-files amendment 2 (guidance-text fix needs no #169 decision); audit-correction pointer 5841856422 (PR #170 catalog claim, PR #172 citation, baseline names 5F+1E, 0.5.0 version identity); DB-posture question + answer recorded on #144 (5841877756). PCM-0055 closed out on this branch (cac15b4).
+
+Evidence:
+- detached-worktree baseline discover at 690b7f8: same six broken names as current 259-test discover (worktrees 4F+1E, test_cli 2F) — zero regressions; gh comments API verified all cited ids; validate = device-local pcm-pinned error only.
+
+Decisions:
+- Acceptance 2 stays owner-gated; DuckDB/OTEL analytics-substrate question to be filed as its own decision issue rather than folded here.
+
+Changed:
+- tasks/TASK-PCM-0054-durability-receipt-audit.md, tasks/TASK-PCM-0055-receipt-json-encoding.md, checkpoints/CURRENT.md, docs/CONTINUITY_INDEX.md
+
+Blocked/uncertain:
+- Acceptance 2 on #169 (owner decision); PCM-0046 arms provider-429 (~04:05Z).
+
+Next:
+- Merge PR task/PCM-0054-projection-sync under six contexts, post merge receipt on #169, then owner answers the pending decision briefs (#162 5840695558, #169 acceptance 2, #144 O1-O4, #142, #143, #166 caveat).
+
 ## Handoff
 
 Read PROJECT → CURRENT → this task → minimum relevant spec. Checkpoint before stopping.
