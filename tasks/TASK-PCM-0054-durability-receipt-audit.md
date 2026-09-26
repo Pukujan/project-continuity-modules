@@ -17,7 +17,7 @@ The 2026-09-25 durability audit found three contract-required merge receipts nev
 
 ## Allowed files
 
-- Filing slice (this increment): this task file, `checkpoints/CURRENT.md`, `.continuity/documents.json`, `docs/CONTINUITY_INDEX.md` (generated). Implementation slice (only after the owner answers the design question on #169): `src/continuity/cli.py`, `tests/test_receipt_audit.py` (new), plus regenerated catalog/index.
+- Filing slice (merged in `0fb5aca`): this task file, `checkpoints/CURRENT.md`, `.continuity/documents.json`, `docs/CONTINUITY_INDEX.md` (generated). Docs slice (named in the filed audit record): the stale "Issue #67 remains open" sentence corrected in all 9 guidance copies — `AGENTS.md`, `HANDOFF.md`, `src/continuity/cli.py` (`GITHUB_PROGRESSION_GUIDANCE`), `templates/v1/{minimal/PROJECT.md,minimal/HANDOFF.md,software/AGENTS.md,software/README.md}`, `.github/{pull_request_template.md,ISSUE_TEMPLATE/task.md}` — required-phrase test `automatic issue-comment synchronization is not implemented` kept intact. Implementation slice (only after the owner answers the design question on #169): `src/continuity/cli.py`, `tests/test_receipt_audit.py` (new), plus regenerated catalog/index.
 
 ## Human outcome
 
@@ -46,6 +46,10 @@ A fresh session running one deterministic command learns, from the repository an
 - Leaf #169 (PCM-0054); parent: none; depends: none; related #67, #162, #166, #139.
 - Primary writer: owner/Astra (omp session); branch task/PCM-0053-closeout (filing increment rides the PCM-0053 closeout push); source issue revision: #169 body at filing; as-of 2026-09-25T23:58Z.
 - Push receipt: continuity checkpoint request pcm-0054-filed-20260925 (posted to #169 after push).
+
+## Docs slice (stale #67 prose correction)
+
+The filed record named this one-line prose defect; it is now corrected in all 9 copies of the guidance block: "Issue #67 remains open" -> "#67 is CLOSED (owner freeze decision 2026-09-25) and its unmet guaranteed-completion acceptance transferred to #110" (observed: #67 CLOSED/COMPLETED; #110 OPEN). The `tests/test_github_progression_policy.py` REQUIRED phrase "automatic issue-comment synchronization is not implemented" is preserved in every copy; guidance/records tests 33 OK; full discover 259 = six known environmental failures; docs render --check SYNCHRONIZED.
 
 ## Checkpoint log
 
