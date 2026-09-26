@@ -284,10 +284,10 @@
 ## PCM-0057 version-drift NOTE + 0.6.0 bump (`pcm-0057-version-note`)
 
 - File: [`tasks/TASK-PCM-0057-version-drift-note.md`](../tasks/TASK-PCM-0057-version-drift-note.md)
-- Local content status: **CURRENT**
+- Local content status: **NEEDS_REVIEW**
 - Last reviewed at commit: `uncommitted`
 - Reviewed SHA-256: `0e9f11baff9f3ee77d2c6a869212b76a40cfa5597a2ab919339d61ef7e0224ed`
-- Current SHA-256: `0e9f11baff9f3ee77d2c6a869212b76a40cfa5597a2ab919339d61ef7e0224ed`
+- Current SHA-256: `c4411ba0725ff79be7392dd24220da20aede933858d105589e4e3c5dfe842ef6`
 - Summary: Checkpoint publishing prints installed-vs-checkout version mismatch (owner decision B, #162 5842002582); 0.5.0->0.6.0 so the PCM-0055 wire change is distinguishable (Refs #177).
 - Search terms: `checkpoint`, `observability`, `version-drift`
 - Neighboring records: `pcm-0052-incident`

@@ -54,6 +54,29 @@ Base `ff84e91` (#176). RED: `PYTHONPATH=src python3.12 -m unittest tests.test_ve
 
 No checkpoints yet.
 
+### 2026-09-26 02:08:58 UTC — owner/Astra
+
+<!-- continuity:checkpoint {"agent":"owner/Astra","blocked":["None for this slice; PCM-0046 arms window ~04:05Z."],"changed":["src/continuity/cli.py, src/continuity/__init__.py, tests/test_version_note.py (new), tests/test_issue_log_format.py, docs/VERSIONING.md, docs/ARCHITECTURE.md, README.md, tasks/TASK-PCM-0057-version-drift-note.md (new), checkpoints/CURRENT.md, .continuity/documents.json, docs/CONTINUITY_INDEX.md"],"completed":["version_drift_note() + print in publish_checkpoint (option B per #162 5842002582); package 0.5.0 -> 0.6.0 with VERSIONING entry, ARCHITECTURE line, README dated note (pinned 0b3be9c table left intact by design); red-first tests/test_version_note.py 4 cases; task projection #177 + catalog/index."],"decisions":["0.6.0 MINOR (backward-compatible safety capability per docs/VERSIONING.md) \u2014 PCM-0055 changed receipt wire behavior under the old 0.5.0 label; NOTE never refuses."],"evidence":["RED: ImportError before function (1 error); GREEN: 4 OK; combined 53 OK (hygiene/retries/stale-base/json-encoding/issue-log-format pin); discover 263 = exactly the six known macOS-environmental names, zero new; ruff@0.6.9 = two pre-existing ISC003; docs render --check SYNCHRONIZED."],"next_action":"Arm auto-merge on this PR now that the final push is complete, post merge receipt on #177/#162, close #162 acceptance 2.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0057","timestamp":"2026-09-26T02:08:58Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"73f4ef6f2181caa3382bca94de78f18d0ed271f2aca7054fd2c0e2187fa64a62","request_id":"pcm-0057-drift-20260926","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0057"} -->
+
+Completed:
+- version_drift_note() + print in publish_checkpoint (option B per #162 5842002582); package 0.5.0 -> 0.6.0 with VERSIONING entry, ARCHITECTURE line, README dated note (pinned 0b3be9c table left intact by design); red-first tests/test_version_note.py 4 cases; task projection #177 + catalog/index.
+
+Evidence:
+- RED: ImportError before function (1 error); GREEN: 4 OK; combined 53 OK (hygiene/retries/stale-base/json-encoding/issue-log-format pin); discover 263 = exactly the six known macOS-environmental names, zero new; ruff@0.6.9 = two pre-existing ISC003; docs render --check SYNCHRONIZED.
+
+Decisions:
+- 0.6.0 MINOR (backward-compatible safety capability per docs/VERSIONING.md) — PCM-0055 changed receipt wire behavior under the old 0.5.0 label; NOTE never refuses.
+
+Changed:
+- src/continuity/cli.py, src/continuity/__init__.py, tests/test_version_note.py (new), tests/test_issue_log_format.py, docs/VERSIONING.md, docs/ARCHITECTURE.md, README.md, tasks/TASK-PCM-0057-version-drift-note.md (new), checkpoints/CURRENT.md, .continuity/documents.json, docs/CONTINUITY_INDEX.md
+
+Blocked/uncertain:
+- None for this slice; PCM-0046 arms window ~04:05Z.
+
+Next:
+- Arm auto-merge on this PR now that the final push is complete, post merge receipt on #177/#162, close #162 acceptance 2.
+
 ## Handoff
 
 Read PROJECT → CURRENT → this task → minimum relevant spec. Checkpoint before stopping.
