@@ -77,6 +77,29 @@ Blocked/uncertain:
 Next:
 - Arm auto-merge on this PR now that the final push is complete, post merge receipt on #177/#162, close #162 acceptance 2.
 
+### 2026-09-26 02:22:28 UTC — owner/Astra
+
+<!-- continuity:checkpoint {"agent":"owner/Astra","blocked":["None; #162 closes on the merge receipt for this PR."],"changed":["tasks/TASK-PCM-0057-version-drift-note.md"],"completed":["Closeout projection: acceptance 3 checked with merge facts (PR #178 merged bcc0bf3 six contexts); receipt id corrected to API-verified 5842251679; status completed. Guard self-observation: the first attempt was REFUSED by the PCM-0053 stale-base guard on the overlapping closeout paths; resolved via cherry-pick onto post-merge main + this dedicated closeout branch (repo precedent: PCM-0051/0052/0043 closeout branches; no force-push)."],"decisions":["Old pushed branch tip f33796f (pre-rebase) left untouched on origin; superseded by this branch's history; #162 closes on this PR's merge receipt."],"evidence":["gh pr view 178 -> MERGED 02:13:21Z bcc0bf30c77d6926e2bbd6fcde686d1a4161c5e8; comments API on #177 -> 5842251679 (pcm:receipt-v2 task=PCM-0057 request=pcm-0057-drift-20260926)."],"next_action":"Open closeout PR, arm auto-merge AFTER this push (PCM-0056 rule), verify six contexts, post merge receipts on #177/#162, close #162.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0057","timestamp":"2026-09-26T02:22:28Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"89c0055f192a2c33ff096b69d62ff5ae9b78116dbae9eee88614ee1f395534a7","request_id":"pcm-0057-closeout-20260926","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0057"} -->
+
+Completed:
+- Closeout projection: acceptance 3 checked with merge facts (PR #178 merged bcc0bf3 six contexts); receipt id corrected to API-verified 5842251679; status completed. Guard self-observation: the first attempt was REFUSED by the PCM-0053 stale-base guard on the overlapping closeout paths; resolved via cherry-pick onto post-merge main + this dedicated closeout branch (repo precedent: PCM-0051/0052/0043 closeout branches; no force-push).
+
+Evidence:
+- gh pr view 178 -> MERGED 02:13:21Z bcc0bf30c77d6926e2bbd6fcde686d1a4161c5e8; comments API on #177 -> 5842251679 (pcm:receipt-v2 task=PCM-0057 request=pcm-0057-drift-20260926).
+
+Decisions:
+- Old pushed branch tip f33796f (pre-rebase) left untouched on origin; superseded by this branch's history; #162 closes on this PR's merge receipt.
+
+Changed:
+- tasks/TASK-PCM-0057-version-drift-note.md
+
+Blocked/uncertain:
+- None; #162 closes on the merge receipt for this PR.
+
+Next:
+- Open closeout PR, arm auto-merge AFTER this push (PCM-0056 rule), verify six contexts, post merge receipts on #177/#162, close #162.
+
 ## Handoff
 
 Read PROJECT → CURRENT → this task → minimum relevant spec. Checkpoint before stopping.
