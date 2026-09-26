@@ -66,6 +66,51 @@ Blocked/uncertain:
 
 Next:
 - After ~04:15Z: spawn 20 arms per docs/plans/PCM-0046-arm-launcher.sh, score with docs/plans/PCM-0046-arm-scorer.py, report, closeout PR, close #139, remove worktree.
+### 2026-09-25 22:20:06 UTC — owner/Astra
+
+<!-- continuity:checkpoint {"agent":"owner/Astra","blocked":["All 20 PCM-0046 arms provider-rate-blocked until ~04:00Z 2026-09-26 (observed 429 retry-after); nothing else actionable without owner input (#144/#142/#143 decisions pending)."],"changed":["checkpoints/CURRENT.md; GitHub: #122 #123 closed"],"completed":["Post-#160 housekeeping increment: CURRENT projection re-synced to observed state (amendment set frozen/merged at 57d5b94, probe 22:04Z 429 retry-after opens ~04:00Z, zero arms run, bundles pristine); #122 and #123 closed with dated evidence closeout comments 5840415451/5840415434 reconciling the sanitizer dogfood split (passes 1-5 = index NOTE only; pass 6 commit 2063136 = sanitizer proof; colon/cross-repo at e3c6f25); next-action paragraph refreshed to v2-bundle/v4-launcher procedure with regeneration condition stated."],"decisions":["PCM-0028 phases 1-3 (#104/#105/#106) remain NOT released: owner direction 5830322199 on #100 requires a separate go; recorded in CURRENT so a fresh session does not start them. #122/#123 closeout by evidence comment rather than closing keyword per sanitized-keyword policy."],"evidence":["PR #160 MERGED via auto-merge at squash 57d5b94 with six required contexts green (quality/test 3.11+3.12/package/parity x2); gh issue view: #122 CLOSED #123 CLOSED; find /tmp/pcm0046-arms-v2 -newer manifest.json -type f -> empty (bundles unmodified, zero arms run); continuity docs render --check SYNCHRONIZED at this commit; two independent 429 probes at 22:04Z (subagent launches rejected pre-execution, retry-after ~5.9h)."],"next_action":"After ~04:00Z 2026-09-26: launch the 20 frozen arms per this CURRENT next-action item 1 (v4 prompts verbatim), capture+score, report tallies on #139/#137, then closeout PR and close #139.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0046","timestamp":"2026-09-25T22:20:06Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"3e08e16aea5145463b6d08fc4437ba13e9bcd4ed44c010ed4f9070a94992fd53","request_id":"pcm-0046-sync-20260925b","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0046"} -->
+
+Completed:
+- Post-#160 housekeeping increment: CURRENT projection re-synced to observed state (amendment set frozen/merged at 57d5b94, probe 22:04Z 429 retry-after opens ~04:00Z, zero arms run, bundles pristine); #122 and #123 closed with dated evidence closeout comments 5840415451/5840415434 reconciling the sanitizer dogfood split (passes 1-5 = index NOTE only; pass 6 commit 2063136 = sanitizer proof; colon/cross-repo at e3c6f25); next-action paragraph refreshed to v2-bundle/v4-launcher procedure with regeneration condition stated.
+
+Evidence:
+- PR #160 MERGED via auto-merge at squash 57d5b94 with six required contexts green (quality/test 3.11+3.12/package/parity x2); gh issue view: #122 CLOSED #123 CLOSED; find /tmp/pcm0046-arms-v2 -newer manifest.json -type f -> empty (bundles unmodified, zero arms run); continuity docs render --check SYNCHRONIZED at this commit; two independent 429 probes at 22:04Z (subagent launches rejected pre-execution, retry-after ~5.9h).
+
+Decisions:
+- PCM-0028 phases 1-3 (#104/#105/#106) remain NOT released: owner direction 5830322199 on #100 requires a separate go; recorded in CURRENT so a fresh session does not start them. #122/#123 closeout by evidence comment rather than closing keyword per sanitized-keyword policy.
+
+Changed:
+- checkpoints/CURRENT.md; GitHub: #122 #123 closed
+
+Blocked/uncertain:
+- All 20 PCM-0046 arms provider-rate-blocked until ~04:00Z 2026-09-26 (observed 429 retry-after); nothing else actionable without owner input (#144/#142/#143 decisions pending).
+
+Next:
+- After ~04:00Z 2026-09-26: launch the 20 frozen arms per this CURRENT next-action item 1 (v4 prompts verbatim), capture+score, report tallies on #139/#137, then closeout PR and close #139.
+
+### 2026-09-25 22:51:35 UTC — owner/Astra
+
+<!-- continuity:checkpoint {"agent":"owner/Astra","blocked":["All 20 arms still provider-rate-gated (22:40Z probe retry-after opens ~04:00Z 2026-09-26); zero arms run."],"changed":["tasks/TASK-PCM-0046-traversal-holdout.md"],"completed":["Supersede the forward-looking directive in checkpoint entry pcm-0046-sync-20260925b: its Next line told the next session to issue a literal closing keyword naming this issue through continuity checkpoint. The directive is replaced by: transition #139 to CLOSED via an explicit closeout comment at merge time, never via a keyword in --next (PCM-0052 incident #162 fired exactly this text through a stale pre-sanitizer CLI at 22:20Z; the appended entry text itself is preserved per append-only)."],"decisions":["Append-only preserved: no edit to the 22:20 entry; supersession recorded here."],"evidence":["Line 68 of this file at a68286d is the superseded directive; this entry's own Next line is keyword-free and the installed CLI is now 0.5.0 from checkout, so both paths are covered."],"next_action":"After the window: launch the 20 frozen arms per docs/plans/PCM-0046-arm-plan.md amendments 1-12, capture+score, report tallies on #139/#137, then PCM-0046 closeout PR transitioning #139 to CLOSED via explicit comment (this entry supersedes the keyword directive).","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0046","timestamp":"2026-09-25T22:51:35Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"2d9aca83ca76d43d2da1ad7149512b8549faadaddef9a17399a139958f0803a6","request_id":"pcm-0046-nextfix-20260925","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0046"} -->
+
+Completed:
+- Supersede the forward-looking directive in checkpoint entry pcm-0046-sync-20260925b: its Next line told the next session to issue a literal closing keyword naming this issue through continuity checkpoint. The directive is replaced by: transition #139 to CLOSED via an explicit closeout comment at merge time, never via a keyword in --next (PCM-0052 incident #162 fired exactly this text through a stale pre-sanitizer CLI at 22:20Z; the appended entry text itself is preserved per append-only).
+
+Evidence:
+- Line 68 of this file at a68286d is the superseded directive; this entry's own Next line is keyword-free and the installed CLI is now 0.5.0 from checkout, so both paths are covered.
+
+Decisions:
+- Append-only preserved: no edit to the 22:20 entry; supersession recorded here.
+
+Changed:
+- tasks/TASK-PCM-0046-traversal-holdout.md
+
+Blocked/uncertain:
+- All 20 arms still provider-rate-gated (22:40Z probe retry-after opens ~04:00Z 2026-09-26); zero arms run.
+
+Next:
+- After the window: launch the 20 frozen arms per docs/plans/PCM-0046-arm-plan.md amendments 1-12, capture+score, report tallies on #139/#137, then PCM-0046 closeout PR transitioning #139 to CLOSED via explicit comment (this entry supersedes the keyword directive).
 
 ## Handoff
 

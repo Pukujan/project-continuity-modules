@@ -26,9 +26,9 @@ CONTINUITY_RECORDS_POLICY_MARKER = (
     '<!-- pcm:policy {"id":"continuity-records","policy_version":"1.3.0","protocol_version":"0.1.0-draft"} -->'
 )
 CONTINUITY_RECORDS_POLICY_VERSION = "1.3.0"
-ISSUE_LOG_FORMAT_POLICY_VERSION = "1.1.0"
+ISSUE_LOG_FORMAT_POLICY_VERSION = "1.2.0"
 ISSUE_LOG_FORMAT_POLICY_MARKER = (
-    '<!-- pcm:policy {"id":"issue-log-format","policy_version":"1.1.0","protocol_version":"0.1.0-draft"} -->'
+    '<!-- pcm:policy {"id":"issue-log-format","policy_version":"1.2.0","protocol_version":"0.1.0-draft"} -->'
 )
 ISSUE_LOG_FORMAT_START_MARKER = "<!-- pcm:issue-log-format:start -->"
 ISSUE_LOG_FORMAT_END_MARKER = "<!-- pcm:issue-log-format:end -->"
@@ -39,7 +39,7 @@ ISSUE_LOG_FORMAT_GUIDANCE = (
     + ")\n\n"
     + ISSUE_LOG_FORMAT_POLICY_MARKER
     + "\n\n"
-    "Write issue logs, progress updates, and pull requests in one plain-language shape a newcomer can follow. Pick the tier by the kind of issue, not by preference. **Core tier (every issue log):** title states the problem and intended direction; a 1-3 paragraph summary naming who/what is affected, the consequence, and what this proposes; identity and lineage (leaf owning issue, parent ancestry or none, task ID, primary writer, branch); observed facts vs interpretation, with inferences labelled *inferred*; acceptance criteria with numeric thresholds marked *(proposed)* when untested; boundaries/non-goals and one next action. **Investigation tier (incidents, failures, research, design issues):** numbered symptoms; hypotheses with Status, confirm/refute, and experiment; evidence with provenance; a **Counter-signal** entry when one exists; honest caveat; problems-vs-gaps; a **Proposal** labelled *(proposal)* stating none of it exists unless named as existing. **Pull requests open reader-first:** problem and consequence, what changes, how to verify, and what stays unchanged; lineage links; evidence and one next action; long logs collapsed or linked; reference issues with \"Refs #<number>\" and use closing keywords only when closing at merge is intended. **Diagrams (mermaid):** when a record describes a flow with 4+ ordered steps or 2+ branches, add a fenced mermaid diagram *and* keep an adjacent text list or table so the record survives render failure; default to `graph TD` (vertical) because wide `LR` flows shrink to illegible strips on phones — reserve `LR` for 4 or fewer short nodes; cap 8 nodes and 6-word labels; wrap diagrams that may exceed the container width inside `<details>` (GitHub mounts the renderer lazily on expand); preview the rendered diagram before publishing (broken syntax shows a visible parse error) and never cite renderer URLs as standalone sources. No private absolute paths or secrets; link rather than paste long logs. See `docs/ISSUE_LOG_FORMAT.md` for the full format, exemplar, and examples.\n"
+    "Write issue logs, progress updates, and pull requests in one plain-language shape a newcomer can follow. Pick the tier by the kind of issue, not by preference. **Core tier (every issue log):** title states the problem and intended direction; a 1-3 paragraph summary naming who/what is affected, the consequence, and what this proposes; identity and lineage (leaf owning issue, parent ancestry or none, task ID, primary writer, branch); observed facts vs interpretation, with inferences labelled *inferred*; acceptance criteria with numeric thresholds marked *(proposed)* when untested; boundaries/non-goals and one next action. **Investigation tier (incidents, failures, research, design issues):** numbered symptoms; hypotheses with Status, confirm/refute, and experiment; evidence with provenance; a **Counter-signal** entry when one exists; honest caveat; problems-vs-gaps; a **Proposal** labelled *(proposal)* stating none of it exists unless named as existing. **Pull requests open reader-first:** problem and consequence, what changes, how to verify, and what stays unchanged; lineage links; evidence and one next action; long logs collapsed or linked; reference issues with \"Refs #<number>\" and use closing keywords only when closing at merge is intended. **Diagrams (mermaid):** when a record describes a flow with 4+ ordered steps or 2+ branches, add a fenced mermaid diagram *and* keep an adjacent text list or table so the record survives render failure; default to `graph TD` (vertical) because wide `LR` flows shrink to illegible strips on phones — reserve `LR` for 4 or fewer short nodes; cap 8 nodes and 6-word labels; wrap diagrams that may exceed the container width inside `<details>` (GitHub mounts the renderer lazily on expand); preview the rendered diagram before publishing (broken syntax shows a visible parse error) and never cite renderer URLs as standalone sources. **Readability rules:** give every SHA, comment id, flag, file path, or tool name a plain-word meaning in the same sentence before it carries load; write evidence as the claim first, numbers as support (“nothing this change could break failed (263 tests, same six machine-environment failures as before)”), never bare counts; no unexplained acronym or bare identifier on first use in any tier; PR openings and checkpoint Completed/Next lines start with one problem sentence a newcomer can follow; the rule set applies to CURRENT projections and checkpoint entries exactly as to issue logs. No private absolute paths or secrets; link rather than paste long logs. See `docs/ISSUE_LOG_FORMAT.md` for the full format, exemplar, and examples.\n"
     + ISSUE_LOG_FORMAT_END_MARKER
 )
 GITHUB_PROGRESSION_GUIDANCE = """<!-- pcm:github-progression:start -->
@@ -53,9 +53,9 @@ Authorized owner/user direction can revise intent: record it on the owning GitHu
 
 Label observed results, repository/external evidence, agent reports and inference separately. Preserve contradictory evidence with source/revision and mark conclusions disputed or unknown until resolved. Append correction/supersession evidence; never rewrite checkpoint history. An upstream correction MUST identify affected descendants and assumptions on their issues; pause, re-plan and revalidate dependent work before resuming. Follow explicit parent/dependency links within the affected scope; cycles or unknown lineage block affected claims. No graph database, local canonical ledger or autonomous polling agent is required.
 
-Before every push, synchronize relevant docs and task/checkpoint projections, CURRENT/HANDOFF when affected, and reviewed catalog/generated index. Record leaf/parent/dependency links, source issue/comment revision, as-of status, evidence, blockers and next action. Commit product/docs first; `continuity checkpoint` then commits and synchronously pushes the checkpoint with a stable request ID. After every successful push, manually publish a leaf issue receipt keyed by request ID and exact pushed SHA, linking changed docs/checkpoint, PR, tests and pending gates; add a linked parent progression update. Retry a missing receipt without another checkpoint/push; inspect for the same key before posting. --receipt-repo and --receipt-issue are opt-in and still require a proven lookup; omit them and the receipt stays manual. Automatic issue-comment synchronization is not implemented. Issue #67 remains open.
+Before every push, synchronize relevant docs and task/checkpoint projections, CURRENT/HANDOFF when affected, and reviewed catalog/generated index. Record leaf/parent/dependency links, source issue/comment revision, as-of status, evidence, blockers and next action. Commit product/docs first; `continuity checkpoint` then commits and synchronously pushes the checkpoint with a stable request ID. After every successful push, manually publish a leaf issue receipt keyed by request ID and exact pushed SHA, linking changed docs/checkpoint, PR, tests and pending gates; add a linked parent progression update. Retry a missing receipt without another checkpoint/push; inspect for the same key before posting. --receipt-repo and --receipt-issue are opt-in and still require a proven lookup; omit them and the receipt stays manual. Automatic issue-comment synchronization is not implemented; issue #67 is CLOSED (owner freeze decision 2026-09-25) and its unmet guaranteed-completion acceptance transferred to #110.
 
-Required CI and GitHub auto-merge are mandatory. Verify protection, required reviews/checks on the exact current-base or merge-queue candidate, and auto-merge; missing, failed, skipped, stale or unverified gates fail closed: no completion or cleanup. After CI/merge, append the exact check results, PR/merge SHA and live issue status to the leaf and link the parent update; fetch and verify accepted history. Reconcile material doc/status corrections in a new synchronized increment. Receipt-only transitions need no recursive doc commit: docs retain an explicit as-of/pending state and point to the live issue. Never label local-only or merely pushed work delivered. Preserve unsafe resources and keep incomplete issues open.
+Required CI and GitHub auto-merge are mandatory. Arm auto-merge only after the increment's final push: a later push races the merge window and strands outside accepted history. Verify protection, required reviews/checks on the exact current-base or merge-queue candidate, and auto-merge; missing, failed, skipped, stale or unverified gates fail closed: no completion or cleanup. After CI/merge, append the exact check results, PR/merge SHA and live issue status to the leaf and link the parent update; fetch and verify accepted history. Reconcile material doc/status corrections in a new synchronized increment. Receipt-only transitions need no recursive doc commit: docs retain an explicit as-of/pending state and point to the live issue. Never label local-only or merely pushed work delivered. Preserve unsafe resources and keep incomplete issues open.
 <!-- pcm:github-progression:end -->"""
 
 GITHUB_ISSUE_LIFECYCLE_GUIDANCE = (
@@ -2865,7 +2865,10 @@ def publish_issue_receipt(
             raise ContinuityError("receipt body is missing its marker")
         reject_receipt_secrets(body)
         path = github_issue_comment_path(repository, issue_number)
-        result = run(["gh", "api", "--method", "POST", path, "--input", "-"], body)
+        # `gh api --input -` parses stdin as JSON request parameters, not a
+        # plain body; posting the raw markdown returns HTTP 400 (PCM-0055).
+        payload = json.dumps({"body": body})
+        result = run(["gh", "api", "--method", "POST", path, "--input", "-"], payload)
         if result.returncode != 0:
             detail = (result.stderr or result.stdout or "GitHub comment post failed").strip()
             try:
@@ -3037,15 +3040,204 @@ def maybe_post_from_page(
     )
 
 
+def receipt_coverage(bodies: list[str]) -> tuple[set[str], set[str]]:
+    """Collect receipt evidence from issue comment bodies.
+
+    v2 markers contribute their exact `sha=` and `request=` fields; historical
+    manual `pcm:receipt` comments contribute every hex token they name (full or
+    short SHA). Prose outside a receipt marker is ignored.
+    """
+    shas: set[str] = set()
+    requests: set[str] = set()
+    for body in bodies:
+        parsed = parse_receipt_marker(body)
+        if parsed is not None:
+            start = body.find(_RECEIPT_V2_PREFIX)
+            end = body.find("-->", start)
+            for field in body[start + len(_RECEIPT_V2_PREFIX) : end].split():
+                key, _, value = field.partition("=")
+                if key == "sha" and value:
+                    shas.add(value)
+                elif key == "request" and value:
+                    requests.add(value)
+        elif "<!-- pcm:receipt " in body:
+            shas.update(re.findall(r"\b[0-9a-f]{7,40}\b", body))
+    return shas, requests
+
+
+def audit_receipt_gaps(
+    commits: list[tuple[str, str]],
+    coverage: tuple[set[str], set[str]],
+    *,
+    lookup_complete: bool,
+) -> tuple[str, list[tuple[str, str]]]:
+    """Compare pushed checkpoint commits against leaf receipt evidence.
+
+    A commit is covered when a receipt names its full sha, any recorded token
+    is a proper prefix of it, or the commit's request id appears in a v2
+    marker. An unproven-complete lookup never fabricates gaps: it degrades.
+    """
+    if not lookup_complete:
+        return "degraded", []
+    shas, requests = coverage
+    gaps = [
+        (sha, request)
+        for sha, request in commits
+        if not (
+            sha in shas
+            or (request and request in requests)
+            or any(token != sha and sha.startswith(token) for token in shas)
+        )
+    ]
+    return ("gaps" if gaps else "ok"), gaps
+
+
+def checkpoint_request_ids_at(root: Path, sha: str, task_rel: str) -> list[str]:
+    """Request ids whose checkpoint-operation marker this commit added."""
+    result = git_run(root, ["show", "--format=", "-U0", sha, "--", task_rel])
+    requests: list[str] = []
+    for line in result.stdout.splitlines():
+        if not line.startswith("+") or "continuity:checkpoint-operation" not in line:
+            continue
+        match = re.search(r"continuity:checkpoint-operation\s+(\{.*\})\s*-->", line)
+        if match is None:
+            continue
+        try:
+            data = json.loads(match.group(1))
+        except json.JSONDecodeError:
+            continue
+        if isinstance(data, dict) and str(data.get("request_id") or ""):
+            requests.append(str(data["request_id"]))
+    return requests
+
+
+def audit_task_receipts(
+    root: Path,
+    task_id: str,
+    repository: str | None,
+    issue_number: str | None,
+    page_size: int = 100,
+) -> int:
+    """Report pushed task-branch checkpoint commits lacking a keyed leaf receipt.
+
+    Exit 0 with AUDIT_CLEAN when every pushed checkpoint commit is covered, 1
+    with MISSING lines on gaps, and 0 with a NOTE when the remote branch or the
+    GitHub lookup is unresolvable — a degraded audit is never a false gap list,
+    and a clean audit is never silence about what was not checked.
+    """
+    root = root.resolve()
+    if TASK_ID_RE.fullmatch(task_id) is None:
+        raise ContinuityError(f"invalid task id: {task_id}")
+    config = load_config(root)
+    task_path = find_task(root, config, task_id)
+    relative = task_path.relative_to(root).as_posix()
+    if not repository or not issue_number:
+        meta = task_metadata(task_path) or {}
+        url = str(meta.get("issue_url") or "")
+        if not url:
+            raise ContinuityError(
+                f"receipt audit needs --repository and --issue or an issue_url on {task_id}"
+            )
+        repository, issue_number = validate_github_issue_url(url)
+    origin_repo = github_repository(git_value(root, ["remote", "get-url", "origin"], ""))
+    if origin_repo is not None and origin_repo != repository:
+        raise ContinuityError(
+            f"receipt audit repository {repository} does not match origin {origin_repo}; "
+            "refusing to judge the wrong ledger"
+        )
+    branch = git_value(root, ["rev-parse", "--abbrev-ref", "HEAD"])
+    if branch == "HEAD":
+        raise ContinuityError("receipt audit requires an attached branch")
+    try:
+        git_run(root, ["fetch", "--quiet", "origin", branch])
+        tip = git_value(root, ["rev-parse", "FETCH_HEAD"])
+    except ContinuityError:
+        print(f"NOTE: audit degraded — {branch} is not on origin; nothing published to audit yet")
+        return 0
+    log = git_run(root, ["log", "--format=%H\x1f%s", tip]).stdout.splitlines()
+    prefix = f"PCM checkpoint {task_id}:"
+    commits: list[tuple[str, str]] = []
+    for line in log:
+        sha, _, subject = line.partition("\x1f")
+        if not subject.startswith(prefix):
+            continue
+        requests = checkpoint_request_ids_at(root, sha, relative)
+        commits.append((sha, requests[0] if requests else ""))
+    if not commits:
+        print(f"AUDIT_CLEAN: no pushed checkpoint commits for {task_id} on {branch}")
+        return 0
+    comment_path = github_issue_comment_path(repository, issue_number)
+    bodies: list[str] = []
+    try:
+        page = 1
+        while True:
+            result = run_external(
+                ["gh", "api", "--method", "GET", f"{comment_path}?per_page={page_size}&page={page}"],
+                root,
+            )
+            if result.returncode != 0:
+                detail = (result.stderr or result.stdout or "GitHub comment lookup failed").strip()
+                print(f"NOTE: audit degraded — {detail}; no gap verdict from {repository}#{issue_number}")
+                return 0
+            page_bodies = comment_bodies(result.stdout)
+            bodies.extend(page_bodies)
+            if page_is_complete(len(page_bodies), page_size):
+                break
+            page += 1
+    except ContinuityError as exc:
+        print(f"NOTE: audit degraded — {exc}; no gap verdict from {repository}#{issue_number}")
+        return 0
+    status, gaps = audit_receipt_gaps(commits, receipt_coverage(bodies), lookup_complete=True)
+    if status == "gaps":
+        for sha, request in gaps:
+            suffix = f" (request {request})" if request else ""
+            print(f"MISSING: {sha}{suffix} has no keyed leaf receipt on {repository}#{issue_number}")
+        print(f"AUDIT_GAPS: {len(gaps)}")
+        return 1
+    print(f"AUDIT_CLEAN: {len(commits)} pushed checkpoint commits covered on {repository}#{issue_number}")
+    return 0
+
+
 CLOSING_DIRECTIVE_RE = re.compile(
     r"(?i)\b(?:close|closes|closed|fix|fixes|fixed|resolve|resolves|resolved)"
-    r"([-\s]+)(#[0-9]+|https?://[^ ]*issues/[0-9]+)"
+    r"(?:([-\s]+)|:\s*)((?:[\w.-]+/[\w.-]+)?#\d+|https?://[^ ]*issues/\d+)"
 )
+
+
+def _refs_replacement(match: re.Match[str]) -> str:
+    sep = match.group(1) or ": "
+    return f"Refs{sep}{match.group(2)}"
 
 
 def sanitize_closing_keywords(message: str) -> tuple[str, int]:
     """Rewrite GitHub issue-closing directives to the non-closing Refs form."""
-    return CLOSING_DIRECTIVE_RE.subn(lambda match: f"Refs{match.group(1)}{match.group(2)}", message)
+    return CLOSING_DIRECTIVE_RE.subn(_refs_replacement, message)
+
+
+def version_drift_note(root: Path) -> str | None:
+    """Compare the running CLI against the checkout's declared version.
+
+    Owner decision B on #162: observability only, never a refusal. Returns a
+    NOTE string when the checkout declares a different version; None when the
+    versions match, the checkout is not a Python package, or the version file
+    is unreadable/malformed (degrade silently — there is nothing to compare).
+    """
+    init_py = root / "src" / "continuity" / "__init__.py"
+    try:
+        text = init_py.read_text(encoding="utf-8")
+    except OSError:
+        return None
+    match = re.search(r'^__version__\s*=\s*["\']([^"\']+)["\']', text, re.MULTILINE)
+    if match is None:
+        return None
+    checkout_version = match.group(1)
+    if checkout_version == __version__:
+        return None
+    return (
+        f"NOTE: version drift — installed CLI {__version__} != checkout {checkout_version} "
+        "(reinstall from the checkout before checkpointing; the composing binary may lack "
+        "current safety behavior, see #162)"
+    )
 
 
 def refresh_index_for_cataloged_change(root: Path, relative: str) -> bool:
@@ -3065,6 +3257,28 @@ def refresh_index_for_cataloged_change(root: Path, relative: str) -> bool:
     return True
 
 
+def _stale_base_overlap(root: Path, remote: str, extra_paths: list[str]) -> tuple[str, list[str]] | None:
+    """Files this branch touches that also changed upstream since the fork point.
+
+    Returns (base_ref, sorted overlap) or None when upstream state is not
+    determinable (offline origin, missing default branch, unrelated history).
+    """
+    try:
+        base_branch = remote_default_branch(root, github_repository(remote))
+        git_run(root, ["fetch", "origin", base_branch])
+        base_ref = f"origin/{base_branch}"
+        fork = git_value(root, ["merge-base", "HEAD", base_ref])
+        if not fork:
+            return None
+        upstream_touched = set(git_run(root, ["diff", "--name-only", fork, base_ref]).stdout.split())
+        local_touched = set(git_run(root, ["diff", "--name-only", fork, "HEAD"]).stdout.split())
+        local_touched.update(extra_paths)
+        overlap = sorted(upstream_touched & local_touched)
+    except ContinuityError:
+        return None
+    return base_ref, overlap
+
+
 def publish_checkpoint(
     root: Path,
     checkpoint_path: Path,
@@ -3073,6 +3287,7 @@ def publish_checkpoint(
     recovery: bool = False,
     request_id: str | None = None,
     allow_closing_keywords: bool = False,
+    allow_stale_base: bool = False,
 ) -> str:
     """Commit and push one checkpoint so the shared branch is the durable handoff."""
     root = root.resolve()
@@ -3088,6 +3303,10 @@ def publish_checkpoint(
         raise ContinuityError("checkpoint publishing requires an attached task branch")
     remote = git_value(root, ["remote", "get-url", "origin"], None)
 
+    drift = version_drift_note(root)
+    if drift is not None:
+        print(drift)
+
     status = git_run(root, ["status", "--porcelain", "--untracked-files=all"]).stdout.splitlines()
     unexpected = [line for line in status if line[3:] != relative]
     if unexpected and not recovery:
@@ -3095,6 +3314,16 @@ def publish_checkpoint(
             "checkpoint publishing requires product changes to be committed first; "
             f"uncommitted paths: {', '.join(line[3:] for line in unexpected)}"
         )
+
+    if not recovery and not allow_stale_base:
+        overlap = _stale_base_overlap(root, remote, [relative])
+        if overlap is not None and overlap[1]:
+            raise ContinuityError(
+                "refusing to publish a checkpoint from a stale base: these paths changed upstream since the "
+                f"fork of {overlap[0]} and this branch touches them too: {', '.join(overlap[1])}; "
+                "rebase onto the current default branch (or verify the overlap is intended) and rerun, "
+                "or pass --allow-stale-base to publish anyway"
+            )
 
     git_run(root, ["add", "--", relative])
     if refresh_index_for_cataloged_change(root, relative):
@@ -3338,6 +3567,14 @@ def build_parser() -> argparse.ArgumentParser:
     p_issue_verify.add_argument("task_id")
     p_issue_verify.add_argument("--root", default=".")
 
+    p_receipt = sub.add_parser("receipt")
+    receipt_sub = p_receipt.add_subparsers(dest="receipt_command", required=True)
+    p_receipt_audit = receipt_sub.add_parser("audit")
+    p_receipt_audit.add_argument("task_id")
+    p_receipt_audit.add_argument("--root", default=".")
+    p_receipt_audit.add_argument("--repository", default=None, help="owner/name; defaults from the task's issue_url")
+    p_receipt_audit.add_argument("--issue", default=None, help="leaf issue number; defaults from issue_url")
+
     p_checkpoint = sub.add_parser("checkpoint")
     p_checkpoint.add_argument("task_id")
     p_checkpoint.add_argument("--root", default=".")
@@ -3368,6 +3605,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--allow-closing-keywords",
         action="store_true",
         help="keep GitHub issue-closing keywords from --next in the checkpoint commit message",
+    )
+    p_checkpoint.add_argument(
+        "--allow-stale-base",
+        action="store_true",
+        help="publish even if this branch overlaps upstream changes on the origin default branch since the fork",
     )
 
     p_recovery = sub.add_parser("recovery")
@@ -3558,6 +3800,7 @@ def main(argv: list[str] | None = None) -> int:
                     args.next_action,
                     request_id=request_id,
                     allow_closing_keywords=args.allow_closing_keywords,
+                    allow_stale_base=args.allow_stale_base,
                 )
                 print(path)
                 print(f"PUSHED: {commit}")
@@ -3797,6 +4040,15 @@ def main(argv: list[str] | None = None) -> int:
             path = pack_task(Path(args.root).resolve(), args.task_id, output)
             print(path)
             return 0
+
+        if args.command == "receipt" and args.receipt_command == "audit":
+            return audit_task_receipts(
+                Path(args.root).resolve(),
+                args.task_id,
+                args.repository,
+                args.issue,
+            )
+
 
         if args.command == "worktree" and args.worktree_command == "create":
             workspace_root = Path(args.root).resolve()
