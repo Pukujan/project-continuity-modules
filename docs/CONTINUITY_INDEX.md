@@ -1,6 +1,6 @@
 # Continuity Document Index
 
-<!-- continuity:documents-index {"catalog_sha256":"ec01c6f8c48e387ecaea10c23c5ecfb998002f92b75b486e3ab8e0c777ed9e30","schema":"project-continuity.documents-index.v1"} -->
+<!-- continuity:documents-index {"catalog_sha256":"2959b9ab8453908d812f4b694f63f8e6acff159a2a1b86682c9ef8b0bcab12ab","schema":"project-continuity.documents-index.v1"} -->
 
 > Generated from `.continuity/documents.json`. Edit the JSON inventory, then run `continuity docs render`; do not edit this view directly.
 > Freshness below compares local file bytes; after `git fetch origin`, use `continuity docs find` for cached remote freshness.
@@ -93,9 +93,9 @@
 
 - File: [`docs/plans/PCM-0015-implementation-plan.md`](../docs/plans/PCM-0015-implementation-plan.md)
 - Local content status: **CURRENT**
-- Last reviewed at commit: `85f13464c466ff277ce319850ce8124c4bc95c52`
-- Reviewed SHA-256: `dfe970f11964ecf93e78ba72281f7ac37283ff3afc2ebba7d192ddc1472d5e1c`
-- Current SHA-256: `dfe970f11964ecf93e78ba72281f7ac37283ff3afc2ebba7d192ddc1472d5e1c`
+- Last reviewed at commit: `uncommitted`
+- Reviewed SHA-256: `92cac86f4a5443c7652d359378e77b75bee83bd83b530df652bcc0e55edebe8a`
+- Current SHA-256: `92cac86f4a5443c7652d359378e77b75bee83bd83b530df652bcc0e55edebe8a`
 - Summary: Prior bounded plan for provenance-backed continuity, focused context and long-running project work.
 - Search terms: `epistemic context`, `handoff planning`, `knowledge discovery`
 - Neighboring records: `pcm-0015-research`, `testing-policy`
