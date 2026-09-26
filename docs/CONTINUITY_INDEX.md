@@ -359,7 +359,7 @@
 - Local content status: **NEEDS_REVIEW**
 - Last reviewed at commit: `82f1e90413c2d45238cc9fb7b6b8a9cc17611e10`
 - Reviewed SHA-256: `0b30810ddf5856b2af6dd3d8aae899ff5dd8318f98ec94acb6dac2e04ece9aba`
-- Current SHA-256: `69cd22fd4484fd5b166d28d480253a1960e3c1daf0b0be9d9ffea81b277cdb61`
+- Current SHA-256: `cc75c3ca8d94f5aaa358eb540242e965b070d2537d9b13ac5816a899aa4c50a5`
 - Summary: Decision task for the read-time staleness-reconciliation rule: PCM-0046 measured T2 at 0/5 (agents follow the stale projection over the closed live issue); owner picks A/B/C on #189 before any guidance slice.
 - Search terms: `63`, `decision`, `staleness`
 - Neighboring records: `pcm-0046-arm-plan`
