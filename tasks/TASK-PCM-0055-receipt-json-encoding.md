@@ -1,8 +1,8 @@
 # TASK-PCM-0055 — Receipt Json Encoding
 
-<!-- continuity:task {"acceptance":["replace this with observable, task-specific acceptance checks"],"depends_on":[],"goal":"Fix the opt-in checkpoint receipt wire format: the post must send a JSON object {\"body\": ...} to gh api --input - so the shipped receipt path actually posts (Refs #171).","id":"PCM-0055","issue_url":"https://github.com/Pukujan/project-continuity-modules/issues/171","next_action":"define scope and observable acceptance checks, then begin bounded work","owner":"owner/Astra planning","priority":"P2","protocol_version":"0.1.0-draft","schema":"project-continuity.task.v1","status":"active","why":"First production use of --receipt-repo/--receipt-issue on push 2f8dc7a failed with HTTP 400 Problems parsing JSON; raw markdown stdin rejected, JSON wrapper accepted (proof #166 comment 5841406124)."} -->
+<!-- continuity:task {"acceptance":["replace this with observable, task-specific acceptance checks"],"depends_on":[],"goal":"Fix the opt-in checkpoint receipt wire format: the post must send a JSON object {\"body\": ...} to gh api --input - so the shipped receipt path actually posts (Refs #171).","id":"PCM-0055","issue_url":"https://github.com/Pukujan/project-continuity-modules/issues/171","next_action":"define scope and observable acceptance checks, then begin bounded work","owner":"owner/Astra planning","priority":"P2","protocol_version":"0.1.0-draft","schema":"project-continuity.task.v1","status":"completed","why":"First production use of --receipt-repo/--receipt-issue on push 2f8dc7a failed with HTTP 400 Problems parsing JSON; raw markdown stdin rejected, JSON wrapper accepted (proof #166 comment 5841406124)."} -->
 
-- Status: active
+- Status: completed
 - Owner: owner/Astra planning
 - Priority: P2
 - Depends on: none
@@ -33,7 +33,7 @@ A writer who passes `--receipt-repo/--receipt-issue` gets a `RECEIPT: post` line
 
 - [x] Red-first: `tests/test_receipt_json_encoding.py` 2 cases fail pre-fix (raw markdown rejected by `json.loads` / shim-captured stdin), pass post-fix; `test_short_page_without_marker_posts_once` updated to assert `json.loads(payload)["body"] == MARKER`.
 - [x] All receipt/checkpoint suites + full discover at known baseline: 259 tests (257 baseline + 2 new), failures = the six known macOS-environmental (worktrees ×4, test_cli ×2); ruff pinned 0.6.9: only the two pre-existing ISC003 findings.
-- [ ] This task's own `continuity checkpoint --receipt-repo Pukujan/project-continuity-modules --receipt-issue 171` posts successfully end-to-end (first production use of the fixed path), then PR under six contexts + auto-merge with merge receipt on #171.
+- [x] End-to-end dogfood DELIVERED: this task's checkpoint printed `RECEIPT: post` (leaf comment 5841558506, request pcm-0055-fix-20260926, push `8278bfe`) — first production success of the opt-in path; PR #172 merged via auto-merge at squash `8227885` with six contexts green; merge receipt 5841585509 on #171. PR body's wrong comment-id citation corrected in place (5841472919 -> 5841558506, note appended).
 
 ## Evidence and sources
 
@@ -46,7 +46,7 @@ A writer who passes `--receipt-repo/--receipt-issue` gets a `RECEIPT: post` line
 
 - Leaf #171 (PCM-0055); parent: none; depends: none; related #67 (frozen opt-in route), #169 (policy detector, separate), #166 (push `2f8dc7a` where the defect was caught).
 - Primary writer: owner/Astra (omp session); branch task/PCM-0055-receipt-json from `origin/main` `0fb5aca`; source issue revision: #171 body at filing; as-of 2026-09-26T00:25Z.
-- Push receipt: continuity checkpoint request pcm-0055-fix-20260926 (opt-in flags exercise the fixed path).
+- Push receipt: continuity checkpoint request pcm-0055-fix-20260926 (opt-in flags exercise the fixed path) — tool-posted 5841558506; merge `8227885` (#172) receipted 5841585509. Task complete; issue closes on owner confirmation.
 
 ## Checkpoint log
 
