@@ -1,6 +1,6 @@
 # TASK-PCM-0063 — T2 Staleness Guidance Decision
 
-<!-- continuity:task {"acceptance": ["Owner records the A/B/C decision on #189.", "If A: T2-v2 holdout design pre-registered in docs/plans before any guidance edit; rule text in the guidance families generator + all copies, pinned by the policy test; re-measured arms reported honestly with inconclusive counts; six contexts + receipt on #189.", "(proposed) Pass bar unchanged at >=4/5 arms; baseline controls must still fail."], "depends_on": [], "goal": "Decide the read-time staleness-reconciliation rule the T2 holdout proved missing: what an agent must do when a stale projection and the live issue disagree (Refs #189).", "id": "PCM-0063", "issue_url": "https://github.com/Pukujan/project-continuity-modules/issues/189", "next_action": "Owner picks option A (rule + pre-registered T2-v2 holdout), B (rule text only), or C (documented acceptance of the gap) on #189.", "owner": "owner/Astra planning", "priority": "P2", "protocol_version": "0.1.0-draft", "schema": "project-continuity.task.v1", "status": "active", "why": "PCM-0046 hidden arms: T2 measured 0/5 — every fresh agent asserted the stale next action as current though the live issue state was attached; three stated the contradiction in their own words and still recommended it. Guidance today is write-time only."} -->
+<!-- continuity:task {"acceptance": ["Owner records the A/B/C decision on #189.", "If A: T2-v2 holdout design pre-registered in docs/plans before any guidance edit; rule text in the guidance families generator + all copies, pinned by the policy test; re-measured arms reported honestly with inconclusive counts; six contexts + receipt on #189.", "(proposed) Pass bar unchanged at >=4/5 arms; baseline controls must still fail."], "depends_on": [], "goal": "Decide the read-time staleness-reconciliation rule the T2 holdout proved missing: what an agent must do when a stale projection and the live issue disagree (Refs #189).", "id": "PCM-0063", "issue_url": "https://github.com/Pukujan/project-continuity-modules/issues/189", "next_action": "Owner picks option A (rule + pre-registered T2-v2 holdout), B (rule text only), or C (documented acceptance of the gap) on #189.", "owner": "owner/Astra planning", "priority": "P2", "protocol_version": "0.1.0-draft", "schema": "project-continuity.task.v1", "status": "active", "why": "PCM-0046 hidden arms: T2 measured 0/5 — every fresh agent asserted the stale next action as current though the live issue state was attached; all five stated the contradiction in their own words and still recommended it (REPORT.md correction 6 supersedes the original three-arm count). Guidance today is write-time only."} -->
 
 - Status: active
 - Owner: owner/Astra planning
@@ -37,7 +37,7 @@ A fresh agent handed a stale status document and the live issue it references st
 
 ## Evidence and sources
 
-T2 tallies + per-arm answers in accepted history at docs/plans/PCM-0046-arms-results/ (merge 969be11); counter-signal (3 arms saw the contradiction, none acted) recorded on #139 comment 5845193587.
+T2 tallies + per-arm answers in accepted history at docs/plans/PCM-0046-arms-results/ (merge 969be11); counter-signal (all five stated the closed-issue fact, none acted on it; correction 6 supersedes the initial count) recorded on #139 comment 5845193587.
 
 ## Related records
 
