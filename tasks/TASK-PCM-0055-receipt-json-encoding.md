@@ -52,6 +52,29 @@ A writer who passes `--receipt-repo/--receipt-issue` gets a `RECEIPT: post` line
 
 No checkpoints yet.
 
+### 2026-09-26 00:34:14 UTC — owner/Astra
+
+<!-- continuity:checkpoint {"agent":"owner/Astra","blocked":["None for this slice; PCM-0046 arms still provider-429."],"changed":["src/continuity/cli.py, tests/test_receipt_json_encoding.py (new), tests/test_receipt_lookup.py, tasks/TASK-PCM-0055-receipt-json-encoding.md (new), checkpoints/CURRENT.md, .continuity/documents.json, docs/CONTINUITY_INDEX.md"],"completed":["JSON wire-format fix in publish_issue_receipt.post() (json.dumps({\"body\": ...}) into gh api --input -), red-first 2-case suite incl. no-network real-subprocess gh shim, disclosed contract update at tests/test_receipt_lookup.py:63, task projection + CURRENT + catalog/index. Dogfood: this very checkpoint command carries the first successful end-to-end production use of --receipt-repo/--receipt-issue."],"decisions":["Single post() encoding site covers leaf+parent paths; default-on-receipts question deliberately untouched (#169 acceptance 2)."],"evidence":["RED pre-fix at 0fb5aca: 2 JSONDecodeError; GREEN: 2 OK + all 12 receipt/checkpoint suites OK; full discover 259 tests = six known macOS-environmental failures (worktrees x4, test_cli x2), no new; ruff@0.6.9 clean on changed files."],"next_action":"Open PR for task/PCM-0055-receipt-json, verify six contexts + auto-merge, post merge receipt on #171.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0055","timestamp":"2026-09-26T00:34:14Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"a782522c65e80184905e9b4084f6ec26ceec0039c5269e3219e618e8bf53b374","request_id":"pcm-0055-fix-20260926","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0055"} -->
+
+Completed:
+- JSON wire-format fix in publish_issue_receipt.post() (json.dumps({"body": ...}) into gh api --input -), red-first 2-case suite incl. no-network real-subprocess gh shim, disclosed contract update at tests/test_receipt_lookup.py:63, task projection + CURRENT + catalog/index. Dogfood: this very checkpoint command carries the first successful end-to-end production use of --receipt-repo/--receipt-issue.
+
+Evidence:
+- RED pre-fix at 0fb5aca: 2 JSONDecodeError; GREEN: 2 OK + all 12 receipt/checkpoint suites OK; full discover 259 tests = six known macOS-environmental failures (worktrees x4, test_cli x2), no new; ruff@0.6.9 clean on changed files.
+
+Decisions:
+- Single post() encoding site covers leaf+parent paths; default-on-receipts question deliberately untouched (#169 acceptance 2).
+
+Changed:
+- src/continuity/cli.py, tests/test_receipt_json_encoding.py (new), tests/test_receipt_lookup.py, tasks/TASK-PCM-0055-receipt-json-encoding.md (new), checkpoints/CURRENT.md, .continuity/documents.json, docs/CONTINUITY_INDEX.md
+
+Blocked/uncertain:
+- None for this slice; PCM-0046 arms still provider-429.
+
+Next:
+- Open PR for task/PCM-0055-receipt-json, verify six contexts + auto-merge, post merge receipt on #171.
+
 ## Handoff
 
 Read PROJECT → CURRENT → this task → minimum relevant spec. Checkpoint before stopping.

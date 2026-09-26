@@ -260,10 +260,10 @@
 ## PCM-0055 receipt JSON wire-format fix (`pcm-0055-receipt-json`)
 
 - File: [`tasks/TASK-PCM-0055-receipt-json-encoding.md`](../tasks/TASK-PCM-0055-receipt-json-encoding.md)
-- Local content status: **CURRENT**
+- Local content status: **NEEDS_REVIEW**
 - Last reviewed at commit: `uncommitted`
 - Reviewed SHA-256: `b9969f3754738546f287b988cb8f4f7a666dae74858dee344f52f2e723eb8646`
-- Current SHA-256: `b9969f3754738546f287b988cb8f4f7a666dae74858dee344f52f2e723eb8646`
+- Current SHA-256: `86028b5550e6fbaf3f924a39a86531ea6055459a78c4aefca3adb01a1d99802f`
 - Summary: gh api --input - needs JSON request parameters; red-first fix + shim test; checkpoint dogfoods the opt-in flags (Refs #171).
 - Search terms: none
 - Neighboring records: `pcm-0054-durability-receipt-audit`
