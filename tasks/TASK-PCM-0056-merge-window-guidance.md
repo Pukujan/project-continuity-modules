@@ -51,6 +51,29 @@ Every fresh session — PCM's or any adopter's via `continuity init` — reads o
 
 No checkpoints yet.
 
+### 2026-09-26 01:42:53 UTC — owner/Astra
+
+<!-- continuity:checkpoint {"agent":"owner/Astra","blocked":["PCM-0046 arms still provider-429 (~04:05Z)."],"changed":["src/continuity/cli.py (constant only), AGENTS.md, HANDOFF.md, templates x4, .github x2, tests/test_github_progression_policy.py, tasks/TASK-PCM-0056-merge-window-guidance.md (new), checkpoints/CURRENT.md, .continuity/documents.json, docs/CONTINUITY_INDEX.md"],"completed":["Merge-window sentence inserted verbatim in all 9 checked-in guidance copies (GITHUB_PROGRESSION_GUIDANCE generator + AGENTS/HANDOFF/templates/.github) per owner decision #166 5842002451; pinned in tests/test_github_progression_policy.py REQUIRED so CI catches deletion/drift and continuity init propagates it to adopters; task projection #175 + CURRENT decision-log paragraph + catalog/index."],"decisions":["Docs/guidance-only increment; no CLI behavior change; PCM-0057 (version NOTE) and PCM-0054-impl (receipt audit) proceed on separate branches per decisions 5842002582/5842002712."],"evidence":["grep -c = 1 per file (9); policy tests OK on 3.11+3.12 incl. adopted-profile init assertion; full discover 259 = six known broken names (test_worktrees 3F+1E, test_cli 2F) identical to 690b7f8 baseline; ruff@0.6.9 = two pre-existing ISC003 only; docs render --check SYNCHRONIZED; validate = device-local pcm-pinned only."],"next_action":"Open PR for task/PCM-0056-merge-window (final push already done), arm auto-merge, post merge receipt on #175, close #166 as delivered.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0056","timestamp":"2026-09-26T01:42:53Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"fef683b5a44b797a4b720187765d506d82bb3438df8d51e6fb5c4b656edff71d","request_id":"pcm-0056-guidance-20260926","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0056"} -->
+
+Completed:
+- Merge-window sentence inserted verbatim in all 9 checked-in guidance copies (GITHUB_PROGRESSION_GUIDANCE generator + AGENTS/HANDOFF/templates/.github) per owner decision #166 5842002451; pinned in tests/test_github_progression_policy.py REQUIRED so CI catches deletion/drift and continuity init propagates it to adopters; task projection #175 + CURRENT decision-log paragraph + catalog/index.
+
+Evidence:
+- grep -c = 1 per file (9); policy tests OK on 3.11+3.12 incl. adopted-profile init assertion; full discover 259 = six known broken names (test_worktrees 3F+1E, test_cli 2F) identical to 690b7f8 baseline; ruff@0.6.9 = two pre-existing ISC003 only; docs render --check SYNCHRONIZED; validate = device-local pcm-pinned only.
+
+Decisions:
+- Docs/guidance-only increment; no CLI behavior change; PCM-0057 (version NOTE) and PCM-0054-impl (receipt audit) proceed on separate branches per decisions 5842002582/5842002712.
+
+Changed:
+- src/continuity/cli.py (constant only), AGENTS.md, HANDOFF.md, templates x4, .github x2, tests/test_github_progression_policy.py, tasks/TASK-PCM-0056-merge-window-guidance.md (new), checkpoints/CURRENT.md, .continuity/documents.json, docs/CONTINUITY_INDEX.md
+
+Blocked/uncertain:
+- PCM-0046 arms still provider-429 (~04:05Z).
+
+Next:
+- Open PR for task/PCM-0056-merge-window (final push already done), arm auto-merge, post merge receipt on #175, close #166 as delivered.
+
 ## Handoff
 
 Read PROJECT → CURRENT → this task → minimum relevant spec. Checkpoint before stopping.

@@ -272,10 +272,10 @@
 ## PCM-0056 merge-window guidance fold (`pcm-0056-merge-window`)
 
 - File: [`tasks/TASK-PCM-0056-merge-window-guidance.md`](../tasks/TASK-PCM-0056-merge-window-guidance.md)
-- Local content status: **CURRENT**
+- Local content status: **NEEDS_REVIEW**
 - Last reviewed at commit: `uncommitted`
 - Reviewed SHA-256: `f2261f6600bfda57ebba2b477887977ca567b895bf4e5f66a7c6acfd11d9c635`
-- Current SHA-256: `f2261f6600bfda57ebba2b477887977ca567b895bf4e5f66a7c6acfd11d9c635`
+- Current SHA-256: `1218580e69d118d4c92844d69771f27ffca341f34dbc52f8daa1d03669b9d2e9`
 - Summary: Arm auto-merge only after the final push: one sentence in all 9 guidance copies + policy-test pin; parent decision #166 5842002451 (Refs #175).
 - Search terms: `auto-merge`, `guidance`, `merge-window`
 - Neighboring records: `pcm-0053-guard-plan`
