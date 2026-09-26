@@ -77,6 +77,29 @@ Blocked/uncertain:
 Next:
 - Open PR for task/PCM-0053-stale-base-guard, verify six required contexts + auto-merge, post merge receipt on #166 and close-out evidence for acceptance criterion 3.
 
+### 2026-09-26 00:10:04 UTC — owner/Astra
+
+<!-- continuity:checkpoint {"agent":"owner/Astra","blocked":[],"changed":["tasks/TASK-PCM-0053-stale-base-guard.md, tasks/TASK-PCM-0054-durability-receipt-audit.md (new), checkpoints/CURRENT.md, .continuity/documents.json, docs/CONTINUITY_INDEX.md"],"completed":["Closeout increment: acceptance 3 evidenced (PR #167 merged 3d1d50a six contexts; #168 sync 690b7f8; receipts 5841072961 + 5841258608); task projection marked completed; CURRENT carries the full durability-audit finding + enforcement matrix; PCM-0054/#169 filed for the receipt-gap enforcement proposal."],"decisions":["Merge-window discipline caveat (arm auto-merge only after final push) stays a record, not code; gap class + detector proposal routed to PCM-0054/#169 per the #162 acceptance-2 pattern (no CLI change before owner decision)."],"evidence":["Audit at 690b7f8: git log --all --not --remotes=origin per-file superseded check zero true-local-only; gh pr view #163/#164/#165/#167/#168 all MERGED; backfilled receipt ids 5841258606/5841258803/5841258608; validate = only pre-existing device-local pcm-pinned error."],"next_action":"Open closeout PR for task/PCM-0053-closeout, enable auto-merge, verify six contexts, post merge receipt on Refs #166.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0053","timestamp":"2026-09-26T00:10:04Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"cdf5d139fb13cfadbefc5cc23793b4bf2b8883fd0525e37b33fce11a9163c293","request_id":"pcm-0053-closeout-20260925","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0053"} -->
+
+Completed:
+- Closeout increment: acceptance 3 evidenced (PR #167 merged 3d1d50a six contexts; #168 sync 690b7f8; receipts 5841072961 + 5841258608); task projection marked completed; CURRENT carries the full durability-audit finding + enforcement matrix; PCM-0054/#169 filed for the receipt-gap enforcement proposal.
+
+Evidence:
+- Audit at 690b7f8: git log --all --not --remotes=origin per-file superseded check zero true-local-only; gh pr view #163/#164/#165/#167/#168 all MERGED; backfilled receipt ids 5841258606/5841258803/5841258608; validate = only pre-existing device-local pcm-pinned error.
+
+Decisions:
+- Merge-window discipline caveat (arm auto-merge only after final push) stays a record, not code; gap class + detector proposal routed to PCM-0054/#169 per the #162 acceptance-2 pattern (no CLI change before owner decision).
+
+Changed:
+- tasks/TASK-PCM-0053-stale-base-guard.md, tasks/TASK-PCM-0054-durability-receipt-audit.md (new), checkpoints/CURRENT.md, .continuity/documents.json, docs/CONTINUITY_INDEX.md
+
+Blocked/uncertain:
+- none
+
+Next:
+- Open closeout PR for task/PCM-0053-closeout, enable auto-merge, verify six contexts, post merge receipt on Refs #166.
+
 ## Handoff
 
 Read PROJECT → CURRENT → this task → minimum relevant spec. Checkpoint before stopping.
