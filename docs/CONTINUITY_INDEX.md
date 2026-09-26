@@ -296,10 +296,10 @@
 ## PCM-0058 readability rules for tool-composed records (`pcm-0058-readability`)
 
 - File: [`tasks/TASK-PCM-0058-readability-rules.md`](../tasks/TASK-PCM-0058-readability-rules.md)
-- Local content status: **CURRENT**
+- Local content status: **NEEDS_REVIEW**
 - Last reviewed at commit: `uncommitted`
 - Reviewed SHA-256: `f95ffb23ad984d439b5d3dc339b6ea657ff799474b7b1fa18efeabd4d3a910f1`
-- Current SHA-256: `f95ffb23ad984d439b5d3dc339b6ea657ff799474b7b1fa18efeabd4d3a910f1`
+- Current SHA-256: `8a110e8a1878065fb5e86cea9f4b3d76b28916d04e785c0c4e5f9eded938d422`
 - Summary: issue-log-format 1.2.0: plain-word meaning before identifiers, claim-first evidence, no bare acronyms; generator+copies+doc+red pins (Refs #180).
 - Search terms: `issue-log-format`, `readability`, `records`
 - Neighboring records: `pcm-0057-version-note`

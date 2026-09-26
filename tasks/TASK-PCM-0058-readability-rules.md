@@ -53,6 +53,29 @@ Base e726ea4 (#179). RED observed: 16 failures (version pins + readability phras
 
 No checkpoints yet.
 
+### 2026-09-26 03:01:37 UTC — owner/Astra
+
+<!-- continuity:checkpoint {"agent":"owner/Astra","blocked":["None for this slice; #181/#182 await owner scope answers."],"changed":["src/continuity/cli.py, AGENTS.md, HANDOFF.md, templates/v1/minimal/HANDOFF.md, templates/v1/software/AGENTS.md, templates/v1/software/README.md, .github/pull_request_template.md, .github/ISSUE_TEMPLATE/task.md, docs/ISSUE_LOG_FORMAT.md, tests/test_issue_log_format.py, tasks/TASK-PCM-0058-readability-rules.md (new), checkpoints/CURRENT.md, .continuity/documents.json, docs/CONTINUITY_INDEX.md"],"completed":["Readability rules shipped into the issue-log-format module 1.1.0 -> 1.2.0: plain-word meaning before identifiers carry load; claim-first evidence with numbers as support; no unexplained acronym/bare id on first use; PR openings and checkpoint Completed/Next lead with one problem sentence; applies to CURRENT/checkpoint exactly as issue logs. Updated the GITHUB guidance generator constant, all 7 checked-in copies, docs/ISSUE_LOG_FORMAT.md (section + changelog), tests (red-first readability + version pins), task projection #180, CURRENT, catalog/index."],"decisions":["1.2.0 marker bump reuses the 1.1.0 diagram-rules propagation mechanism; no retroactive rewriting of published records."],"evidence":["RED observed 16 failures before implementation (version pins + readability phrases); GREEN: issue-log-format + progression + records suites OK; discover 264 = six known macOS-environmental names, zero new; ruff = two pre-existing ISC003; docs render --check SYNCHRONIZED; validate = device-local pcm-pinned only. Before/after exemplar: PR #178 comment 5842450065 (append-only, body not rewritten)."],"next_action":"Open PR for task/PCM-0058-readability-rules, arm auto-merge after this final push, merge receipt on #180.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0058","timestamp":"2026-09-26T03:01:37Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"efb56b6a80c9fe12b686ccb6fc7244455320018b916d5d54ee86755b90020025","request_id":"pcm-0058-readability-20260926","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0058"} -->
+
+Completed:
+- Readability rules shipped into the issue-log-format module 1.1.0 -> 1.2.0: plain-word meaning before identifiers carry load; claim-first evidence with numbers as support; no unexplained acronym/bare id on first use; PR openings and checkpoint Completed/Next lead with one problem sentence; applies to CURRENT/checkpoint exactly as issue logs. Updated the GITHUB guidance generator constant, all 7 checked-in copies, docs/ISSUE_LOG_FORMAT.md (section + changelog), tests (red-first readability + version pins), task projection #180, CURRENT, catalog/index.
+
+Evidence:
+- RED observed 16 failures before implementation (version pins + readability phrases); GREEN: issue-log-format + progression + records suites OK; discover 264 = six known macOS-environmental names, zero new; ruff = two pre-existing ISC003; docs render --check SYNCHRONIZED; validate = device-local pcm-pinned only. Before/after exemplar: PR #178 comment 5842450065 (append-only, body not rewritten).
+
+Decisions:
+- 1.2.0 marker bump reuses the 1.1.0 diagram-rules propagation mechanism; no retroactive rewriting of published records.
+
+Changed:
+- src/continuity/cli.py, AGENTS.md, HANDOFF.md, templates/v1/minimal/HANDOFF.md, templates/v1/software/AGENTS.md, templates/v1/software/README.md, .github/pull_request_template.md, .github/ISSUE_TEMPLATE/task.md, docs/ISSUE_LOG_FORMAT.md, tests/test_issue_log_format.py, tasks/TASK-PCM-0058-readability-rules.md (new), checkpoints/CURRENT.md, .continuity/documents.json, docs/CONTINUITY_INDEX.md
+
+Blocked/uncertain:
+- None for this slice; #181/#182 await owner scope answers.
+
+Next:
+- Open PR for task/PCM-0058-readability-rules, arm auto-merge after this final push, merge receipt on #180.
+
 ## Handoff
 
 Read PROJECT → CURRENT → this task → minimum relevant spec. Checkpoint before stopping.
