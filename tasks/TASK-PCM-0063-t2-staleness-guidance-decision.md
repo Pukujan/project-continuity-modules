@@ -13,7 +13,7 @@ Decide the read-time staleness-reconciliation rule the T2 holdout proved missing
 
 ## Why
 
-PCM-0046 hidden arms: T2 measured 0/5 — every fresh agent asserted the stale next action as current though the live issue state was attached; three stated the contradiction in their own words and still recommended it. Guidance today is write-time only.
+PCM-0046 hidden arms: T2 measured 0/5 — every fresh agent asserted the stale next action as current though the live issue state was attached; all five stated the contradiction in their own words and still recommended it (REPORT.md correction 6 supersedes the initial three-arm count). Guidance today is write-time only.
 
 ## Allowed files
 
