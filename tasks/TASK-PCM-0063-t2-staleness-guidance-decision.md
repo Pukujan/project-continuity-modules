@@ -164,6 +164,29 @@ Blocked/uncertain:
 Next:
 - Open PR, arm auto-merge after this final push, post merge receipt on #189 and the gate note on #191.
 
+### 2026-09-26 13:59:13 UTC — owner/Astra
+
+<!-- continuity:checkpoint {"agent":"owner/Astra","blocked":[],"changed":["tasks/TASK-PCM-0063-t2-staleness-guidance-decision.md, docs/plans/PCM-0046-arms-results/{REPORT.md,meta.json}, .continuity/documents.json, docs/CONTINUITY_INDEX.md"],"completed":["Post-close review caught the residual increment's own checkpoint text embedding the foreign Windows path in abbreviated form twice while its Evidence line claimed a zero-hit scan. Both strings sanitized in place (username withheld), REPORT.md correction 11 discloses the self-contradiction and extends correction 9's history statement to 1d91487, manifest re-pinned. Scan restated honestly as post-entry: tracked content 0 hits; history blobs at 5d6d9ad and 1d91487 retain prior forms, no rewrite per contract."],"decisions":["Gate-B addition for #191: path scan must cover checkpoint payloads before composition, not only files staged for commit - this breach entered through the record describing the fix."],"evidence":["grep -rl over docs/tasks/checkpoints/.continuity: 0 tracked hits; pins loop zero stale after re-pin; docs refresh pcm-0063-decision REVIEWED + render SYNCHRONIZED; suite 274 at six known names."],"next_action":"Open PR, arm auto-merge after this final push, post merge receipt on #189 and the gate-(B) payload-scan note on #191.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0063","timestamp":"2026-09-26T13:59:13Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"2fb84855f5ef8ea564b3e03dc12fdc9dd04ac5f9300d4a68cb51221ff52d0e29","request_id":"pcm-0063-selfleak-20260926","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0063"} -->
+
+Completed:
+- Post-close review caught the residual increment's own checkpoint text embedding the foreign Windows path in abbreviated form twice while its Evidence line claimed a zero-hit scan. Both strings sanitized in place (username withheld), REPORT.md correction 11 discloses the self-contradiction and extends correction 9's history statement to 1d91487, manifest re-pinned. Scan restated honestly as post-entry: tracked content 0 hits; history blobs at 5d6d9ad and 1d91487 retain prior forms, no rewrite per contract.
+
+Evidence:
+- grep -rl over docs/tasks/checkpoints/.continuity: 0 tracked hits; pins loop zero stale after re-pin; docs refresh pcm-0063-decision REVIEWED + render SYNCHRONIZED; suite 274 at six known names.
+
+Decisions:
+- Gate-B addition for #191: path scan must cover checkpoint payloads before composition, not only files staged for commit - this breach entered through the record describing the fix.
+
+Changed:
+- tasks/TASK-PCM-0063-t2-staleness-guidance-decision.md, docs/plans/PCM-0046-arms-results/{REPORT.md,meta.json}, .continuity/documents.json, docs/CONTINUITY_INDEX.md
+
+Blocked/uncertain:
+- none
+
+Next:
+- Open PR, arm auto-merge after this final push, post merge receipt on #189 and the gate-(B) payload-scan note on #191.
+
 ## Handoff
 
 Read PROJECT → CURRENT → this task → minimum relevant spec. Checkpoint before stopping.
