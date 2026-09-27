@@ -106,7 +106,7 @@ Exact title and subtitle copy, prompts, alt text, crop rules, rejection conditio
 - [`SPEC.md`](SPEC.md): the normative protocol, record authority, and publication rules.
 - [`docs/HANDOFF_PROTOCOL.md`](docs/HANDOFF_PROTOCOL.md): start-session and stop-session procedures, checkpoint format, degraded continuity, and context packs.
 - [`docs/TARGET_ADOPTION.md`](docs/TARGET_ADOPTION.md): adding PCM to an existing repository without overwriting its own docs.
-- [docs/adopter-enforcement.md](docs/adopter-enforcement.md): mandatory PR-only / required check `gates` / auto-merge-when-green for every adopter.
+- [`docs/adopter-enforcement.md`](docs/adopter-enforcement.md): mandatory PR-only / required check `gates` / auto-merge-when-green for every adopter.
 - [`AGENTS.md`](AGENTS.md): the full agent operating contract, including worktrees, workspace registry, receipts, and the document catalog.
 - [`docs/VERSIONING.md`](docs/VERSIONING.md): protocol and package version rules and migration.
 - [`docs/CONTINUITY_RECORDS_POLICY.md`](docs/CONTINUITY_RECORDS_POLICY.md): how to write issues and records a human can follow.
