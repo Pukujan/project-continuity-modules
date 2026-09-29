@@ -1,8 +1,8 @@
 # TASK-PCM-0067 — Issue URL Origin Cross-Check for All Tasks
 
-<!-- continuity:task {"acceptance": ["Red-first test: a fixture repository with an origin remote, one active task and one completed task whose issue_url points at a validly-shaped issue in a foreign repository; validate exits non-zero naming the file and the mismatch (1 failing test before, passing after).", "The origin cross-check runs for every task file whose issue_url is present when trackers.github is on and origin resolves to a GitHub repository, keeping the existing error text style; a missing or null issue_url stays legal on every task file, and the requirement that an issue_url exist remains scoped to the CURRENT-active task exactly as today.", "Existing fixtures or tests that rely on active-only checking are updated in the same change; the full PCM suite, ruff, mypy, compileall, continuity validate and the docs index check stay green."], "depends_on": [], "goal": "Make continuity validate cross-check every task file's issue_url against the checkout's origin repository, not only the CURRENT-active task, so a wrong-repo tracker link on a completed or pending projection can never print VALID (Refs #209).", "id": "PCM-0067", "issue_url": "https://github.com/Pukujan/project-continuity-modules/issues/209", "next_action": "Worker on branch task/PCM-0067-issue-url-cross-check reproduces the two probes from #209, writes the red-first test with a real origin remote, moves the cross-check out of the active-only branch in validate_repo, and updates affected fixtures in the same increment.", "owner": "omp worker (delegated)", "priority": "P1", "protocol_version": "0.1.0-draft", "schema": "project-continuity.task.v1", "status": "active", "why": "A well-formed issue_url pointing at another repository on a non-active task file passes every deterministic gate today (observed VALID, exit 0), so a cold-start agent silently follows a tracker link that does not own the task — the exact authority break the link exists to prevent."} -->
+<!-- continuity:task {"acceptance": ["Red-first test: a fixture repository with an origin remote, one active task and one completed task whose issue_url points at a validly-shaped issue in a foreign repository; validate exits non-zero naming the file and the mismatch (1 failing test before, passing after).", "The origin cross-check runs for every task file whose issue_url is present when trackers.github is on and origin resolves to a GitHub repository, keeping the existing error text style; a missing or null issue_url stays legal on every task file, and the requirement that an issue_url exist remains scoped to the CURRENT-active task exactly as today.", "Existing fixtures or tests that rely on active-only checking are updated in the same change; the full PCM suite, ruff, mypy, compileall, continuity validate and the docs index check stay green."], "depends_on": [], "goal": "Make continuity validate cross-check every task file's issue_url against the checkout's origin repository, not only the CURRENT-active task, so a wrong-repo tracker link on a completed or pending projection can never print VALID (Refs #209).", "id": "PCM-0067", "issue_url": "https://github.com/Pukujan/project-continuity-modules/issues/209", "next_action": "No product work remains. Remove the managed worktree with `continuity worktree remove PCM-0067` now that this task reads completed on origin/main.", "owner": "omp worker (delegated)", "priority": "P1", "protocol_version": "0.1.0-draft", "schema": "project-continuity.task.v1", "status": "completed", "why": "A well-formed issue_url pointing at another repository on a non-active task file passes every deterministic gate today (observed VALID, exit 0), so a cold-start agent silently follows a tracker link that does not own the task — the exact authority break the link exists to prevent."} -->
 
-- Status: active
+- Status: completed (delivered in PR #216, squash `a3931c1`; leaf issue #209 closed 2026-09-29)
 - Owner: omp worker (delegated)
 - Priority: P1
 - Depends on: none
@@ -31,9 +31,9 @@ A cold-start agent reading any task projection follows a tracker link that prova
 
 ## Acceptance criteria
 
-- [ ] Red-first test: a fixture repository with an origin remote, one active task and one completed task whose issue_url points at a validly-shaped issue in a foreign repository; validate exits non-zero naming the file and the mismatch (1 failing test before, passing after).
-- [ ] The origin cross-check runs for every task file whose issue_url is present when trackers.github is on and origin resolves, keeping the existing error text style; a missing or null issue_url stays legal on every task file, and the existence requirement remains scoped to the CURRENT-active task only (six non-CURRENT task files in this repository are active without issue_url and must keep validating).
-- [ ] Existing fixtures or tests that rely on active-only checking are updated in the same change; the full PCM suite, ruff, mypy, compileall, continuity validate and the docs index check stay green.
+- [x] Red-first test delivered: `tests/test_cli.py::test_issue_url_origin_cross_check_covers_every_task_file` failed before the fix (`'…TASK-APP-0002-done.md: issue_url repository evil-org/other-repo does not match origin example/real-repo' not found in []`) and passes after, on a fixture with a real `git init` + `git remote add origin` plus a matching-URL negative control.
+- [x] Cross-check widened to every task file carrying an `issue_url` string when `trackers.github` is on, with the existing message text preserved; the existence requirement stayed scoped to the CURRENT-active task, so the six non-CURRENT `status: active` task files without an `issue_url` still validate.
+- [x] No existing fixture asserted the active-only behavior, so none needed updating; the local run at the pushed branch showed only the six recorded macOS-environmental names (zero new) with `validate` VALID and `docs render --check` SYNCHRONIZED. Post-merge gate authority is the hosted CI aggregate `gates` = SUCCESS on PR #216, which is what actually proves suite/lint/build state on `main`, not the worker's local run.
 
 ## Evidence and sources
 
@@ -43,11 +43,11 @@ Observed on continuity 0.6.0 against a target overlay checkout, 2026-09-26 ~22:2
 
 - Required leaf owning issue, parent ancestry and dependencies (or explicitly none): leaf #209 (PCM-0067); parent: none; dependencies: none.
 - Primary writer / branch / source issue revision / as-of status: omp delegated worker, sole writer on task/PCM-0067-issue-url-cross-check; source: live #209 body as of 2026-09-26T22:14Z; projection created 2026-09-29.
-- Related PR/CI evidence and push receipt (request ID / SHA): none yet; identity recorded on #209 at comment 5896436577.
+- Related PR/CI evidence and push receipt (request ID / SHA): projection checkpoint push `870df40` (request `70292a163ede46d3bc4d2a432464691d`, receipt 5896825798, merge receipt 5896922871 for PR #215 squash `0dfe798`); implementation checkpoint push `2e9ad8e` (request `6d1eaca1b6e748e089f5e7805575be56`) → PR #216 merged as squash `a3931c1b2536c24b9d330d9cf0d019cd3f34c318` with required gate `gates` SUCCESS; #209 CLOSED as completed on that evidence.
 
 ## Checkpoint log
 
-No checkpoints yet.
+Delivery summary: the projection increment (coordinator) and the implementation increment (delegated worker) are both recorded below; nothing in this task remains open.
 
 ### 2026-09-29 19:04:34 UTC — omp-owner-session (coordinator)
 
