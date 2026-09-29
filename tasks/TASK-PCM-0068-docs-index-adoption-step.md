@@ -1,8 +1,8 @@
 # TASK-PCM-0068 — Docs Inventory Render Step for Overlays
 
-<!-- continuity:task {"acceptance": ["TARGET_ADOPTION.md overlay gains a step after validation: build the optional documents inventory with `continuity docs init`, register target documents with `continuity docs add`, then `continuity docs render`; wording states the inventory is optional-but-recommended and that `docs find` and `docs render` fail with a distinct actionable error while it is absent, because render reads the catalog and cannot create it.", "`continuity validate` prints a WARNING (not an error, not inside validate_repo's error list) when .continuity/config.json exists with trackers.github true and no .continuity/documents.json exists, naming `continuity docs init` as the remedy; preflight stays error-only and the tests asserting validate_repo(root) == [] are unaffected.", "Red-first test for the warning; the full PCM suite, ruff, mypy, compileall, continuity validate and the docs index check stay green."], "depends_on": [], "goal": "Close the mature-target overlay gap where continuity validate prints VALID but continuity docs find errors: document the docs-inventory build step in TARGET_ADOPTION.md and make validate warn when a GitHub-authoritative repository has no documents index (Refs #210).", "id": "PCM-0068", "issue_url": "https://github.com/Pukujan/project-continuity-modules/issues/210", "next_action": "Worker on branch task/PCM-0068-docs-index-adoption-step writes the red-first warning test through a separate findings helper surfaced in the validate CLI output branch, adds the docs init/add/render overlay step, and keeps validate_repo error-only.", "owner": "omp worker (delegated)", "priority": "P1", "protocol_version": "0.1.0-draft", "schema": "project-continuity.task.v1", "status": "active", "why": "An adopter that follows the overlay guide verbatim ends up VALID yet unable to run the deterministic document lookup that PCM's own agent guidance requires of every fresh session, so adoption looks complete while half of the continuity contract is silently unavailable (observed: docs find exit 2, missing file)."} -->
+<!-- continuity:task {"acceptance": ["TARGET_ADOPTION.md overlay gains a step after validation: build the optional documents inventory with `continuity docs init`, register target documents with `continuity docs add`, then `continuity docs render`; wording states the inventory is optional-but-recommended and that `docs find` and `docs render` fail with a distinct actionable error while it is absent, because render reads the catalog and cannot create it.", "`continuity validate` prints a WARNING (not an error, not inside validate_repo's error list) when .continuity/config.json exists with trackers.github true and no .continuity/documents.json exists, naming `continuity docs init` as the remedy; preflight stays error-only and the tests asserting validate_repo(root) == [] are unaffected.", "Red-first test for the warning; the full PCM suite, ruff, mypy, compileall, continuity validate and the docs index check stay green."], "depends_on": [], "goal": "Close the mature-target overlay gap where continuity validate prints VALID but continuity docs find errors: document the docs-inventory build step in TARGET_ADOPTION.md and make validate warn when a GitHub-authoritative repository has no documents index (Refs #210).", "id": "PCM-0068", "issue_url": "https://github.com/Pukujan/project-continuity-modules/issues/210", "next_action": "No product work remains. Remove the managed worktree with `continuity worktree remove PCM-0068` now that this task reads completed on origin/main; leaf issue #210 closes on the verified merge receipt.", "owner": "omp worker (delegated)", "priority": "P1", "protocol_version": "0.1.0-draft", "schema": "project-continuity.task.v1", "status": "completed", "why": "An adopter that follows the overlay guide verbatim ends up VALID yet unable to run the deterministic document lookup that PCM's own agent guidance requires of every fresh session, so adoption looks complete while half of the continuity contract is silently unavailable (observed: docs find exit 2, missing file)."} -->
 
-- Status: active
+- Status: completed (delivered in PR #218, squash `a21b7bb`; leaf issue #210 closed 2026-09-29)
 - Owner: omp worker (delegated)
 - Priority: P1
 - Depends on: none
@@ -31,9 +31,9 @@ A mature target that follows the overlay guide ends with working deterministic d
 
 ## Acceptance criteria
 
-- [ ] TARGET_ADOPTION.md overlay gains a step after validation: build the optional documents inventory with `continuity docs init`, register target documents with `continuity docs add`, then `continuity docs render`; wording states the inventory is optional-but-recommended and that `docs find`/`docs render` fail with a distinct actionable error while it is absent.
-- [ ] `continuity validate` prints a WARNING (not an error, not in validate_repo's error list) when .continuity/config.json exists with trackers.github true and no .continuity/documents.json, naming the docs init path; preflight and tests asserting validate_repo(root) == [] are unaffected.
-- [ ] Red-first test for the warning; the full PCM suite, ruff, mypy, compileall, continuity validate and the docs index check stay green.
+- [x] TARGET_ADOPTION.md overlay gains a step after validation: build the optional documents inventory with `continuity docs init`, register target documents with `continuity docs add`, then `continuity docs render`; wording states the inventory is optional-but-recommended and that `docs find`/`docs render` fail with a distinct actionable error while it is absent.
+- [x] `continuity validate` prints a WARNING (not an error, not in validate_repo's error list) when .continuity/config.json exists with trackers.github true and no .continuity/documents.json, naming the docs init path; preflight and tests asserting validate_repo(root) == [] are unaffected.
+- [x] Red-first test for the warning; the full PCM suite, ruff, mypy, compileall, continuity validate and the docs index check stay green.
 
 ## Evidence and sources
 
@@ -43,11 +43,11 @@ Observed (continuity 0.6.0, target checkout, 2026-09-26): validate VALID exit 0;
 
 - Required leaf owning issue, parent ancestry and dependencies (or explicitly none): leaf #210 (PCM-0068); parent: none; dependencies: none (sibling shared-file note above).
 - Primary writer / branch / source issue revision / as-of status: omp delegated worker, sole writer on task/PCM-0068-docs-index-adoption-step; source: live #210 body as of 2026-09-26T23:43Z; projection created 2026-09-29.
-- Related PR/CI evidence and push receipt (request ID / SHA): none yet; identity recorded on #210 at comment 5896436590.
+- Related PR/CI evidence and push receipt (request ID / SHA): projection checkpoint push `870df40` (request `70292a163ede46d3bc4d2a432464691d`, receipts 5896825814 / merge 5896922882 for PR #215 squash `0dfe798`); implementation push `3e86642` (request `413752801525490c94e537888a66c022`, receipt 5897700149) -> PR #218 merged as squash `a21b7bb1b5390d0292f91b63e4ec53dae26108c9` with required gate `gates` SUCCESS on CI run 36623486061; identity recorded on #210 at comment 5896436590.
 
 ## Checkpoint log
 
-No checkpoints yet.
+Delivery summary: the overlay guide step and the `validate` WARNING shipped in PR #218; the worker entry below is the implementation increment.
 
 ### 2026-09-29 20:01:44 UTC — omp-worker-pcm0068
 
