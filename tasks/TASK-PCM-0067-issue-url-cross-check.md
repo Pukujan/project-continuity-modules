@@ -49,6 +49,29 @@ Observed on continuity 0.6.0 against a target overlay checkout, 2026-09-26 ~22:2
 
 No checkpoints yet.
 
+### 2026-09-29 19:04:34 UTC — omp-owner-session (coordinator)
+
+<!-- continuity:checkpoint {"agent":"omp-owner-session (coordinator)","blocked":[],"changed":["tasks/TASK-PCM-0067-issue-url-cross-check.md, tasks/TASK-PCM-0068-docs-index-adoption-step.md, checkpoints/CURRENT.md"],"completed":["Published the PCM-0067/PCM-0068 task projections from the two fresh defect issue logs (#209 wrong-repo issue_url passes validate on non-active tasks; #210 overlay adopter is VALID but docs find errors), synced checkpoints/CURRENT.md (active_task moved off the owner-gated PCM-0050 to PCM-0067, with the reason and the CI consequence recorded), and recorded writer/branch identity on both leaf issues before the projection landed."],"decisions":["PCM-0066 stays reserved for #201, so this wave allocates 0067/0068. The new task files are deliberately NOT registered in .continuity/documents.json yet: a cataloged checkpoint path makes the checkpoint regenerate docs/CONTINUITY_INDEX.md, and two parallel worker branches would both rewrite that generated view and trigger the stale-base refusal on the second push; catalog registration is deferred to the single-writer closeout. Publication is serialized: PCM-0067 merges first, PCM-0068 rebases onto it with a fresh request ID, never --allow-stale-base."],"evidence":["continuity validate --root . now reports only the pre-existing /private/tmp/pcm-pinned foreign-worktree error (the two missing-'why' schema errors I introduced were fixed in the same increment); PYTHONPATH=src python -m unittest discover -s tests -> 274 tests, 5 failures + 1 error = the six recorded macOS-environmental names (test_worktrees: confined/refuses/distinct + another_drive error; test_cli: preflight_rejects + unavailable_canonical_state), zero new; issue comments 5896436577 (#209) and 5896436590 (#210)."],"next_action":"Create the two managed worktrees from merged main and hand PCM-0067/PCM-0068 to one worker each; workers keep their own task files status active and never edit CURRENT or .continuity.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0067","timestamp":"2026-09-29T19:04:34Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"0ea7c7258c26c6f774da2bf6fdf298d2e62db947d3fc8ff78799a7bc1bda406f","request_id":"70292a163ede46d3bc4d2a432464691d","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0067"} -->
+
+Completed:
+- Published the PCM-0067/PCM-0068 task projections from the two fresh defect issue logs (#209 wrong-repo issue_url passes validate on non-active tasks; #210 overlay adopter is VALID but docs find errors), synced checkpoints/CURRENT.md (active_task moved off the owner-gated PCM-0050 to PCM-0067, with the reason and the CI consequence recorded), and recorded writer/branch identity on both leaf issues before the projection landed.
+
+Evidence:
+- continuity validate --root . now reports only the pre-existing /private/tmp/pcm-pinned foreign-worktree error (the two missing-'why' schema errors I introduced were fixed in the same increment); PYTHONPATH=src python -m unittest discover -s tests -> 274 tests, 5 failures + 1 error = the six recorded macOS-environmental names (test_worktrees: confined/refuses/distinct + another_drive error; test_cli: preflight_rejects + unavailable_canonical_state), zero new; issue comments 5896436577 (#209) and 5896436590 (#210).
+
+Decisions:
+- PCM-0066 stays reserved for #201, so this wave allocates 0067/0068. The new task files are deliberately NOT registered in .continuity/documents.json yet: a cataloged checkpoint path makes the checkpoint regenerate docs/CONTINUITY_INDEX.md, and two parallel worker branches would both rewrite that generated view and trigger the stale-base refusal on the second push; catalog registration is deferred to the single-writer closeout. Publication is serialized: PCM-0067 merges first, PCM-0068 rebases onto it with a fresh request ID, never --allow-stale-base.
+
+Changed:
+- tasks/TASK-PCM-0067-issue-url-cross-check.md, tasks/TASK-PCM-0068-docs-index-adoption-step.md, checkpoints/CURRENT.md
+
+Blocked/uncertain:
+- none
+
+Next:
+- Create the two managed worktrees from merged main and hand PCM-0067/PCM-0068 to one worker each; workers keep their own task files status active and never edit CURRENT or .continuity.
+
 ## Handoff
 
 Read PROJECT → CURRENT → this task → minimum relevant spec. Checkpoint before stopping.
