@@ -55,8 +55,39 @@ Observed 2026-09-29 at `main` `a21b7bb`: zero `evidence_class` matches under `sr
 
 ## Checkpoint log
 
-No checkpoints yet.
+Delivery summary: one projection-refinement entry below; the implementation increment is still open work.
+
+### 2026-09-29 20:32:27 UTC — omp-owner-session (coordinator)
+
+<!-- continuity:checkpoint {"agent":"omp-owner-session (coordinator)","blocked":[],"changed":["tasks/TASK-PCM-0069-epistemic-checkpoint-fields.md"],"completed":["Refined PCM-0069's projection before dispatch: criterion 1 now requires BUILTIN_SCHEMAS[\"checkpoint\"] and schemas/v1/checkpoint.schema.json to be extended in the same commit, added an init-checkout acceptance test as criterion 2, and withdrew two claims that failed verification (a nonexistent templates/v1/schemas path and a mis-invoked validate_schema probe). Scope comment posted on #217."],"decisions":["Distribution of schema copies to already-adopted repositories stays out of this slice and with #107/#108 under #100, whose phases 1-3 the owner holds unreleased (5830322199); the ship-now-versus-gate choice is recorded on #217 rather than decided here. Withdrawn claims are kept visible in the projection instead of being silently deleted, so the next reader does not re-derive them."],"evidence":["cli.py:780 materializes each checkout's schemas/v1 from BUILTIN_SCHEMAS; cli.py:412-423 load_schema prefers the checkout copy with the builtin as fallback; repo schemas/v1/checkpoint.schema.json and BUILTIN_SCHEMAS[checkpoint] compare equal on required and properties today; extended-schema probe: unextended copy reports unexpected key 'evidence_class'/'supersedes'/'as_of' on a complete marker, extended copy accepts all three, out-of-enum value reports expected one of ['observed','inferred']; validate_schema({'request_id':'probe'}, 'checkpoint') raises AttributeError because a string was passed where a dict belongs. Suite at this commit: 284 tests, the six recorded macOS-environmental names only; docs render --check SYNCHRONIZED; validate reports only the two pre-removal worktree policy lines."],"next_action":"Update PR #219's title and body to cover both closeouts, push nothing further, then verify gates on the final head and arm squash auto-merge.","protocol_version":"0.1.0-draft","schema":"project-continuity.checkpoint.v1","task_id":"PCM-0069","timestamp":"2026-09-29T20:32:27Z"} -->
+<!-- continuity:checkpoint-operation {"payload_sha256":"b10a1acd68be022fdd8eb89c0a3f5068f425fa64490c2c68ebceac66ed6e9335","request_id":"382722ab734f4e8e823787a9d64100ad","schema":"project-continuity.checkpoint-operation.v1","task_id":"PCM-0069"} -->
+
+Completed:
+- Refined PCM-0069's projection before dispatch: criterion 1 now requires BUILTIN_SCHEMAS["checkpoint"] and schemas/v1/checkpoint.schema.json to be extended in the same commit, added an init-checkout acceptance test as criterion 2, and withdrew two claims that failed verification (a nonexistent templates/v1/schemas path and a mis-invoked validate_schema probe). Scope comment posted on #217.
+
+Evidence:
+- cli.py:780 materializes each checkout's schemas/v1 from BUILTIN_SCHEMAS; cli.py:412-423 load_schema prefers the checkout copy with the builtin as fallback; repo schemas/v1/checkpoint.schema.json and BUILTIN_SCHEMAS[checkpoint] compare equal on required and properties today; extended-schema probe: unextended copy reports unexpected key 'evidence_class'/'supersedes'/'as_of' on a complete marker, extended copy accepts all three, out-of-enum value reports expected one of ['observed','inferred']; validate_schema({'request_id':'probe'}, 'checkpoint') raises AttributeError because a string was passed where a dict belongs. Suite at this commit: 284 tests, the six recorded macOS-environmental names only; docs render --check SYNCHRONIZED; validate reports only the two pre-removal worktree policy lines.
+
+Decisions:
+- Distribution of schema copies to already-adopted repositories stays out of this slice and with #107/#108 under #100, whose phases 1-3 the owner holds unreleased (5830322199); the ship-now-versus-gate choice is recorded on #217 rather than decided here. Withdrawn claims are kept visible in the projection instead of being silently deleted, so the next reader does not re-derive them.
+
+Changed:
+- tasks/TASK-PCM-0069-epistemic-checkpoint-fields.md
+
+Blocked/uncertain:
+- none
+
+Next:
+- Update PR #219's title and body to cover both closeouts, push nothing further, then verify gates on the final head and arm squash auto-merge.
 
 ## Handoff
 
 Read PROJECT → CURRENT → this task → #217 → #144 comment 5842123741. Checkpoint before stopping.
+
+### 2026-09-29 — Correction to the entry above and to the version on `main` (append-only)
+
+The entry above was written before PR #219 merged and its Next line still says "update PR #219"; #219 in fact merged as squash `9ee580c`, so that refinement ships as its own later pull request. The entry is preserved unmodified because its `payload_sha256` covers its own text and rewriting it would silently break the digest that proves the record immutable.
+
+Two claims in the `9ee580c` version of this file are withdrawn here rather than quietly overwritten, because they were published: the out-of-scope reference to `templates/v1/schemas/**` names a directory that does not exist (`templates/v1/` holds only `minimal/` and `software/`), and the cited `validate_schema({"request_id": "probe"}, "checkpoint")` result was a mis-invocation — a string was passed where a loaded schema dict belongs, which raises `AttributeError: 'str' object has no attribute 'get'`, so the `[]` I read from it proved nothing. Measured correctly, `schemas/v1/checkpoint.schema.json` and `BUILTIN_SCHEMAS["checkpoint"]` are equal today on `required` and `properties`. What survives is narrower and is the actual basis for criterion 2: `load_schema` consults the checkout's own copy first (cli.py:412-423), `continuity init` materializes that copy from `BUILTIN_SCHEMAS` (cli.py:780), an unextended schema reports `unexpected key 'evidence_class'` on a complete marker, and an extended copy accepts all three fields. Withdrawal also recorded on #217 at comment 5898271314, since that issue owns the scope.
+
+Next: land this refinement so no worker can implement against the `9ee580c` criteria that would leave `BUILTIN_SCHEMAS` stale, then create PCM-0069's worktree and dispatch it.
