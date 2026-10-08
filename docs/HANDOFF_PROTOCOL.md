@@ -29,6 +29,12 @@ GitHub Issues own task scope, acceptance, priority, ownership, dependencies, lif
 If delegated agents are used, read `docs/AGENT_LIFECYCLE.md` as part of the
 relevant handoff contract.
 
+## Optional live decision preflight (proposed; not part of required v1 gate)
+
+For a consequential task that records an explicit issue/decision revision precondition, use the [read-only decision preflight](DECISION_PREFLIGHT.md) when resuming and again before action. It checks current GitHub issue state/update revision and, optionally, a particular decision comment's identity/body digest. STALE, REVIEW_REQUIRED, and UNKNOWN **do not authorize continuation of that guarded action**. Read the actual issue/comments, preserve historical evidence, resolve scope and affected descendants, and record a new reviewed precondition if appropriate. A structural CURRENT means only that the planned issue revision still matches; it does not grant authority or semantic validity.
+
+This optional check is not a substitute for the required live issue, ownership, source revision and acceptance checks above. It adds no new canonical ledger, and the currently certified PCM releases may not yet contain its module.
+
 ## Checkpoint format
 
 Append, do not rewrite history:
