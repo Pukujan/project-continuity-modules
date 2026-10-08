@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import hashlib
-import json
 import shutil
 import tempfile
 import unittest
@@ -42,7 +41,6 @@ class CheckpointEpistemicsTests(unittest.TestCase):
         )
         old_payload = {key: m[key] for key in old_keys}
         # This reproduces the previous implementation's payload representation.
-        old_json = json.dumps(old_payload, separators=(",", ":"), sort_keys=True)
         # Verify against the CLI's canonical serializer rather than assuming its spacing.
         from continuity.cli import _json
         digest = hashlib.sha256(_json(old_payload).encode("utf-8")).hexdigest()
