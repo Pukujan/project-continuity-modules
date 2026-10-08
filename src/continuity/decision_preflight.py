@@ -12,7 +12,6 @@ import hashlib
 import json
 import os
 import re
-import sys
 from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
@@ -110,7 +109,9 @@ def evaluate(record: dict[str, Any], issue: Any,
     # Review any new issue/comment/label/description revision; do not infer
     # unrelated changes are safe. The human can refresh after inspection.
     if issue["updated_at"] != record["expected_issue_updated_at"]:
-        return _result("REVIEW_REQUIRED", "Owning issue changed since this plan; reconcile before action", record, issue)
+        return _result(
+            "REVIEW_REQUIRED", "Owning issue changed since this plan; reconcile before action", record, issue
+        )
     if "decision_comment_id" in record:
         if not isinstance(comment, dict):
             return _result("UNKNOWN", "Live decision comment could not be checked", record, issue)
