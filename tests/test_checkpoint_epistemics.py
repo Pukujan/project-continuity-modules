@@ -109,7 +109,8 @@ class CheckpointEpistemicsTests(unittest.TestCase):
                 )
             tampered = first.replace('"evidence_class":"observed"', '"evidence_class":"inferred"')
             self.assertNotEqual(tampered, first)
-            self.assertTrue(any("digest does not match" in e for e in validate_checkpoint_structure(root, path, tampered)))
+            self.assertTrue(any("digest does not match" in e
+                                for e in validate_checkpoint_structure(root, path, tampered)))
 
 
 if __name__ == "__main__":
