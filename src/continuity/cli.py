@@ -17,7 +17,7 @@ from contextlib import contextmanager, suppress
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path, PurePosixPath
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 from . import __version__
@@ -425,8 +425,9 @@ def load_schema(root: Path, kind: str) -> dict[str, Any]:
             # Adopt new optional fields in existing v1 repos without requiring a schema migration.
             properties = schema.setdefault("properties", {})
             if isinstance(properties, dict):
+                builtin_checkpoint = cast(dict[str, Any], BUILTIN_SCHEMAS["checkpoint"])
                 for name in ("evidence_class", "supersedes", "as_of"):
-                    properties.setdefault(name, BUILTIN_SCHEMAS["checkpoint"]["properties"][name])
+                    properties.setdefault(name, builtin_checkpoint["properties"][name])
         if kind == "config":
             # Existing v1 repositories can retain their checked-in schema and
             # still adopt this optional, backward-compatible policy field.
