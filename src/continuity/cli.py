@@ -421,6 +421,12 @@ def load_schema(root: Path, kind: str) -> dict[str, Any]:
     path = schema_dir(root) / SCHEMA_FILES[kind]
     if path.exists():
         schema = load_json(path)
+        if kind == "checkpoint":
+            # Adopt new optional fields in existing v1 repos without requiring a schema migration.
+            properties = schema.setdefault("properties", {})
+            if isinstance(properties, dict):
+                for name in ("evidence_class", "supersedes", "as_of"):
+                    properties.setdefault(name, BUILTIN_SCHEMAS["checkpoint"]["properties"][name])
         if kind == "config":
             # Existing v1 repositories can retain their checked-in schema and
             # still adopt this optional, backward-compatible policy field.
