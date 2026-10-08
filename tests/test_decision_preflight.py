@@ -111,6 +111,32 @@ class DecisionPreflightTests(unittest.TestCase):
         self.assertEqual("CURRENT", result["status"])
         self.assertIn("not semantic truth", result["meaning"])
 
+    def test_full_json_api_read_transitions_at_same_plan_version(self) -> None:
+        """Transport parsing + unchanged expectation, with fake remote mutations."""
+        record, issue, comment = fixture()
+        issue_url = issue["url"]
+        comment_url = comment["url"]
+        observed = {issue_url: issue, comment_url: comment}
+        seen_urls = []
+
+        def fake_urlopen(request, timeout=12):
+            self.assertGreater(timeout, 0)
+            seen_urls.append(request.full_url)
+            return io.BytesIO(json.dumps(observed[request.full_url]).encode("utf-8"))
+
+        with patch("continuity.decision_preflight.urlopen", side_effect=fake_urlopen):
+            self.assertEqual("CURRENT", check_live(record)["status"])
+            issue["updated_at"] = "2026-10-08T10:10:11Z"
+            self.assertEqual("REVIEW_REQUIRED", check_live(record)["status"])
+            issue["state"] = "closed"
+            self.assertEqual("STALE", check_live(record)["status"])
+            issue["state"] = "open"
+            issue["updated_at"] = record["expected_issue_updated_at"]
+            comment["body"] += "\nOwner rejected the prior assumption."
+            self.assertEqual("REVIEW_REQUIRED", check_live(record)["status"])
+        self.assertIn(issue_url, seen_urls)
+        self.assertIn(comment_url, seen_urls)
+
     def test_command_status_codes_without_network(self) -> None:
         record, _, _ = fixture()
         with tempfile.TemporaryDirectory() as td:
