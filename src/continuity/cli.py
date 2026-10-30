@@ -21,15 +21,23 @@ from typing import Any, cast
 from urllib.parse import quote
 
 from . import __version__
+from .contributor import (
+    ANCHOR_KINDS,
+    ignored_leak_paths,
+    leak_findings,
+    parse_contributor_descriptor,
+    render_contributor_descriptor,
+)
 
 PROTOCOL_VERSION = "0.1.0-draft"
+CONTRIBUTOR_DESCRIPTOR_FILENAME = "contributor.json"
 CONTINUITY_RECORDS_POLICY_MARKER = (
     '<!-- pcm:policy {"id":"continuity-records","policy_version":"1.3.0","protocol_version":"0.1.0-draft"} -->'
 )
 CONTINUITY_RECORDS_POLICY_VERSION = "1.3.0"
-ISSUE_LOG_FORMAT_POLICY_VERSION = "1.2.0"
+ISSUE_LOG_FORMAT_POLICY_VERSION = "1.3.0"
 ISSUE_LOG_FORMAT_POLICY_MARKER = (
-    '<!-- pcm:policy {"id":"issue-log-format","policy_version":"1.2.0","protocol_version":"0.1.0-draft"} -->'
+    '<!-- pcm:policy {"id":"issue-log-format","policy_version":"1.3.0","protocol_version":"0.1.0-draft"} -->'
 )
 ISSUE_LOG_FORMAT_START_MARKER = "<!-- pcm:issue-log-format:start -->"
 ISSUE_LOG_FORMAT_END_MARKER = "<!-- pcm:issue-log-format:end -->"
@@ -40,7 +48,7 @@ ISSUE_LOG_FORMAT_GUIDANCE = (
     + ")\n\n"
     + ISSUE_LOG_FORMAT_POLICY_MARKER
     + "\n\n"
-    "Write issue logs, progress updates, and pull requests in one plain-language shape a newcomer can follow. Pick the tier by the kind of issue, not by preference. **Core tier (every issue log):** title states the problem and intended direction; a 1-3 paragraph summary naming who/what is affected, the consequence, and what this proposes; identity and lineage (leaf owning issue, parent ancestry or none, task ID, primary writer, branch); observed facts vs interpretation, with inferences labelled *inferred*; acceptance criteria with numeric thresholds marked *(proposed)* when untested; boundaries/non-goals and one next action. **Investigation tier (incidents, failures, research, design issues):** numbered symptoms; hypotheses with Status, confirm/refute, and experiment; evidence with provenance; a **Counter-signal** entry when one exists; honest caveat; problems-vs-gaps; a **Proposal** labelled *(proposal)* stating none of it exists unless named as existing. **Pull requests open reader-first:** problem and consequence, what changes, how to verify, and what stays unchanged; lineage links; evidence and one next action; long logs collapsed or linked; reference issues with \"Refs #<number>\" and use closing keywords only when closing at merge is intended. **Diagrams (mermaid):** when a record describes a flow with 4+ ordered steps or 2+ branches, add a fenced mermaid diagram *and* keep an adjacent text list or table so the record survives render failure; default to `graph TD` (vertical) because wide `LR` flows shrink to illegible strips on phones — reserve `LR` for 4 or fewer short nodes; cap 8 nodes and 6-word labels; wrap diagrams that may exceed the container width inside `<details>` (GitHub mounts the renderer lazily on expand); preview the rendered diagram before publishing (broken syntax shows a visible parse error) and never cite renderer URLs as standalone sources. **Readability rules:** give every SHA, comment id, flag, file path, or tool name a plain-word meaning in the same sentence before it carries load; write evidence as the claim first, numbers as support (“nothing this change could break failed (263 tests, same six machine-environment failures as before)”), never bare counts; no unexplained acronym or bare identifier on first use in any tier; PR openings and checkpoint Completed/Next lines start with one problem sentence a newcomer can follow; the rule set applies to CURRENT projections and checkpoint entries exactly as to issue logs. No private absolute paths or secrets; link rather than paste long logs. See `docs/ISSUE_LOG_FORMAT.md` for the full format, exemplar, and examples.\n"
+    "**The issue-log shape is OIO's.** The canonical shape — required fields, lifecycle status, typed relations, and filer provenance — is defined by [`Pukujan/observational-issue-ops`](https://github.com/Pukujan/observational-issue-ops): [`ontology/ISSUE_LOG_ONTOLOGY.md`](https://github.com/Pukujan/observational-issue-ops/blob/main/ontology/ISSUE_LOG_ONTOLOGY.md) is the semantic definition and [`.github/ISSUE_TEMPLATE/observational-issue.yml`](https://github.com/Pukujan/observational-issue-ops/blob/main/.github/ISSUE_TEMPLATE/observational-issue.yml) is the intake form. PCM does not define a competing form; fill OIO's shape and apply the writing rules below. **PCM owns the writing:** plain language, claim-first evidence, no unexplained acronym or bare identifier on first use, diagrams (mermaid), the reader-first pull-request shape, checkpoint and CURRENT projections, and the closing-keyword rule. **What an investigation record must say** (incidents, failures, research, design issues whose cause is not yet proven): numbered symptoms, each with a bold short name and one observable sentence; hypotheses with **Status** (unverified / confirmed / refuted / inconclusive), **Would confirm**, **Would refute**, and **Experiment**; evidence with provenance that names the hypothesis it supports or undercuts, plus a **Counter-signal** when one exists; an honest caveat; problems kept separate from gaps; and a **Proposal** labelled *(proposal)* that says none of it exists unless named as existing. That is guidance on what the record must say, not a second form schema. **Pull requests open reader-first:** problem and consequence, what changes, how to verify, and what stays unchanged; lineage links; evidence and one next action; long logs collapsed or linked; progress-only references use `Refs #<number>`, and a native closing keyword (`Closes`/`Fixes`/`Resolves #<number>`) only when the merge should resolve the issue. **Diagrams (mermaid):** when a record describes a flow with 4+ ordered steps or 2+ branches, add a fenced mermaid diagram *and* keep an adjacent text list or table so the record survives render failure; default to `graph TD` (vertical) because wide `LR` flows shrink to illegible strips on phones — reserve `LR` for 4 or fewer short nodes; cap 8 nodes and 6-word labels; wrap diagrams that may exceed the container width inside `<details>` (GitHub mounts the renderer lazily on expand); preview the rendered diagram before publishing (broken syntax shows a visible parse error) and never cite renderer URLs as standalone sources. **Readability rules:** the explain-the-reference rule is owned by Content Generation Modules, the single source for issue-log prose voice; read [CGM `docs/NARRATIVE_AUTHORITY.md` Rule 2](https://github.com/Pukujan/content-generation-modules/blob/main/docs/NARRATIVE_AUTHORITY.md#rule-2-explain-the-reference-before-it-carries-weight) rather than a copy here. Write evidence as the claim first, numbers as support (“nothing this change could break failed (263 tests, same six machine-environment failures as before)”), never bare counts; no unexplained acronym or bare identifier on first use in any tier; PR openings and checkpoint Completed/Next lines start with one problem sentence a newcomer can follow; the rule set applies to CURRENT projections and checkpoint entries exactly as to issue logs. No private absolute paths or secrets; link rather than paste long logs. See `docs/ISSUE_LOG_FORMAT.md` for the full format, exemplar, and examples.\n"
     + ISSUE_LOG_FORMAT_END_MARKER
 )
 GITHUB_PROGRESSION_GUIDANCE = """<!-- pcm:github-progression:start -->
@@ -1907,6 +1915,132 @@ def preflight_repo(root: Path) -> tuple[str, list[str]]:
             return "DEGRADED_TARGET", errors
         return "INVALID_TARGET", errors
     return "TARGET_VALID", []
+
+
+# --- Contributor mode (issue #247, first slice) ------------------------------
+#
+# A contributor works on a repository they do not administer. Nothing from the
+# stack may be written into that checkout, and the task's identity is recorded
+# on the owner's side of the boundary. See docs/CONTRIBUTOR_MODE.md.
+
+def foreign_leak_findings(root: Path) -> list[str]:
+    """Report stack-owned paths present in a foreign checkout's working tree.
+
+    Runs ``git status`` inside ``root`` and returns one finding per staged,
+    unstaged, or untracked entry under a stack-owned path (see
+    ``continuity.contributor.STACK_PATHS``). A clean foreign tree returns an
+    empty list.
+
+    Two closed doors, not one:
+
+    - Untracked files are expanded with ``--untracked-files=all`` so an
+      untracked stack directory names its files instead of hiding behind an
+      abbreviated entry.
+    - Ignored entries are *also* reported, via a second ``--ignored`` pass,
+      because a contributor who accidentally added ``.coord/`` to a foreign
+      ``.gitignore`` has still written stack state into that repository's
+      working tree — and a guard that only reads plain ``git status`` would
+      call that tree clean. Git's ignore list is the foreign repository's
+      policy, not ours to trust for the zero-writes contract.
+
+    This guard fails closed: when ``root`` is not a Git working tree, or Git
+    cannot report status at all, a :class:`ContinuityError` is raised rather
+    than returning an empty list — an unrunnable guard must never be mistaken
+    for a clean checkout.
+    """
+    root = root.resolve()
+    try:
+        proc = subprocess.run(
+            ["git", "-C", str(root), "status", "--porcelain", "--untracked-files=all"],
+            check=True,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+        )
+        ignored = subprocess.run(
+            ["git", "-C", str(root), "status", "--porcelain", "--ignored", "--untracked-files=all"],
+            check=True,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+        )
+    except FileNotFoundError as exc:
+        raise ContinuityError("git is required for the contributor leak guard") from exc
+    except subprocess.CalledProcessError as exc:
+        detail = (exc.stderr or exc.stdout or "git status failed").strip()
+        raise ContinuityError(f"foreign checkout status unavailable (the guard fails closed): {detail}") from exc
+    findings = leak_findings(proc.stdout)
+    findings.extend(f"{path}: stack-owned path {prefix!r} is ignored in the foreign checkout"
+                    for path, prefix in ignored_leak_paths(ignored.stdout))
+    return findings
+
+
+def foreign_anchor_present(root: Path, anchor_sha: str) -> bool:
+    """True when the anchor SHA resolves as a commit in the foreign checkout.
+
+    An unresolvable anchor is reported as a degraded note by the caller, never
+    as a refusal: the SHA is upstream's, and a contributor may legitimately
+    record it before fetching the upstream ref. A missing Git binary is also
+    reported as absent rather than raising, for the same reason.
+    """
+    try:
+        proc = subprocess.run(
+            ["git", "-C", str(root), "cat-file", "-e", f"{anchor_sha}^{{commit}}"],
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+    except OSError:
+        return False
+    return proc.returncode == 0
+
+
+def write_contributor_descriptor(
+    store_root: Path,
+    foreign_root: Path,
+    repository: str,
+    anchor_sha: str,
+    anchor_kind: str,
+    sidecar: str,
+) -> Path:
+    """Record a contributor task's identity on the owner's side of the boundary.
+
+    ``store_root`` is where the descriptor is written (in real use, the task's
+    private sidecar checkout); ``foreign_root`` is the checkout being guarded.
+    The write is refused when the two overlap, because a descriptor inside the
+    foreign repository is exactly the leak the guard exists to prevent.
+    """
+    store_root = store_root.resolve()
+    foreign_root = foreign_root.resolve()
+    if store_root == foreign_root or store_root.is_relative_to(foreign_root):
+        raise ContinuityError(
+            f"descriptor store root {store_root} is inside the foreign checkout {foreign_root}; "
+            "contributor state must live on the owner's side of the boundary"
+        )
+    try:
+        content = render_contributor_descriptor(repository, anchor_sha, anchor_kind, sidecar)
+    except ValueError as exc:
+        raise ContinuityError(str(exc)) from exc
+    path = store_root / CONTRIBUTOR_DESCRIPTOR_FILENAME
+    write_file_no_overwrite(path, content)
+    return path
+
+
+def load_contributor_descriptor(store_root: Path) -> dict[str, str]:
+    """Read back a contributor descriptor, failing closed on anything malformed."""
+    path = store_root.resolve() / CONTRIBUTOR_DESCRIPTOR_FILENAME
+    try:
+        text = path.read_text(encoding="utf-8")
+    except FileNotFoundError as exc:
+        raise ContinuityError(f"missing contributor descriptor: {path}") from exc
+    except OSError as exc:
+        raise ContinuityError(f"contributor descriptor unavailable: {path}: {exc}") from exc
+    try:
+        return parse_contributor_descriptor(text)
+    except ValueError as exc:
+        raise ContinuityError(f"{path}: {exc}") from exc
 
 
 def checkpoint_metadata(
@@ -3955,6 +4089,41 @@ def build_parser() -> argparse.ArgumentParser:
     p_workspace_unregister = workspace_sub.add_parser("unregister")
     p_workspace_unregister.add_argument("--root", required=True)
 
+    p_contributor = sub.add_parser(
+        "contributor",
+        help="contributor mode: work on a repository you do not administer, with zero writes into it",
+    )
+    contributor_sub = p_contributor.add_subparsers(dest="contributor_command", required=True)
+    p_contributor_guard = contributor_sub.add_parser(
+        "guard",
+        help="fail if any stack-owned path appears in a foreign checkout's git status",
+    )
+    p_contributor_guard.add_argument("--root", required=True, help="the foreign checkout to guard")
+    p_contributor_describe = contributor_sub.add_parser(
+        "describe",
+        help="record a contributor task's identity on the owner's side of the boundary",
+    )
+    p_contributor_describe.add_argument("--root", required=True, help="sidecar/store root; never the foreign checkout")
+    p_contributor_describe.add_argument("--foreign-root", required=True, help="the foreign checkout being guarded")
+    p_contributor_describe.add_argument("--repo", required=True, help="owner/name of the repository contributed to")
+    p_contributor_describe.add_argument(
+        "--anchor-sha",
+        required=True,
+        help="full upstream commit/pull-request-head SHA that anchors the task (the one-way link)",
+    )
+    p_contributor_describe.add_argument(
+        "--anchor",
+        dest="anchor_kind",
+        choices=list(ANCHOR_KINDS),
+        default="pr",
+        help="whether the SHA is an upstream pull request head (pr, default) or a plain commit (commit)",
+    )
+    p_contributor_describe.add_argument(
+        "--sidecar",
+        required=True,
+        help="private sidecar location holding this task's continuity state",
+    )
+
     return parser
 
 
@@ -4367,6 +4536,28 @@ def main(argv: list[str] | None = None) -> int:
                 print("PLAN (dry run; pass --yes to apply):")
             for step in plan:
                 print(f"  {step}")
+            return 0
+
+        if args.command == "contributor" and args.contributor_command == "guard":
+            findings = foreign_leak_findings(Path(args.root).resolve())
+            for finding in findings:
+                print(f"LEAK: {finding}")
+            if findings:
+                print(f"LEAKED: {len(findings)} stack path(s) present in the foreign checkout; remove them before any push or pull request")
+                return 1
+            print("CLEAN: no stack-owned path appears in the foreign checkout's git status")
+            return 0
+
+        if args.command == "contributor" and args.contributor_command == "describe":
+            path = write_contributor_descriptor(
+                Path(args.root).resolve(),
+                Path(args.foreign_root).resolve(),
+                args.repo,
+                args.anchor_sha,
+                args.anchor_kind,
+                args.sidecar,
+            )
+            print(path)
             return 0
 
         parser.error("unhandled command")
